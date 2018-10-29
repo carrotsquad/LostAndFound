@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/dongtai_ui"
+        android:icon="@drawable/search"
+        android:title="动态"
+        app:showAsAction="collapseActionView" />
+
+
+    <item
+        android:id="@+id/search_ui"
+        android:icon="@drawable/search"
+        android:title="搜索" />
+
+    <item
+        android:id="@+id/newmessage_ui"
+        android:icon="@drawable/search"
+        android:title="新建" />
+
+    <item
+        android:id="@+id/message_ui"
+        android:icon="@drawable/search"
+        android:title="消息" />
+
+    <!--android:icon="@drawable/personage_bt"-->
+    <item
+        android:id="@+id/mine_ui"
+        android:icon="@drawable/search"
+        android:title="我的" />
+
+</menu>
