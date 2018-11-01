@@ -11,8 +11,8 @@
     </style>
     <!--引导页-->
     <!--<style name="SplashTheme" parent="AppTheme">-->
-        <!--<item name="android:windowFullscreen">true</item>-->
-        <!--<item name="android:windowBackground">@drawable/welcome_bg</item>-->
+    <!--<item name="android:windowFullscreen">true</item>-->
+    <!--<item name="android:windowBackground">@drawable/welcome_bg</item>-->
     <!--</style>-->
     <!--toolbar返回箭头-->
     <style name="BlackToolbarStyle" parent="Base.Theme.AppCompat.Light.DarkActionBar">
@@ -77,4 +77,8 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

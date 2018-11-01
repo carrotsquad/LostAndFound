@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_200"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:id="@+id/verify_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="验证码已发送到关联邮箱 879481917@qq.com"
+            android:id="@+id/verify_email"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/verify_email"
+            android:id="@+id/verify_qingshuru"
+            android:textSize="20sp"
+            android:text="请输入验证码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.tuo.customview.VerificationCodeView
+            android:layout_below="@+id/verify_qingshuru"
+            android:id="@+id/verify_icv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginRight="10dp"
+            app:icv_et_bg_focus="@drawable/shape_icv_et_bg_focus"
+            app:icv_et_bg_normal="@drawable/shape_icv_et_bg_normal"
+            app:icv_et_divider_drawable="@drawable/shape_divider_identifying"
+            app:icv_et_number="4"
+            app:icv_et_pwd="true"
+            app:icv_et_pwd_radius="10dp"
+            app:icv_et_text_color="#000000"
+            app:icv_et_width="50dp" />
+
+        <Button
+            android:id="@+id/verify_sure"
+            android:layout_width="150dp"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:background="@color/blue_400"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/verify_icv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+
+            android:text="确认" />
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
