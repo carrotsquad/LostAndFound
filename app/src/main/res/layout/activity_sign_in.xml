@@ -16,7 +16,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/loginbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@drawable/background"
         android:fitsSystemWindows="true">
 
@@ -31,8 +31,8 @@
 
         <ImageView
             android:id="@+id/login_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/ic_arrows"/>
 
     </android.support.v7.widget.Toolbar>
