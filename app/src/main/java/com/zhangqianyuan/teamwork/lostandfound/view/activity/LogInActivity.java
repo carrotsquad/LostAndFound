@@ -1,15 +1,18 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.LogInPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ILogInActivity;
 
 import butterknife.BindView;
@@ -47,6 +50,9 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     @BindView(R.id.login_sure)
     Button button;
 
+    @BindView(R.id.login_tosignin)
+    TextView tosignin;
+
     private String pwd;
     private String repwd;
     private String pnb;
@@ -56,12 +62,18 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     public static final String PNB = "PNB";
     public static final String EMAIL = "EMAIL";
     public static final String NICKNAME = "NICKNAME";
+    public static final String SESSION = "SESSION";
+
+    private LogInPresenter iLogInPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         ButterKnife.bind(this);
+        //加下划线
+        tosignin.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
+        iLogInPresenter = new LogInPresenter(this);
     }
 
     @Override
@@ -69,22 +81,26 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.login_sure})
-    void OnClicked(View view){
+    @OnClick({R.id.login_sure,R.id.login_tosignin})
+    void onClicked(View view){
         switch (view.getId()){
             case R.id.login_sure:{
-                do {
-                    pwd = loginPassword.getText().toString();
-                    repwd = loginRepassword.getText().toString();
-                    pnb = loginPhone.getText().toString();
-                    email = loginEmail.getText().toString();
-                    nickname = loginNickname.getText().toString();
-                    if(!pwd.equals(repwd)){
-                        FancyToast.makeText(this,"两次密码不一致",Toast.LENGTH_SHORT,FancyToast.ERROR,true).show();
-                    }
-                    Intent intent = new Intent(LogInActivity.this,VerifyActivity.class);
-
-                }while (!pwd.equals(repwd));
+                pwd = loginPassword.getText().toString();
+                repwd = loginRepassword.getText().toString();
+                pnb = loginPhone.getText().toString();
+                email = loginEmail.getText().toString();
+                nickname = loginNickname.getText().toString();
+                if(!pwd.equals(repwd)&&!"".equals(pwd)&&!"".equals(repwd)&&!"".equals(pnb)&&!"".equals(email)&&!"".equals(nickname)){
+                    FancyToast.makeText(this,"密码不一致或者其他错误",Toast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+                }else {
+                    iLogInPresenter.getCodeStatus(email);
+                }
+                break;
+            }
+            case R.id.login_tosignin:{
+                Intent intent = new Intent(LogInActivity.this,SignInActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             }
             default:{
@@ -94,24 +110,25 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     }
 
     @Override
-    public void showEmailStatus(Integer status) {
+    public void showEmailStatus(Integer status,String session) {
         switch (status){
             case 200:{
-                FancyToast.makeText(this,"发送验证码成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
+                FancyToast.makeText(this,"发送验证码成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                 Intent intent = new Intent(LogInActivity.this,VerifyActivity.class);
                 intent.putExtra(PWD,pwd);
                 intent.putExtra(PNB,pnb);
                 intent.putExtra(EMAIL,email);
                 intent.putExtra(NICKNAME,nickname);
+                intent.putExtra(SESSION,session);
                 startActivity(intent);
                 break;
             }
             case 201:{
-                FancyToast.makeText(this,"邮箱已经存在",FancyToast.LENGTH_SHORT,FancyToast.WARNING,true).show();
+                FancyToast.makeText(this,"邮箱已经存在",FancyToast.LENGTH_SHORT,FancyToast.WARNING,false).show();
                 break;
             }
             case 400:{
-                FancyToast.makeText(this,"发送验证码失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+                FancyToast.makeText(this,"发送验证码失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
                 break;
             }
             default:{

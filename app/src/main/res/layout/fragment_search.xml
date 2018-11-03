@@ -6,6 +6,7 @@
 
     <Button
         android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -15,11 +16,10 @@
         android:text="搜索"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        app:layout_constraintVertical_bias="0.011" />
 
     <EditText
         android:id="@+id/editText"
@@ -30,10 +30,10 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:maxLines="1"
         android:text="关键词"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015"
-        android:maxLines="1"/>
+        app:layout_constraintVertical_bias="0.015" />
 </android.support.constraint.ConstraintLayout>

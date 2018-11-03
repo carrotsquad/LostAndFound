@@ -4,24 +4,44 @@ import android.annotation.SuppressLint;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ILogInModel;
+import com.zhangqianyuan.teamwork.lostandfound.model.LogInModel;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ILogInActivity;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class LogInPresenter implements ILogInPresenter{
 
     private ILogInModel iLogInModel;
     private ILogInActivity iLogInActivity;
 
-    LogInPresenter(ILogInActivity iLogInActivity){
+    public LogInPresenter(ILogInActivity iLogInActivity){
         this.iLogInActivity = iLogInActivity;
     }
 
     @SuppressLint("NewApi")
     @Override
     public void getCodeStatus(String email) {
-        iLogInModel.getInfo(email, new java.util.function.Consumer<SendCheckCodeBean>() {
+        iLogInModel = new LogInModel();
+        iLogInModel.getInfo(email, new Observer<SendCheckCodeBean>() {
             @Override
-            public void accept(SendCheckCodeBean sendCheckCodeBean) {
-                iLogInActivity.showEmailStatus(sendCheckCodeBean.getStatus());
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(SendCheckCodeBean sendCheckCodeBean) {
+                iLogInActivity.showEmailStatus(sendCheckCodeBean.getStatus(),sendCheckCodeBean.getJSESSIONID());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
             }
         });
     }

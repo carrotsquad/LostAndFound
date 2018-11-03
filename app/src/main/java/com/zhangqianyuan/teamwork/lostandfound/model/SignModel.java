@@ -1,20 +1,21 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
-import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class LogInModel extends BaseModel implements ILogInModel{
+public class SignModel extends BaseModel implements ISignModel{
 
-    public LogInModel(){
+    public SignModel(){
         super();
     }
 
+
     @Override
-    public void getInfo(String email, Observer<SendCheckCodeBean> observer) {
-        api.getSendCheckCode(email)
+    public void signIn(String email, String password, Observer<SignInBean> observer) {
+        api.getSignIn(email,password)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
