@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group
+    android:checkableBehavior="single">
+    <item
+        android:id="@+id/my_lost"
+        android:icon="@drawable/ic_lost"
+        android:title="我的失物"
+        />
+    <item
+        android:id="@+id/my_find"
+        android:icon="@drawable/ic_find"
+        android:title="我的招领"/>
+    <item
+        android:id="@+id/my_info"
+        android:icon="@drawable/ic_userinfo"
+        android:title="我的信息"
+        />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_setting"
+        android:title="设置"
+        />
+    <item
+        android:id="@+id/about_us"
+        android:icon="@drawable/ic_aboutus"
+        android:title="关于我们"/>
+</group>
+</menu>
