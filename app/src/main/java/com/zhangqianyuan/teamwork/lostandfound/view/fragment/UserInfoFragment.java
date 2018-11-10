@@ -24,4 +24,8 @@ public class UserInfoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             return  inflater.inflate(R.layout.fragment_userinfo,container,false);
     }
+    public static Fragment newInstance(){
+       UserInfoFragment fragment = new UserInfoFragment();
+        return fragment;
+    }
 }

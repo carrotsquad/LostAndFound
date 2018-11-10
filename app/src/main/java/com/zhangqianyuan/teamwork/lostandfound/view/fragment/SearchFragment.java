@@ -25,9 +25,15 @@ import com.zhangqianyuan.teamwork.lostandfound.adapter.ListDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItem;
 
+<<<<<<< Updated upstream
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+=======
+
+
+public class SearchFragment extends Fragment{
+>>>>>>> Stashed changes
 
 import butterknife.ButterKnife;
 
@@ -73,10 +79,12 @@ public class SearchFragment extends Fragment {
         return fragment;
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search, null);
+<<<<<<< Updated upstream
         context = getActivity();
         SearchItem searchItem1=new SearchItem();
         searchItem1.setTitle("我掉了红色的手表");
@@ -93,6 +101,9 @@ public class SearchFragment extends Fragment {
         searchItemArrayList.add(searchItem3);
         searchItemArrayList.add(searchItem4);
         searchItemArrayList.add(searchItem5);
+=======
+        context = getContext();
+>>>>>>> Stashed changes
         initView();
         return view;
     }

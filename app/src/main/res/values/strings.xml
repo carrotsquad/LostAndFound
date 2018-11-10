@@ -3,4 +3,7 @@
     <string name="title_activity_log_in">LogInActivity</string>
     <string name="neckname">SweetDeliven</string>
     <string name="textview">this is a large of balabala </string>
+    <string name="lost">失物</string>
+    <string name="find">招领</string>
+    <string name="upload">上传</string>
 </resources>

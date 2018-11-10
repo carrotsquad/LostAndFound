@@ -28,4 +28,8 @@ public class MainViewAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragments.size();
     }
+
+    public List<Fragment> getFragments() {
+        return fragments;
+    }
 }

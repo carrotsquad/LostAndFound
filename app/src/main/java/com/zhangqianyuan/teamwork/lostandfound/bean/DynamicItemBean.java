@@ -8,7 +8,7 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public class DynamicItem {
+public class DynamicItemBean {
     public static final int  TYPE_LOST=0; //丢失
     public static final int  TYPE_FIND=1; //招领
     private int cardType;
@@ -18,12 +18,13 @@ public class DynamicItem {
     private String time;      //捡到/丢失时间
     private String description; //用户对这个东西的描述
 
-    public DynamicItem(int headImg, String neckName, String thingType, String time, String where, String description) {
+    public DynamicItemBean(int headImg, String neckName, String thingType, String time, String where, String description, int cardType) {
         this.headImg = headImg;
         this.neckName = neckName;
         this.thingType = thingType;
         this.time = time;
         this.description = description;
+        this.cardType=cardType;
     }
 
     public int getCardType() {

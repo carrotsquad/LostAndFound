@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
-import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItem;
+import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.ViewHolder> {
    private Context mContext;
-   private List<DynamicItem> lists;
+   private List<DynamicItemBean> lists;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -47,7 +47,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
            thingType = view.findViewById(R.id.dynamic_card_thingtype);
        }
    }
-    public DynamicItemAdapter(List<DynamicItem> list){
+    public DynamicItemAdapter(List<DynamicItemBean> list){
         this.lists = list;
     }
 
@@ -63,18 +63,18 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DynamicItem dynamicItem = lists.get(position);
-        if (dynamicItem.getCardType()==DynamicItem.TYPE_LOST){
+        DynamicItemBean dynamicItemBean = lists.get(position);
+        if (dynamicItemBean.getCardType()==DynamicItemBean.TYPE_LOST){
         holder.mCardView.setBackgroundColor(Color.parseColor("FFE086A9"));
     }
-       if (dynamicItem.getCardType()==DynamicItem.TYPE_FIND){
-            holder.mCardView.setBackgroundColor(Color.parseColor("FF9C8BE7"));
+       if (dynamicItemBean.getCardType()==DynamicItemBean.TYPE_FIND){
+            holder.mCardView.setBackgroundColor(Color.parseColor("#ab47bc"));
        }
-        holder.headimg.setImageResource(dynamicItem.getHeadImg());
-        holder.neckname.setText(dynamicItem.getNeckName());
-        holder.time.setText(dynamicItem.getTime());
-        holder.description.setText(dynamicItem.getDescription());
-        holder.thingType.setText(dynamicItem.getThingType());
+        holder.headimg.setImageResource(dynamicItemBean.getHeadImg());
+        holder.neckname.setText(dynamicItemBean.getNeckName());
+        holder.time.setText(dynamicItemBean.getTime());
+        holder.description.setText(dynamicItemBean.getDescription());
+        holder.thingType.setText(dynamicItemBean.getThingType());
     }
 
     @Override

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+    android:id="@+id/dynamic_childfragment_lost"
+    android:title="@string/lost"
+    android:enabled="true"
+        android:icon="@drawable/ic_testfind"
+    app:showAsAction="always"/>
+    <item
+        android:id="@+id/dynamic_childfragment_find"
+        android:title="@string/find"
+        android:enabled="true"
+        android:icon="@drawable/ic_testfind"
+        app:showAsAction="ifRoom"/>
+</menu>
