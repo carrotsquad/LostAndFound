@@ -10,9 +10,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
@@ -20,9 +27,6 @@ import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 /**
@@ -124,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                     case R.id.newmessage_ui:{
-//                        mViewPager.setCurrentItem(MESSAGE_FRAGMENT);
+                        showPopUpWindow();
                         return true;
                     }
                     case R.id.message_ui:{
@@ -139,6 +143,45 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 }
+            }
+        });
+    }
+
+    private void showPopUpWindow() {
+        View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.choose, null);
+        final PopupWindow mPopWindow = new PopupWindow(contentView,
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+        mPopWindow.setContentView(contentView);
+        ImageView newShiWu = contentView.findViewById(R.id.newShiWu);
+        ImageView newZhaoLing = contentView.findViewById(R.id.newZhaoLing);
+        ImageView cancel = contentView.findViewById(R.id.cancel);
+
+        View rootView = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_main, null);
+        mPopWindow.setTouchable(true);
+        mPopWindow.setOutsideTouchable(true);
+        mPopWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
+
+
+        //新建失物
+        newShiWu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        //新建招领
+        newZhaoLing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopWindow.dismiss();
             }
         });
     }
