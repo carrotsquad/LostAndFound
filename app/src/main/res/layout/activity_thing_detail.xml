@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:background="@color/deepskyblue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/thing_detail_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back"/>
+
+            <TextView
+                android:id="@+id/thing_detail_type"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="失物/招领详情"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/thing_detail_thingsdetail_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/thing_detail_cardrelative"
+                android:layout_width="match_parent"
+                android:layout_height="217dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/thing_detail_thingsdetail_circleview"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/diai" />
+
+                <TextView
+                    android:id="@+id/thing_detail_thingsdetail_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/thing_detail_thingsdetail_fabiaodate"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="86dp"
+                    android:text="我不是桔猫我是橘猫"
+                    android:textSize="20dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_below="@+id/thing_detail_thingsdetail_fabiaodate">
+
+                    <RelativeLayout
+                        android:id="@+id/lolollol"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:id="@+id/thing_detail_thingsdetail_diushidate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:text="丢失时间:2018年11月19日" />
+
+                        <TextView
+                            android:id="@+id/thing_detail_thingsdetail_place"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginEnd="91dp"
+                            android:text="丢失地点:二教" />
+                        <TextView
+                            android:layout_marginVertical="2dp"
+                            android:layout_marginHorizontal="3dp"
+                            android:text="快来添加描述————我想到，人世间的波折其实也和果树一样。有时候我们面临了冬天的肃杀，却还要被减去枝桠，甚至留下了心里的汁液。有那些怯懦的，他就不能等到春天。只有永远保持春天的心情等待发芽的人，才能勇敢的过冬，才能在流血之后还能枝繁叶茂，然后结出比剪枝之前更好的果。"
+                            android:id="@+id/thing_detail_thingsdetail_describe"
+                            android:layout_below="@id/thing_detail_thingsdetail_diushidate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <cn.finalteam.galleryfinal.widget.HorizontalListView
+                            android:id="@+id/thing_detail_thingsdetail_types"
+                            android:layout_below="@id/thing_detail_thingsdetail_describe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </cn.finalteam.galleryfinal.widget.HorizontalListView>
+                        <cn.finalteam.galleryfinal.widget.HorizontalListView
+                            android:layout_below="@id/thing_detail_thingsdetail_types"
+                            android:id="@+id/thing_detail_thingsdetail_imgs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </cn.finalteam.galleryfinal.widget.HorizontalListView>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/thing_detail_thingsdetail_fabiaodate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/thing_detail_thingsdetail_circleview"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="90dp"
+                    android:text="发布于2018年11月20日" />
+
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/thing_detail_comment_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/thing_detail_comment_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>

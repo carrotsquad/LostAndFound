@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItem;
 
@@ -17,6 +16,12 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Description: 搜索fragment的recyclerview适配器
+ * Created at: 2018/11/10 20:05
+ * @author: zhangqianyuan
+ * Email: zhang.qianyuan@foxmail.com
+ */
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
 
     private ArrayList<SearchItem> searchItemArrayList;
@@ -35,7 +40,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
         public ViewHolder(View view) {
             super(view);
-            mCardView = view.findViewById(R.id.search_item_cardview);
+            mCardView = (CardView) view;
             headimg = view.findViewById(R.id.search_item_photo);
 //            neckname = view.findViewById(R.id.dynamic_card_neckname);
             time = view.findViewById(R.id.search_item_date);
@@ -56,7 +61,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         if(mContext==null){
             mContext=parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.search_item,  parent);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.search_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -64,14 +69,14 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SearchItem searchItem = searchItemArrayList.get(position);
 //        holder.headimg
-        holder.qishileixing.setText(searchItem.getQishileixing());
-        holder.place.setText(searchItem.getPlace());
-        holder.time.setText(searchItem.getDate());
+        holder.qishileixing.setText("启事类型:"+searchItem.getQishileixing());
+        holder.place.setText("丢失地点:"+searchItem.getPlace());
+        holder.time.setText("丢失时间:"+searchItem.getDate());
         holder.title.setText(searchItem.getTitle());
-        Glide.with(mContext)
-                .load(searchItem.getPhoto())
-                .asBitmap()
-                .into(holder.headimg);
+//        Glide.with(mContext)
+//                .load(searchItem.getPhoto())
+//                .asBitmap()
+//                .into(holder.headimg);
     }
 
     @Override

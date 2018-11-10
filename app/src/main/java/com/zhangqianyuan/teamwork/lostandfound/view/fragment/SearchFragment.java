@@ -22,6 +22,8 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.ConstellationAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.GirdDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.ListDropDownAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +64,9 @@ public class SearchFragment extends Fragment {
     private TextView ok;
     private GridLayoutManager gridLayoutManager;
 
+    private SearchItemAdapter searchItemAdapter;
+    private ArrayList<SearchItem> searchItemArrayList = new ArrayList<>();
+
 
     public static Fragment newInstance(){
         SearchFragment fragment = new SearchFragment();
@@ -73,7 +78,21 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search, null);
         context = getActivity();
-
+        SearchItem searchItem1=new SearchItem();
+        searchItem1.setTitle("我掉了红色的手表");
+        SearchItem searchItem2=new SearchItem();
+        searchItem2.setTitle("我掉了我的校卡");
+        SearchItem searchItem3=new SearchItem();
+        searchItem3.setTitle("我掉了我的打火机");
+        SearchItem searchItem4=new SearchItem();
+        searchItem4.setTitle("我掉了我的手机");
+        SearchItem searchItem5=new SearchItem();
+        searchItem5.setTitle("我掉了我的作业本");
+        searchItemArrayList.add(searchItem1);
+        searchItemArrayList.add(searchItem2);
+        searchItemArrayList.add(searchItem3);
+        searchItemArrayList.add(searchItem4);
+        searchItemArrayList.add(searchItem5);
         initView();
         return view;
     }
@@ -119,12 +138,15 @@ public class SearchFragment extends Fragment {
         popupViews.add(thingsView);
 
         //初始化recyclerView
+        searchItemAdapter = new SearchItemAdapter(searchItemArrayList);
         recyclerView = new RecyclerView(context);
         recyclerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         gridLayoutManager = new GridLayoutManager(context,1);
         recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(theatreConAdapter);
+        recyclerView.setAdapter(searchItemAdapter);
+//        SwipeRefreshLayout swipeRefreshLayout = new SwipeRefreshLayout(context);
 
+        //设置dropDownMenu
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, recyclerView);
         
         diushitypesView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
