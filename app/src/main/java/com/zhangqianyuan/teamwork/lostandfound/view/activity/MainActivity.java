@@ -18,8 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
@@ -27,6 +26,9 @@ import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -83,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(SearchFragment.newInstance());
         fragments.add(SearchFragment.newInstance());
         fragments.add(SearchFragment.newInstance());
-//        fragments.add(SearchFragment.newInstance());
-//        fragments.add(new PersonFragment());
 
         MainViewAdapter mainViewAdapter = new MainViewAdapter(getSupportFragmentManager());
 
@@ -103,7 +103,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 mTitleTv.setText(titles[position]);
-                mBottomNav.getMenu().getItem(position).setChecked(true);
+                if(position<=1){
+                    mBottomNav.getMenu().getItem(position).setChecked(true);
+                }else if(position>=2&&position<=3){
+                    mBottomNav.getMenu().getItem(position+1).setChecked(true);
+                }
+
             }
 
             @Override
@@ -178,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //取消
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

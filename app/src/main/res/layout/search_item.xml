@@ -1,7 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="7dp"
+    android:layout_marginVertical="2dp"
+    android:id="@+id/search_item_cardview"
+    app:cardCornerRadius="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/search_item_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:src="@mipmap/diai" />
+
+        <TextView
+            android:id="@+id/search_item_title"
+            android:layout_width="227dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
+            android:maxLines="1"
+            android:singleLine="false"
+            android:text="我的钥匙掉在昨晚掉在2014了你们能帮我一下么" />
+
+        <TextView
+            android:id="@+id/search_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/search_item_title"
+            android:layout_below="@+id/search_item_qishileixing"
+            android:layout_marginVertical="2dp"
+            android:text="发布时间:2018年10月5日" />
+
+        <TextView
+            android:id="@+id/search_item_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/search_item_title"
+            android:layout_below="@+id/search_item_date"
+            android:layout_marginVertical="2dp"
+            android:text="丢失地点:四教" />
+
+        <TextView
+            android:id="@+id/search_item_qishileixing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/search_item_title"
+            android:layout_below="@+id/search_item_title"
+            android:layout_marginVertical="2dp"
+            android:text="启事类型:失物启事" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/search_item_newmessage"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape5" />
+    </RelativeLayout>
 
 
-</RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -55,10 +55,15 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
+        //如果已经登录过，直接进入主页面
+        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))){
+            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
         register.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
         signPresenter = new SignPresenter(this);
-        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
         mIntent=getIntent();
         if(mIntent.getIntExtra(SIGNIN,0)==1){
             signPresenter.getSignIn(mIntent.getStringExtra(EMAIL),mIntent.getStringExtra(PASSWORD));
@@ -102,6 +107,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     public void showSignInStatus(Boolean status, SignInBean signInBean) {
         if(status){
             FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            editor = sharedPreferences.edit();
             editor.putString(EMAIL,signInBean.getUser().getUsername());
             editor.putString(PASSWORD,signInBean.getUser().getPassword());
             editor.putString(NICKNAME,signInBean.getUser().getNickname());

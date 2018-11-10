@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity"
     tools:showIn="@layout/activity_log_in">
@@ -16,12 +17,11 @@
             android:id="@+id/login_photo"
             android:layout_width="83dp"
             android:layout_height="61dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="84dp"
             android:src="@drawable/photo_ic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

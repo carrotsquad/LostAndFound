@@ -13,7 +13,7 @@ public class DynamicItem {
     public static final int  TYPE_FIND=1; //招领
     private int cardType;
     private int headImg;  //用户头像
-    private String neckName;  //用户呢城
+    private String neckName;  //用户呢称
     private String thingType; //物件的类型
     private String time;      //捡到/丢失时间
     private String description; //用户对这个东西的描述
