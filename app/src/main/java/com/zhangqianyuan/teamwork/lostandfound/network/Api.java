@@ -23,7 +23,7 @@ public interface Api {
 
     //核对验证码
     @POST("/passlove/user/register/checkCode")
-    Observable<CheckCodeBean> getCheckCode(@Query("status") String ckeckcode, @Query("JSESSIONID") String sessionID);
+    Observable<CheckCodeBean> getCheckCode(@Query("checkcode") String ckeckcode, @Query("JSESSIONID") String sessionID);
 
     //注册
     @POST("/passlove/user/register")

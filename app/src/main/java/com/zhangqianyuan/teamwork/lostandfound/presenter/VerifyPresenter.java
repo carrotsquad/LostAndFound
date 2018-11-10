@@ -1,7 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.IVerifyListener;
 import com.zhangqianyuan.teamwork.lostandfound.model.VerifyModel;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IVerifyActivity;
 
@@ -21,33 +21,50 @@ public class VerifyPresenter implements IVerifyPresenter {
     @Override
     public void getRegister(String checkcode, String email, String nickname, String password, String phonenumber, String sessionID) {
         verifyModel = new VerifyModel();
-        verifyModel.checkCheckCode(checkcode, email, nickname, password, phonenumber, sessionID, new IVerifyListener() {
-            @Override
-            public void onStatus(Boolean status) {
-                iVerifyActivity.showcheckcodestatus(status);
-            }
-        }, new Observer<RegisterBean>() {
+
+        verifyModel.checkCheckCode(checkcode, sessionID, new Observer<CheckCodeBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(RegisterBean registerBean) {
-                if(registerBean == null){
-                    iVerifyActivity.getregister(false);
+            public void onNext(CheckCodeBean checkCodeBean) {
+                if(checkCodeBean==null||checkCodeBean.getStatus()==400){
+                    iVerifyActivity.showcheckcodestatus(false);
                 }else {
-                if(registerBean.getStatus() == 400){
-                    iVerifyActivity.getregister(false);
-                }else {
-                    iVerifyActivity.getregister(true);
+                    iVerifyActivity.showcheckcodestatus(true);
+                    verifyModel.register(email, nickname, password, phonenumber, sessionID, new Observer<RegisterBean>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(RegisterBean registerBean) {
+                            if(registerBean==null||registerBean.getStatus()==400){
+                                iVerifyActivity.getregister(false);
+                            }else {
+                                iVerifyActivity.getregister(true);
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
                 }
-            }
             }
 
             @Override
             public void onError(Throwable e) {
-                iVerifyActivity.getregister(false);
+
             }
 
             @Override

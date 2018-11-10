@@ -17,7 +17,7 @@
 
     <item
         android:id="@+id/newmessage_ui"
-        android:icon="@drawable/search"
+        android:icon="@drawable/newbuild_icon"
         android:title="新建" />
 
     <item

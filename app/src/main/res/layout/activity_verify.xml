@@ -25,7 +25,8 @@
             android:id="@+id/verify_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrows"/>
+            android:src="@drawable/ic_arrows"
+            android:contentDescription="TODO" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -65,7 +66,7 @@
             app:icv_et_bg_focus="@drawable/shape_icv_et_bg_focus"
             app:icv_et_bg_normal="@drawable/shape_icv_et_bg_normal"
             app:icv_et_divider_drawable="@drawable/shape_divider_identifying"
-            app:icv_et_number="4"
+            app:icv_et_number="5"
             app:icv_et_pwd="false"
             app:icv_et_pwd_radius="10dp"
             app:icv_et_text_color="#000000"
@@ -83,7 +84,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-
             android:text="确认" />
     </RelativeLayout>
 

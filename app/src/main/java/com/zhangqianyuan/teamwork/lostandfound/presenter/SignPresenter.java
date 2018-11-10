@@ -28,7 +28,7 @@ public class SignPresenter implements ISignPresenter {
 
             @Override
             public void onNext(SignInBean signInBean) {
-                if (signInBean.getStatus()==200) {
+                if (signInBean==null||signInBean.getStatus()==200) {
                     iSignInActivity.showSignInStatus(true,signInBean);
                 }else {
                     iSignInActivity.showSignInStatus(false,null);

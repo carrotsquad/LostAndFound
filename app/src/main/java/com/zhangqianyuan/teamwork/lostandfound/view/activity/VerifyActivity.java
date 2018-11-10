@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,6 +34,8 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivit
  * Email: zhang.qianyuan@foxmail.com
  */
 public class VerifyActivity extends AppCompatActivity implements IVerifyActivity {
+
+    public static final String SIGNIN = "SignIn";
 
     @BindView(R.id.verify_icv)
     VerificationCodeView verificationCodeView;
@@ -82,6 +85,8 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
         switch (view.getId()){
             case R.id.verify_sure:{
                 String checkcode = verificationCodeView.getInputContent();
+                Log.e("Verify",checkcode);
+                Log.e("Verify",eemail+nickname+pwd+pnb+session);
                 verifyPresenter.getRegister(checkcode,eemail,nickname,pwd,pnb,session);
                 break;
             }
@@ -99,6 +104,15 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
     public void getregister(Boolean status) {
         if(status){
             FancyToast.makeText(VerifyActivity.this,"注册成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            Intent intent = new Intent(VerifyActivity.this,SignInActivity.class);
+            intent.putExtra(PWD,pwd);
+            intent.putExtra(PNB,pnb);
+            intent.putExtra(EMAIL,eemail);
+            intent.putExtra(NICKNAME,nickname);
+            intent.putExtra(SESSION,session);
+            intent.putExtra(SIGNIN,1);
+            startActivity(intent);
+            onDestroy();
         }else {
             FancyToast.makeText(VerifyActivity.this,"注册失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
@@ -107,7 +121,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
     @Override
     public void showcheckcodestatus(Boolean status) {
         if(status){
-            FancyToast.makeText(VerifyActivity.this,"验证码一致",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+//            FancyToast.makeText(VerifyActivity.this,"验证码一致",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
         }else {
             FancyToast.makeText(VerifyActivity.this,"验证码不一致",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }

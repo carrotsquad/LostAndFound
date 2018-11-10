@@ -46,6 +46,6 @@
         android:layout_below="@+id/search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <include layout="@layout/dropmenu"/>
+        <include layout="@layout/dropmenu_layout"/>
     </LinearLayout>
 </RelativeLayout>

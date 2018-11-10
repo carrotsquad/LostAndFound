@@ -1,6 +1,8 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +21,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.provider.Telephony.Carriers.PASSWORD;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.EMAIL;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.NICKNAME;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.PNB;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.VerifyActivity.SIGNIN;
+
 public class SignInActivity extends AppCompatActivity implements ISignInActivity {
 
     @BindView(R.id.signin_signin)
@@ -35,6 +44,12 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
 
     private SignPresenter signPresenter;
 
+    private SharedPreferences sharedPreferences;
+
+    SharedPreferences.Editor editor;
+
+    private Intent mIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +57,12 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         ButterKnife.bind(this);
         register.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
         signPresenter = new SignPresenter(this);
+        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        mIntent=getIntent();
+        if(mIntent.getIntExtra(SIGNIN,0)==1){
+            signPresenter.getSignIn(mIntent.getStringExtra(EMAIL),mIntent.getStringExtra(PASSWORD));
+        }
     }
 
     @Override
@@ -52,6 +73,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     @OnClick({R.id.signin_tologin,R.id.signin_signin})
     void onClicked(View view){
         switch (view.getId()){
+            //点击登陆
             case R.id.signin_signin:{
                 if("".equals(pwd.getText().toString())||"".equals(email.getText().toString())){
                     FancyToast.makeText(SignInActivity.this,"输入有问题",FancyToast.LENGTH_SHORT,FancyToast.WARNING,true).show();
@@ -59,12 +81,10 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
                     String eemail = email.getText().toString();
                     String password = pwd.getText().toString();
                     signPresenter.getSignIn(eemail,password);
-                    Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
                 break;
             }
+            //点击“未有账号，点击注册”
             case R.id.signin_tologin:{
                 Intent intent = new Intent(SignInActivity.this,LogInActivity.class);
                 startActivity(intent);
@@ -81,7 +101,17 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     @Override
     public void showSignInStatus(Boolean status, SignInBean signInBean) {
         if(status){
-            FancyToast.makeText(SignInActivity.this,"登录失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            editor.putString(EMAIL,signInBean.getUser().getUsername());
+            editor.putString(PASSWORD,signInBean.getUser().getPassword());
+            editor.putString(NICKNAME,signInBean.getUser().getNickname());
+            editor.putString(PNB,signInBean.getUser().getPhonenumber());
+            editor.putString(SESSION,signInBean.getJSESSIONID());
+            editor.commit();
+            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+            startActivity(intent);
+            FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            finish();
         }else {
             FancyToast.makeText(SignInActivity.this,"登录失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
