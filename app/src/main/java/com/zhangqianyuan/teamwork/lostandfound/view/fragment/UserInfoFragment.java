@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 
 /**
+ * Description
+ * 用户资料界面
  * @author zhoudada
  * @version $Rev$
  * @des ${TODO}

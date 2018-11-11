@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Description 动态Fragment
+ * Description 动态界面
  * @author zhoudada
  * @version $Rev$
  * @des ${TODO}
