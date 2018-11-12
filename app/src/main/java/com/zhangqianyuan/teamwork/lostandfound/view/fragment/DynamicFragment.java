@@ -1,4 +1,4 @@
-package com.zhangqianyuan.teamwork.lostandfound.view.Fragment;
+package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
 import android.os.Bundle;
 
@@ -46,11 +46,11 @@ import butterknife.ButterKnife;
      */
 public class DynamicFragment extends Fragment {
 
-@BindView(R.id.dynamic_fragment_tablayout)
-TabLayout  tab;
+    @BindView(R.id.dynamic_fragment_tablayout)
+    TabLayout  tab;
 
-@BindView(R.id.dynamic_viewpager)
-ViewPager mViewPager;
+    @BindView(R.id.dynamic_viewpager)
+    ViewPager mViewPager;
 
 
 
@@ -60,9 +60,7 @@ ViewPager mViewPager;
         View  view = inflater.inflate(R.layout.fragment_dynamic,container,false);
         //bind（）参数为空间所在的layout
         ButterKnife.bind(this,view);
-        if (savedInstanceState==null){
-            linkBottomWithViewpager();
-        }
+        linkBottomWithViewpager();
         return view;
     }
 

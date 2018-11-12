@@ -6,6 +6,5 @@
     android:layout_height="match_parent"
     android:id="@+id/nav_userinfo"
     app:menu="@menu/nav_userinfo_item"
-    app:headerLayout="@layout/userinfo_fragment_headlayout"
     >
 </android.support.design.widget.NavigationView>
