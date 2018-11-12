@@ -33,6 +33,8 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
+ * Description
+ * 用户资料界面
  * @author zhoudada
  * @version $Rev$
  * @des ${TODO}

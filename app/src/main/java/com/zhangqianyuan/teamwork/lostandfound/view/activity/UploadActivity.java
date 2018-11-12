@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -46,6 +47,10 @@ public class UploadActivity extends AppCompatActivity {
     public void initView(){
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         mRecyclerView.setAdapter(new UploadFragmentAdapter(lists));
     }

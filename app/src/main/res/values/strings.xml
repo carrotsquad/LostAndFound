@@ -6,4 +6,5 @@
     <string name="lost">失物</string>
     <string name="find">招领</string>
     <string name="upload">上传</string>
+    <string name="editInfo">编辑信息</string>
 </resources>

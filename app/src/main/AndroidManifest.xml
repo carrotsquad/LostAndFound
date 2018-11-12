@@ -13,11 +13,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.activity.MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".view.activity.LogInActivity"
             android:label="@string/title_activity_log_in"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".view.activity.VerifyActivity" />
         <activity android:name=".view.activity.SignInActivity">
             <intent-filter>
@@ -26,7 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ThingDetailActivity"></activity>
+        <activity android:name=".view.activity.ThingDetailActivity" />
+        <activity android:name=".view.activity.UserInfoSettingActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/editInfo"
+            ></activity>
+        <activity android:name=".view.activity.UploadActivity"/>
+        <activity android:name=".view.activity.UploadFormActivity"/>
     </application>
 
 </manifest>
