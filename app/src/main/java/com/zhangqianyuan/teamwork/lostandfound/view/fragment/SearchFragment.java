@@ -25,6 +25,9 @@ import com.zhangqianyuan.teamwork.lostandfound.adapter.GirdDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.ListDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItem;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.ISearchPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.SearchPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +44,7 @@ import butterknife.ButterKnife;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements ISearchFragment {
 
     private EditText searchInput;
     private Button sure;
@@ -71,6 +74,8 @@ public class SearchFragment extends Fragment {
     private SearchItemAdapter searchItemAdapter;
     private ArrayList<SearchItem> searchItemArrayList = new ArrayList<>();
 
+    private ISearchPresenter iSearchPresenter;
+
 
     public static Fragment newInstance(){
         SearchFragment fragment = new SearchFragment();
@@ -98,7 +103,7 @@ public class SearchFragment extends Fragment {
         searchItemArrayList.add(searchItem3);
         searchItemArrayList.add(searchItem4);
         searchItemArrayList.add(searchItem5);
-
+        iSearchPresenter = new SearchPresenter(this);
         initView();
         return view;
     }
@@ -200,5 +205,15 @@ public class SearchFragment extends Fragment {
             }
         });
     }
-    
+
+    @Override
+    public void showSearchResult(Boolean status, ArrayList<SearchItem> searchItemArrayList) {
+        if(status){
+            this.searchItemArrayList.clear();
+            this.searchItemArrayList.addAll(searchItemArrayList);
+            searchItemAdapter.notifyItemChanged(this.searchItemArrayList.size()-1);
+//            recyclerView.scrollToPosition(msgList.size() - 1);
+//            recyclerView.
+        }
+    }
 }

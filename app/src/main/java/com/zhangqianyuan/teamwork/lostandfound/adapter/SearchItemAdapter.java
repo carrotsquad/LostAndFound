@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItem;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
 
@@ -62,7 +64,17 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             mContext=parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.search_item,parent,false);
-        return new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ThingDetailActivity.class);
+//                intent.putExtra()
+            }
+        });
+
+        return holder;
     }
 
     @Override
