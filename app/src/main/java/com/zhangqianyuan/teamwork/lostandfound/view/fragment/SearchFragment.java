@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ import com.zhangqianyuan.teamwork.lostandfound.adapter.ListDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItem;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,8 +34,6 @@ import butterknife.ButterKnife;
 
 
 
-
-import butterknife.ButterKnife;
 
 /**
  * Description: 搜索界面
@@ -52,10 +50,10 @@ public class SearchFragment extends Fragment {
     private View view;
     private Context context;
 
-    private String headers[] = {"启事类型", "丢失地点", "物品类型"};
-    private String diushitypes[] = {"不限","失物","招领"};
-    private String places[]={"不限","一教","二教","三教","四教","五教","六教","七教","八教","二维码大楼","信科","逸夫楼","老图","数图","太极运动场","风华运动场","风雨操场"};
-    private String thingstypes[] = {"不限","衣物","首饰","运动器材","书本","手机","电脑","有赏金","其他"};
+    private String[] headers = {"启事类型", "丢失地点", "物品类型"};
+    private String[] diushitypes = {"不限", "失物", "招领"};
+    private String[] places = {"不限", "一教", "二教", "三教", "四教", "五教", "六教", "七教", "八教", "二维码大楼", "信科", "逸夫楼", "老图", "数图", "太极运动场", "风华运动场", "风雨操场"};
+    private String[] thingstypes = {"不限", "衣物", "首饰", "运动器材", "书本", "手机", "电脑", "有赏金", "其他"};
 
     private int thingsPosition = 0;
 
@@ -83,8 +81,8 @@ public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_search, null);
-        context = getActivity();
+        view = inflater.inflate(R.layout.fragment_search, container,false);
+        context = getContext();
         SearchItem searchItem1=new SearchItem();
         searchItem1.setTitle("我掉了红色的手表");
         SearchItem searchItem2=new SearchItem();
@@ -100,8 +98,6 @@ public class SearchFragment extends Fragment {
         searchItemArrayList.add(searchItem3);
         searchItemArrayList.add(searchItem4);
         searchItemArrayList.add(searchItem5);
-
-        context = getContext();
 
         initView();
         return view;
@@ -143,9 +139,7 @@ public class SearchFragment extends Fragment {
         ok = ButterKnife.findById(thingsView,R.id.ok);
 
         //init popupViews
-        popupViews.add(diushitypesView);
-        popupViews.add(placesView);
-        popupViews.add(thingsView);
+        popupViews= Arrays.asList(diushitypesView, placesView, thingsView);
 
         //初始化recyclerView
         searchItemAdapter = new SearchItemAdapter(searchItemArrayList);
@@ -155,6 +149,8 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(searchItemAdapter);
 //        SwipeRefreshLayout swipeRefreshLayout = new SwipeRefreshLayout(context);
+
+        Log.e("SearchFragment","headers大小:"+Integer.toString(headers.length) + "popupViews大小:"+Integer.toString(popupViews.size()));
 
         //设置dropDownMenu
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, recyclerView);

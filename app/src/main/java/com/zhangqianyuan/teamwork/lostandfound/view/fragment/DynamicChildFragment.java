@@ -1,4 +1,4 @@
-package com.zhangqianyuan.teamwork.lostandfound.view.Fragment;
+package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

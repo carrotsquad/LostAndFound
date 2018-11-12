@@ -21,7 +21,10 @@ import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicFragment;
+import com.zhangqianyuan.teamwork.lostandfound.view.fragment.MessageFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
+import com.zhangqianyuan.teamwork.lostandfound.view.fragment.UserInfoFragment;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -81,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
     private void initView() throws NoSuchFieldException, IllegalAccessException {
 
         List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new DynamicFragment());
         fragments.add(SearchFragment.newInstance());
-        fragments.add(SearchFragment.newInstance());
-        fragments.add(SearchFragment.newInstance());
-        fragments.add(SearchFragment.newInstance());
+        fragments.add(MessageFragment.newInstance());
+        fragments.add(new UserInfoFragment());
 
         MainViewAdapter mainViewAdapter = new MainViewAdapter(getSupportFragmentManager());
 
