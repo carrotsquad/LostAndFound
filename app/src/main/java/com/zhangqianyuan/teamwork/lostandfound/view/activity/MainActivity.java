@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         newShiWu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                 startActivity(new Intent(view.getContext(),UploadActivity.class));
             }
         });
 
@@ -182,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         newZhaoLing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(view.getContext(),UploadActivity.class));
             }
         });
 

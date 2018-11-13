@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,10 @@ import android.widget.TextView;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.system.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyHistory;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoSettingActivity;
 
 import java.util.List;
 
@@ -129,20 +134,21 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.my_lost:{
-                return false;
+            case R.id.my_upload:{
+                startActivity(new Intent(getContext(),UserInfoMyUpload.class));
+                return true;
             }
-            case R.id.my_find:{
-                return false;
-            }
-            case R.id.my_info:{
-                return false;
+            case R.id.my_history:{
+                startActivity(new Intent(getContext(),UserInfoMyHistory.class));
+                return true;
             }
             case R.id.setting:{
-                return false;
+                startActivity(new Intent(getContext(),UserInfoSettingActivity.class));
+                return true;
             }
             case R.id.about_us:{
-                return false;
+                startActivity(new Intent(getContext(),UserInfoAboutUsActivity.class));
+                return true;
             }
             default:{
                 return false;
