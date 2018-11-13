@@ -6,8 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.internal.NavigationMenu;
-import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,11 +17,15 @@ import android.widget.TextView;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
-import com.zhangqianyuan.teamwork.lostandfound.system.GlideImageLoader;
+
+
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyHistory;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoSettingActivity;
+
+import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
+
 
 import java.util.List;
 
@@ -61,6 +63,12 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     private Context mContext;
 
 
+    public static Fragment newInstance(){
+        UserInfoFragment fragment = new UserInfoFragment();
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,11 +82,6 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         img.setOnClickListener(this);
         nickname.setOnClickListener(this);
         return view;
-    }
-
-    public static Fragment newInstance(){
-       UserInfoFragment fragment = new UserInfoFragment();
-        return fragment;
     }
 
     //选择图片
@@ -156,6 +159,11 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         }
     }
 
+
+    /**
+     * 点击头像和名字
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){

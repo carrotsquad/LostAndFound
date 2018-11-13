@@ -156,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * popupWindows
+     */
     private void showPopUpWindow() {
         View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.choose, null);
         final PopupWindow mPopWindow = new PopupWindow(contentView,

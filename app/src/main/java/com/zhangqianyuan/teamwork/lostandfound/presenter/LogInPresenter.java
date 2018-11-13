@@ -10,6 +10,12 @@ import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ILogInActivity;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
+/**
+ * Description: 注册Presenter
+ * Created at: 2018/11/13 10:53
+ * @author: zhangqianyuan
+ * Email: zhang.qianyuan@foxmail.com
+ */
 public class LogInPresenter implements ILogInPresenter{
 
     private ILogInModel iLogInModel;

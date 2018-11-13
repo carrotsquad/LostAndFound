@@ -28,6 +28,12 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivit
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.VerifyActivity.SIGNIN;
 
+/**
+ * Description: 登陆activity
+ * Created at: 2018/11/13 10:51
+ * @author: zhangqianyuan
+ * Email: zhang.qianyuan@foxmail.com
+ */
 public class SignInActivity extends AppCompatActivity implements ISignInActivity {
 
     @BindView(R.id.signin_signin)

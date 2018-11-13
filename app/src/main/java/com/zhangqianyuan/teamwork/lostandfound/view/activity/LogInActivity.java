@@ -22,7 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
- * Description: 注册页面
+ * Description: 注册页面,英文单词好像弄错了
  * Created at: 2018/10/31 22:06
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com

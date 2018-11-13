@@ -1,16 +1,26 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.ThingDetailPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
+
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.finalteam.galleryfinal.widget.HorizontalListView;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -20,50 +30,131 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class ThingDetailActivity extends AppCompatActivity {
+// TODO: 2018/11/13 需要完善，网络数据获取，添加评论等
+public class ThingDetailActivity extends AppCompatActivity implements IThingDetailActivity {
 
+    public static final String OTHERSNICKNAME = "OTHERSNICKNAME";
+    public static final String OTHERSIMG = "OTHERSIMG";
+    public static final String OTHERSFABIAODATE = "OTHERSFABIAODATE";
+    public static final String OTHERSPLACE = "OTHERSPLACE";
+    public static final String OTHERSDIUSHILEIXING = "OTHERSDIUSHILEIXING";
+    public static final String OTHERSDIUSHIDATE = "OTHERSDIUSHIDATE";
+    public static final String OTHERSTHINGSTYPES = "OTHERSTHINGSTYPES";
+    public static final String OTHERSID = "OTHERSID";
+
+    //头像
     @BindView(R.id.thing_detail_thingsdetail_circleview)
     CircleImageView userimg;
 
+    //nickname
     @BindView(R.id.thing_detail_thingsdetail_nickname)
     TextView nickname;
 
+    //发表时间
     @BindView(R.id.thing_detail_thingsdetail_fabiaodate)
     TextView fabiaodate;
 
+    //丢失时间
     @BindView(R.id.thing_detail_thingsdetail_diushidate)
     TextView diushidate;
 
+    //丢失地点
     @BindView(R.id.thing_detail_thingsdetail_place)
     TextView place;
 
+    //描述
     @BindView(R.id.thing_detail_thingsdetail_describe)
     TextView describe;
 
+    //评论列表
     @BindView(R.id.thing_detail_comment_recyclerview)
     RecyclerView recyclerView;
 
+    //启示类型
     @BindView(R.id.thing_detail_type)
     TextView type;
 
+    //返回按键
     @BindView(R.id.thing_detail_back)
     ImageView back;
 
+    //东西类型列表
     @BindView(R.id.thing_detail_thingsdetail_types)
-    HorizontalListView thingstypes;
+    HorizontalScrollView thingstypes;
 
+    //东西的图片
     @BindView(R.id.thing_detail_thingsdetail_imgs)
-    HorizontalListView imgs;
+    HorizontalScrollView imgs;
+
+    private String ID;
+    private SharedPreferences sharedPreferences;
+    private ThingDetailPresenter thingDetailPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thing_detail);
         ButterKnife.bind(this);
-        initView();
+        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+        thingDetailPresenter = new ThingDetailPresenter(this);
+        initDataFromLocal();
+        initDataFromWeb();
     }
 
-    private void initView(){
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    private void initDataFromLocal() {
+        Intent intent = getIntent();
+        /**
+         * intent.putExtra(OTHERSIMG, searchItemBean.getPhoto());
+         intent.putExtra(OTHERSFABIAODATE,searchItemBean.getFabiaodate());
+         intent.putExtra(OTHERSDIUSHILEIXING, searchItemBean.getQishileixing());
+         intent.putExtra(OTHERSDIUSHIDATE, searchItemBean.getDiushidate());
+         intent.putExtra(OTHERSTHINGSTYPES, searchItemBean.getTypes());
+         intent.putExtra(OTHERSID, searchItemBean.getID());
+         */
+        String strimg = intent.getStringExtra(OTHERSIMG);
+        String strfabiaodate = intent.getStringExtra(OTHERSFABIAODATE);
+        String strplace = intent.getStringExtra(OTHERSPLACE);
+        String strdiushidate = intent.getStringExtra(OTHERSDIUSHIDATE);
+        String strdiushileixing = intent.getStringExtra(OTHERSDIUSHILEIXING);
+
+        Bundle bundle = intent.getBundleExtra(OTHERSTHINGSTYPES);
+        List<String> strthingstypes = bundle.getStringArrayList(OTHERSTHINGSTYPES);
+        ID = intent.getStringExtra(OTHERSID);
+        fabiaodate.setText("发表于"+strfabiaodate);
+        diushidate.setText("丢失时间:"+strdiushidate);
+        place.setText("丢失地点:"+strplace);
+    }
+
+    @OnClick({R.id.thing_detail_back})
+    void onClick(View view){
+        switch (view.getId()){
+            case R.id.thing_detail_back:{
+                finish();
+                break;
+            }
+            default:{
+                break;
+            }
+        }
+    }
+
+    /**
+     * 从网络获取数据
+     */
+    private void initDataFromWeb(){
+        String session=sharedPreferences.getString("SESSION","nought");
+        thingDetailPresenter.getDataFromWeb(ID, session);
+    }
+
+    // TODO: 2018/11/13 需完善
+    @Override
+    public void showDataFromWeb() {
 
     }
 }
