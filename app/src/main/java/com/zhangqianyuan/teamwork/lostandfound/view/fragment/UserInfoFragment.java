@@ -5,8 +5,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.internal.NavigationMenu;
-import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,7 +16,7 @@ import android.widget.TextView;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
-import com.zhangqianyuan.teamwork.lostandfound.system.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -83,7 +84,9 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 intent.putExtra(OTHERSFABIAODATE,searchItemBean.getFabiaodate());
                 intent.putExtra(OTHERSDIUSHILEIXING, searchItemBean.getQishileixing());
                 intent.putExtra(OTHERSDIUSHIDATE, searchItemBean.getDiushidate());
-                intent.putExtra(OTHERSTHINGSTYPES, searchItemBean.getTypes());
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList(OTHERSTHINGSTYPES, (ArrayList<String>) searchItemBean.getTypes());
+                intent.putExtra(OTHERSTHINGSTYPES, bundle);
                 intent.putExtra(OTHERSID, searchItemBean.getID());
                 mContext.startActivity(intent);
             }

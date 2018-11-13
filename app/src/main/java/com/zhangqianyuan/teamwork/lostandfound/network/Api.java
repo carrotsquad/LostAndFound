@@ -5,6 +5,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.POST;
@@ -35,7 +36,11 @@ public interface Api {
     @POST("/passlove/user/loginIn")
     Observable<SignInBean> getSignIn(@Query("username") String email,@Query("password") String password);
 
-    //登录
+    //搜索
     @POST("/passlove/user/loginIn")
     Observable<SearchBean> getSearchItem(@Query("keyword") String keyword, @Query("diushileixing") String diushileixing, @Query("place") String place, @Query("thingtype") String thingtype , @Query("JSESSIONID") String sessionID);
+
+    //启事详情
+    @POST("/passlove/user/loginIn")
+    Observable<ThingDetailBean> getThingDetail(@Query("ID") String ID, @Query("JSESSIONID") String session);
 }

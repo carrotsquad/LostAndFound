@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchItemBean {
     
@@ -12,7 +13,7 @@ public class SearchItemBean {
     private String fabiaodate;
     private String diushidate;
     private String place;
-    private ArrayList<String> types;
+    private List<String> types;
 
     public void setFabiaodate(String fabiaodate) {
         this.fabiaodate = fabiaodate;
@@ -46,7 +47,7 @@ public class SearchItemBean {
         this.qishileixing = qishileixing;
     }
 
-    public ArrayList<String> getTypes() {
+    public List<String> getTypes() {
         return types;
     }
 
@@ -84,7 +85,7 @@ public class SearchItemBean {
         this.title = title;
     }
 
-    public void setTypes(ArrayList<String> types) {
+    public void setTypes(List<String> types) {
         this.types = types;
     }
 
