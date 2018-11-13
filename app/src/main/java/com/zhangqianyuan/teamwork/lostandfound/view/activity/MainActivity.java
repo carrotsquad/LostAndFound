@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -50,8 +51,12 @@ public class MainActivity extends AppCompatActivity {
     private final int MESSAGE_FRAGMENT = 2;
     private final int MINE_FRAGMENT = 3;
 
+    @BindView(R.id.app_bar)
+    AppBarLayout appBarLayout;
+
     @BindView(R.id.main_title_tv)
     TextView mTitleTv;
+
     @BindView(R.id.main_view_pager)
     ViewPager mViewPager;
 
@@ -60,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView mBottomNav;
 
     private String[] titles = new String[]{"动态", "搜索", "消息","我的"};
-
 
 
     @Override
@@ -105,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
             private MenuItem prevMenuItem;
             @Override
             public void onPageSelected(int position) {
+                if(position == 1){
+                    appBarLayout.setVisibility(View.GONE);
+                }else {
+                    appBarLayout.setVisibility(View.VISIBLE);
+                }
                 mTitleTv.setText(titles[position]);
                 if(position<=1){
                     mBottomNav.getMenu().getItem(position).setChecked(true);
