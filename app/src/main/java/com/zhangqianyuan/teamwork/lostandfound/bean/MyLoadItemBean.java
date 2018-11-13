@@ -26,13 +26,7 @@ public class MyLoadItemBean {
         this.description = description;
     }
 
-    public static int getTypeLost() {
-        return TYPE_LOST;
-    }
 
-    public static int getTypeFind() {
-        return TYPE_FIND;
-    }
 
     public int getTypeId() {
         return typeId;
