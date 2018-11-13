@@ -22,6 +22,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class ThingDetailActivity extends AppCompatActivity {
 
+    public static final String OTHERSNICKNAME = "OTHERSNICKNAME";
+    public static final String OTHERSIMG = "OTHERSIMG";
+    public static final String OTHERSFABIAODATE = "OTHERSFABIAODATE";
+    public static final String OTHERSPLACE = "OTHERSPLACE";
+    public static final String OTHERSDIUSHILEIXING = "OTHERSDIUSHILEIXING";
+    public static final String OTHERSDIUSHIDATE = "OTHERSDIUSHIDATE";
+    public static final String OTHERSTHINGSTYPES = "OTHERSTHINGSTYPES";
+    public static final String OTHERSID = "OTHERSID";
+
     @BindView(R.id.thing_detail_thingsdetail_circleview)
     CircleImageView userimg;
 

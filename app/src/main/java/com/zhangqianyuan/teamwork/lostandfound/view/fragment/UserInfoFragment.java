@@ -56,6 +56,12 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     private Context mContext;
 
 
+    public static Fragment newInstance(){
+        UserInfoFragment fragment = new UserInfoFragment();
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,11 +75,6 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         img.setOnClickListener(this);
         nickname.setOnClickListener(this);
         return view;
-    }
-
-    public static Fragment newInstance(){
-       UserInfoFragment fragment = new UserInfoFragment();
-        return fragment;
     }
 
     //选择图片
@@ -150,6 +151,11 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         }
     }
 
+
+    /**
+     * 点击头像和名字
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){

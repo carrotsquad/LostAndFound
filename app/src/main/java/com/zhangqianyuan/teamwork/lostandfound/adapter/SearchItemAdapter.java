@@ -11,12 +11,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
-import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItem;
+import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHILEIXING;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSFABIAODATE;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSID;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSIMG;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPES;
 
 /**
  * Description: 搜索fragment的recyclerview适配器
@@ -26,7 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
 
-    private ArrayList<SearchItem> searchItemArrayList;
+    private ArrayList<SearchItemBean> searchItemBeanArrayList;
     private Context mContext;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,10 +41,10 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         CardView mCardView;
         CircleImageView headimg;
         TextView neckname;
-        TextView time;
+        TextView fabiaotime;
         TextView title;
         TextView thingType;
-        TextView place;
+        TextView placeanddate;
         TextView qishileixing;
 
         public ViewHolder(View view) {
@@ -45,16 +52,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             mCardView = (CardView) view;
             headimg = view.findViewById(R.id.search_item_photo);
 //            neckname = view.findViewById(R.id.dynamic_card_neckname);
-            time = view.findViewById(R.id.search_item_date);
+            fabiaotime = view.findViewById(R.id.search_item_fabiaodate);
             title = view.findViewById(R.id.search_item_title);
-            place = view.findViewById(R.id.search_item_place);
+            placeanddate = view.findViewById(R.id.search_item_placeanddate);
             qishileixing = view.findViewById(R.id.search_item_qishileixing);
             thingType = view.findViewById(R.id.dynamic_card_thingtype);
         }
     }
 
-    public SearchItemAdapter(ArrayList<SearchItem> searchItemArrayList){
-        this.searchItemArrayList = searchItemArrayList;
+    public SearchItemAdapter(ArrayList<SearchItemBean> searchItemBeanArrayList){
+        this.searchItemBeanArrayList = searchItemBeanArrayList;
     }
 
     @NonNull
@@ -69,8 +76,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                SearchItemBean searchItemBean = searchItemBeanArrayList.get(position);
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
-//                intent.putExtra()
+                intent.putExtra(OTHERSIMG, searchItemBean.getPhoto());
+                intent.putExtra(OTHERSFABIAODATE,searchItemBean.getFabiaodate());
+                intent.putExtra(OTHERSDIUSHILEIXING, searchItemBean.getQishileixing());
+                intent.putExtra(OTHERSDIUSHIDATE, searchItemBean.getDiushidate());
+                intent.putExtra(OTHERSTHINGSTYPES, searchItemBean.getTypes());
+                intent.putExtra(OTHERSID, searchItemBean.getID());
+                mContext.startActivity(intent);
             }
         });
 
@@ -79,21 +94,22 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SearchItem searchItem = searchItemArrayList.get(position);
+        SearchItemBean searchItemBean = searchItemBeanArrayList.get(position);
 //        holder.headimg
-        holder.qishileixing.setText("启事类型:"+searchItem.getQishileixing());
-        holder.place.setText("丢失地点:"+searchItem.getPlace());
-        holder.time.setText("丢失时间:"+searchItem.getDate());
-        holder.title.setText(searchItem.getTitle());
+        holder.qishileixing.setText("启事类型:"+ searchItemBean.getQishileixing());
+        holder.fabiaotime.setText("发表地点:"+ searchItemBean.getFabiaodate());
+//        holder.headimg
+        holder.placeanddate.setText("丢失时间:"+ searchItemBean.getDiushidate()+" 丢失地点:"+searchItemBean.getDiushidate());
+        holder.title.setText(searchItemBean.getTitle());
 //        Glide.with(mContext)
-//                .load(searchItem.getPhoto())
+//                .load(searchItemBean.getPhoto())
 //                .asBitmap()
 //                .into(holder.headimg);
     }
 
     @Override
     public int getItemCount() {
-        return searchItemArrayList.size();
+        return searchItemBeanArrayList.size();
     }
 
 

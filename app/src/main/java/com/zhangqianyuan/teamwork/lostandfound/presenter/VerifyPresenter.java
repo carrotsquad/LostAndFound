@@ -8,6 +8,12 @@ import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IVerifyActivity;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
+/**
+ * Description: 验证Presenter
+ * Created at: 2018/11/13 10:53
+ * @author: zhangqianyuan
+ * Email: zhang.qianyuan@foxmail.com
+ */
 public class VerifyPresenter implements IVerifyPresenter {
 
     private IVerifyActivity iVerifyActivity;

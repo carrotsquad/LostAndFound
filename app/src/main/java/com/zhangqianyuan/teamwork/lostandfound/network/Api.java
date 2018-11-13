@@ -3,11 +3,8 @@ package com.zhangqianyuan.teamwork.lostandfound.network;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.POST;

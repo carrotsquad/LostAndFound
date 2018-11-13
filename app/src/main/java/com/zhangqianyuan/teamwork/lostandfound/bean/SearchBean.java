@@ -4,14 +4,24 @@ import java.util.List;
 
 public class SearchBean {
 
-    private List<SearchItem> searchItemList;
+    private Integer status;
 
-    public List<SearchItem> getSearchItemList() {
-        return searchItemList;
+    private List<SearchItemBean> searchItemBeanList;
+
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setSearchItemList(List<SearchItem> searchItemList) {
-        this.searchItemList = searchItemList;
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public List<SearchItemBean> getSearchItemBeanList() {
+        return searchItemBeanList;
+    }
+
+    public void setSearchItemBeanList(List<SearchItemBean> searchItemBeanList) {
+        this.searchItemBeanList = searchItemBeanList;
     }
 
 }

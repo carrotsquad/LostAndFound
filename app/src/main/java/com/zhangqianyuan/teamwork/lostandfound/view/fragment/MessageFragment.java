@@ -14,6 +14,12 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Description: 消息fragment
+ * Created at: 2018/11/13 10:51
+ * @author: zhangqianyuan
+ * Email: zhang.qianyuan@foxmail.com
+ */
 public class MessageFragment extends Fragment {
 
     private View view;

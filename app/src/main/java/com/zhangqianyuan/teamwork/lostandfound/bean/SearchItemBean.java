@@ -2,14 +2,41 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
 
 import java.util.ArrayList;
 
-public class SearchItem {
+public class SearchItemBean {
+    
+    private String ID;
     private String photo;
     private String qishileixing;
     private Boolean isNew;
     private String title;
-    private String date;
+    private String fabiaodate;
+    private String diushidate;
     private String place;
     private ArrayList<String> types;
+
+    public void setFabiaodate(String fabiaodate) {
+        this.fabiaodate = fabiaodate;
+    }
+
+    public String getDiushidate() {
+        return diushidate;
+    }
+
+    public String getFabiaodate() {
+        return fabiaodate;
+    }
+
+    public void setDiushidate(String diushidate) {
+        this.diushidate = diushidate;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
+    }
 
     public String getQishileixing() {
         return qishileixing;
@@ -27,9 +54,6 @@ public class SearchItem {
         return isNew;
     }
 
-    public String getDate() {
-        return date;
-    }
 
     public String getPhoto() {
         return photo;
@@ -43,9 +67,6 @@ public class SearchItem {
         return title;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public void setNew(Boolean isNew) {
         this.isNew = isNew;
