@@ -11,7 +11,7 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
 public class DynamicItemBean {
     public static final int  TYPE_LOST=0; //丢失
     public static final int  TYPE_FIND=1; //招领
-    private int cardType;
+    private int eventType;
     private int headImg;  //用户头像
     private String neckName;  //用户呢称
     private String thingType; //物件的类型
@@ -24,15 +24,15 @@ public class DynamicItemBean {
         this.thingType = thingType;
         this.time = time;
         this.description = description;
-        this.cardType=cardType;
+        this.eventType=cardType;
     }
 
     public int getCardType() {
-        return cardType;
+        return eventType;
     }
 
     public void setCardType(int cardType) {
-        this.cardType = cardType;
+        this.eventType = cardType;
     }
 
     public int getHeadImg() {

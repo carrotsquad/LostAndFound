@@ -38,8 +38,12 @@ import butterknife.ButterKnife;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
+
+/**
+ * 参数：
+ *
+ */
 // TODO: 2018/11/8  实现 动态加载数据  下拉刷新 上拉加载更多
-// TODO: 2018/11/9  实现bottomnavegation 点击 和ViewPager滑动  在子fragment中加载recycleview并设置颜色
     /*
      最开始时 默认预加载16条动态信息，动态中的count数目按照时间顺序 0到15排序
      上拉 或者 下拉时  count数目清零 再次向服务器请求16条数据.......
@@ -70,15 +74,14 @@ public class DynamicFragment extends Fragment {
           */
         List<Fragment> mFragments = new ArrayList<>();
         List<String>  title     = new ArrayList<>();
-        mFragments.add(DynamicChildFragment.newInstance());
-        mFragments.add(DynamicChildFragment.newInstance());
+        mFragments.add(com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicChildFragment.newInstance());
+        mFragments.add(com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicChildFragment.newInstance());
         title.add("失物");
         title.add("招领");
         FragmentManager man = getChildFragmentManager();
         TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man,mFragments,title);
         mViewPager.setAdapter(adapter);
         tab.setupWithViewPager(mViewPager);
-        tab.setTabsFromPagerAdapter(adapter);
 }
     public static DynamicFragment newInstance(){
         DynamicFragment fragment = new DynamicFragment();

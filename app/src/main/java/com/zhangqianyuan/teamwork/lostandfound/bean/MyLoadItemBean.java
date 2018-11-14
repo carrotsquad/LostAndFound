@@ -18,6 +18,16 @@ public class MyLoadItemBean {
     private  String time;                 //发布事件
     private  String description;          //事件的描述
 
+    public int getThingImg() {
+        return thingImg;
+    }
+
+    public void setThingImg(int thingImg) {
+        this.thingImg = thingImg;
+    }
+
+    private  int    thingImg ;             //物品具体的图片 用于点击item后的Activity
+
     public MyLoadItemBean(int typeId, int type, String where, String time, String description) {
         this.typeId = typeId;
         this.type = type;
