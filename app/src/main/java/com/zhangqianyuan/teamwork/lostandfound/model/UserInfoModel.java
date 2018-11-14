@@ -19,7 +19,7 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
     }
 
     @Override
-    public void getUserInfoData(int headImg, String neckname, String phone, String emai,Callback<UserInfoBean> callback) {
-        api.getUserInfoData(headImg, neckname, phone, emai).enqueue(callback);
+    public void getUserInfoData(Callback<UserInfoBean> callback) {
+        api.getUserInfoData().enqueue(callback);
     }
 }

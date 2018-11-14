@@ -19,12 +19,15 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 
 
+import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyHistory;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoSettingActivity;
 
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
 
 
 import java.util.List;
@@ -48,25 +51,23 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-// TODO: 2018/11/8  给item加点击事件 
-public class UserInfoFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+public class UserInfoFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,IUserInfoFragment {
 
     private static final int REQUEST_CODE_GALLERY = 1;
 
     @BindView(R.id.nav_userinfo)
     NavigationView navigationView;
 
+
     private CircleImageView img;
     private TextView nickname;
     private View headview;
-
     private Context mContext;
+    private UserInfoPresenter  mPresenter;
+    private Intent mIntent;
 
 
-    public static Fragment newInstance(){
-        UserInfoFragment fragment = new UserInfoFragment();
-        return fragment;
-    }
 
 
     @Nullable
@@ -74,15 +75,33 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_userinfo,container,false);
         ButterKnife.bind(this,view);
-        mContext = getContext();
-        headview=navigationView.inflateHeaderView(R.layout.userinfo_fragment_headlayout);
-        img = headview.findViewById(R.id.userinfo_head_img);
-        nickname = headview.findViewById(R.id.userinfo_head_nickname);
-        navigationView.setNavigationItemSelectedListener(this);
-        img.setOnClickListener(this);
-        nickname.setOnClickListener(this);
+        initView();
         return view;
     }
+
+
+    public void initView(){
+        mContext = getContext();
+        headview=navigationView.inflateHeaderView(R.layout.userinfo_fragment_headlayout);
+        navigationView.setNavigationItemSelectedListener(this);
+        img = headview.findViewById(R.id.userinfo_head_img);
+        nickname = headview.findViewById(R.id.userinfo_head_nickname);
+        img.setOnClickListener(this);
+        nickname.setOnClickListener(this);
+    }
+
+
+    public void initMVP(){
+        mPresenter = new UserInfoPresenter(new UserInfoModel());
+        mPresenter.getUserInfoData();
+    }
+
+
+    public static Fragment newInstance(){
+        UserInfoFragment fragment = new UserInfoFragment();
+        return fragment;
+    }
+
 
     //选择图片
     private void initGallery(){
@@ -146,7 +165,7 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
                 return true;
             }
             case R.id.setting:{
-                startActivity(new Intent(getContext(),UserInfoSettingActivity.class));
+                startActivity(mIntent);
                 return true;
             }
             case R.id.about_us:{
@@ -175,5 +194,23 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
                 break;
             }
         }
+    }
+
+    /**
+     * 获得基础数据的同时为设置界面添加数据
+     * @param headImg
+     * @param neckname
+     * @param phone
+     * @param emai
+     */
+    @Override
+    public void showData(int headImg, String neckname, String phone, String emai) {
+        img.setImageResource(headImg);
+        nickname.setText(neckname);
+        mIntent = new Intent(getContext(),UserInfoSettingActivity.class);
+        mIntent.putExtra("headImg",headImg);
+        mIntent.putExtra("neckname",neckname);
+        mIntent.putExtra("phone",phone);
+        mIntent.putExtra("emai",emai);
     }
 }

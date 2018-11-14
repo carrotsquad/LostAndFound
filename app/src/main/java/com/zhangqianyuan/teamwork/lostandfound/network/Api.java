@@ -3,6 +3,7 @@ package com.zhangqianyuan.teamwork.lostandfound.network;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
@@ -67,17 +68,17 @@ public interface Api {
     //获取我的界面 信息
     @POST("")
     @FormUrlEncoded
-    Call<UserInfoBean>    getUserInfoData(int headImg,String neckname,String phone,String emai);
+    Call<UserInfoBean>    getUserInfoData();
 
     //获取我的发布 信息
     @POST()
     @FormUrlEncoded
-    Call<UserInfoMyUpload>  getMyLoadData();
+    Call<List<MyLoadItemBean>>  getMyLoadData();
 
     //获取我的历史 信息
     @POST()
     @FormUrlEncoded
-    Call<MyHistoryItemBean> getMyHistoryData();
+    Call<List<MyHistoryItemBean>> getMyHistoryData();
 
     /*
     我的发布 包括丢/失

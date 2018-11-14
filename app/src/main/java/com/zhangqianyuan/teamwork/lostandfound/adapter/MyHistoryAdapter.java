@@ -12,9 +12,13 @@ import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.MyHistoryPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyHistoryActivity;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,8 +31,22 @@ import butterknife.ButterKnife;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.ViewHolder> {
-    private List<MyHistoryItemBean> lists;
+// TODO: 2018/11/15 完善服务器传递  item对象到list中
+public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.ViewHolder> implements IMyHistoryActivity {
+    private List<MyHistoryItemBean> lists = new ArrayList<>();
+
+
+    /**
+     * 直接传Myhistory对象list回来
+     */
+    @Override
+    public void showData(List<MyHistoryItemBean> beans) {
+        lists.clear();
+        lists.addAll(beans);
+    }
+
+
+
 
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
@@ -50,8 +68,9 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
         }
     }
 
-    public MyHistoryAdapter ( List<MyHistoryItemBean> list){
-        this.lists = list;
+    public MyHistoryAdapter (){
+        MyHistoryPresenter presenter = new MyHistoryPresenter(new MyHistoryModel());
+        presenter.getMyHistoryData();
     }
     @NonNull
     @Override

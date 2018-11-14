@@ -25,4 +25,7 @@ public class BasePresenter<V extends BaseView> {
         return this.v!=null;
     }
 
+    public V getV(){
+        return  this.v;
+    }
 }

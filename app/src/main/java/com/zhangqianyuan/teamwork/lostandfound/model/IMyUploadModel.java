@@ -1,5 +1,9 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 
+import java.util.List;
+
+import retrofit2.Callback;
 /**
  * Description
  * 我的 我的发布model
@@ -19,5 +23,5 @@ public interface IMyUploadModel {
      * 描述
      * 物品具体图片
      */
-    void getMyLoadData();
+    void getMyLoadData(Callback<List<MyLoadItemBean>> callback);
 }

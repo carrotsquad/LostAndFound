@@ -1,5 +1,5 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
-
+import retrofit2.Callback;
 /**
  * @author zhoudada
  * @version $Rev$
