@@ -14,13 +14,13 @@ import io.reactivex.disposables.Disposable;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class SignPresenter implements ISignPresenter {
+public class SignPresenter extends AbstractBasePresenter<ISignInActivity> implements ISignPresenter {
 
     private ISignModel signModel;
     private ISignInActivity iSignInActivity;
 
     public SignPresenter(ISignInActivity iSignInActivity){
-        this.iSignInActivity = iSignInActivity;
+        super(iSignInActivity);
     }
 
     @Override
@@ -35,9 +35,9 @@ public class SignPresenter implements ISignPresenter {
             @Override
             public void onNext(SignInBean signInBean) {
                 if (signInBean==null||signInBean.getStatus()==200) {
-                    iSignInActivity.showSignInStatus(true,signInBean);
+                    v.showSignInStatus(true,signInBean);
                 }else {
-                    iSignInActivity.showSignInStatus(false,null);
+                    v.showSignInStatus(false,null);
                 }
             }
 

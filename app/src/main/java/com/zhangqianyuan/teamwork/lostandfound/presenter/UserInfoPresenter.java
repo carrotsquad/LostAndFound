@@ -31,7 +31,6 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoFragment> implemen
         this.mUserInfoModel = model;
     }
 
-
     @Override
     public void getUserInfoData() {
         if (isAttachActivity()){

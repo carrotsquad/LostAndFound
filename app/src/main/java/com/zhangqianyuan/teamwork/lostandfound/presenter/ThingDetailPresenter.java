@@ -14,13 +14,12 @@ import io.reactivex.disposables.Disposable;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class ThingDetailPresenter implements IThingDetailPresenter {
+public class ThingDetailPresenter extends AbstractBasePresenter<IThingDetailActivity> implements IThingDetailPresenter {
 
-    private IThingDetailActivity iThingDetailActivity;
     private IThingDetailModel iThingDetailModel;
 
     public ThingDetailPresenter(IThingDetailActivity iThingDetailActivity){
-        this.iThingDetailActivity = iThingDetailActivity;
+        super(iThingDetailActivity);
     }
 
 
