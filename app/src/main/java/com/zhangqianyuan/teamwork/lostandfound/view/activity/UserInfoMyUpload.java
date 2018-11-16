@@ -35,13 +35,12 @@ public class UserInfoMyUpload extends AppCompatActivity {
     @BindView(R.id.userinfo_myupload_toolbar)
     Toolbar  mToolbar;
 
-    List<MyLoadItemBean> mMyLoadItemBeanList = new ArrayList<>();
     MyLoadItemAdapter  mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_my_upload);
-
+        initView();
     }
 
     public void initView(){

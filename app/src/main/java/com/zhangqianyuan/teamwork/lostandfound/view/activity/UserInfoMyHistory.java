@@ -9,13 +9,11 @@ import android.support.v7.widget.Toolbar;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyHistoryAdapter;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Description
@@ -36,14 +34,15 @@ public class UserInfoMyHistory extends AppCompatActivity {
     @BindView(R.id.userinfo_myhistory_toolbar)
     Toolbar mToolbar;
 
-    private List<MyHistoryItemBean> mMyHistoryItemBeans = new ArrayList<>();
+    @BindView(R.id.userinfo_myhistory_head)
+    CircleImageView headImg;                  //headImg 通过intent传过来
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_my_history);
         initView();
-        initList();
     }
 
     public void initView(){
@@ -54,16 +53,9 @@ public class UserInfoMyHistory extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new MyHistoryAdapter(mMyHistoryItemBeans));
+        mRecyclerView.setAdapter(new MyHistoryAdapter());
     }
 
-    public void initList(){
-        for (int i = 0; i <50 ; i++) {
-            MyHistoryItemBean bean = new MyHistoryItemBean(R.drawable.gril6,R.drawable.gril6
-            ,true,"fhh","10.10.10");
-            mMyHistoryItemBeans.add(bean);
-        }
-    }
 
 }
 

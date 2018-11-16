@@ -11,7 +11,11 @@ import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,9 +28,14 @@ import butterknife.ButterKnife;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public class MyLoadItemAdapter extends RecyclerView.Adapter<MyLoadItemAdapter.ViewHolder> {
-    private List<MyLoadItemBean> lists;
+public class MyLoadItemAdapter extends RecyclerView.Adapter<MyLoadItemAdapter.ViewHolder> implements IMyLoadActivity {
+    private List<MyLoadItemBean> lists = new ArrayList<>();
 
+    @Override
+    public void showData(List<MyLoadItemBean> bean) {
+        lists.clear();
+        lists.addAll(bean);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView  description;
@@ -50,8 +59,9 @@ public class MyLoadItemAdapter extends RecyclerView.Adapter<MyLoadItemAdapter.Vi
         }
     }
 
-    public MyLoadItemAdapter (List<MyLoadItemBean> list){
-        this.lists = list;
+    public MyLoadItemAdapter (){
+        MyLoadPresenter presenter = new MyLoadPresenter(new MyLoadModel());
+        presenter.getMyloadData();
     }
 
     @NonNull

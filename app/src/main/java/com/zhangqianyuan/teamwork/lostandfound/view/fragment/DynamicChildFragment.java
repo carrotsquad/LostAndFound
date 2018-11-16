@@ -26,6 +26,7 @@ import java.util.List;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
+
 public class DynamicChildFragment extends Fragment {
     RecyclerView mRecyclerView;
     DynamicItemAdapter mDynamicItemAdapter;

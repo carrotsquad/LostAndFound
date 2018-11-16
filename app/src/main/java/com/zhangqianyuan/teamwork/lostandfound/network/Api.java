@@ -1,13 +1,24 @@
 package com.zhangqianyuan.teamwork.lostandfound.network;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UploadBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
+
+import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -43,4 +54,38 @@ public interface Api {
     //启事详情
     @POST("/passlove/user/loginIn")
     Observable<ThingDetailBean> getThingDetail(@Query("ID") String ID, @Query("JSESSIONID") String session);
+
+    //获取动态 失物 信息
+    @POST("")
+    @FormUrlEncoded
+    Call<DynamicItemBean> getDynamicLostData();
+
+    //获取动态 招领 信息
+    @POST("")
+    @FormUrlEncoded
+    Call<DynamicItemBean> getDynamicFindData();
+
+    //获取我的界面 信息
+    @POST("")
+    @FormUrlEncoded
+    Call<UserInfoBean>    getUserInfoData();
+
+    //获取我的发布 信息
+    @POST()
+    @FormUrlEncoded
+    Call<List<MyLoadItemBean>>  getMyLoadData();
+
+    //获取我的历史 信息
+    @POST()
+    @FormUrlEncoded
+    Call<List<MyHistoryItemBean>> getMyHistoryData();
+
+    /*
+    我的发布 包括丢/失
+    向服务器传数据
+     */
+    @POST()
+    @FormUrlEncoded
+    Call<UploadBean>        postUploadBean(int  lostOrFind,int  thingType, String  byWho,String  uploadTime
+    ,String  happendTime,String  where,String  description,List<Integer> thingImg);
 }
