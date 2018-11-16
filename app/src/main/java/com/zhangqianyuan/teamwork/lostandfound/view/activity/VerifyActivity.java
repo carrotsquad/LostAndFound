@@ -67,6 +67,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
 
     @Override
     protected void onDestroy() {
+        verifyPresenter.dettachActivity();
         super.onDestroy();
     }
 

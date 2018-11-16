@@ -14,13 +14,12 @@ import io.reactivex.disposables.Disposable;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class VerifyPresenter implements IVerifyPresenter {
+public class VerifyPresenter extends AbstractBasePresenter<IVerifyActivity> implements IVerifyPresenter {
 
-    private IVerifyActivity iVerifyActivity;
     private VerifyModel verifyModel;
 
     public VerifyPresenter(IVerifyActivity iVerifyActivity) {
-        this.iVerifyActivity = iVerifyActivity;
+        super(iVerifyActivity);
     }
 
 
@@ -37,9 +36,9 @@ public class VerifyPresenter implements IVerifyPresenter {
             @Override
             public void onNext(CheckCodeBean checkCodeBean) {
                 if(checkCodeBean==null||checkCodeBean.getStatus()==400){
-                    iVerifyActivity.showcheckcodestatus(false);
+                    v.showcheckcodestatus(false);
                 }else {
-                    iVerifyActivity.showcheckcodestatus(true);
+                    v.showcheckcodestatus(true);
                     verifyModel.register(email, nickname, password, phonenumber, sessionID, new Observer<RegisterBean>() {
                         @Override
                         public void onSubscribe(Disposable d) {
@@ -49,9 +48,9 @@ public class VerifyPresenter implements IVerifyPresenter {
                         @Override
                         public void onNext(RegisterBean registerBean) {
                             if(registerBean==null||registerBean.getStatus()==400){
-                                iVerifyActivity.getregister(false);
+                                v.getregister(false);
                             }else {
-                                iVerifyActivity.getregister(true);
+                                v.getregister(true);
                             }
                         }
 

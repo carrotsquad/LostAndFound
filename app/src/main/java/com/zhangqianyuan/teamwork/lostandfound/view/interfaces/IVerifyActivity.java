@@ -1,6 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
 
-public interface IVerifyActivity {
+public interface IVerifyActivity extends BaseView{
     void getregister(Boolean status);
     void showcheckcodestatus(Boolean status);
 }

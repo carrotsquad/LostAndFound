@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.MessageFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
@@ -43,6 +45,8 @@ import butterknife.ButterKnife;
  * Email: zhang.qianyuan@foxmail.com
  */
 public class MainActivity extends AppCompatActivity {
+
+    public static final Integer FINE_INTERNET_STATUS = 200;
 
     /**
      * 几个常量

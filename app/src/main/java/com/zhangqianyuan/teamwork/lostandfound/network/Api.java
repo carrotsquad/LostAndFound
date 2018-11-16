@@ -1,7 +1,10 @@
 package com.zhangqianyuan.teamwork.lostandfound.network;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.AllPlacesBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
@@ -11,16 +14,16 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UploadBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
-import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.Callback;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 // TODO: 2018/11/12 需完善
 /**
@@ -32,28 +35,49 @@ import retrofit2.http.Query;
 public interface Api {
 
     //发送验证码
+    @FormUrlEncoded
     @POST("/passlove/user/register/sendCheckCode")
-    Observable<SendCheckCodeBean> getSendCheckCode(@Query("mail") String email);
+    Observable<SendCheckCodeBean> getSendCheckCode(@Field("mail") String email);
 
     //核对验证码
+    @FormUrlEncoded
     @POST("/passlove/user/register/checkCode")
-    Observable<CheckCodeBean> getCheckCode(@Query("checkcode") String ckeckcode, @Query("JSESSIONID") String sessionID);
+    Observable<CheckCodeBean> getCheckCode(@Field("checkcode") String ckeckcode, @Field("JSESSIONID") String sessionID);
 
     //注册
+    @FormUrlEncoded
     @POST("/passlove/user/register")
-    Observable<RegisterBean> getRegister(@Query("username") String username,@Query("password") String password,@Query("nickname") String nickname,@Query("phonenumber") String phonenumber,@Query("JSESSIONID") String sessionID);
+    Observable<RegisterBean> getRegister(@Field("username") String username,@Field("password") String password,@Field("nickname") String nickname,@Field("phonenumber") String phonenumber,@Field("JSESSIONID") String sessionID);
 
     //登录
+    @FormUrlEncoded
     @POST("/passlove/user/loginIn")
-    Observable<SignInBean> getSignIn(@Query("username") String email,@Query("password") String password);
+    Observable<SignInBean> getSignIn(@Field("username") String email,@Field("password") String password);
 
     //搜索
-    @POST("/passlove/user/loginIn")
-    Observable<SearchBean> getSearchItem(@Query("keyword") String keyword, @Query("diushileixing") String diushileixing, @Query("place") String place, @Query("thingtype") String thingtype , @Query("JSESSIONID") String sessionID);
+    @FormUrlEncoded
+    @POST("/passlove/dynamics/search")
+    Observable<SearchBean> getSearchItem(@Field("JSESSIONID") String sessionID, @Body RequestBody body);
 
     //启事详情
+    @FormUrlEncoded
     @POST("/passlove/user/loginIn")
-    Observable<ThingDetailBean> getThingDetail(@Query("ID") String ID, @Query("JSESSIONID") String session);
+    Observable<ThingDetailBean> getThingDetail(@Field("ID") String ID, @Field("JSESSIONID") String session);
+
+    //获取所有地点
+    @FormUrlEncoded
+    @POST("/passlove/info/places")
+    Observable<AllPlacesBean> getAllPlaces(@Field("JSESSIONID") String session);
+
+    //获取所有地点
+    @FormUrlEncoded
+    @POST("/passlove/info/types")
+    Observable<AllTypesBean> getAllTypes(@Field("JSESSIONID") String session);
+
+    //退出
+    @FormUrlEncoded
+    @POST("/passlove/user/loginOut")
+    Observable<StatusBean> getLogOut(@Field("JSESSIONID") String session);
 
     //获取动态 失物 信息
     @POST("")
