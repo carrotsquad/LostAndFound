@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.network;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.ChangePhoneNumberBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.ChangeUserNickNameBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
@@ -8,6 +10,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UploadBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
@@ -18,6 +21,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -88,4 +92,17 @@ public interface Api {
     @FormUrlEncoded
     Call<UploadBean>        postUploadBean(int  lostOrFind,int  thingType, String  byWho,String  uploadTime
     ,String  happendTime,String  where,String  description,List<Integer> thingImg);
+
+
+    //退出登录
+    @POST("passlove/user/loginOut")
+    Call<StatusBean>  exitAccount(String jsessionId);
+
+    //修改用户昵称
+    @POST("passlove/user/update/nickname")
+    Call<StatusBean> uploadNickName(@Body  ChangeUserNickNameBean bean);
+
+    // 修改用户手机号码
+    @POST("passlove/user/update/phonenumber")
+    Call<StatusBean> uploadPhoneNumber(@Body ChangePhoneNumberBean bean);
 }

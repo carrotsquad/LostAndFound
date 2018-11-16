@@ -15,10 +15,10 @@ public class LogOutModel extends BaseModel implements ILogOutModel{
 
     @Override
     public void logOut(String session, Observer<StatusBean> observer) {
-        api.getLogOut(session)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+//        api.getLogOut(session)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer);
     }
 }

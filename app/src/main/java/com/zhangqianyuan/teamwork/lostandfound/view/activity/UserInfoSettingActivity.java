@@ -139,7 +139,7 @@ public class UserInfoSettingActivity extends AppCompatActivity {
             case R.id.setting_editinfo:
                     break;
             case R.id.exit_account:
-                mUserSettingPresenter.exitAccount();
+              //  mUserSettingPresenter.exitAccount();
             default:{
                 break;
             }

@@ -189,7 +189,7 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.userinfo_head_img:{
-                mPresenter.uploadHeadImg();
+               // mPresenter.uploadHeadImg();
                 if (success){
                     initGallery();
                 }
@@ -221,7 +221,9 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     }
 
     @Override
-    public void onSuccess(String status) {
-        success= status.equals("200");
+    public void onSuccess(int status) {
+        success = status==200;
     }
+
+
 }

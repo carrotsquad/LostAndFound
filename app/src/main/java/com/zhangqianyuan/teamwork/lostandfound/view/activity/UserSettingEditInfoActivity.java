@@ -53,8 +53,8 @@ public class UserSettingEditInfoActivity extends AppCompatActivity implements IE
     }
     @OnClick(R.id.edit_info_ok)
     public void onClick(View view){
-        mEditInfoPresenter.uoloadPhoneNumber();
-        mEditInfoPresenter.uploadNeckName();
+       // mEditInfoPresenter.uoloadPhoneNumber();
+       // mEditInfoPresenter.uploadNeckName();
     }
 
     @Override

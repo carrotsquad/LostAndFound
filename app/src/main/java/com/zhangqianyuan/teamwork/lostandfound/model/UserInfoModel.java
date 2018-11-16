@@ -32,7 +32,7 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
 
     @Override
     public void changeHeadImg(String jecessionId, File imgFile, Callback<StatusBean> callback) {
-        api.uploadHeadImg(jecessionId,createResponseBody(imgFile)).enqueue(callback);
+       // api.uploadHeadImg(jecessionId,createResponseBody(imgFile)).enqueue(callback);
     }
 
 
