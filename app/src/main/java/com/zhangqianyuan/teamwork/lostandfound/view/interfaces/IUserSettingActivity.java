@@ -7,7 +7,7 @@ package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public interface IUserInfoFragment extends BaseView {
-    void showData(int headImg, String neckname, String phone, String emai);
-    void  onSuccess(int status);
+public interface IUserSettingActivity extends BaseView {
+
+    void onSuccess(int status);
 }

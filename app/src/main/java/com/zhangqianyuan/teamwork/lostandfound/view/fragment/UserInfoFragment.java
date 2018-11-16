@@ -52,6 +52,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @updateDes ${TODO}
  */
 
+// TODO: 2018/11/15  跟张同学讨论 怎么选择的图片 以及图片文件
 public class UserInfoFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,IUserInfoFragment {
 
     private static final int REQUEST_CODE_GALLERY = 1;
@@ -66,6 +67,7 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     private Context mContext;
     private UserInfoPresenter  mPresenter;
     private Intent mIntent;
+    boolean success;            //用于判断是否上传头像成功
 
 
 
@@ -187,7 +189,11 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.userinfo_head_img:{
-                initGallery();
+                mPresenter.uploadHeadImg();
+                if (success){
+                    initGallery();
+                }
+                success =false;
                 break;
             }
             default:{
@@ -212,5 +218,10 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         mIntent.putExtra("neckname",neckname);
         mIntent.putExtra("phone",phone);
         mIntent.putExtra("emai",emai);
+    }
+
+    @Override
+    public void onSuccess(String status) {
+        success= status.equals("200");
     }
 }

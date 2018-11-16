@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.model.UserSettingModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.UserSettingPresenter;
 
 import java.util.List;
 
@@ -43,19 +45,24 @@ public class UserInfoSettingActivity extends AppCompatActivity {
     CircleImageView headImg;               //头像
 
     @BindView(R.id.setting_neckname_eidit)
-    EditText neckName;                    //昵称  原本有数据 可直接点击修改
+    TextView neckName;                    //昵称  原本有数据 可直接点击修改
 
     @BindView(R.id.setting_phone_eidit)
-    EditText   phone;                      //电话号码  同上
-
-    @BindView(R.id.setting_autograph_eidit)
-    EditText  autograph;                    //个性签名  同上
+    TextView   phone;                      //电话号码  同上
 
     @BindView(R.id.setting_mail_eidit)
     TextView  mail;                         //邮箱 展示作用 无法修改
 
     @BindView(R.id.setting_password_text)
     TextView  password;                      //修改密码按钮
+
+    @BindView(R.id.setting_editinfo)
+    TextView  eidtInfo;
+
+    @BindView(R.id.exit_account)
+    TextView  exitAccount;
+
+    private UserSettingPresenter mUserSettingPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,7 @@ public class UserInfoSettingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
+        mUserSettingPresenter = new UserSettingPresenter(new UserSettingModel());
         if (actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -117,17 +125,21 @@ public class UserInfoSettingActivity extends AppCompatActivity {
      * 设置点击事件
      * @param v
      */
-    @OnClick({R.id.userinfo_head_img,R.id.setting_password_text})
+    @OnClick({R.id.userinfo_head_img,R.id.setting_password_text,R.id.setting_editinfo,R.id.exit_account})
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.userinfo_head_img:{
+            case R.id.userinfo_head_img:
                 initGallery();
-                break;}
+                break;
                 case R.id.setting_password_text:
                     /*
                     进入修改密码界面
                      */
                     break;
+            case R.id.setting_editinfo:
+                    break;
+            case R.id.exit_account:
+                mUserSettingPresenter.exitAccount();
             default:{
                 break;
             }
