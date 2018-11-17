@@ -31,17 +31,24 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
     }
 
     @Override
-    public void changeHeadImg(String jecessionId, File imgFile, Callback<StatusBean> callback) {
-       // api.uploadHeadImg(jecessionId,createResponseBody(imgFile)).enqueue(callback);
+    public void changeHeadImg(String jsessionId, File imgFile, Callback<StatusBean> callback) {
+       api.uploadHeadImg(createRequestbody(jsessionId),createMultipartBody(imgFile)).enqueue(callback);
     }
 
-
-    public MultipartBody.Part createResponseBody(File file){
-        //创建  RequestBody  用于封装构建RequestBody
-       RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file);
-
-        //构建MultiPartBody.part
-        MultipartBody.Part body=MultipartBody.Part.createFormData("photo",file.getName(),requestBody);
+    //创建jsessionId 的 requestbody
+    public RequestBody createRequestbody(String jsessionId){
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"),"jsessionId");
         return body;
+    }
+
+    /*创建图片 的MultipartBody
+      也可以用requestbody 但是这样就需要在参数里加入请求头中的name =  +filename =
+      建议使用multipartbody
+     */
+    public MultipartBody.Part createMultipartBody(File file){
+        RequestBody body = RequestBody.create(MediaType.parse(" image/png"),file);
+        //image为name参数的值，file.getname为filename参数的名字，body为请求体
+        MultipartBody.Part part = MultipartBody.Part.createFormData("image",file.getName(),body);
+        return part;
     }
 }

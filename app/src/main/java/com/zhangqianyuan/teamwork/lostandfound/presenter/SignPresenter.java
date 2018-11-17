@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import android.util.Log;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ISignModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.SignModel;
@@ -39,11 +41,13 @@ public class SignPresenter extends AbstractBasePresenter<ISignInActivity> implem
                 }else {
                     v.showSignInStatus(false,null);
                 }
+                Log.d("fuck","onnext");
             }
 
             @Override
             public void onError(Throwable e) {
-                iSignInActivity.showSignInStatus(false,null);
+               iSignInActivity.showSignInStatus(false,null);
+                Log.d("fuck","onerror");
             }
 
             @Override

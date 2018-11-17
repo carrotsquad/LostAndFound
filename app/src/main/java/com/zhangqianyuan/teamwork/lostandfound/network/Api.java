@@ -4,6 +4,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.ChangePhoneNumberBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ChangeUserNickNameBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.LoginBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
@@ -19,11 +20,17 @@ import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 // TODO: 2018/11/12 需完善
@@ -36,20 +43,21 @@ import retrofit2.http.Query;
 public interface Api {
 
     //发送验证码
-    @POST("/passlove/user/register/sendCheckCode")
+    @POST("passlove/register/sendCheckCode")
     Observable<SendCheckCodeBean> getSendCheckCode(@Query("mail") String email);
 
     //核对验证码
-    @POST("/passlove/user/register/checkCode")
+    @POST("passlove/register/checkCode")
     Observable<CheckCodeBean> getCheckCode(@Query("checkcode") String ckeckcode, @Query("JSESSIONID") String sessionID);
 
     //注册
-    @POST("/passlove/user/register")
+    @POST("passlove/register")
     Observable<RegisterBean> getRegister(@Query("username") String username,@Query("password") String password,@Query("nickname") String nickname,@Query("phonenumber") String phonenumber,@Query("JSESSIONID") String sessionID);
 
     //登录
-    @POST("/passlove/user/loginIn")
-    Observable<SignInBean> getSignIn(@Query("username") String email,@Query("password") String password);
+    @FormUrlEncoded
+    @POST("/passlove/loginIn")
+    Observable<SignInBean> getSignIn(@Field("requestData") String info);
 
     //搜索
     @POST("/passlove/user/loginIn")
@@ -105,4 +113,10 @@ public interface Api {
     // 修改用户手机号码
     @POST("passlove/user/update/phonenumber")
     Call<StatusBean> uploadPhoneNumber(@Body ChangePhoneNumberBean bean);
+
+    //修改头像
+    @Multipart
+    @POST("passlove/user/update/photo")
+    Call<StatusBean> uploadHeadImg(@Part("jsessionId")RequestBody jsessionid,
+                                   @Part MultipartBody.Part img);
 }

@@ -14,10 +14,10 @@ public class AllTypesModel extends BaseModel implements IAllTypesModel{
 
     @Override
     public void getAllTypes(String session, Observer<AllTypesBean> observer) {
-        api.getAllTypes(session)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+//        api.getAllTypes(session)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer);
     }
 }
