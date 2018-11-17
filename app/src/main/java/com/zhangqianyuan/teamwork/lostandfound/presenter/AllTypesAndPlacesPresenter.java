@@ -35,10 +35,11 @@ public class AllTypesAndPlacesPresenter extends AbstractBasePresenter<IAllTypesA
 
             @Override
             public void onNext(AllTypesBean allTypesBean) {
-                if (allTypesBean != null && !FINE_INTERNET_STATUS.equals(allTypesBean.getStatus())) {
+                if (allTypesBean == null || !FINE_INTERNET_STATUS.equals(allTypesBean.getStatus())) {
                     v.getIAllTypesAndPlaces(false,null,null);
                 }else {
-                    iAllPlacesModel.getAllPlacesModel(session, new Observer<AllPlacesBean>() {
+
+                    iAllPlacesModel.getAllPlaces(session, new Observer<AllPlacesBean>() {
                         @Override
                         public void onSubscribe(Disposable d) {
 
@@ -46,7 +47,7 @@ public class AllTypesAndPlacesPresenter extends AbstractBasePresenter<IAllTypesA
 
                         @Override
                         public void onNext(AllPlacesBean allPlacesBean) {
-                            if (allPlacesBean != null && !FINE_INTERNET_STATUS.equals(allPlacesBean.getStatus())) {
+                            if (allPlacesBean == null || !FINE_INTERNET_STATUS.equals(allPlacesBean.getStatus())) {
                                 v.getIAllTypesAndPlaces(false,null,null);
                             }else {
                                 v.getIAllTypesAndPlaces(true,allTypesBean.getTypes(),allPlacesBean.getTypes());

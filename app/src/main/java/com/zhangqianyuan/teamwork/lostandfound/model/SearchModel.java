@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
+import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchRequestBean;
 
@@ -37,7 +38,7 @@ public class SearchModel extends BaseModel implements ISearchModel{
         }
         searchRequestBean.setTypeid(thingstypes);
         searchRequestBean.setPlaceid(place);
-        api.getSearchItem(searchRequestBean,session)
+        api.getSearchItem(new Gson().toJson(searchRequestBean),session)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

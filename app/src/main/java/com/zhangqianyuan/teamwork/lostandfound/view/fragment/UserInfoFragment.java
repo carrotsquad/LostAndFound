@@ -204,8 +204,9 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
                 mPresenter.uploadHeadImg(jsession,new File(photoPath));
                 if (success){
                     Toast.makeText(mContext,"头像上传成功",Toast.LENGTH_SHORT).show();
-                }else
-                    Toast.makeText(mContext,"头像上传失败",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
+                }
                 break;
             }
             default:{

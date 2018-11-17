@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -139,10 +140,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             //去获取所有的丢失物品类型和地点
             allTypesAndPlacesPresenter.getAllTypesAndPlaces(signInBean.getJSESSIONID());
             editor.commit();
-            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-            startActivity(intent);
-            FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-            finish();
+
         }else {
             FancyToast.makeText(SignInActivity.this,"登录失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
@@ -151,14 +149,20 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     @Override
     public void getIAllTypesAndPlaces(Boolean status, List<TypeBean> typeBeanList, List<PlaceBean> placeBeanList) {
         if(status){
-            for (TypeBean bean:
-                 typeBeanList) {
-                allPlaceBeanList.add(bean.getName());
+            int i = typeBeanList.size();
+            for (int k = 0; k<i;k++) {
+                allTypeBeanList.add(typeBeanList.get(k).getName());
             }
-            for (PlaceBean bean :
-                    placeBeanList) {
-                allPlaceBeanList.add(bean.getName());
+            i = placeBeanList.size();
+            for (int k = 0; k<i;k++) {
+                allPlaceBeanList.add(placeBeanList.get(k).getName());
             }
+            Log.e("SignIn",allPlaceBeanList.toString());
+            Log.e("SignIn",allTypeBeanList.toString());
+            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+            startActivity(intent);
+            FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            finish();
 //            allTypeBeanList = typeBeanList;
 //            allPlaceBeanList = placeBeanList;
         }else {
