@@ -20,11 +20,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.EMAIL;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.NICKNAME;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.PNB;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.PWD;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PNB;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PWD;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 
 /**

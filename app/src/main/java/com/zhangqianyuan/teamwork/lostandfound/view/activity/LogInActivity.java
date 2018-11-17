@@ -20,6 +20,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PNB;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PWD;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+
 
 /**
  * Description: 注册页面,英文单词好像弄错了
@@ -58,11 +64,7 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     private String pnb;
     private String email;
     private String nickname;
-    public static final String PWD = "PWD";
-    public static final String PNB = "PNB";
-    public static final String EMAIL = "EMAIL";
-    public static final String NICKNAME = "NICKNAME";
-    public static final String SESSION = "SESSION";
+
 
     private LogInPresenter iLogInPresenter;
 
@@ -78,6 +80,7 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
 
     @Override
     protected void onDestroy() {
+        iLogInPresenter.dettachActivity();
         super.onDestroy();
     }
 

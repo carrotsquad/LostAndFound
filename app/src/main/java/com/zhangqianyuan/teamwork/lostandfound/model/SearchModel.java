@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.SearchRequestBean;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -13,8 +14,30 @@ public class SearchModel extends BaseModel implements ISearchModel{
     }
 
     @Override
-    public void getSearch(String keyword, String diushileixing, String place, String thingstypes, String session, Observer<SearchBean> searchBeanObserver) {
-        api.getSearchItem(keyword,diushileixing,place,thingstypes,session)
+    public void getSearch(String keyword, int diushileixing, int place, int thingstypes, String session, Observer<SearchBean> searchBeanObserver) {
+        SearchRequestBean searchRequestBean = new SearchRequestBean();
+        searchRequestBean.setStart(0);
+        searchRequestBean.setEnd(500);
+        searchRequestBean.setKeyword(keyword);
+        switch (diushileixing){
+            case 0:{
+                break;
+            }
+            case 1:{
+                searchRequestBean.setLosttype(0);
+                break;
+            }
+            case 2:{
+                searchRequestBean.setLosttype(1);
+                break;
+            }
+            default:{
+                break;
+            }
+        }
+        searchRequestBean.setTypeid(thingstypes);
+        searchRequestBean.setPlaceid(place);
+        api.getSearchItem(searchRequestBean,session)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

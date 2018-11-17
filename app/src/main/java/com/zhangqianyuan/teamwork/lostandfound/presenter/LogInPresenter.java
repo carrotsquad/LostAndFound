@@ -16,13 +16,12 @@ import io.reactivex.disposables.Disposable;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class LogInPresenter implements ILogInPresenter{
+public class LogInPresenter extends AbstractBasePresenter<ILogInActivity> implements ILogInPresenter{
 
     private ILogInModel iLogInModel;
-    private ILogInActivity iLogInActivity;
 
     public LogInPresenter(ILogInActivity iLogInActivity){
-        this.iLogInActivity = iLogInActivity;
+        super(iLogInActivity);
     }
 
     @SuppressLint("NewApi")
@@ -37,7 +36,7 @@ public class LogInPresenter implements ILogInPresenter{
 
             @Override
             public void onNext(SendCheckCodeBean sendCheckCodeBean) {
-                iLogInActivity.showEmailStatus(sendCheckCodeBean.getStatus(),sendCheckCodeBean.getJSESSIONID());
+                v.showEmailStatus(sendCheckCodeBean.getStatus(),sendCheckCodeBean.getJSESSIONID());
             }
 
             @Override

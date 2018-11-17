@@ -65,4 +65,6 @@ public class UserSettingEditInfoActivity extends AppCompatActivity implements IE
             Toast.makeText(UserSettingEditInfoActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

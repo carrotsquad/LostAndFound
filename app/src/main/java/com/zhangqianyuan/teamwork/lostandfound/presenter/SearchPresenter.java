@@ -15,18 +15,17 @@ import io.reactivex.disposables.Disposable;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class SearchPresenter implements ISearchPresenter{
+public class SearchPresenter extends AbstractBasePresenter<ISearchFragment> implements ISearchPresenter{
 
     private ISearchModel iSearchModel;
-    private ISearchFragment iSearchFragment;
 
     public SearchPresenter(ISearchFragment iSearchFragment){
-        this.iSearchFragment = iSearchFragment;
+        super(iSearchFragment);
     }
 
 
     @Override
-    public void getSearchResult(String keyword, String qishileixing, String place, String thingstypes, String session) {
+    public void getSearchResult(String keyword, int qishileixing, int place, int thingstypes, String session) {
         iSearchModel = new SearchModel();
         iSearchModel.getSearch(keyword, qishileixing, place, thingstypes, session, new Observer<SearchBean>() {
             @Override
@@ -37,15 +36,15 @@ public class SearchPresenter implements ISearchPresenter{
             @Override
             public void onNext(SearchBean searchBean) {
                 if(searchBean!=null&&searchBean.getStatus()!=400) {
-                    iSearchFragment.showSearchResult(true,searchBean.getSearchItemBeanList());
+                    v.showSearchResult(true,searchBean.getSearchItemBeanList());
                 }else {
-                    iSearchFragment.showSearchResult(false,searchBean.getSearchItemBeanList());
+                    v.showSearchResult(false,searchBean.getSearchItemBeanList());
                 }
             }
 
             @Override
             public void onError(Throwable e) {
-                iSearchFragment.showSearchResult(false,null);
+                v.showSearchResult(false,null);
             }
 
             @Override

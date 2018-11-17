@@ -36,7 +36,9 @@ import java.util.Arrays;
 import java.util.List;
 import butterknife.ButterKnife;
 
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 
 /**
@@ -58,9 +60,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     private String[] diushitypes = {"不限", "失物", "招领"};
     private String[] places = {"不限", "一教", "二教", "三教", "四教", "五教", "六教", "七教", "八教", "二维码大楼", "信科", "逸夫楼", "老图", "数图", "太极运动场", "风华运动场", "风雨操场"};
     private String[] thingstypes = {"不限", "衣物", "首饰", "运动器材", "书本", "手机", "电脑", "有赏金", "其他"};
-    private String diushitype = "不限";
-    private String place = "不限";
-    private String thingstype = "不限";
+    private int diushiTypePosition = 0;
+    private int placePosition = 0;
+    private int thingsTypePosition = 0;
 
     private int thingsPosition = 0;
 
@@ -143,14 +145,14 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
         //初始化丢失地点过滤
         placesView = new ListView(context);
-        placesAdapter = new ListDropDownAdapter(context, Arrays.asList(places));
+        placesAdapter = new ListDropDownAdapter(context, allPlaceBeanList);
         placesView.setDividerHeight(0);
         placesView.setAdapter(placesAdapter);
 
         //初始化物品类型过滤
         thingsView = getLayoutInflater().inflate(R.layout.custom_layout,null);
         thingsConstellationView = thingsView.findViewById( R.id.constellation);
-        thingsAdapter = new ConstellationAdapter(context, Arrays.asList(thingstypes));
+        thingsAdapter = new ConstellationAdapter(context, allTypeBeanList);
         thingsConstellationView.setAdapter(thingsAdapter);
         ok = thingsView.findViewById(R.id.ok);
 
@@ -183,7 +185,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 diushitypeAdapter.setCheckItem(position);
                 dropDownMenu.setTabText(position == 0 ? headers[0] : diushitypes[position]);
-                diushitype = diushitypes[position];
+                diushiTypePosition = position;
                 dropDownMenu.closeMenu();
             }
         });
@@ -192,8 +194,8 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 placesAdapter.setCheckItem(position);
-                dropDownMenu.setTabText(position == 0 ? headers[1] : places[position]);
-                place = places[position];
+                dropDownMenu.setTabText(position == 0 ? headers[1] : allPlaceBeanList.get(position));
+                placePosition = position;
                 dropDownMenu.closeMenu();
             }
         });
@@ -203,8 +205,8 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             public void onClick(View v) {
                 //其内部已经设置了记录当前tab位置的参数，该参数会随tab被点击而改变，所以这里直接设置tab值即可
                 //此处若想获得constellations第一个值“不限”，可修改constellationPosition初始值为-1，且这里代码改为constellationPosition == -1)
-                dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : thingstypes[thingsPosition]);
-                thingstype = thingstypes[thingsPosition];
+                dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : allTypeBeanList.get(placePosition));
+//                thingstype = thingstypes[thingsPosition];
                 dropDownMenu.closeMenu();
 //                changeContentView();   //在这里可以请求获得经筛选后要显示的内容
             }
@@ -224,7 +226,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             public void onClick(View v) {
                 String keyword = searchInput.getText().toString();
                 String session = sharedPreferences.getString(SESSION,"null");
-                iSearchPresenter.getSearchResult(keyword, diushitype, place, thingstype, session);
+                iSearchPresenter.getSearchResult(keyword, diushiTypePosition, placePosition, thingsTypePosition, session);
             }
         });
     }
@@ -234,7 +236,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         if(status){
             this.searchItemBeanArrayList.clear();
             this.searchItemBeanArrayList.addAll(searchItemBeanArrayList);
-            searchItemAdapter.notifyDataSetChanged();
+            searchItemAdapter.notifyItemChanged(0);
 //            searchItemAdapter.notifyItemChanged(this.searchItemBeanArrayList.size()-1);
 //            recyclerView.scrollToPosition(msgList.size() - 1);
 //            recyclerView.

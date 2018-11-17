@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.network;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.AllPlacesBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ChangePhoneNumberBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ChangeUserNickNameBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
@@ -8,6 +10,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.SearchRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
@@ -19,12 +22,14 @@ import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.Field;
 
 // TODO: 2018/11/12 需完善
 /**
@@ -36,28 +41,47 @@ import retrofit2.http.Query;
 public interface Api {
 
     //发送验证码
-    @POST("/passlove/user/register/sendCheckCode")
-    Observable<SendCheckCodeBean> getSendCheckCode(@Query("mail") String email);
+    @POST("/passlove/register/sendCheckCode")
+    @FormUrlEncoded
+    Observable<SendCheckCodeBean> getSendCheckCode(@Field("mail") String email);
 
     //核对验证码
-    @POST("/passlove/user/register/checkCode")
-    Observable<CheckCodeBean> getCheckCode(@Query("checkcode") String ckeckcode, @Query("JSESSIONID") String sessionID);
+    @POST("/passlove/register/checkCode")
+    @FormUrlEncoded
+    Observable<CheckCodeBean> getCheckCode(@Field("checkcode") String ckeckcode, @Field("JSESSIONID") String sessionID);
 
     //注册
-    @POST("/passlove/user/register")
-    Observable<RegisterBean> getRegister(@Query("username") String username,@Query("password") String password,@Query("nickname") String nickname,@Query("phonenumber") String phonenumber,@Query("JSESSIONID") String sessionID);
+    @POST("/passlove/register")
+    @FormUrlEncoded
+    Observable<RegisterBean> getRegister(@Field("username") String username,@Field("password") String password,@Field("nickname") String nickname,@Field("phonenumber") String phonenumber,@Field("JSESSIONID") String sessionID);
 
     //登录
-    @POST("/passlove/user/loginIn")
-    Observable<SignInBean> getSignIn(@Query("username") String email,@Query("password") String password);
+    @POST("/passlove/loginIn")
+    @FormUrlEncoded
+    Observable<SignInBean> getSignIn(@Field("username") String email,@Field("password") String password);
 
     //搜索
+
     @POST("/passlove/user/loginIn")
-    Observable<SearchBean> getSearchItem(@Query("keyword") String keyword, @Query("diushileixing") String diushileixing, @Query("place") String place, @Query("thingtype") String thingtype , @Query("JSESSIONID") String sessionID);
+    @FormUrlEncoded
+    Observable<SearchBean> getSearchItem(@Body SearchRequestBean body, @Field("JSESSIONID") String sessionID);
 
     //启事详情
+
     @POST("/passlove/user/loginIn")
-    Observable<ThingDetailBean> getThingDetail(@Query("ID") String ID, @Query("JSESSIONID") String session);
+    @FormUrlEncoded
+    Observable<ThingDetailBean> getThingDetail(@Field("ID") String ID, @Field("JSESSIONID") String session);
+
+    //获取所有类型
+    @POST("/passlove/info/types")
+    @FormUrlEncoded
+    Observable<AllTypesBean> getAllTypes(@Field("JSESSIONID") String session);
+
+    //获取所有地点
+
+    @POST("/passlove/info/places")
+    @FormUrlEncoded
+    Observable<AllPlacesBean> getAllPlaces(@Field("JSESSIONID") String session);
 
     //获取动态 失物 信息
     @POST("")

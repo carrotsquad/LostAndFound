@@ -13,19 +13,23 @@ import android.widget.TextView;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.bean.PlaceBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TypeBean;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.AllTypesAndPlacesPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.SignPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IAllTypesAndPlaces;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISignInActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.provider.Telephony.Carriers.PASSWORD;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.EMAIL;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.NICKNAME;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.PNB;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.VerifyActivity.SIGNIN;
 
 /**
@@ -34,7 +38,15 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.VerifyActivi
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class SignInActivity extends AppCompatActivity implements ISignInActivity {
+public class SignInActivity extends AppCompatActivity implements ISignInActivity ,IAllTypesAndPlaces{
+
+    public static final String PWD = "PWD";
+    public static final String PNB = "PNB";
+    public static final String EMAIL = "EMAIL";
+    public static final String NICKNAME = "NICKNAME";
+    public static final String SESSION = "SESSION";
+    public static final String ALLTYPES ="ALLTYPES";
+    public static final String ALLPLACES = "ALLPLACES";
 
     @BindView(R.id.signin_signin)
     Button signin;
@@ -49,6 +61,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     TextView register;
 
     private SignPresenter signPresenter;
+    private AllTypesAndPlacesPresenter allTypesAndPlacesPresenter;
 
     private SharedPreferences sharedPreferences;
 
@@ -68,8 +81,10 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             startActivity(intent);
             finish();
         }
+        //字体
         register.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
         signPresenter = new SignPresenter(this);
+        allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
         mIntent=getIntent();
         if(mIntent.getIntExtra(SIGNIN,0)==1){
             signPresenter.getSignIn(mIntent.getStringExtra(EMAIL),mIntent.getStringExtra(PASSWORD));
@@ -78,6 +93,8 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
 
     @Override
     protected void onDestroy() {
+        allTypesAndPlacesPresenter.dettachActivity();
+        signPresenter.dettachActivity();
         super.onDestroy();
     }
 
@@ -115,10 +132,12 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             editor = sharedPreferences.edit();
             editor.putString(EMAIL,signInBean.getUser().getUsername());
-            editor.putString(PASSWORD,signInBean.getUser().getPassword());
+            editor.putString(PWD,signInBean.getUser().getPassword());
             editor.putString(NICKNAME,signInBean.getUser().getNickname());
             editor.putString(PNB,signInBean.getUser().getPhonenumber());
             editor.putString(SESSION,signInBean.getJSESSIONID());
+            //去获取所有的丢失物品类型和地点
+            allTypesAndPlacesPresenter.getAllTypesAndPlaces(signInBean.getJSESSIONID());
             editor.commit();
             Intent intent = new Intent(SignInActivity.this,MainActivity.class);
             startActivity(intent);
@@ -126,6 +145,24 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             finish();
         }else {
             FancyToast.makeText(SignInActivity.this,"登录失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+        }
+    }
+
+    @Override
+    public void getIAllTypesAndPlaces(Boolean status, List<TypeBean> typeBeanList, List<PlaceBean> placeBeanList) {
+        if(status){
+            for (TypeBean bean:
+                 typeBeanList) {
+                allPlaceBeanList.add(bean.getName());
+            }
+            for (PlaceBean bean :
+                    placeBeanList) {
+                allPlaceBeanList.add(bean.getName());
+            }
+//            allTypeBeanList = typeBeanList;
+//            allPlaceBeanList = placeBeanList;
+        }else {
+            FancyToast.makeText(SignInActivity.this,"无法获取丢失物品类型和地点",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
     }
 }
