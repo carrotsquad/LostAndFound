@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
+import com.google.gson.Gson;
+import com.zhangqianyuan.teamwork.lostandfound.bean.LoginBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 
 import io.reactivex.Observer;
@@ -15,10 +17,16 @@ public class SignModel extends BaseModel implements ISignModel{
 
     @Override
     public void signIn(String email, String password, Observer<SignInBean> observer) {
-        api.getSignIn(email,password)
+        LoginBean bean = new LoginBean();
+        bean.setPassword(password);
+        bean.setUsername(email);
+        Gson gson = new Gson();
+        api.getSignIn(gson.toJson(bean))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
+
+
 }

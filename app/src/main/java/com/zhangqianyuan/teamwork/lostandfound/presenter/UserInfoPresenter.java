@@ -58,11 +58,7 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoFragment> implemen
             mUserInfoModel.changeHeadImg(jsessionId, imgFile, new Callback<StatusBean>() {
                 @Override
                 public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
-                    if (response.body().getStatus()==200) {
-                        Log.d(T, "上传成功");
-                        getV().onSuccess(response.body().getStatus());
-                    } else if (response.body().getStatus()==400)
-                        Log.d(T, "上传失败");
+                    getV().onSuccess(response.body().getStatus());
                 }
                 @Override
                 public void onFailure(Call<StatusBean> call, Throwable t) {

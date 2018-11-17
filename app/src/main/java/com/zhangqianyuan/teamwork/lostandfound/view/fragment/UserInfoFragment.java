@@ -1,7 +1,9 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
@@ -21,6 +24,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyHistory;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
@@ -30,6 +34,7 @@ import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
 
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -67,8 +72,13 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     private Context mContext;
     private UserInfoPresenter  mPresenter;
     private Intent mIntent;
-    boolean success;            //用于判断是否上传头像成功
-
+    private boolean success;            //用于判断是否上传头像成功
+    private String  photoPath;          //头像文件路径
+    private String  nick;               //昵称
+    private String  email;
+    private String  phoneNumber;
+    private String  jsession;
+    private String  passwords;
 
 
 
@@ -77,6 +87,7 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_userinfo,container,false);
         ButterKnife.bind(this,view);
+        getSharePrefrence();
         initView();
         return view;
     }
@@ -135,7 +146,7 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
             //进行图片上传与置换
             //置换
-            String photoPath = resultList.get(0).getPhotoPath();
+            photoPath = resultList.get(0).getPhotoPath();
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(mContext,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
             //上传
@@ -189,11 +200,12 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.userinfo_head_img:{
-               // mPresenter.uploadHeadImg();
+                initGallery();
+                mPresenter.uploadHeadImg(jsession,new File(photoPath));
                 if (success){
-                    initGallery();
-                }
-                success =false;
+                    Toast.makeText(mContext,"头像上传成功",Toast.LENGTH_SHORT).show();
+                }else
+                    Toast.makeText(mContext,"头像上传失败",Toast.LENGTH_SHORT).show();
                 break;
             }
             default:{
@@ -224,6 +236,19 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     public void onSuccess(int status) {
         success = status==200;
     }
+
+
+    public void getSharePrefrence(){
+        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
+        jsession=preferences.getString("SESSION","null");
+        passwords = preferences.getString("password","null");
+        phoneNumber = preferences.getString("PNB","null");
+        nick=preferences.getString("NICKNAME","null");
+        email=preferences.getString("EMAIL","null");
+    }
+
+
+
 
 
 }

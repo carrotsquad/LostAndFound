@@ -15,10 +15,10 @@ public class AllPlacesModel extends BaseModel implements IAllPlacesModel{
 
     @Override
     public void getAllPlacesModel(String session, Observer<AllPlacesBean> observer) {
-        api.getAllPlaces(session)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+//        api.getAllPlaces(session)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer);
     }
 }

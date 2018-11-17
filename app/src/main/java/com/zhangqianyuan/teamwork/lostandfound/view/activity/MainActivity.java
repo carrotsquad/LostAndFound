@@ -2,6 +2,7 @@ package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final Integer FINE_INTERNET_STATUS = 200;
 
+
     /**
      * 几个常量
      */
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+       // getSharePrefrenceData();
     }
 
 
@@ -236,5 +239,24 @@ public class MainActivity extends AppCompatActivity {
             Log.e("BNVHelper", "Unable to change value of shift mode", e);
         }
     }
+
+    //获得SignInActivity 传过来的数据
+    //再把数据存到shareprefrence中 方便Fragment取出来
+//    public void getSharePrefrenceData(){
+//        SharedPreferences preferences = getSharedPreferences("users",MODE_PRIVATE);
+//        String jsessionId= preferences.getString("SESSION","null");
+//        String email=preferences.getString("EMAIL","null");
+//        String nickname= preferences.getString("NICKNAME","null");
+//        String passwords = preferences.getString("password","null");
+//        String phoneNumber=preferences.getString("PNB","null");
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putString("jsessionId",jsessionId);
+//        editor.putString("email",email);
+//        editor.putString("nickname",nickname);
+//        editor.putString("passwords",passwords);
+//        editor.putString("phoneNumber",phoneNumber);
+//        editor.commit();
+//    }
+
 
 }
