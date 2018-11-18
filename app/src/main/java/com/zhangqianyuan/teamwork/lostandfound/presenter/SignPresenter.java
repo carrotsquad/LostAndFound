@@ -19,7 +19,6 @@ import io.reactivex.disposables.Disposable;
 public class SignPresenter extends AbstractBasePresenter<ISignInActivity> implements ISignPresenter {
 
     private ISignModel signModel;
-    private ISignInActivity iSignInActivity;
 
     public SignPresenter(ISignInActivity iSignInActivity){
         super(iSignInActivity);
@@ -46,7 +45,7 @@ public class SignPresenter extends AbstractBasePresenter<ISignInActivity> implem
 
             @Override
             public void onError(Throwable e) {
-               iSignInActivity.showSignInStatus(false,null);
+               v.showSignInStatus(false,null);
                 Log.d("fuck","onerror");
             }
 

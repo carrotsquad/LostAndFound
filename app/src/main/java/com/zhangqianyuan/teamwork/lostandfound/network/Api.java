@@ -66,8 +66,8 @@ public interface Api {
 
     //搜索
     @FormUrlEncoded
-    @POST("/passlove/user/loginIn")
-    Observable<SearchBean> getSearchItem(@Field("requestData") String info, @Field("JSESSIONID") String sessionID);
+    @POST("/passlove/dynamics/search")
+    Observable<SearchBean> getSearchItem(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //启事详情
     @FormUrlEncoded

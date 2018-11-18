@@ -26,7 +26,8 @@ import com.zhangqianyuan.teamwork.lostandfound.adapter.ConstellationAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.GirdDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.ListDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
-import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ISearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.SearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
@@ -78,7 +79,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     private GridLayoutManager gridLayoutManager;
 
     private SearchItemAdapter searchItemAdapter;
-    private ArrayList<SearchItemBean> searchItemBeanArrayList = new ArrayList<>();
+    private ArrayList<DynamicItemBean> searchItemBeanArrayList = new ArrayList<>();
 
     private ISearchPresenter iSearchPresenter;
 
@@ -97,22 +98,19 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         view = inflater.inflate(R.layout.fragment_search, container,false);
         context = getContext();
         sharedPreferences = context.getSharedPreferences("users", Context.MODE_PRIVATE);
-        SearchItemBean searchItemBean1 =new SearchItemBean();
-        searchItemBean1.setTitle("我掉了红色的手表");
-        SearchItemBean searchItemBean2 =new SearchItemBean();
-        searchItemBean2.setTitle("我掉了我的校卡");
-        SearchItemBean searchItemBean3 =new SearchItemBean();
-        searchItemBean3.setTitle("我掉了我的打火机");
-        SearchItemBean searchItemBean4 =new SearchItemBean();
-        searchItemBean4.setTitle("我掉了我的手机");
-        SearchItemBean searchItemBean5 =new SearchItemBean();
-        searchItemBean5.setTitle("我掉了我的作业本");
+        DynamicItemBean searchItemBean1 =new DynamicItemBean();
+        TheLostBean theLostBean = new TheLostBean();
+        theLostBean.setTitle("我掉了我的校卡");
+        searchItemBean1.setThelost(theLostBean);
+
+        DynamicItemBean searchItemBean2 =new DynamicItemBean();
+        TheLostBean theLostBean2 = new TheLostBean();
+        theLostBean.setTitle("我掉了我的U盘");
+        searchItemBean1.setThelost(theLostBean2);
         searchItemBeanArrayList.add(searchItemBean1);
         searchItemBeanArrayList.add(searchItemBean2);
-        searchItemBeanArrayList.add(searchItemBean3);
-        searchItemBeanArrayList.add(searchItemBean4);
-        searchItemBeanArrayList.add(searchItemBean5);
-        iSearchPresenter = new SearchPresenter(this);
+
+        iSearchPresenter = new SearchPresenter(SearchFragment.this);
         initView();
         setOnClick();
         return view;
@@ -125,6 +123,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
     }
 
@@ -232,7 +231,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     }
 
     @Override
-    public void showSearchResult(Boolean status, List<SearchItemBean> searchItemBeanArrayList) {
+    public void showSearchResult(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
         if(status){
             this.searchItemBeanArrayList.clear();
             this.searchItemBeanArrayList.addAll(searchItemBeanArrayList);

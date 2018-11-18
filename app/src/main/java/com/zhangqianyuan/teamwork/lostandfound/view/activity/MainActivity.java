@@ -48,7 +48,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     public static final Integer FINE_INTERNET_STATUS = 200;
-
+    public static final Integer BAD_INTERNET_STATUS = 400;
 
     /**
      * 几个常量

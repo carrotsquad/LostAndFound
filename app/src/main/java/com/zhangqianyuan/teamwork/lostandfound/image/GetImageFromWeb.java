@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.image;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,7 +30,7 @@ public class GetImageFromWeb {
      * @param imageView
      * @param activity
      */
-    public static void glideSetImageView(final String path, final ImageView imageView, final Activity activity){
+    public static void glideSetImageView(final String path, final ImageView imageView, final Context activity){
         Glide.with(activity)
                 .load(path)
                 //设置加载时的图

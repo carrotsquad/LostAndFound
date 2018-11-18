@@ -6,7 +6,7 @@ public class SearchBean {
 
     private Integer status;
 
-    private List<SearchItemBean> searchItemBeanList;
+    private List<DynamicItemBean> dynamics;
 
     public Integer getStatus() {
         return status;
@@ -16,12 +16,11 @@ public class SearchBean {
         this.status = status;
     }
 
-    public List<SearchItemBean> getSearchItemBeanList() {
-        return searchItemBeanList;
+    public List<DynamicItemBean> getDynamics() {
+        return dynamics;
     }
 
-    public void setSearchItemBeanList(List<SearchItemBean> searchItemBeanList) {
-        this.searchItemBeanList = searchItemBeanList;
+    public void setDynamics(List<DynamicItemBean> dynamics) {
+        this.dynamics = dynamics;
     }
-
 }

@@ -8,6 +8,8 @@ import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.BAD_INTERNET_STATUS;
+
 
 /**
  * Description: 搜索Presenter
@@ -35,10 +37,10 @@ public class SearchPresenter extends AbstractBasePresenter<ISearchFragment> impl
 
             @Override
             public void onNext(SearchBean searchBean) {
-                if(searchBean!=null&&searchBean.getStatus()!=400) {
-                    v.showSearchResult(true,searchBean.getSearchItemBeanList());
+                if(searchBean!=null&& !searchBean.getStatus().equals(BAD_INTERNET_STATUS)) {
+                    v.showSearchResult(true,searchBean.getDynamics());
                 }else {
-                    v.showSearchResult(false,searchBean.getSearchItemBeanList());
+                    v.showSearchResult(false,searchBean.getDynamics());
                 }
             }
 

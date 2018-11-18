@@ -5,14 +5,14 @@
 
     <item
         android:id="@+id/dongtai_ui"
-        android:icon="@drawable/search"
+        android:icon="@drawable/bottom_dynamics"
         android:title="动态"
         app:showAsAction="collapseActionView" />
 
 
     <item
         android:id="@+id/search_ui"
-        android:icon="@drawable/search"
+        android:icon="@drawable/bottom_search"
         android:title="搜索" />
 
     <item
@@ -22,13 +22,13 @@
 
     <item
         android:id="@+id/message_ui"
-        android:icon="@drawable/search"
+        android:icon="@drawable/bottom_message"
         android:title="消息" />
 
     <!--android:icon="@drawable/personage_bt"-->
     <item
         android:id="@+id/mine_ui"
-        android:icon="@drawable/search"
+        android:icon="@drawable/bottom_mine"
         android:title="我的" />
 
 </menu>

@@ -31,6 +31,7 @@ import butterknife.OnClick;
 import static android.provider.Telephony.Carriers.PASSWORD;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.VerifyActivity.SIGNIN;
 
 /**
@@ -152,6 +153,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             int i = typeBeanList.size();
             for (int k = 0; k<i;k++) {
                 allTypeBeanList.add(typeBeanList.get(k).getName());
+                allTypeImgsList.add(typeBeanList.get(k).getName());
             }
             i = placeBeanList.size();
             for (int k = 0; k<i;k++) {

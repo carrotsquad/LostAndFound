@@ -11,20 +11,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
-import com.zhangqianyuan.teamwork.lostandfound.bean.SearchItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSFABIAODATE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSID;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSIMG;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPES;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSIMGS;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSNICKNAME;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPHOTO;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPLACE;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPE;
 
 /**
  * Description: 搜索fragment的recyclerview适配器
@@ -34,7 +41,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
  */
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
 
-    private ArrayList<SearchItemBean> searchItemBeanArrayList;
+    private ArrayList<DynamicItemBean> searchItemBeanArrayList;
     private Context mContext;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,7 +68,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
     }
 
-    public SearchItemAdapter(ArrayList<SearchItemBean> searchItemBeanArrayList){
+    public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList){
         this.searchItemBeanArrayList = searchItemBeanArrayList;
     }
 
@@ -78,16 +85,55 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                SearchItemBean searchItemBean = searchItemBeanArrayList.get(position);
+                DynamicItemBean DynamicItemBean = searchItemBeanArrayList.get(position);
+
+                String date_orig = DynamicItemBean.getThelost().getPublishtime();
+                String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
+                if(!"0".equals(date_orig.substring(6, 7))) {
+                    fabaiodate = fabaiodate+date_orig.substring(6, 7);
+                }
+                fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
+
+                String lostdate_orig = DynamicItemBean.getThelost().getLosttime();
+                String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
+                if(!"0".equals(lostdate_orig.substring(6, 7))){
+                    lostdate = lostdate + lostdate_orig.substring(6, 7);
+                }
+                lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
+
+                int lostplace = DynamicItemBean.getThelost().getPlaceid();
+                int losttype = DynamicItemBean.getThelost().getLosttype();
+                int thingstype = DynamicItemBean.getThelost().getTypeid();
+
+                String place = allPlaceBeanList.get(lostplace);
+                String thingsType = allTypeBeanList.get(thingstype);
+                String lostType="";
+
+                switch (losttype){
+                    case 0:{
+                        lostType = "寻物启示";
+                        break;
+                    }
+                    case 1:{
+                        lostType = "招领启示";
+                    }
+                    default:{
+                        break;
+                    }
+                }
+
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
-                intent.putExtra(OTHERSIMG, searchItemBean.getPhoto());
-                intent.putExtra(OTHERSFABIAODATE,searchItemBean.getFabiaodate());
-                intent.putExtra(OTHERSDIUSHILEIXING, searchItemBean.getQishileixing());
-                intent.putExtra(OTHERSDIUSHIDATE, searchItemBean.getDiushidate());
+                intent.putExtra(OTHERSNICKNAME,DynamicItemBean.getNickname());
+                intent.putExtra(OTHERSPHOTO,DynamicItemBean.getUserphoto());
+                intent.putExtra(OTHERSFABIAODATE,fabaiodate);
+                intent.putExtra(OTHERSDIUSHILEIXING, lostType);
+                intent.putExtra(OTHERSDIUSHIDATE, lostdate);
+                intent.putExtra(OTHERSPLACE,place);
                 Bundle bundle = new Bundle();
-                bundle.putStringArrayList(OTHERSTHINGSTYPES, (ArrayList<String>) searchItemBean.getTypes());
-                intent.putExtra(OTHERSTHINGSTYPES, bundle);
-                intent.putExtra(OTHERSID, searchItemBean.getID());
+                bundle.putStringArrayList(OTHERSIMGS, (ArrayList<String>) DynamicItemBean.getThelost().getPhoto());
+                intent.putExtra(OTHERSIMGS, bundle);
+                intent.putExtra(OTHERSTHINGSTYPE, DynamicItemBean.getThelost().getTypeid());
+                intent.putExtra(OTHERSID, DynamicItemBean.getThelost().getId());
                 mContext.startActivity(intent);
             }
         });
@@ -97,17 +143,53 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SearchItemBean searchItemBean = searchItemBeanArrayList.get(position);
-//        holder.headimg
-        holder.qishileixing.setText("启事类型:"+ searchItemBean.getQishileixing());
-        holder.fabiaotime.setText("发表地点:"+ searchItemBean.getFabiaodate());
-//        holder.headimg
-        holder.placeanddate.setText("丢失时间:"+ searchItemBean.getDiushidate()+" 丢失地点:"+searchItemBean.getDiushidate());
-        holder.title.setText(searchItemBean.getTitle());
-//        Glide.with(mContext)
-//                .load(searchItemBean.getPhoto())
-//                .asBitmap()
-//                .into(holder.headimg);
+        DynamicItemBean DynamicItemBean = searchItemBeanArrayList.get(position);
+        /**
+         * "publishtime": "20181105173056",
+         * "losttime": "2018110512",
+         */
+        holder.qishileixing.setText("启事类型:"+ DynamicItemBean.getThelost().getLosttype());
+        String date_orig = DynamicItemBean.getThelost().getPublishtime();
+        String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
+        if(!"0".equals(date_orig.substring(6, 7))) {
+            fabaiodate = fabaiodate+date_orig.substring(6, 7);
+        }
+        fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
+        holder.fabiaotime.setText("发表时间:"+ fabaiodate);
+
+        String lostdate_orig = DynamicItemBean.getThelost().getLosttime();
+        String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
+        if(!"0".equals(lostdate_orig.substring(6, 7))){
+            lostdate = lostdate + lostdate_orig.substring(6, 7);
+        }
+        lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
+
+        int lostplace = DynamicItemBean.getThelost().getPlaceid();
+        int losttype = DynamicItemBean.getThelost().getLosttype();
+        int thingstype = DynamicItemBean.getThelost().getTypeid();
+
+        String place = allPlaceBeanList.get(lostplace);
+        String thingsType = allTypeBeanList.get(thingstype);
+        String lostType="";
+        switch (losttype){
+            case 0:{
+                lostType = "寻物启示";
+                break;
+            }
+            case 1:{
+                lostType = "招领启示";
+            }
+            default:{
+                break;
+            }
+        }
+
+        holder.placeanddate.setText("丢失时间:"+ lostdate+" 丢失地点:"+place);
+        holder.title.setText(DynamicItemBean.getThelost().getTitle());
+        Glide.with(mContext)
+                .load(DynamicItemBean.getThelost().getPhoto())
+                .asBitmap()
+                .into(holder.headimg);
     }
 
     @Override

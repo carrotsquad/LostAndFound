@@ -1,8 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
 
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
 
 import java.util.List;
 

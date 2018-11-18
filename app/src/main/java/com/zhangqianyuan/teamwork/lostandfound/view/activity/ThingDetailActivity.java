@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ThingDetailPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
@@ -34,12 +35,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ThingDetailActivity extends AppCompatActivity implements IThingDetailActivity {
 
     public static final String OTHERSNICKNAME = "OTHERSNICKNAME";
-    public static final String OTHERSIMG = "OTHERSIMG";
+    public static final String OTHERSPHOTO = "OTHERSPHOTO";
     public static final String OTHERSFABIAODATE = "OTHERSFABIAODATE";
     public static final String OTHERSPLACE = "OTHERSPLACE";
     public static final String OTHERSDIUSHILEIXING = "OTHERSDIUSHILEIXING";
     public static final String OTHERSDIUSHIDATE = "OTHERSDIUSHIDATE";
-    public static final String OTHERSTHINGSTYPES = "OTHERSTHINGSTYPES";
+    public static final String OTHERSTHINGSTYPE = "OTHERSTHINGSTYPE";
+    public static final String OTHERSIMGS = "OTHERSIMGS";
     public static final String OTHERSID = "OTHERSID";
 
     //头像
@@ -99,11 +101,12 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this);
         initDataFromLocal();
-        initDataFromWeb();
+//        initDataFromWeb();
     }
 
     @Override
     protected void onDestroy() {
+        thingDetailPresenter.dettachActivity();
         super.onDestroy();
     }
 
@@ -117,15 +120,19 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
          intent.putExtra(OTHERSTHINGSTYPES, searchItemBean.getTypes());
          intent.putExtra(OTHERSID, searchItemBean.getID());
          */
-        String strimg = intent.getStringExtra(OTHERSIMG);
+        String strusernickname = intent.getStringExtra(OTHERSNICKNAME);
+        String struserphoto = intent.getStringExtra(OTHERSPHOTO);
         String strfabiaodate = intent.getStringExtra(OTHERSFABIAODATE);
         String strplace = intent.getStringExtra(OTHERSPLACE);
         String strdiushidate = intent.getStringExtra(OTHERSDIUSHIDATE);
         String strdiushileixing = intent.getStringExtra(OTHERSDIUSHILEIXING);
 
-        Bundle bundle = intent.getBundleExtra(OTHERSTHINGSTYPES);
-        List<String> strthingstypes = bundle.getStringArrayList(OTHERSTHINGSTYPES);
+        Bundle bundle = intent.getBundleExtra(OTHERSIMGS);
+        List<String> strThingsImgs = bundle.getStringArrayList(OTHERSIMGS);
         ID = intent.getStringExtra(OTHERSID);
+
+        nickname.setText(strusernickname);
+        GetImageFromWeb.glideSetImageView(struserphoto,userimg,this);
         fabiaodate.setText("发表于"+strfabiaodate);
         diushidate.setText("丢失时间:"+strdiushidate);
         place.setText("丢失地点:"+strplace);
