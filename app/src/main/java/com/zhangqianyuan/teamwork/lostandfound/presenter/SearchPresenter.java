@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import android.support.annotation.Nullable;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ISearchModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.SearchModel;
@@ -25,9 +27,8 @@ public class SearchPresenter extends AbstractBasePresenter<ISearchFragment> impl
         super(iSearchFragment);
     }
 
-
     @Override
-    public void getSearchResult(String keyword, int qishileixing, int place, int thingstypes, String session) {
+    public void getSearchResult(String keyword, @Nullable Integer qishileixing, @Nullable Integer place, @Nullable Integer thingstypes, String session) {
         iSearchModel = new SearchModel();
         iSearchModel.getSearch(keyword, qishileixing, place, thingstypes, session, new Observer<SearchBean>() {
             @Override

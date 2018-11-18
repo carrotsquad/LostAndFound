@@ -78,15 +78,13 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         ButterKnife.bind(this);
         //如果已经登录过，直接进入主页面
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
-        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))){
-            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
         //字体
         register.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
         signPresenter = new SignPresenter(this);
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
+        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
+            allTypesAndPlacesPresenter.getAllTypesAndPlaces(sharedPreferences.getString(SESSION, "balabala"));
+        }
         mIntent=getIntent();
         if(mIntent.getIntExtra(SIGNIN,0)==1){
             signPresenter.getSignIn(mIntent.getStringExtra(EMAIL),mIntent.getStringExtra(PASSWORD));
@@ -106,7 +104,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             //点击登陆
             case R.id.signin_signin:{
                 if("".equals(pwd.getText().toString())||"".equals(email.getText().toString())){
-                    FancyToast.makeText(SignInActivity.this,"输入有问题",FancyToast.LENGTH_SHORT,FancyToast.WARNING,true).show();
+                    FancyToast.makeText(SignInActivity.this,"输入有问题",FancyToast.LENGTH_SHORT,FancyToast.WARNING,false).show();
                 }else {
                     String eemail = email.getText().toString();
                     String password = pwd.getText().toString();
@@ -166,8 +164,6 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             startActivity(intent);
             FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             finish();
-//            allTypeBeanList = typeBeanList;
-//            allPlaceBeanList = placeBeanList;
         }else {
             FancyToast.makeText(SignInActivity.this,"无法获取丢失物品类型和地点",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }

@@ -1,103 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+
     <RelativeLayout
-        android:background="@color/deepskyblue"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_marginStart="0dp"
+        android:background="@color/deepskyblue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:id="@+id/upload_lostorfind_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/back"/>
+            android:src="@drawable/back" />
 
         <TextView
             android:id="@+id/upload_lostorfind_qishitype"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
             android:gravity="center"
             android:text="失物/招领发布"
             android:textColor="@color/white"
             android:textSize="25sp" />
     </RelativeLayout>
 
-<RelativeLayout
-    android:layout_centerHorizontal="true"
-    android:layout_margin="20dp"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent">
 
-    <EditText
+    <TextView
         android:id="@+id/upload_lostorfind_time"
-        android:layout_width="280dp"
+        android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
         android:drawableStart="@drawable/ic_time"
         android:ems="12"
-        android:hint="请输入丢失时间"
-        android:inputType="datetime" />
+        android:hint="请输入丢失时间(必填)"
+        android:inputType="datetime"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="13dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/ic_where"
+        android:text="请选择丢失地点(必选):"
+        android:textColor="@color/grey_500"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_lostorfind_time" />
+
     <Spinner
         android:id="@+id/upload_lostorfind_where"
+        android:layout_width="147dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/upload_lostorfind_time"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_where"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:ems="12"
-        android:hint="请输入丢失地点"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_lostorfind_time" />
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="是否有酬金"
+        android:textSize="20sp"
+        android:textColor="@color/grey_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_lostorfind_where" />
+
+    <Spinner
+        android:id="@+id/upload_lostorfind_bounty"
+        android:layout_width="147dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.289"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/upload_lostorfind_where">
+
+    </Spinner>
+
     <android.support.v7.widget.CardView
         android:id="@+id/upload_lostorfind_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/upload_lostorfind_where"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp">
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/upload_lostorfind_description_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:hint="请输入标题" />
 
             <EditText
                 android:id="@+id/upload_lostorfind_description_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minLines="4"
+                android:layout_height="146dp"
+                android:layout_below="@+id/upload_lostorfind_description_title"
                 android:gravity="top"
                 android:hint="请输入对此事件的描述"
-                />
+                android:minLines="4" />
 
             <ImageView
-                android:layout_below="@id/upload_lostorfind_description_text"
                 android:id="@+id/upload_lostorfind_description_img"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_below="@id/upload_lostorfind_description_text"
                 android:layout_margin="5dp"
-                android:src="@drawable/ic_takephoto"
-                />
+                android:src="@drawable/ic_takephoto" />
 
             <TextView
-                android:layout_below="@id/upload_lostorfind_description_img"
+                android:id="@+id/upload_lostorfind_description_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="点击上传图片"
+                android:layout_below="@id/upload_lostorfind_description_img"
                 android:layout_margin="5dp"
-                />
+                android:text="点击上传图片"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/upload_lostorfind_sure"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/shape_button"
+        android:text="确 认 发 布"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_lostorfind_description" />
+
+</android.support.constraint.ConstraintLayout>

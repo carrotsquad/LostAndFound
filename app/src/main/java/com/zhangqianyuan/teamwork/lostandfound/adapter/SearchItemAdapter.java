@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -85,25 +84,25 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                DynamicItemBean DynamicItemBean = searchItemBeanArrayList.get(position);
+                DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
 
-                String date_orig = DynamicItemBean.getThelost().getPublishtime();
+                String date_orig = dynamicItemBean.getThelost().getPublishtime();
                 String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
                 if(!"0".equals(date_orig.substring(6, 7))) {
                     fabaiodate = fabaiodate+date_orig.substring(6, 7);
                 }
                 fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
 
-                String lostdate_orig = DynamicItemBean.getThelost().getLosttime();
+                String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
                 String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
                 if(!"0".equals(lostdate_orig.substring(6, 7))){
                     lostdate = lostdate + lostdate_orig.substring(6, 7);
                 }
                 lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
 
-                int lostplace = DynamicItemBean.getThelost().getPlaceid();
-                int losttype = DynamicItemBean.getThelost().getLosttype();
-                int thingstype = DynamicItemBean.getThelost().getTypeid();
+                int lostplace = dynamicItemBean.getThelost().getPlaceid();
+                int losttype = dynamicItemBean.getThelost().getLosttype();
+                int thingstype = dynamicItemBean.getThelost().getTypeid();
 
                 String place = allPlaceBeanList.get(lostplace);
                 String thingsType = allTypeBeanList.get(thingstype);
@@ -123,17 +122,17 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 }
 
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
-                intent.putExtra(OTHERSNICKNAME,DynamicItemBean.getNickname());
-                intent.putExtra(OTHERSPHOTO,DynamicItemBean.getUserphoto());
+                intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getNickname());
+                intent.putExtra(OTHERSPHOTO,dynamicItemBean.getUserphoto());
                 intent.putExtra(OTHERSFABIAODATE,fabaiodate);
                 intent.putExtra(OTHERSDIUSHILEIXING, lostType);
                 intent.putExtra(OTHERSDIUSHIDATE, lostdate);
                 intent.putExtra(OTHERSPLACE,place);
                 Bundle bundle = new Bundle();
-                bundle.putStringArrayList(OTHERSIMGS, (ArrayList<String>) DynamicItemBean.getThelost().getPhoto());
+                bundle.putStringArrayList(OTHERSIMGS, (ArrayList<String>) dynamicItemBean.getThelost().getPhoto());
                 intent.putExtra(OTHERSIMGS, bundle);
-                intent.putExtra(OTHERSTHINGSTYPE, DynamicItemBean.getThelost().getTypeid());
-                intent.putExtra(OTHERSID, DynamicItemBean.getThelost().getId());
+                intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
+                intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
                 mContext.startActivity(intent);
             }
         });
@@ -143,13 +142,13 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DynamicItemBean DynamicItemBean = searchItemBeanArrayList.get(position);
+        DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
         /**
          * "publishtime": "20181105173056",
          * "losttime": "2018110512",
          */
-        holder.qishileixing.setText("启事类型:"+ DynamicItemBean.getThelost().getLosttype());
-        String date_orig = DynamicItemBean.getThelost().getPublishtime();
+        holder.qishileixing.setText("启事类型:"+ dynamicItemBean.getThelost().getLosttype());
+        String date_orig = dynamicItemBean.getThelost().getPublishtime();
         String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
         if(!"0".equals(date_orig.substring(6, 7))) {
             fabaiodate = fabaiodate+date_orig.substring(6, 7);
@@ -157,16 +156,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
         holder.fabiaotime.setText("发表时间:"+ fabaiodate);
 
-        String lostdate_orig = DynamicItemBean.getThelost().getLosttime();
+        String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
         String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
         if(!"0".equals(lostdate_orig.substring(6, 7))){
             lostdate = lostdate + lostdate_orig.substring(6, 7);
         }
         lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
 
-        int lostplace = DynamicItemBean.getThelost().getPlaceid();
-        int losttype = DynamicItemBean.getThelost().getLosttype();
-        int thingstype = DynamicItemBean.getThelost().getTypeid();
+        int lostplace = dynamicItemBean.getThelost().getPlaceid();
+        int losttype = dynamicItemBean.getThelost().getLosttype();
+        int thingstype = dynamicItemBean.getThelost().getTypeid();
 
         String place = allPlaceBeanList.get(lostplace);
         String thingsType = allTypeBeanList.get(thingstype);
@@ -185,9 +184,9 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
 
         holder.placeanddate.setText("丢失时间:"+ lostdate+" 丢失地点:"+place);
-        holder.title.setText(DynamicItemBean.getThelost().getTitle());
+        holder.title.setText(dynamicItemBean.getThelost().getTitle());
         Glide.with(mContext)
-                .load(DynamicItemBean.getThelost().getPhoto())
+                .load(dynamicItemBean.getThelost().getPhoto())
                 .asBitmap()
                 .into(holder.headimg);
     }

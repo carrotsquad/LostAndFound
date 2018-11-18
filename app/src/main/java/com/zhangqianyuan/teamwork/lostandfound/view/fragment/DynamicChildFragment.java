@@ -45,11 +45,11 @@ public class DynamicChildFragment extends Fragment {
     }
 
     public void  initLists(){
-            for (int i = 0; i <6 ; i++) {
-                DynamicItemBean da = new DynamicItemBean(R.drawable.gril6,"周大大","walete",
-                        "10.10","home","我在马路边丢了很多钱",1);
-                lists.add(da);
-            }
+//            for (int i = 0; i <6 ; i++) {
+//                DynamicItemBean da = new DynamicItemBean(R.drawable.gril6,"周大大","walete",
+//                        "10.10","home","我在马路边丢了很多钱",1);
+//                lists.add(da);
+//            }
     }
 
 

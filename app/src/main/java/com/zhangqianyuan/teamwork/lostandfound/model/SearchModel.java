@@ -18,26 +18,12 @@ public class SearchModel extends BaseModel implements ISearchModel{
     public void getSearch(String keyword, int diushileixing, int place, int thingstypes, String session, Observer<SearchBean> searchBeanObserver) {
         SearchRequestBean searchRequestBean = new SearchRequestBean();
         searchRequestBean.setStart(0);
-        searchRequestBean.setEnd(500);
+        searchRequestBean.setEnd(10);
         searchRequestBean.setKeyword(keyword);
-        switch (diushileixing){
-            case 0:{
-                break;
-            }
-            case 1:{
-                searchRequestBean.setLosttype(0);
-                break;
-            }
-            case 2:{
-                searchRequestBean.setLosttype(1);
-                break;
-            }
-            default:{
-                break;
-            }
-        }
+        searchRequestBean.setLosttype(diushileixing);
         searchRequestBean.setTypeid(thingstypes);
         searchRequestBean.setPlaceid(place);
+
         api.getSearchItem(new Gson().toJson(searchRequestBean),session)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

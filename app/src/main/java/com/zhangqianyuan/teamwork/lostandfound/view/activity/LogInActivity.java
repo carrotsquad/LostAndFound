@@ -35,9 +35,6 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  */
 public class LogInActivity extends AppCompatActivity implements ILogInActivity {
 
-    @BindView(R.id.login_photo)
-    CircleImageView loginPhoto;
-
     @BindView(R.id.login_email)
     EditText loginEmail;
 

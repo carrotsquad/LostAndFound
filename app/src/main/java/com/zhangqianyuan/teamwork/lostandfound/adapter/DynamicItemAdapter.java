@@ -17,6 +17,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
+
 /**
  * @author zhoudada
  * @version $Rev$
@@ -64,17 +67,22 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DynamicItemBean dynamicItemBean = lists.get(position);
-        if (dynamicItemBean.getCardType()==DynamicItemBean.TYPE_LOST){
+        if (dynamicItemBean.getThelost().getLosttype()==DynamicItemBean.TYPE_LOST){
         holder.mCardView.setBackgroundColor(Color.parseColor("FFE086A9"));
-    }
-       if (dynamicItemBean.getCardType()==DynamicItemBean.TYPE_FIND){
+        }
+       if (dynamicItemBean.getThelost().getLosttype()==DynamicItemBean.TYPE_FIND){
             holder.mCardView.setBackgroundColor(Color.parseColor("#ab47bc"));
        }
-        holder.headimg.setImageResource(dynamicItemBean.getHeadImg());
-        holder.neckname.setText(dynamicItemBean.getNeckName());
-        holder.time.setText(dynamicItemBean.getTime());
-        holder.description.setText(dynamicItemBean.getDescription());
-        holder.thingType.setText(dynamicItemBean.getThingType());
+//        holder.headimg.setImageResource(dynamicItemBean.);
+        holder.neckname.setText(dynamicItemBean.getNickname());
+
+//        holder.time.setText(dynamicItemBean.getTime());
+
+        holder.description.setText(dynamicItemBean.getThelost().getDescription());
+
+        int thingstype = dynamicItemBean.getThelost().getTypeid();
+        String thingsType = allTypeBeanList.get(thingstype);
+        holder.thingType.setText(thingsType);
     }
 
     @Override
