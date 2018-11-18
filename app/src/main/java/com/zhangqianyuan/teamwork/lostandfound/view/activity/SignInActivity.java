@@ -67,7 +67,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
 
     private SharedPreferences sharedPreferences;
 
-    SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor;
 
     private Intent mIntent;
 
@@ -76,14 +76,15 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
-        //如果已经登录过，直接进入主页面
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         //字体
         register.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
         signPresenter = new SignPresenter(this);
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
+        //如果已经登录过，再次登陆，进入主页面
         if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
-            allTypesAndPlacesPresenter.getAllTypesAndPlaces(sharedPreferences.getString(SESSION, "balabala"));
+//            allTypesAndPlacesPresenter.getAllTypesAndPlaces(sharedPreferences.getString(SESSION, "balabala"));
+            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "balabala"),sharedPreferences.getString(SESSION, "balabala"));
         }
         mIntent=getIntent();
         if(mIntent.getIntExtra(SIGNIN,0)==1){

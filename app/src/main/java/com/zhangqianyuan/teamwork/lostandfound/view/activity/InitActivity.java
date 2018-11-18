@@ -1,6 +1,8 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+
+/**
+ * Description: 初始化界面
+ * Created at: 2018/11/19 0:10
+ * @author: zhangqianyuan
+ * Email: zhang.qianyuan@foxmail.com
+ */
 public class InitActivity extends AppCompatActivity {
 
     @BindView(R.id.select_register)
@@ -20,11 +31,19 @@ public class InitActivity extends AppCompatActivity {
     @BindView(R.id.select_signin)
     Button signin;
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
         ButterKnife.bind(this);
+
+        //如果已经登录过，直接进入登陆界面
+        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
+            startActivity(new Intent(InitActivity.this,SignInActivity.class));
+        }
     }
 
     @OnClick({R.id.select_register,R.id.select_signin})

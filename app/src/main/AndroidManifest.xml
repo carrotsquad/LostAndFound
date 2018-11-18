@@ -19,9 +19,7 @@
             android:label="@string/title_activity_log_in"
             android:theme="@style/AppTheme" />
         <activity android:name=".view.activity.VerifyActivity" />
-        <activity android:name=".view.activity.SignInActivity">
-
-        </activity>
+        <activity android:name=".view.activity.SignInActivity"></activity>
         <activity android:name=".view.activity.ThingDetailActivity" />
         <activity
             android:name=".view.activity.UserInfoSettingActivity"
@@ -46,6 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.UploadSuccessActivity"></activity>
     </application>
 
 </manifest>

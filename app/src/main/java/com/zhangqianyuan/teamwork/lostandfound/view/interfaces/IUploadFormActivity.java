@@ -7,6 +7,6 @@ package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public interface IUploadActivity extends BaseView {
-    void showData();
+public interface IUploadFormActivity extends BaseView {
+    void showStatus(Boolean status);
 }

@@ -10,13 +10,13 @@ import io.reactivex.disposables.Disposable;
 
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.FINE_INTERNET_STATUS;
 
-public class LogOutPresenter implements ILogOutPresenter{
+public class LogOutPresenter extends AbstractBasePresenter<ILogOut> implements ILogOutPresenter{
 
     private ILogOut iLogOut;
     private ILogOutModel iLogOutModel;
 
     public LogOutPresenter(ILogOut iLogOut){
-        this.iLogOut = iLogOut;
+        super(iLogOut);
     }
 
     @Override
@@ -31,15 +31,15 @@ public class LogOutPresenter implements ILogOutPresenter{
             @Override
             public void onNext(StatusBean statusBean) {
                 if(statusBean ==null|| !statusBean.getStatus().equals(FINE_INTERNET_STATUS)){
-                    iLogOut.logOut(false);
+                    v.logOut(false);
                 }else {
-                    iLogOut.logOut(true);
+                    v.logOut(true);
                 }
             }
 
             @Override
             public void onError(Throwable e) {
-                iLogOut.logOut(false);
+                v.logOut(false);
             }
 
             @Override

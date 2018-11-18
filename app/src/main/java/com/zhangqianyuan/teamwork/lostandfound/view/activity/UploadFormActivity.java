@@ -1,7 +1,9 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,7 +16,10 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUploadFormActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +28,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.galleryfinal.BuildConfig;
+import cn.finalteam.galleryfinal.CoreConfig;
+import cn.finalteam.galleryfinal.FunctionConfig;
+import cn.finalteam.galleryfinal.GalleryFinal;
+import cn.finalteam.galleryfinal.ThemeConfig;
+import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 import static cn.finalteam.toolsfinal.DateUtils.getTime;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
@@ -32,7 +43,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBea
  * 点击上传界面后用户填写表单的界面
  * @author  zhou
  */
-public class UploadFormActivity extends AppCompatActivity {
+public class UploadFormActivity extends AppCompatActivity implements IUploadFormActivity{
 
     @BindView(R.id.upload_lostorfind_back)
     ImageView btnBack;
@@ -64,6 +75,8 @@ public class UploadFormActivity extends AppCompatActivity {
     @BindView(R.id.upload_lostorfind_sure)
     Button btnSure;
 
+    private static final int REQUEST_CODE_GALLERY = 1;
+    //时间选择器
     private TimePickerView pvTime;
 
     @Override
@@ -86,6 +99,16 @@ public class UploadFormActivity extends AppCompatActivity {
             case R.id.upload_lostorfind_time:{
                 pvTime.show();
                 break;
+            }
+            //选择图片
+            case R.id.upload_lostorfind_description_img:
+            case R.id.upload_lostorfind_description_upload:{
+                initGallery();
+                break;
+            }
+            //点击确认
+            case R.id.upload_lostorfind_sure:{
+
             }
             default:{
                 break;
@@ -112,4 +135,56 @@ public class UploadFormActivity extends AppCompatActivity {
         }).build();
     }
 
+    //选择图片
+    private void initGallery(){
+        //设置主题
+        //ThemeConfig.CYAN
+        ThemeConfig theme = new ThemeConfig.Builder().build();
+        //配置功能
+        FunctionConfig functionConfig = new FunctionConfig.Builder()
+                .setEnableCamera(true)
+                .setEnableEdit(true)
+                .setEnableCrop(true)
+                .setEnableRotate(true)
+                .setCropSquare(true)
+                .setEnablePreview(true)
+                .build();
+
+        //配置imageloader
+        GlideImageLoader imageloader = new GlideImageLoader();
+        CoreConfig coreConfig = new CoreConfig.Builder(this, imageloader, theme)
+                .setDebug(BuildConfig.DEBUG)
+                .setFunctionConfig(functionConfig).build();
+        GalleryFinal.init(coreConfig);
+
+        GalleryFinal.openGallerySingle(REQUEST_CODE_GALLERY, mOnHandlerResultCallback);
+    }
+
+    private GalleryFinal.OnHanlderResultCallback mOnHandlerResultCallback = new GalleryFinal.OnHanlderResultCallback() {
+        @Override
+        public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+            //进行图片上传与置换
+            //置换
+            String photoPath = resultList.get(0).getPhotoPath();
+            img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+            FancyToast.makeText(UploadFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            //上传
+            //上传时记得压缩
+        }
+
+        @Override
+        public void onHanlderFailure(int requestCode, String errorMsg) {
+            Log.e("editinfo",errorMsg);
+            FancyToast.makeText(UploadFormActivity.this,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+        }
+    };
+
+    @Override
+    public void showStatus(Boolean status) {
+        if(status){
+
+        }else {
+            FancyToast.makeText(UploadFormActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+        }
+    }
 }

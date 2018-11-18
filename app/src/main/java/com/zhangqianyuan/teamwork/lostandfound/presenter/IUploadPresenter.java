@@ -1,5 +1,10 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
+
+import java.io.File;
+import java.util.List;
+
 /**
  * @author zhoudada
  * @version $Rev$
@@ -8,5 +13,5 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
  * @updateDes ${TODO}
  */
 public interface IUploadPresenter {
-    void postUpload();
+    void postUpload(String session, TheLostBean bean, List<File> fileList);
 }

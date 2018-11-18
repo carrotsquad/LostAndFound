@@ -14,11 +14,13 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UploadBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 
+import java.io.File;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -80,10 +82,18 @@ public interface Api {
     @POST("/passlove/info/types")
     Observable<AllTypesBean> getAllTypes(@Field("JSESSIONID") String session);
 
-    //获得所有类型
+    //获得所有丢失地点
     @FormUrlEncoded
     @POST("/passlove/info/places")
     Observable<AllPlacesBean> getAllPlaces(@Field("JSESSIONID") String session);
+
+    /*
+    我的发布 包括丢/失
+    向服务器传数据
+     */
+    @POST("/passlove/user/publishlost")
+    @Multipart
+    Observable<UploadBean> postUpload(@Part("JSESSIONID") String session, @Part("thelost") RequestBody theLostBean, @Part("photos") MultipartBody.Part Imgs);
 
     //获取动态 失物 信息
     @POST("")
@@ -110,14 +120,7 @@ public interface Api {
     @FormUrlEncoded
     Call<List<MyHistoryItemBean>> getMyHistoryData();
 
-    /*
-    我的发布 包括丢/失
-    向服务器传数据
-     */
-    @POST()
-    @FormUrlEncoded
-    Call<UploadBean>        postUploadBean(int  lostOrFind,int  thingType, String  byWho,String  uploadTime
-    ,String  happendTime,String  where,String  description,List<Integer> thingImg);
+
 
 
     //退出登录
