@@ -20,11 +20,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".view.activity.VerifyActivity" />
         <activity android:name=".view.activity.SignInActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.activity.ThingDetailActivity" />
         <activity
@@ -43,7 +39,13 @@
             android:label="我的发布"
             android:theme="@style/AppTheme" />
         <activity android:name=".view.activity.UserSettingEditInfoActivity" />
-        <activity android:name=".view.activity.InitActivity"></activity>
+        <activity android:name=".view.activity.InitActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

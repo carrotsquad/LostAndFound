@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //新建招领
+        //ic_newzhaolin
         newZhaoLing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
