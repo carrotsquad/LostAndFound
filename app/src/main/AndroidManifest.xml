@@ -30,7 +30,7 @@
         <activity
             android:name=".view.activity.UserInfoSettingActivity"
             android:label="@string/editInfo"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".view.activity.UploadActivity" />
         <activity android:name=".view.activity.UserInfoMyHistory" />
         <activity android:name=".view.activity.UploadFormActivity" />
@@ -42,7 +42,8 @@
             android:name=".view.activity.UserInfoMyUpload"
             android:label="我的发布"
             android:theme="@style/AppTheme" />
-        <activity android:name=".view.activity.UserSettingEditInfoActivity"></activity>
+        <activity android:name=".view.activity.UserSettingEditInfoActivity" />
+        <activity android:name=".view.activity.InitActivity"></activity>
     </application>
 
 </manifest>

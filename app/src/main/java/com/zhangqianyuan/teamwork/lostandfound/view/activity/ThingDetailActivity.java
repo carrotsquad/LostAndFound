@@ -80,9 +80,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.thing_detail_back)
     ImageView back;
 
-    //东西类型列表
-    @BindView(R.id.thing_detail_thingsdetail_types)
-    HorizontalScrollView thingstypes;
+//    //东西类型列表
+//    @BindView(R.id.thing_detail_thingsdetail_types)
+//    HorizontalScrollView thingstypes;
 
     //东西的图片
     @BindView(R.id.thing_detail_thingsdetail_imgs)

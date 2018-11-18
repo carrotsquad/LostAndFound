@@ -161,6 +161,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             }
             Log.e("SignIn",allPlaceBeanList.toString());
             Log.e("SignIn",allTypeBeanList.toString());
+            Log.e("SignIn",allTypeImgsList.toString());
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(intent);
             FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
