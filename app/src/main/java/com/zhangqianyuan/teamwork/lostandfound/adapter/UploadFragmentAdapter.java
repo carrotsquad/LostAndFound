@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UploadItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UploadActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UploadFormActivity;
 
@@ -76,8 +78,14 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UploadItemBean  bean = lists.get(position);
-       holder.img.setImageResource(bean.getTypeImgId());
+        Glide.with(mContext)
+                .load(bean.getTypeImgId())
+                .asBitmap()
+                .into(holder.img);
+        //       holder.img.setImageResource(bean.getTypeImgId());
         holder.text.setText(bean.getTypeText());
+        Log.e("TypesImgUrl",bean.getTypeImgId());
+
     }
 
     @Override

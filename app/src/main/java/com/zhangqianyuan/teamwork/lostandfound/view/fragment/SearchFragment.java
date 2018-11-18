@@ -61,11 +61,11 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     private String[] diushitypes = {"不限", "失物", "招领"};
     private String[] places = {"不限", "一教", "二教", "三教", "四教", "五教", "六教", "七教", "八教", "二维码大楼", "信科", "逸夫楼", "老图", "数图", "太极运动场", "风华运动场", "风雨操场"};
     private String[] thingstypes = {"不限", "衣物", "首饰", "运动器材", "书本", "手机", "电脑", "有赏金", "其他"};
-    private int diushiTypePosition = 0;
-    private int placePosition = 0;
-    private int thingsTypePosition = 0;
+    private Integer diushiTypePosition = 0;
+    private Integer placePosition = 0;
+    private Integer thingsTypePosition = 0;
 
-    private int thingsPosition = 0;
+    private Integer thingsPosition = 0;
 
     private GirdDropDownAdapter diushitypeAdapter;
     private ListDropDownAdapter placesAdapter;
@@ -227,7 +227,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                 String session = sharedPreferences.getString(SESSION,"null");
                 switch (diushiTypePosition){
                     case 0:{
-                        iSearchPresenter.getSearchResult(keyword, null, placePosition, thingsTypePosition, session);
+                        iSearchPresenter.getSearchResult(keyword, Integer.valueOf(null), placePosition, thingsTypePosition, session);
                         break;
                     }
                     case 1:

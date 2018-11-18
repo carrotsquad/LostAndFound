@@ -151,7 +151,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             int i = typeBeanList.size();
             for (int k = 0; k<i;k++) {
                 allTypeBeanList.add(typeBeanList.get(k).getName());
-                allTypeImgsList.add(typeBeanList.get(k).getName());
+                allTypeImgsList.add(typeBeanList.get(k).getPhoto());
             }
             i = placeBeanList.size();
             for (int k = 0; k<i;k++) {

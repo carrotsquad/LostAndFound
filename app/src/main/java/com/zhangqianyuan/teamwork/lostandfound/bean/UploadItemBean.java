@@ -8,24 +8,24 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * @updateDes ${TODO}
  */
 public class UploadItemBean {
-    private int  typeImgId;
+    private String  typeImgId;
     private String  typeText;
 
-    public UploadItemBean(int typeImgId, String typeText) {
+    public UploadItemBean(String typeImgId, String typeText) {
         this.typeImgId = typeImgId;
         this.typeText = typeText;
     }
 
-    public int getTypeImgId() {
+    public String getTypeImgId() {
         return typeImgId;
-    }
-
-    public void setTypeImgId(int typeImgId) {
-        this.typeImgId = typeImgId;
     }
 
     public String getTypeText() {
         return typeText;
+    }
+
+    public void setTypeImgId(String typeImgId) {
+        this.typeImgId = typeImgId;
     }
 
     public void setTypeText(String typeText) {
