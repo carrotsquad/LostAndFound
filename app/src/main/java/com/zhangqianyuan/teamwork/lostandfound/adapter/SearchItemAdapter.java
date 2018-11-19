@@ -129,7 +129,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 intent.putExtra(OTHERSDIUSHIDATE, lostdate);
                 intent.putExtra(OTHERSPLACE,place);
                 Bundle bundle = new Bundle();
-                bundle.putStringArrayList(OTHERSIMGS, (ArrayList<String>) dynamicItemBean.getThelost().getPhoto());
+                bundle.putString(OTHERSIMGS,  dynamicItemBean.getThelost().getPhoto());
                 intent.putExtra(OTHERSIMGS, bundle);
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
@@ -182,7 +182,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 break;
             }
         }
-
+        holder.qishileixing.setText("启事类型:"+lostType);
         holder.placeanddate.setText("丢失时间:"+ lostdate+" 丢失地点:"+place);
         holder.title.setText(dynamicItemBean.getThelost().getTitle());
         Glide.with(mContext)

@@ -22,6 +22,7 @@ import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -35,6 +36,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 // TODO: 2018/11/12 需完善
@@ -93,7 +95,7 @@ public interface Api {
      */
     @POST("/passlove/user/publishlost")
     @Multipart
-    Observable<UploadBean> postUpload(@Part("JSESSIONID") String session, @Part("thelost") RequestBody theLostBean, @Part("photos") MultipartBody.Part Imgs);
+    Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @PartMap Map<String,RequestBody> photos);
 
     //获取动态 失物 信息
     @POST("")

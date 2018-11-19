@@ -31,7 +31,7 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
     }
 
     //创建jsessionId 的 requestbody
-    public RequestBody createRequestbody(String jsessionId){
+    RequestBody createRequestbody(String jsessionId){
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"),jsessionId);
         return body;
     }
@@ -40,7 +40,7 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
       也可以用requestbody 但是这样就需要在参数里加入请求头中的name =  +filename =
       建议使用multipartbody
      */
-    public MultipartBody.Part createMultipartBody(File file){
+    MultipartBody.Part createMultipartBody(File file){
 
         RequestBody body = RequestBody.create(MediaType.parse("image/" + file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length())),file);
         //image为name参数的值，file.getname为filename参数的名字，body为请求体

@@ -12,7 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/search_item_photo"
@@ -23,6 +23,7 @@
             android:src="@mipmap/diai" />
 
         <RelativeLayout
+            android:id="@+id/search_item_relate1"
             android:layout_width="286dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -31,17 +32,17 @@
             android:layout_toEndOf="@id/search_item_photo">
 
             <TextView
+                android:id="@+id/search_item_thingstype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="物品类型:U盘" />
+                android:text="物品类型:" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="12dp"
-                android:src="@drawable/uflass" />
+                android:layout_toEndOf="@+id/search_item_thingstype"
+                android:src="@drawable/littleicon_uflash" />
         </RelativeLayout>
 
 
@@ -60,11 +61,11 @@
             android:text="我的钥匙掉在昨晚掉在2014了你们能帮我一下么" />
 
         <TextView
+            android:layout_below="@id/search_item_qishileixing"
             android:id="@+id/search_item_fabiaodate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/search_item_placeanddate"
-            android:layout_marginVertical="2dp"
+            android:layout_marginVertical="0dp"
             android:layout_toEndOf="@+id/search_item_photo"
             android:text="发布时间:2018年10月5日" />
 
@@ -72,17 +73,16 @@
             android:id="@+id/search_item_placeanddate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/search_item_photo"
-            android:layout_alignStart="@+id/search_item_title"
-            android:layout_marginVertical="0dp"
-            android:text="丢失地点:四教  丢失时间:今天10:10" />
+            android:layout_toEndOf="@+id/search_item_photo"
+            android:layout_below="@id/search_item_fabiaodate"
+            android:text="丢失于:四教  丢失时间:今天10:10"/>
 
         <TextView
             android:id="@+id/search_item_qishileixing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/search_item_title"
-            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/search_item_relate1"
+            android:layout_below="@+id/search_item_relate1"
             android:layout_marginVertical="2dp"
             android:text="启事类型:失物启事" />
 

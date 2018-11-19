@@ -5,7 +5,19 @@ import java.util.List;
 public class TheLostBean {
 
 
-        /**
+    public TheLostBean(int typeid, int losttype, String title, String description, int placeid, String publishtime, String losttime, String photo, int ishandled) {
+        this.typeid = typeid;
+        this.losttype = losttype;
+        this.title = title;
+        this.description = description;
+        this.placeid = placeid;
+        this.publishtime = publishtime;
+        this.losttime = losttime;
+        this.photo = photo;
+        this.ishandled = ishandled;
+    }
+
+    /**
          * id : 1
          * typeid : 1
          * losttype : 0
@@ -18,6 +30,8 @@ public class TheLostBean {
          * ishandled : 0
          */
 
+
+
         private int id;
         private int typeid;
         private int losttype;
@@ -26,7 +40,7 @@ public class TheLostBean {
         private int placeid;
         private String publishtime;
         private String losttime;
-        private List<String> photo;
+        private String photo;
         private int ishandled;
 
         public int getId() {
@@ -93,11 +107,11 @@ public class TheLostBean {
         this.losttime = losttime;
     }
 
-    public List<String> getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(List<String> photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

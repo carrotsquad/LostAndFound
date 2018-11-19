@@ -23,6 +23,7 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 
 
+import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
@@ -48,8 +49,10 @@ import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getUserPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
 /**
  * Description
@@ -60,8 +63,6 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @updateAuthor $zhangqianyuan$
  * @updateDes ${TODO}
  */
-
-// TODO: 2018/11/15  跟张同学讨论 怎么选择的图片 以及图片文件
 public class UserInfoFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,IUserInfoFragment {
 
     private static final int REQUEST_CODE_GALLERY = 1;
@@ -93,7 +94,6 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         ButterKnife.bind(this,view);
         mContext = getContext();
         sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
-        getSharePrefrence();
         initMVP();
         initView();
         return view;
@@ -106,7 +106,8 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         img = headview.findViewById(R.id.userinfo_head_img);
         nickname = headview.findViewById(R.id.userinfo_head_nickname);
         nickname.setText(sharedPreferences.getString(NICKNAME, "null"));
-
+        photoPath = getUserPhoto(jsession, sharedPreferences.getString(USERPHOTO,"null"));
+        GetImageFromWeb.glideSetImageView(photoPath,img,mContext);
         img.setOnClickListener(this);
         nickname.setOnClickListener(this);
     }
@@ -115,7 +116,6 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     public void initMVP(){
         mPresenter = new UserInfoPresenter(new UserInfoModel());
         mPresenter.attachActivity(this);
-//        mPresenter.getUserInfoData();
     }
 
 
@@ -220,24 +220,6 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         }
     }
 
-//    /**
-//     * 获得基础数据的同时为设置界面添加数据
-//     * @param headImg
-//     * @param neckname
-//     * @param phone
-//     * @param emai
-//     */
-//    @Override
-//    public void showData(int headImg, String neckname, String phone, String emai) {
-//        img.setImageResource(headImg);
-//        nickname.setText(neckname);
-//        mIntent = new Intent(getContext(),UserInfoSettingActivity.class);
-//        mIntent.putExtra("headImg",headImg);
-//        mIntent.putExtra("neckname",neckname);
-//        mIntent.putExtra("phone",phone);
-//        mIntent.putExtra("emai",emai);
-//    }
-
     @Override
     public void onSuccess(int status) {
         success = (status==200);
@@ -247,19 +229,4 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
             Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-    public void getSharePrefrence(){
-        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
-        jsession=preferences.getString("SESSION","null");
-        passwords = preferences.getString("password","null");
-        phoneNumber = preferences.getString("PNB","null");
-        nick=preferences.getString("NICKNAME","null");
-        email=preferences.getString("EMAIL","null");
-    }
-
-
-
-
-
 }

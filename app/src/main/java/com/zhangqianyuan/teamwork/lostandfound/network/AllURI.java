@@ -12,4 +12,8 @@ public class AllURI {
     public static List<String> allTypeBeanList = new ArrayList<>();
     public static List<String> allPlaceBeanList = new ArrayList<>();
     public static List<String> allTypeImgsList = new ArrayList<>();
+
+    public static String getUserPhoto(String JSESSION, String imgName){
+        return "http://111.230.235.15/passlove/img/user?" + "JSESSIONID="+JSESSION +"&name="+imgName;
+    }
 }
