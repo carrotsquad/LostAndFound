@@ -1,5 +1,8 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,9 +22,13 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.IUploadPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.UploadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUploadFormActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +45,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 import static cn.finalteam.toolsfinal.DateUtils.getTime;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 /**
  * Description
@@ -80,12 +88,25 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     //时间选择器
     private TimePickerView pvTime;
 
+    private SharedPreferences sharedPreferences;
+
+    private UploadPresenter uploadPresenter;
+
+    private String jsession;
+
+    private TheLostBean bean;
+
+    private List<File> fileList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
         ButterKnife.bind(this);
+        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         initView();
+        uploadPresenter = new UploadPresenter();
+        uploadPresenter.attachActivity(this);
     }
 
     @OnClick({R.id.upload_lostorfind_back,R.id.upload_lostorfind_time
@@ -109,7 +130,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             }
             //点击确认
             case R.id.upload_lostorfind_sure:{
-
+                jsession = sharedPreferences.getString(SESSION,"null");
+                uploadPresenter.postUpload(jsession,bean,fileList);
             }
             default:{
                 break;
@@ -137,13 +159,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             }
         }).build();
 
-        //选择地点
-        where.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
     }
 
     //选择图片
@@ -180,7 +195,13 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UploadFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传
-            //上传时记得压缩
+            bean = new TheLostBean(1,1,"1","da",1,"2018283281","201828","nick.jpg",1);
+            fileList=new ArrayList<>();
+            for(int i =0 ; i<resultList.size();i++){
+                fileList.add(new File(resultList.get(i).getPhotoPath()));
+                Log.e("ImgTest",resultList.get(i).getPhotoPath());
+            }
+
         }
 
         @Override
@@ -193,9 +214,10 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     @Override
     public void showStatus(Boolean status) {
         if(status){
-
+            startActivity(new Intent(UploadFormActivity.this,UploadSuccessActivity.class));
+            FancyToast.makeText(UploadFormActivity.this,"发布成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
         }else {
-            FancyToast.makeText(UploadFormActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+            FancyToast.makeText(UploadFormActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
     }
 }

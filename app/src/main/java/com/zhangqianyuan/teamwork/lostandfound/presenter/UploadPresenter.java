@@ -20,7 +20,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public class UploadPresenter extends BasePresenter<IUploadFormActivity> implements  IUploadPresenter {
+public class UploadPresenter extends BasePresenter<IUploadFormActivity> implements IUploadPresenter {
     private UploadModel mUploadModel;
 
     public UploadPresenter(){

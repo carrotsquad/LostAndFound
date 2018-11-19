@@ -126,8 +126,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         nickname.setText(strusernickname);
         GetImageFromWeb.glideSetImageView(struserphoto,userimg,this);
         fabiaodate.setText("发表于"+strfabiaodate);
-        diushidate.setText("丢失时间:"+strdiushidate);
-        place.setText("丢失地点:"+strplace);
+        diushidate.setText(strdiushidate);
+        place.setText(strplace);
     }
 
     @OnClick({R.id.thing_detail_back})

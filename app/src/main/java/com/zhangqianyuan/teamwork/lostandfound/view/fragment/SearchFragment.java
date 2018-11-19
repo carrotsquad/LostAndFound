@@ -59,11 +59,11 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
     private String[] headers = {"启事类型", "丢失地点", "物品类型"};
     private String[] diushitypes = {"不限", "失物", "招领"};
-    private String[] places = {"不限", "一教", "二教", "三教", "四教", "五教", "六教", "七教", "八教", "二维码大楼", "信科", "逸夫楼", "老图", "数图", "太极运动场", "风华运动场", "风雨操场"};
-    private String[] thingstypes = {"不限", "衣物", "首饰", "运动器材", "书本", "手机", "电脑", "有赏金", "其他"};
+    private List<String> places = new ArrayList<>();
+    private List<String> thingstypes = new ArrayList<>();
     private Integer diushiTypePosition = 0;
-    private Integer placePosition = 0;
-    private Integer thingsTypePosition = 0;
+    private Integer placePosition = -1;
+    private Integer thingsTypePosition = -1;
 
     private Integer thingsPosition = 0;
 
@@ -119,6 +119,11 @@ public class SearchFragment extends Fragment implements ISearchFragment {
      * Description: 初始化控件
      */
     private void initView(){
+        places.add("不限");
+        places.addAll(allPlaceBeanList);
+        thingstypes.add("不限");
+        thingstypes.addAll(allTypeBeanList);
+        
         ButterKnife.bind(view);
         searchInput = view.findViewById(R.id.search_input);
         sure = view.findViewById(R.id.search_sure);
@@ -132,14 +137,14 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
         //初始化丢失地点过滤
         placesView = new ListView(context);
-        placesAdapter = new ListDropDownAdapter(context, allPlaceBeanList);
+        placesAdapter = new ListDropDownAdapter(context, places);
         placesView.setDividerHeight(0);
         placesView.setAdapter(placesAdapter);
 
         //初始化物品类型过滤
         thingsView = getLayoutInflater().inflate(R.layout.custom_layout,null);
         thingsConstellationView = thingsView.findViewById( R.id.constellation);
-        thingsAdapter = new ConstellationAdapter(context, allTypeBeanList);
+        thingsAdapter = new ConstellationAdapter(context, thingstypes);
         thingsConstellationView.setAdapter(thingsAdapter);
         ok = thingsView.findViewById(R.id.ok);
 
@@ -181,7 +186,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 placesAdapter.setCheckItem(position);
-                dropDownMenu.setTabText(position == 0 ? headers[1] : allPlaceBeanList.get(position));
+                dropDownMenu.setTabText(position == 0 ? headers[1] : places.get(position));
                 placePosition = position;
                 dropDownMenu.closeMenu();
             }
@@ -192,7 +197,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             public void onClick(View v) {
                 //其内部已经设置了记录当前tab位置的参数，该参数会随tab被点击而改变，所以这里直接设置tab值即可
                 //此处若想获得constellations第一个值“不限”，可修改constellationPosition初始值为-1，且这里代码改为constellationPosition == -1)
-                dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : allTypeBeanList.get(placePosition));
+                dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : thingstypes.get(placePosition));
 //                thingstype = thingstypes[thingsPosition];
                 dropDownMenu.closeMenu();
 //                changeContentView();   //在这里可以请求获得经筛选后要显示的内容
@@ -213,21 +218,20 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             public void onClick(View v) {
                 String keyword = searchInput.getText().toString();
                 String session = sharedPreferences.getString(SESSION,"null");
-                iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsTypePosition, session);
+                iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition-1, thingsTypePosition-1, session);
 
             }
         });
     }
 
     @Override
-    public void showSearchResult(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
+    public void showSearchResult(Boolean status, List<DynamicItemBean> arrayList) {
         if(status){
-            this.searchItemBeanArrayList.clear();
-            this.searchItemBeanArrayList.addAll(searchItemBeanArrayList);
-            searchItemAdapter.notifyItemChanged(0);
+            searchItemBeanArrayList.clear();
+            searchItemBeanArrayList.addAll(arrayList);
+            searchItemAdapter.notifyDataSetChanged();
 //            searchItemAdapter.notifyItemChanged(this.searchItemBeanArrayList.size()-1);
 //            recyclerView.scrollToPosition(msgList.size() - 1);
-//            recyclerView.
         }else {
             FancyToast.makeText(context,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }

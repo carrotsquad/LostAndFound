@@ -47,6 +47,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     public static final String EMAIL = "EMAIL";
     public static final String NICKNAME = "NICKNAME";
     public static final String SESSION = "SESSION";
+    public static final String USERPHOTO = "USERPHOTO";
     public static final String ALLTYPES ="ALLTYPES";
     public static final String ALLPLACES = "ALLPLACES";
 
@@ -136,6 +137,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             editor.putString(PWD,signInBean.getUser().getPassword());
             editor.putString(NICKNAME,signInBean.getUser().getNickname());
             editor.putString(PNB,signInBean.getUser().getPhonenumber());
+            editor.putString(USERPHOTO,signInBean.getUser().getPhoto());
             editor.putString(SESSION,signInBean.getJSESSIONID());
             //去获取所有的丢失物品类型和地点
             allTypesAndPlacesPresenter.getAllTypesAndPlaces(signInBean.getJSESSIONID());
