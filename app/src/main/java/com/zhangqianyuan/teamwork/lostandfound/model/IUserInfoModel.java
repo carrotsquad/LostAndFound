@@ -18,10 +18,6 @@ import retrofit2.Response;
  * @updateDes ${TODO}
  */
 public interface IUserInfoModel {
-    /**
-     * 获取我的基本信息
-     */
-    void getUserInfoData(Callback<UserInfoBean> callback);
 
     /**
      * 修改头像

@@ -105,11 +105,6 @@ public interface Api {
     @FormUrlEncoded
     Call<DynamicItemBean> getDynamicFindData();
 
-    //获取我的界面 信息
-    @POST("")
-    @FormUrlEncoded
-    Call<UserInfoBean>    getUserInfoData();
-
     //获取我的发布 信息
     @POST()
     @FormUrlEncoded
@@ -128,16 +123,16 @@ public interface Api {
     Call<StatusBean>  exitAccount(String jsessionId);
 
     //修改用户昵称
-    @POST("passlove/user/update/nickname")
+    @POST("/passlove/user/update/nickname")
     Call<StatusBean> uploadNickName(@Body  ChangeUserNickNameBean bean);
 
     // 修改用户手机号码
-    @POST("passlove/user/update/phonenumber")
+    @POST("/passlove/user/update/phonenumber")
     Call<StatusBean> uploadPhoneNumber(@Body ChangePhoneNumberBean bean);
 
     //修改头像
     @Multipart
-    @POST("passlove/user/update/photo")
-    Call<StatusBean> uploadHeadImg(@Part("jsessionId")RequestBody jsessionid,
-                                   @Part MultipartBody.Part img);
+    @POST("/passlove/user/update/photo")
+    Call<StatusBean> uploadHeadImg(@Part("JSESSIONID") RequestBody JSESSIONID,
+                                   @Part MultipartBody.Part photo);
 }

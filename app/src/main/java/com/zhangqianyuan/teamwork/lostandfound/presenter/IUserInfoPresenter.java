@@ -12,6 +12,6 @@ import retrofit2.Callback;
  * @updateDes ${TODO}
  */
 public interface IUserInfoPresenter {
-    void getUserInfoData();
+//    void getUserInfoData();
     void uploadHeadImg(String jsessionId, File imgFile);
 }

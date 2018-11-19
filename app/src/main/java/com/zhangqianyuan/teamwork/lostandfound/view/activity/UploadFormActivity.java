@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -90,7 +91,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     @OnClick({R.id.upload_lostorfind_back,R.id.upload_lostorfind_time
                 ,R.id.upload_lostorfind_description_img,R.id.upload_lostorfind_description_upload
                 ,R.id.upload_lostorfind_sure})
-    void Onclicked(View view){
+    void onClicked(View view){
         switch (view.getId()){
             case R.id.upload_lostorfind_back:{
                 finish();
@@ -116,6 +117,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         }
     }
 
+
+
     private void initView(){
 
         List<String> isNeedBountyArray = new ArrayList<>();
@@ -133,6 +136,14 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 Toast.makeText(UploadFormActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
             }
         }).build();
+
+        //选择地点
+        where.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     //选择图片
@@ -157,7 +168,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
 
-        GalleryFinal.openGallerySingle(REQUEST_CODE_GALLERY, mOnHandlerResultCallback);
+        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,20 ,mOnHandlerResultCallback);
     }
 
     private GalleryFinal.OnHanlderResultCallback mOnHandlerResultCallback = new GalleryFinal.OnHanlderResultCallback() {

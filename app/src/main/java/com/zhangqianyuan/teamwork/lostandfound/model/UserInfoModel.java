@@ -26,18 +26,13 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
     }
 
     @Override
-    public void getUserInfoData(Callback<UserInfoBean> callback) {
-        api.getUserInfoData().enqueue(callback);
-    }
-
-    @Override
     public void changeHeadImg(String jsessionId, File imgFile, Callback<StatusBean> callback) {
        api.uploadHeadImg(createRequestbody(jsessionId),createMultipartBody(imgFile)).enqueue(callback);
     }
 
     //创建jsessionId 的 requestbody
     public RequestBody createRequestbody(String jsessionId){
-        RequestBody body = RequestBody.create(MediaType.parse("text/plain"),"jsessionId");
+        RequestBody body = RequestBody.create(MediaType.parse("text/plain"),jsessionId);
         return body;
     }
 
@@ -46,9 +41,10 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
       建议使用multipartbody
      */
     public MultipartBody.Part createMultipartBody(File file){
-        RequestBody body = RequestBody.create(MediaType.parse(" image/png"),file);
+
+        RequestBody body = RequestBody.create(MediaType.parse("image/" + file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length())),file);
         //image为name参数的值，file.getname为filename参数的名字，body为请求体
-        MultipartBody.Part part = MultipartBody.Part.createFormData("image",file.getName(),body);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("photo",file.getName(),body);
         return part;
     }
 }

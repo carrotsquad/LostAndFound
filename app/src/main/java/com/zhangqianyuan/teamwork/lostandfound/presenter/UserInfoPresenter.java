@@ -31,26 +31,26 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoFragment> implemen
         this.mUserInfoModel = model;
     }
 
-    @Override
-    public void getUserInfoData() {
-        if (isAttachActivity()){
-          mUserInfoModel.getUserInfoData(new Callback<UserInfoBean>() {
-              @Override
-              public void onResponse( Call<UserInfoBean> call, Response<UserInfoBean> response) throws NullPointerException{
-                  if (!response.body().toString().equals("")){
-                      Log.d(T,"response is not null");
-                      assert response.body() != null;
-                      getV().showData(response.body().getHeadImg(),response.body().getNeckname(),response.body().getPhone(),response.body().getEmai());
-                  }
-              }
-
-              @Override
-              public void onFailure(Call<UserInfoBean> call, Throwable t) {
-                   Log.d(T,"error"+t.toString());
-              }
-          });
-        }
-    }
+//    @Override
+//    public void getUserInfoData() {
+//        if (isAttachActivity()){
+//          mUserInfoModel.getUserInfoData(new Callback<UserInfoBean>() {
+//              @Override
+//              public void onResponse( Call<UserInfoBean> call, Response<UserInfoBean> response) throws NullPointerException{
+//                  if (!response.body().toString().equals("")){
+//                      Log.d(T,"response is not null");
+//                      assert response.body() != null;
+//                      getV().showData(response.body().getHeadImg(),response.body().getNeckname(),response.body().getPhone(),response.body().getEmai());
+//                  }
+//              }
+//
+//              @Override
+//              public void onFailure(Call<UserInfoBean> call, Throwable t) {
+//                   Log.d(T,"error"+t.toString());
+//              }
+//          });
+//        }
+//    }
 
     @Override
     public void uploadHeadImg(String jsessionId, File imgFile) {
@@ -58,7 +58,11 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoFragment> implemen
             mUserInfoModel.changeHeadImg(jsessionId, imgFile, new Callback<StatusBean>() {
                 @Override
                 public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
-                    getV().onSuccess(response.body().getStatus());
+                    if(response.body()==null){
+                        getV().onSuccess(400);
+                    }else {
+                        getV().onSuccess(response.body().getStatus());
+                    }
                 }
                 @Override
                 public void onFailure(Call<StatusBean> call, Throwable t) {

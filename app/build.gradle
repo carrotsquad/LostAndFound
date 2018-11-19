@@ -74,7 +74,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.youth.banner:banner:1.4.10'
-    //    implementation 'com.zhihu.android:matisse:0.5.0'
+
     implementation 'cn.finalteam:galleryfinal:1.4.3'
     implementation 'com.ufo:DWImageSelector:0.9.5'
     //RecyclerView

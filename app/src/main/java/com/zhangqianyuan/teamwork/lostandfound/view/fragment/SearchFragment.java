@@ -98,18 +98,6 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         view = inflater.inflate(R.layout.fragment_search, container,false);
         context = getContext();
         sharedPreferences = context.getSharedPreferences("users", Context.MODE_PRIVATE);
-//        DynamicItemBean searchItemBean1 =new DynamicItemBean();
-//        TheLostBean theLostBean = new TheLostBean();
-//        theLostBean.setTitle("我掉了我的校卡");
-//        searchItemBean1.setThelost(theLostBean);
-//
-//        DynamicItemBean searchItemBean2 =new DynamicItemBean();
-//        TheLostBean theLostBean2 = new TheLostBean();
-//        theLostBean.setTitle("我掉了我的U盘");
-//        searchItemBean1.setThelost(theLostBean2);
-//        searchItemBeanArrayList.add(searchItemBean1);
-//        searchItemBeanArrayList.add(searchItemBean2);
-
         iSearchPresenter = new SearchPresenter(SearchFragment.this);
         initView();
         setOnClick();
@@ -225,21 +213,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             public void onClick(View v) {
                 String keyword = searchInput.getText().toString();
                 String session = sharedPreferences.getString(SESSION,"null");
-                switch (diushiTypePosition){
-                    case 0:{
-                        iSearchPresenter.getSearchResult(keyword, Integer.valueOf(null), placePosition, thingsTypePosition, session);
-                        break;
-                    }
-                    case 1:
-                    case 2:
-                    {
-                        iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsTypePosition, session);
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
-                }
+                iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsTypePosition, session);
 
             }
         });

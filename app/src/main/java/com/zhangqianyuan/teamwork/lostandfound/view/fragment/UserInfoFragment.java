@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -47,13 +48,16 @@ import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+
 /**
  * Description
  * 用户资料界面
  * @author zhoudada
  * @version $Rev$
  * @des ${TODO}
- * @updateAuthor $Author$
+ * @updateAuthor $zhangqianyuan$
  * @updateDes ${TODO}
  */
 
@@ -79,26 +83,30 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     private String  phoneNumber;
     private String  jsession;
     private String  passwords;
-
-
+    private SharedPreferences sharedPreferences;
+//    private String
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_userinfo,container,false);
         ButterKnife.bind(this,view);
+        mContext = getContext();
+        sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         getSharePrefrence();
+        initMVP();
         initView();
         return view;
     }
 
 
     public void initView(){
-        mContext = getContext();
         headview=navigationView.inflateHeaderView(R.layout.userinfo_fragment_headlayout);
         navigationView.setNavigationItemSelectedListener(this);
         img = headview.findViewById(R.id.userinfo_head_img);
         nickname = headview.findViewById(R.id.userinfo_head_nickname);
+        nickname.setText(sharedPreferences.getString(NICKNAME, "null"));
+
         img.setOnClickListener(this);
         nickname.setOnClickListener(this);
     }
@@ -106,7 +114,8 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
 
     public void initMVP(){
         mPresenter = new UserInfoPresenter(new UserInfoModel());
-        mPresenter.getUserInfoData();
+        mPresenter.attachActivity(this);
+//        mPresenter.getUserInfoData();
     }
 
 
@@ -147,10 +156,12 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
             //进行图片上传与置换
             //置换
             photoPath = resultList.get(0).getPhotoPath();
+            Log.e("ImgTest",photoPath);
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(mContext,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
             //上传
-            //上传时记得压缩
+            jsession = sharedPreferences.getString(SESSION,"null");
+            mPresenter.uploadHeadImg(jsession,new File(photoPath));
         }
 
         @Override
@@ -201,12 +212,6 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         switch (v.getId()){
             case R.id.userinfo_head_img:{
                 initGallery();
-                mPresenter.uploadHeadImg(jsession,new File(photoPath));
-                if (success){
-                    Toast.makeText(mContext,"头像上传成功",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
-                }
                 break;
             }
             default:{
@@ -215,27 +220,32 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         }
     }
 
-    /**
-     * 获得基础数据的同时为设置界面添加数据
-     * @param headImg
-     * @param neckname
-     * @param phone
-     * @param emai
-     */
-    @Override
-    public void showData(int headImg, String neckname, String phone, String emai) {
-        img.setImageResource(headImg);
-        nickname.setText(neckname);
-        mIntent = new Intent(getContext(),UserInfoSettingActivity.class);
-        mIntent.putExtra("headImg",headImg);
-        mIntent.putExtra("neckname",neckname);
-        mIntent.putExtra("phone",phone);
-        mIntent.putExtra("emai",emai);
-    }
+//    /**
+//     * 获得基础数据的同时为设置界面添加数据
+//     * @param headImg
+//     * @param neckname
+//     * @param phone
+//     * @param emai
+//     */
+//    @Override
+//    public void showData(int headImg, String neckname, String phone, String emai) {
+//        img.setImageResource(headImg);
+//        nickname.setText(neckname);
+//        mIntent = new Intent(getContext(),UserInfoSettingActivity.class);
+//        mIntent.putExtra("headImg",headImg);
+//        mIntent.putExtra("neckname",neckname);
+//        mIntent.putExtra("phone",phone);
+//        mIntent.putExtra("emai",emai);
+//    }
 
     @Override
     public void onSuccess(int status) {
-        success = status==200;
+        success = (status==200);
+        if (success){
+            Toast.makeText(mContext,"头像上传成功",Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
