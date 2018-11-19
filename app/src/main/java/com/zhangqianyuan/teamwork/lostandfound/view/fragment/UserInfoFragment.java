@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.finalteam.galleryfinal.BuildConfig;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
@@ -61,30 +63,40 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @updateDes ${TODO}
  */
 
-// TODO: 2018/11/15  跟张同学讨论 怎么选择的图片 以及图片文件
-public class UserInfoFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,IUserInfoFragment {
+// TODO: 2018/11/15  图片尚未加载
+public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     private static final int REQUEST_CODE_GALLERY = 1;
 
-    @BindView(R.id.nav_userinfo)
-    NavigationView navigationView;
+    @BindView(R.id.userinfo_head_img)
+    CircleImageView headImg;
+
+    @BindView(R.id.userinfo_head_nick)
+    TextView  headTxt;
+
+    @BindView(R.id.userinfo_myupload_layout)
+    RelativeLayout  myupload;
+
+    @BindView(R.id.userinfo_myhistory_layout)
+    RelativeLayout  myhistory;
+
+    @BindView(R.id.userinfo_aboutus_layout)
+    RelativeLayout aboutus;
+
+    @BindView(R.id.userinfo_setting_layout)
+    RelativeLayout setting;
 
 
-    private CircleImageView img;
-    private TextView nickname;
-    private View headview;
-    private Context mContext;
-    private UserInfoPresenter  mPresenter;
-    private Intent mIntent;
+    private  Context mContext;
     private boolean success;            //用于判断是否上传头像成功
     private String  photoPath;          //头像文件路径
     private String  nick;               //昵称
-    private String  email;
-    private String  phoneNumber;
     private String  jsession;
-    private String  passwords;
-    private SharedPreferences sharedPreferences;
-//    private String
+
+
+    private UserInfoPresenter mPresenter;
+
+
 
     @Nullable
     @Override
@@ -92,23 +104,10 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
         View view = inflater.inflate(R.layout.fragment_userinfo,container,false);
         ButterKnife.bind(this,view);
         mContext = getContext();
-        sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         getSharePrefrence();
         initMVP();
         initView();
         return view;
-    }
-
-
-    public void initView(){
-        headview=navigationView.inflateHeaderView(R.layout.userinfo_fragment_headlayout);
-        navigationView.setNavigationItemSelectedListener(this);
-        img = headview.findViewById(R.id.userinfo_head_img);
-        nickname = headview.findViewById(R.id.userinfo_head_nickname);
-        nickname.setText(sharedPreferences.getString(NICKNAME, "null"));
-
-        img.setOnClickListener(this);
-        nickname.setOnClickListener(this);
     }
 
 
@@ -157,10 +156,10 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
             //置换
             photoPath = resultList.get(0).getPhotoPath();
             Log.e("ImgTest",photoPath);
-            img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+            headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(mContext,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
             //上传
-            jsession = sharedPreferences.getString(SESSION,"null");
+            jsession = getActivity().getSharedPreferences("users",Context.MODE_PRIVATE).getString(SESSION,"null");
             mPresenter.uploadHeadImg(jsession,new File(photoPath));
         }
 
@@ -170,73 +169,6 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
             FancyToast.makeText(mContext,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
         }
     };
-
-
-    /**
-     * 导航条点击
-     * @param item
-     * @return
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.my_upload:{
-                startActivity(new Intent(getContext(),UserInfoMyUpload.class));
-                return true;
-            }
-            case R.id.my_history:{
-                startActivity(new Intent(getContext(),UserInfoMyHistory.class));
-                return true;
-            }
-            case R.id.setting:{
-                startActivity(mIntent);
-                return true;
-            }
-            case R.id.about_us:{
-                startActivity(new Intent(getContext(),UserInfoAboutUsActivity.class));
-                return true;
-            }
-            default:{
-                return false;
-            }
-        }
-    }
-
-
-    /**
-     * 点击头像和名字
-     * @param v
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.userinfo_head_img:{
-                initGallery();
-                break;
-            }
-            default:{
-                break;
-            }
-        }
-    }
-
-//    /**
-//     * 获得基础数据的同时为设置界面添加数据
-//     * @param headImg
-//     * @param neckname
-//     * @param phone
-//     * @param emai
-//     */
-//    @Override
-//    public void showData(int headImg, String neckname, String phone, String emai) {
-//        img.setImageResource(headImg);
-//        nickname.setText(neckname);
-//        mIntent = new Intent(getContext(),UserInfoSettingActivity.class);
-//        mIntent.putExtra("headImg",headImg);
-//        mIntent.putExtra("neckname",neckname);
-//        mIntent.putExtra("phone",phone);
-//        mIntent.putExtra("emai",emai);
-//    }
 
     @Override
     public void onSuccess(int status) {
@@ -252,14 +184,36 @@ public class UserInfoFragment extends Fragment implements NavigationView.OnNavig
     public void getSharePrefrence(){
         SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
         jsession=preferences.getString("SESSION","null");
-        passwords = preferences.getString("password","null");
-        phoneNumber = preferences.getString("PNB","null");
         nick=preferences.getString("NICKNAME","null");
-        email=preferences.getString("EMAIL","null");
+    }
+
+    public void initView(){
+        headTxt.setText(nick);
     }
 
 
-
+    @OnClick({R.id.userinfo_head_img,R.id.userinfo_head_nick,R.id.userinfo_myupload_layout,
+            R.id.userinfo_myhistory_layout,R.id.userinfo_aboutus_layout,R.id.userinfo_setting_layout})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.userinfo_head_img:
+            case R.id.userinfo_head_nick:
+                initGallery();
+                break;
+            case R.id.userinfo_myupload_layout:
+                startActivity(new Intent(mContext,UserInfoMyUpload.class));
+                break;
+            case R.id.userinfo_myhistory_layout:
+                startActivity(new Intent(mContext,UserInfoMyHistory.class));
+                break;
+            case  R.id.userinfo_aboutus_layout:
+                startActivity(new Intent(mContext,UserInfoAboutUsActivity.class));
+                break;
+            case R.id.userinfo_setting_layout:
+                startActivity(new Intent(mContext,UserInfoSettingActivity.class));
+                break;
+        }
+    }
 
 
 }

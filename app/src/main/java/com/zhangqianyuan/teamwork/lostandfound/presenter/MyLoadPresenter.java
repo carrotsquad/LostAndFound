@@ -2,6 +2,7 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
 import android.util.Log;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
@@ -30,20 +31,17 @@ public class MyLoadPresenter extends BasePresenter<IMyLoadActivity> implements I
 
 
     @Override
-    public void getMyloadData() {
+    public void getMyloadData(String jsessionid,int start,int end) {
         if (isAttachActivity()){
-            mMyLoadModel.getMyLoadData(new Callback<List<MyLoadItemBean>>() {
+            mMyLoadModel.getMyLoadData(jsessionid, start, end, new Callback<MyHistoryItem>() {
                 @Override
-                public void onResponse(Call<List<MyLoadItemBean>> call, Response<List<MyLoadItemBean>> response) {
-                    if (!response.body().toString().equals("")){
-                        getV().showData(response.body());
-                    }
-                    Log.d(T,"response is null");
+                public void onResponse(Call<MyHistoryItem> call, Response<MyHistoryItem> response) {
+                    getV().showData(response.body().getData());
                 }
 
                 @Override
-                public void onFailure(Call<List<MyLoadItemBean>> call, Throwable t) {
-                   Log.d(T,"connection failure"+t.toString());
+                public void onFailure(Call<MyHistoryItem> call, Throwable t) {
+                    Log.d(T,"connection failure"+t.toString());
                 }
             });
         }

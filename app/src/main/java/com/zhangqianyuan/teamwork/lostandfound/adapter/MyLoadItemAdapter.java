@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
@@ -28,8 +29,9 @@ import butterknife.ButterKnife;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
+// TODO: 2018/11/20   加入和myhistoryadatater 一样的逻辑 
 public class MyLoadItemAdapter extends RecyclerView.Adapter<MyLoadItemAdapter.ViewHolder> implements IMyLoadActivity {
-    private List<MyLoadItemBean> lists = new ArrayList<>();
+    private List<MyHistoryItem.DataBean> lists = new ArrayList<>();
 
     @Override
     public void showData(List<MyLoadItemBean> bean) {

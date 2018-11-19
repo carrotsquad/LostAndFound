@@ -8,5 +8,5 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
  * @updateDes ${TODO}
  */
 public interface IMyHistoryPresenter {
-    void getMyHistoryData();
+    void getMyHistoryData(String jsessionid,int start,int end);
 }

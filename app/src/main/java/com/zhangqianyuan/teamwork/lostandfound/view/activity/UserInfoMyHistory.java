@@ -28,14 +28,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 // TODO: 2018/11/13 数据加入逻辑
 public class UserInfoMyHistory extends AppCompatActivity {
-    @BindView(R.id.userinfo_myhistory_list)
+    @BindView(R.id.myhistory_myload_list)
     RecyclerView mRecyclerView;
 
-    @BindView(R.id.userinfo_myhistory_toolbar)
-    Toolbar mToolbar;
-
-    @BindView(R.id.userinfo_myhistory_head)
-    CircleImageView headImg;                  //headImg 通过intent传过来
 
 
     @Override
@@ -47,11 +42,6 @@ public class UserInfoMyHistory extends AppCompatActivity {
 
     public void initView(){
         ButterKnife.bind(this);
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new MyHistoryAdapter());
     }

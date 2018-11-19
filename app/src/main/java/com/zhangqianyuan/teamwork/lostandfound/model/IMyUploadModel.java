@@ -1,4 +1,5 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 
 import java.util.List;
@@ -23,5 +24,5 @@ public interface IMyUploadModel {
      * 描述
      * 物品具体图片
      */
-    void getMyLoadData(Callback<List<MyLoadItemBean>> callback);
+    void getMyLoadData(String jsessionid,int start,int end,Callback<MyHistoryItem> callback);
 }
