@@ -16,7 +16,7 @@ import retrofit2.Callback;
 public interface IMyUploadModel {
     /**
      * 需要获得的数据
-     * 丢/失  图象
+     * littleicon_type_lost/失  图象
      * 物品类型图片
      * 地点
      * 时间

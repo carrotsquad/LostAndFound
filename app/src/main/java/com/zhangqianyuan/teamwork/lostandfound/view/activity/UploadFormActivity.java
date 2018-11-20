@@ -20,18 +20,24 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.bean.FormFile;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.network.Form;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.IUploadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UploadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUploadFormActivity;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +51,8 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 import static cn.finalteam.toolsfinal.DateUtils.getTime;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TYPEID;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 /**
@@ -96,7 +104,14 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     private TheLostBean bean;
 
-    private List<File> fileList;
+    private List<FormFile> files = new ArrayList<>();
+
+    private Integer placeid = 0;
+
+    private String strphoto = "";
+
+    private Integer strLostDate=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,12 +122,30 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         initView();
         uploadPresenter = new UploadPresenter();
         uploadPresenter.attachActivity(this);
+        btnSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jsession = sharedPreferences.getString(SESSION,"null");
+//                uploadPresenter.postUpload(jsession,bean,fileList);
+                Map<String, String> params = new HashMap<>();
+                Gson gson = new Gson();
+                params.put("JSESSIONID", sharedPreferences.getString(SESSION,"null"));
+                params.put("thelost",gson.toJson(bean));
+                Log.e("Upload",gson.toJson(bean));
+                final String[] res = new String[1];
+                try {
+                    Form.submit("http://111.230.235.15/passlove/user/publishlost",params,files);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+//
+            }
+        });
     }
 
     @OnClick({R.id.upload_lostorfind_back,R.id.upload_lostorfind_time
-                ,R.id.upload_lostorfind_description_img,R.id.upload_lostorfind_description_upload
-                ,R.id.upload_lostorfind_sure})
-    void onClicked(View view){
+                ,R.id.upload_lostorfind_description_img,R.id.upload_lostorfind_description_upload})
+    void onClicked(View view) {
         switch (view.getId()){
             case R.id.upload_lostorfind_back:{
                 finish();
@@ -127,11 +160,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             case R.id.upload_lostorfind_description_upload:{
                 initGallery();
                 break;
-            }
-            //点击确认
-            case R.id.upload_lostorfind_sure:{
-                jsession = sharedPreferences.getString(SESSION,"null");
-                uploadPresenter.postUpload(jsession,bean,fileList);
             }
             default:{
                 break;
@@ -155,10 +183,24 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         pvTime = new TimePickerBuilder(UploadFormActivity.this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                Toast.makeText(UploadFormActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
+                strLostDate = 0;
+                strLostDate = date.getYear()+date.getMonth()+date.getDay();
+                Toast.makeText(UploadFormActivity.this, strLostDate.toString(), Toast.LENGTH_SHORT).show();
             }
         }).build();
 
+        //地点选择
+        where.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                placeid=position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     //选择图片
@@ -183,7 +225,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
 
-        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,20 ,mOnHandlerResultCallback);
+        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,9 ,mOnHandlerResultCallback);
     }
 
     private GalleryFinal.OnHanlderResultCallback mOnHandlerResultCallback = new GalleryFinal.OnHanlderResultCallback() {
@@ -195,12 +237,22 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UploadFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传
-            bean = new TheLostBean(1,1,"1","da",1,"2018283281","201828","nick.jpg",1);
-            fileList=new ArrayList<>();
             for(int i =0 ; i<resultList.size();i++){
-                fileList.add(new File(resultList.get(i).getPhotoPath()));
+                if(i>0){
+                    strphoto = strphoto+",";
+                }
+                FormFile formFile = new FormFile("photos", "img/jpg", new File(resultList.get(i).getPhotoPath()));
+                files.add(formFile);
+                strphoto = strphoto + resultList.get(i).getPhotoPath();
                 Log.e("ImgTest",resultList.get(i).getPhotoPath());
             }
+            Intent intent = getIntent();
+            Integer qishileixing =intent.getIntExtra(QISHILEIXING,0);
+            Integer typeid =intent.getIntExtra(TYPEID,0);
+            String strtitle = titleEdit.getText().toString();
+            String strdescri = descEdit.getText().toString();
+
+            bean = new TheLostBean(typeid,qishileixing,strtitle,strdescri,placeid,"2018283281","201828",strphoto,0);
 
         }
 
