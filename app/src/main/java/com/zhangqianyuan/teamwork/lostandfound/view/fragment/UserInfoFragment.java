@@ -20,11 +20,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 
 
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
+import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
@@ -50,6 +52,7 @@ import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
@@ -188,6 +191,11 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     }
 
     public void initView(){
+        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
+        Glide.with(this)
+                .load(AllURI.getUserPhoto(preferences.getString("SESSION",null),preferences.getString("USERPHOTO",null)))
+                .asBitmap()
+                .into(headImg);
         headTxt.setText(nick);
     }
 

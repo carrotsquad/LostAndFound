@@ -13,12 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserSettingModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserSettingPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserSettingActivity;
 
 import java.util.List;
 
@@ -40,7 +42,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  *我的界面 中的 设置 界面
  * @author  zhou
  */
-public class UserInfoSettingActivity extends AppCompatActivity {
+public class UserInfoSettingActivity extends AppCompatActivity implements IUserSettingActivity {
     private static final int REQUEST_CODE_GALLERY = 1;
 
   @BindView(R.id.setting_headlayout)
@@ -71,7 +73,7 @@ public class UserInfoSettingActivity extends AppCompatActivity {
   RelativeLayout passwordlayout;
 
   @BindView(R.id.exit_account)
-    CardView  exitaccount;
+   Button  exitaccount;
 
 
 
@@ -147,6 +149,7 @@ public class UserInfoSettingActivity extends AppCompatActivity {
             case R.id.setting_passwordlayout:
                 break;
             case R.id.exit_account:
+                Log.d("1549","click this");
                 mUserSettingPresenter.exitAccount(jsessionid);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
@@ -156,11 +159,21 @@ public class UserInfoSettingActivity extends AppCompatActivity {
 
     public void initData(){
         mUserSettingPresenter = new UserSettingPresenter(new UserSettingModel());
+        mUserSettingPresenter.attachActivity(this);
         sharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
         email.setText(sharedPreferences.getString("EMAIL",null));
         jsessionid=sharedPreferences.getString("SESSION",null);
         nickname.setText(sharedPreferences.getString("NICKNAME",null));
         phone.setText(sharedPreferences.getString("PNB",null));
 
+    }
+
+    @Override
+    public void onSuccess(int status) {
+        if (status==200){
+            Toast.makeText(UserInfoSettingActivity.this,"退出成功",Toast.LENGTH_SHORT).show();
+        }else if (status==400){
+            Toast.makeText(UserInfoSettingActivity.this,"退出失败",Toast.LENGTH_SHORT).show();
+        }
     }
 }

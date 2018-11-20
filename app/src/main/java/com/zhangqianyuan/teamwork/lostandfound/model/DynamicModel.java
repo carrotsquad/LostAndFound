@@ -20,12 +20,12 @@ public class DynamicModel extends BaseModel implements IDynamicModel {
 
     @Override
     public void getDynamicLostData(int headImg, String thingtype, String time, String where, String description, Callback<DynamicItemBean> callback) {
-        api.getDynamicLostData().enqueue(callback);
+     //   api.getDynamicLostData().enqueue(callback);
     }
 
     @Override
     public void getDynamicFindData(int headImg, String thingtype, String time, String where, String description, Callback<DynamicItemBean> callback) {
-        api.getDynamicFindData().enqueue(callback);
+     //   api.getDynamicFindData().enqueue(callback);
     }
 
 

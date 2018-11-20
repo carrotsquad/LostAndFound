@@ -99,15 +99,6 @@ public interface Api {
     @Multipart
     Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @PartMap Map<String,RequestBody> photos);
 
-    //获取动态 失物 信息
-    @POST("")
-    @FormUrlEncoded
-    Call<DynamicItemBean> getDynamicLostData();
-
-    //获取动态 招领 信息
-    @POST("")
-    @FormUrlEncoded
-    Call<DynamicItemBean> getDynamicFindData();
 
     //获取我的发布 信息
     @POST("passlove/user/mypublish")
@@ -125,8 +116,9 @@ public interface Api {
 
 
     //退出登录
+    @FormUrlEncoded
     @POST("passlove/user/loginOut")
-    Call<StatusBean>  exitAccount(@Field("JSISSIONID") String jsessionId);
+    Call<StatusBean>  exitAccount(@Field("JSESSIONID") String jsessionId);
 
     //修改用户昵称
     @POST("/passlove/user/update/nickname")

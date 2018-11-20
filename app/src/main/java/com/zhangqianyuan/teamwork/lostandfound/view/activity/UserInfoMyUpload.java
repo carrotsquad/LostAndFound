@@ -6,14 +6,20 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyLoadItemAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.MyHistoryPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyHistoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -24,33 +30,37 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author  zhou
  */
 // TODO: 2018/11/13  加入 上传item数据
-public class UserInfoMyUpload extends AppCompatActivity {
+public class UserInfoMyUpload extends AppCompatActivity implements IMyHistoryActivity {
+    private List<MyHistoryItem.DataBean> lists = new ArrayList<>();
+    private MyHistoryPresenter presenter = new MyHistoryPresenter(new MyHistoryModel());
+    private MyLoadItemAdapter  mAdapter ;
+   @BindView(R.id.myhistory_myload_list)
+   RecyclerView list;
 
-    @BindView(R.id.userinfo_myupload_list)
-    RecyclerView  mRecyclerView;
-
-    @BindView(R.id.userinfo_myupload_head)   //头像 不可更改
-    CircleImageView mCircleImageView;
-
-    @BindView(R.id.userinfo_myupload_toolbar)
-    Toolbar  mToolbar;
-
-    MyLoadItemAdapter  mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_my_upload);
+        initMvp();
         initView();
     }
 
     public void initView(){
         ButterKnife.bind(this);
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Log.d("123456","success");
+        list.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void showData(List<MyHistoryItem.DataBean> beans) {
+       lists.clear();
+       lists.addAll(beans);
+       mAdapter=new MyLoadItemAdapter(lists);
+       list.setAdapter(mAdapter);
+    }
+
+    public void initMvp(){
+        presenter.attachActivity(this);
+        presenter.getMyHistoryData(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),0,15);
     }
 }

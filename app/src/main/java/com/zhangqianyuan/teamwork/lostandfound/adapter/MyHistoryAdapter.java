@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
 import android.support.annotation.NonNull;
@@ -36,18 +37,9 @@ import butterknife.ButterKnife;
  * @updateDes ${TODO}
  */
 // TODO: 2018/11/15 完善服务器传递  item对象到list中
-public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.ViewHolder> implements IMyHistoryActivity {
-    private List<MyHistoryItem.DataBean> lists = new ArrayList<>();
+public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.ViewHolder>  {
+    private List<MyHistoryItem.DataBean> lists ;
     private Context mContext;
-    private final  String url ="http://111.230.235.15/passlove/img/losttype?";
-
-
-    @Override
-    public void showData(List<MyHistoryItem.DataBean> beans) {
-        lists.clear();
-        lists.addAll(beans);
-    }
-
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
         @BindView(R.id.myhistory_thingtype)
@@ -71,15 +63,14 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
         @BindView(R.id.isdone_description)
         TextView   isdong;
 
-        public ViewHolder(View view){
+        public ViewHolder(View  view){
             super(view);
             ButterKnife.bind(this,view);
         }
     }
 
-    public MyHistoryAdapter (){
-        MyHistoryPresenter presenter = new MyHistoryPresenter(new MyHistoryModel());
-        presenter.getMyHistoryData();
+    public MyHistoryAdapter (List<MyHistoryItem.DataBean> lists){
+      this.lists=lists;
     }
     @NonNull
     @Override
@@ -116,7 +107,17 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         // TODO: 2018/11/20  将类型小图片 用swith 方法进行选择加载
         holder.where.setText(lostPlace);
-        // TODO: 2018/11/20   将时间 分隔开 只展示月 日 小时
+        String publishTime= lists.get(position).getPublishtime();
+        if (!publishTime.equals("")){
+         String   mouth = publishTime.substring(4,6);
+         String    day = publishTime.substring(6,8);
+         String    hours=publishTime.substring(8,10);
+            String time1 = mouth+" 月"+"  "+day+" 日";
+            String time2=  hours+":00";
+            holder.time.setText(time1);
+            holder.time2.setText(time2);
+        }
+
     }
 
     @Override
