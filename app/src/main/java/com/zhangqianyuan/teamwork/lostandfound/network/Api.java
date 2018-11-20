@@ -7,6 +7,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.ChangeUserNickNameBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.LoginBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
@@ -108,21 +109,22 @@ public interface Api {
     Observable<SearchBean> getDynamicFindData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //获取我的发布 信息
-    @POST()
+    @POST("passlove/user/mypublish")
     @FormUrlEncoded
-    Call<List<MyLoadItemBean>>  getMyLoadData();
+    Call<MyHistoryItem>  getMyLoadData(@Field("JSESSIONID")String jsessionid,@Field("requestData") String bean);
 
     //获取我的历史 信息
-    @POST()
+    @POST("passlove/user/myhistory")
     @FormUrlEncoded
-    Call<List<MyHistoryItemBean>> getMyHistoryData();
+    Call<MyHistoryItem> getMyHistoryData(@Field("JSESSIONID")String jsessionid,@Field("requestData") String bean);
 
 
 
 
     //退出登录
+    @FormUrlEncoded
     @POST("passlove/user/loginOut")
-    Call<StatusBean>  exitAccount(String jsessionId);
+    Call<StatusBean>  exitAccount(@Field("JSESSIONID") String jsessiond);
 
     //修改用户昵称
     @FormUrlEncoded
