@@ -2,6 +2,7 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
 import android.util.Log;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyHistoryActivity;
@@ -29,19 +30,16 @@ public class MyHistoryPresenter extends BasePresenter<IMyHistoryActivity> implem
 
 
     @Override
-    public void getMyHistoryData() {
+    public void getMyHistoryData(String jsessionid,int start,int end) {
         if (isAttachActivity()){
-          mMyHistoryModel.getMyHistoryData(new Callback<List<MyHistoryItemBean>>() {
+          mMyHistoryModel.getMyHistoryData(jsessionid,start,end,new Callback<MyHistoryItem>() {
               @Override
-              public void onResponse(Call<List<MyHistoryItemBean>> call, Response<List<MyHistoryItemBean>> response) {
-                  if (!response.body().toString().equals("")){
-                      getV().showData(response.body());
-                  }
-                  Log.d(T,"response is null");
+              public void onResponse(Call<MyHistoryItem> call, Response<MyHistoryItem> response) {
+                  getV().showData(response.body().getData());
               }
 
               @Override
-              public void onFailure(Call<List<MyHistoryItemBean>> call, Throwable t) {
+              public void onFailure(Call<MyHistoryItem> call, Throwable t) {
                   Log.d(T,"connection failure"+t.toString());
               }
           });

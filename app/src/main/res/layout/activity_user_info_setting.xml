@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,12 +8,215 @@
     android:orientation="vertical"
     tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoSettingActivity">
 
-  <android.support.v7.widget.Toolbar
-      android:id="@+id/setting_toolbar"
-      android:background="?attr/colorPrimary"
-      android:layout_width="match_parent"
-      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-      android:layout_height="?attr/actionBarSize"/>
-    <include layout="@layout/setting_content"/>
 
-</LinearLayout>
+  <android.support.design.widget.AppBarLayout
+      android:id="@+id/setting_bar"
+      android:background="@drawable/barbackgroud"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize">
+
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:text="设置"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+  </android.support.design.widget.AppBarLayout>
+
+
+  <RelativeLayout
+      android:layout_below="@id/setting_bar"
+      android:layout_marginTop="10dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/setting_headlayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+      <TextView
+          android:layout_width="80dp"
+          android:layout_height="match_parent"
+          android:layout_alignParentTop="true"
+          android:layout_marginStart="20dp"
+          android:gravity="center"
+          android:text="头像"
+          android:textColor="@color/black"
+          android:textSize="15sp" />
+
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:src="@drawable/gril6"
+          android:id="@+id/setting_headlayout_img"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_alignParentStart="true"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="129dp" />
+
+      <View
+          android:layout_alignParentBottom="true"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/setting_headlayout"
+        android:id="@+id/setting_nicklayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+      <TextView
+          android:id="@+id/setting_nicklayout_nick"
+          android:layout_marginStart="20dp"
+          android:gravity="center"
+          android:textColor="@color/black"
+          android:textSize="15sp"
+          android:text="昵称"
+          android:layout_width="80dp"
+          android:layout_height="match_parent" />
+
+      <TextView
+          android:id="@+id/setting_nicklayout_txt"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignParentTop="true"
+          android:layout_marginStart="29dp"
+          android:layout_marginTop="0dp"
+          android:layout_toEndOf="@id/setting_nicklayout_nick"
+          android:gravity="center_vertical"
+          android:text="我是一个家用户"
+          android:textColor="@color/black"
+          android:textSize="15sp" />
+
+      <View
+          android:layout_alignParentBottom="true"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/setting_nicklayout"
+        android:id="@+id/setting_emaillayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+      <TextView
+          android:id="@+id/setting_emaillayout_nick"
+          android:layout_marginStart="20dp"
+          android:gravity="center"
+          android:textColor="@color/black"
+          android:textSize="15sp"
+          android:text="邮箱"
+          android:layout_width="80dp"
+          android:layout_height="match_parent" />
+
+      <TextView
+          android:id="@+id/setting_emaillayout_txt"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignParentTop="true"
+          android:layout_marginStart="29dp"
+          android:layout_marginTop="0dp"
+          android:layout_toEndOf="@id/setting_emaillayout_nick"
+          android:gravity="center_vertical"
+          android:text="我是一个家用户"
+          android:textColor="@color/black"
+          android:textSize="15sp" />
+
+      <View
+          android:layout_alignParentBottom="true"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+      android:layout_marginTop="2dp"
+      android:layout_below="@id/setting_emaillayout"
+      android:id="@+id/setting_phonelayout"
+      android:layout_width="match_parent"
+      android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/setting_phonelayout_nick"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:text="电话"
+        android:layout_width="80dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/setting_phonelayout_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@id/setting_phonelayout_nick"
+        android:gravity="center_vertical"
+        android:text="我是一个家用户"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+  </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/setting_phonelayout"
+        android:id="@+id/setting_passwordlayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+      <TextView
+          android:id="@+id/setting_passwordlayout_nick"
+          android:layout_width="80dp"
+          android:layout_height="match_parent"
+
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+          android:layout_marginStart="35dp"
+          android:layout_marginTop="0dp"
+          android:gravity="center"
+          android:text="修改密码"
+          android:textColor="@color/black"
+          android:textSize="15sp" />
+
+      <View
+          android:layout_alignParentBottom="true"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"/>
+    </RelativeLayout>
+
+  </RelativeLayout>
+
+  <android.support.v7.widget.CardView
+      android:clickable="true"
+      app:cardCornerRadius="4dp"
+      android:layout_marginBottom="20dp"
+     android:layout_centerHorizontal="true"
+      android:layout_alignParentBottom="true"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      >
+
+    <Button
+        android:id="@+id/exit_account"
+        android:background="@drawable/barbackgroud"
+        android:text="退出登录"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+  </android.support.v7.widget.CardView>
+</RelativeLayout>

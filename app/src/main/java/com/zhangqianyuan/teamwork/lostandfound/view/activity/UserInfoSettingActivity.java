@@ -1,23 +1,30 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserSettingModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserSettingPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserSettingActivity;
 
 import java.util.List;
 
+import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,46 +42,51 @@ import de.hdodenhof.circleimageview.CircleImageView;
  *我的界面 中的 设置 界面
  * @author  zhou
  */
-public class UserInfoSettingActivity extends AppCompatActivity {
+public class UserInfoSettingActivity extends AppCompatActivity implements IUserSettingActivity {
     private static final int REQUEST_CODE_GALLERY = 1;
 
-    @BindView(R.id.setting_toolbar)
-    Toolbar mToolbar;
+  @BindView(R.id.setting_headlayout)
+    RelativeLayout headlayout;
 
-    @BindView(R.id.userinfo_head_img)
-    CircleImageView headImg;               //头像
+  @BindView(R.id.setting_headlayout_img)
+  CircleImageView  headImg;
 
-    @BindView(R.id.setting_neckname_eidit)
-    TextView neckName;                    //昵称  原本有数据 可直接点击修改
+  @BindView(R.id.setting_nicklayout)
+  RelativeLayout  nicklayout;
 
-    @BindView(R.id.setting_phone_eidit)
-    TextView   phone;                      //电话号码  同上
+  @BindView(R.id.setting_nicklayout_txt)
+  TextView  nickname;
 
-    @BindView(R.id.setting_mail_eidit)
-    TextView  mail;                         //邮箱 展示作用 无法修改
+  @BindView(R.id.setting_emaillayout)
+  RelativeLayout  emaillayout;
 
-    @BindView(R.id.setting_password_text)
-    TextView  password;                      //修改密码按钮
+  @BindView(R.id.setting_emaillayout_txt)
+  TextView  email;
 
-    @BindView(R.id.setting_editinfo)
-    TextView  eidtInfo;
+  @BindView(R.id.setting_phonelayout)
+  RelativeLayout  phonelayout;
 
-    @BindView(R.id.exit_account)
-    TextView  exitAccount;
+  @BindView(R.id.setting_phonelayout_txt)
+  TextView  phone;
 
+  @BindView(R.id.setting_passwordlayout)
+  RelativeLayout passwordlayout;
+
+  @BindView(R.id.exit_account)
+   Button  exitaccount;
+
+
+
+    private String  jsessionid;
     private UserSettingPresenter mUserSettingPresenter;
+    private SharedPreferences sharedPreferences  ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_setting);
         ButterKnife.bind(this);
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        mUserSettingPresenter = new UserSettingPresenter(new UserSettingModel());
-        if (actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        initData();
     }
 
     //选择图片
@@ -121,28 +133,47 @@ public class UserInfoSettingActivity extends AppCompatActivity {
         }
     };
 
-    /**
-     * 设置点击事件
-     * @param v
-     */
-    @OnClick({R.id.userinfo_head_img,R.id.setting_password_text,R.id.setting_editinfo,R.id.exit_account})
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.userinfo_head_img:
+
+    @OnClick({R.id.setting_headlayout,R.id.setting_headlayout_img,R.id.setting_nicklayout
+            ,R.id.setting_phonelayout,R.id.setting_passwordlayout,R.id.exit_account})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.setting_headlayout:
+            case R.id.setting_headlayout_img:
                 initGallery();
                 break;
-                case R.id.setting_password_text:
-                    /*
-                    进入修改密码界面
-                     */
-                    break;
-            case R.id.setting_editinfo:
-                    break;
-            case R.id.exit_account:
-              //  mUserSettingPresenter.exitAccount();
-            default:{
+            case R.id.setting_nicklayout:
                 break;
-            }
+            case R.id.setting_phonelayout:
+                break;
+            case R.id.setting_passwordlayout:
+                break;
+            case R.id.exit_account:
+                Log.d("1549","click this");
+                mUserSettingPresenter.exitAccount(jsessionid);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                break;
+        }
+    }
+
+    public void initData(){
+        mUserSettingPresenter = new UserSettingPresenter(new UserSettingModel());
+        mUserSettingPresenter.attachActivity(this);
+        sharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
+        email.setText(sharedPreferences.getString("EMAIL",null));
+        jsessionid=sharedPreferences.getString("SESSION",null);
+        nickname.setText(sharedPreferences.getString("NICKNAME",null));
+        phone.setText(sharedPreferences.getString("PNB",null));
+
+    }
+
+    @Override
+    public void onSuccess(int status) {
+        if (status==200){
+            Toast.makeText(UserInfoSettingActivity.this,"退出成功",Toast.LENGTH_SHORT).show();
+        }else if (status==400){
+            Toast.makeText(UserInfoSettingActivity.this,"退出失败",Toast.LENGTH_SHORT).show();
         }
     }
 }

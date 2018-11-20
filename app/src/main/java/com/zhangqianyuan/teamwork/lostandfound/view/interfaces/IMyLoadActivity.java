@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 
 import java.util.List;
@@ -12,5 +13,5 @@ import java.util.List;
  * @updateDes ${TODO}
  */
 public interface IMyLoadActivity extends BaseView {
-    void showData(List<MyLoadItemBean> bean);
+    void showData(List<MyHistoryItem.DataBean> bean);
 }

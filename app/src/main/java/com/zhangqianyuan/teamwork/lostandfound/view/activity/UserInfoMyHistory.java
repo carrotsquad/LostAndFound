@@ -9,7 +9,15 @@ import android.support.v7.widget.Toolbar;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyHistoryAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.MyLoadItemAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
+import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.MyHistoryPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyHistoryActivity;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,21 +29,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author   zhou
  */
 
-/**
- *
- *
- *
- */
 // TODO: 2018/11/13 数据加入逻辑
-public class UserInfoMyHistory extends AppCompatActivity {
-    @BindView(R.id.userinfo_myhistory_list)
+public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryActivity {
+    private MyHistoryAdapter mAdapter;
+    private List<MyHistoryItem.DataBean> lists =new ArrayList<>();
+
+    @BindView(R.id.myhistory_list)
     RecyclerView mRecyclerView;
-
-    @BindView(R.id.userinfo_myhistory_toolbar)
-    Toolbar mToolbar;
-
-    @BindView(R.id.userinfo_myhistory_head)
-    CircleImageView headImg;                  //headImg 通过intent传过来
 
 
     @Override
@@ -43,19 +43,27 @@ public class UserInfoMyHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_my_history);
         initView();
+        initMvp();
     }
 
     public void initView(){
         ButterKnife.bind(this);
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new MyHistoryAdapter());
+
     }
 
+    @Override
+    public void showData(List<MyHistoryItem.DataBean> beans) {
+        lists.clear();
+        lists.addAll(beans);
+        mAdapter = new MyHistoryAdapter(lists);
+        mRecyclerView.setAdapter(mAdapter);
+    }
 
+    public void initMvp(){
+        MyHistoryPresenter presenter = new MyHistoryPresenter(new MyHistoryModel());
+        presenter.attachActivity(this);
+        presenter.getMyHistoryData(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),0,15);
+    }
 }
 
