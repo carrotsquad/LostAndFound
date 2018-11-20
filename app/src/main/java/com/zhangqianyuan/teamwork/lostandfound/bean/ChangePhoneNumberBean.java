@@ -11,36 +11,17 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  */
 public class ChangePhoneNumberBean {
 
-    private RequestData  requestData;
+        private String phonenumber;
 
-    public static class  RequestData{
-        private String JSESSIONID;
-        private String phonumber;
 
-        public String getJSESSIONID() {
-            return JSESSIONID;
-        }
-
-        public void setJSESSIONID(String JSESSIONID) {
-            this.JSESSIONID = JSESSIONID;
-        }
-
-        public String getPhonumber() {
-            return phonumber;
-        }
-
-        public void setPhonumber(String phonumber) {
-            this.phonumber = phonumber;
-        }
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public RequestData getRequestData() {
-        return requestData;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
-
-    public void setRequestData(RequestData requestData) {
-        this.requestData = requestData;
-    }
-
-
 }
+
+
+

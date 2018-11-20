@@ -9,12 +9,12 @@
         android:background="@drawable/userinfo_background"
         android:id="@+id/userinfo_headlayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="220dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userinfo_head_img"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp" />
@@ -38,7 +38,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="218dp">
+        android:layout_marginTop="238dp">
 
      <RelativeLayout
          android:id="@+id/userinfo_myupload_layout"

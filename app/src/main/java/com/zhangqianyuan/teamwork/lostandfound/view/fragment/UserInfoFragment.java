@@ -223,5 +223,9 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         }
     }
 
-
+    @Override
+    public  void onResume() {
+        headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString("NICKNAME",null));
+        super.onResume();
+    }
 }

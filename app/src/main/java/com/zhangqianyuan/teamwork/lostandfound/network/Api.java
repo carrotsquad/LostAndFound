@@ -121,12 +121,14 @@ public interface Api {
     Call<StatusBean>  exitAccount(@Field("JSESSIONID") String jsessionId);
 
     //修改用户昵称
-    @POST("/passlove/user/update/nickname")
-    Call<StatusBean> uploadNickName(@Body  ChangeUserNickNameBean bean);
+    @FormUrlEncoded
+    @POST("passlove/user/update/nickname")
+    Call<StatusBean> uploadNickName(@Field("JSESSIONID")String jsessionid,@Field("requestData") String bean);
 
     // 修改用户手机号码
-    @POST("/passlove/user/update/phonenumber")
-    Call<StatusBean> uploadPhoneNumber(@Body ChangePhoneNumberBean bean);
+    @FormUrlEncoded
+    @POST("passlove/user/update/phonenumber")
+    Call<StatusBean> uploadPhoneNumber(@Field("JSESSIONID")String jsessionid,@Field("requestData") String bean);
 
     //修改头像
     @Multipart

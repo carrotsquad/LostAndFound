@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBar;
@@ -143,8 +144,10 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserS
                 initGallery();
                 break;
             case R.id.setting_nicklayout:
+                startActivity(new Intent(UserInfoSettingActivity.this,ChangeNickNameActivity.class));
                 break;
             case R.id.setting_phonelayout:
+                startActivity(new Intent(UserInfoSettingActivity.this,ChangePhoneActivty.class));
                 break;
             case R.id.setting_passwordlayout:
                 break;
@@ -175,5 +178,13 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserS
         }else if (status==400){
             Toast.makeText(UserInfoSettingActivity.this,"退出失败",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d("onResume",sharedPreferences.getString("NICKNAME",null));
+        nickname.setText(sharedPreferences.getString("NICKNAME",null));
+        phone.setText(sharedPreferences.getString("PNB",null));
+        super.onResume();
     }
 }

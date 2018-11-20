@@ -10,18 +10,7 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * @updateDes ${TODO}
  */
 public class ChangeUserNickNameBean {
-        private  RequestData requestData;
-       public static class RequestData{
-            private String JSESSIONID;
             private String nickname;
-
-            public String getJSESSIONID() {
-                return JSESSIONID;
-            }
-
-            public void setJSESSIONID(String JSESSIONID) {
-                this.JSESSIONID = JSESSIONID;
-            }
 
             public String getNickname() {
                 return nickname;
@@ -32,12 +21,5 @@ public class ChangeUserNickNameBean {
             }
         }
 
-        public RequestData getRequestData() {
-            return requestData;
-        }
 
-        public void setRequestData(RequestData requestData) {
-            this.requestData = requestData;
-        }
-    }
 
