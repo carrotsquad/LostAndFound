@@ -38,6 +38,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+
 
 /**
  * Description: 主页面
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView mBottomNav;
 
     private String[] titles = new String[]{"动态", "搜索", "消息","我的"};
+    private String session = "";
 
 
     @Override
@@ -88,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        Intent intent = getIntent();
+        session = intent.getStringExtra(SESSION);
        // getSharePrefrenceData();
     }
 
@@ -98,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView() throws NoSuchFieldException, IllegalAccessException {
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new DynamicFragment());
+        fragments.add(new DynamicFragment(session));
         fragments.add(SearchFragment.newInstance());
         fragments.add(MessageFragment.newInstance());
         fragments.add(new UserInfoFragment());

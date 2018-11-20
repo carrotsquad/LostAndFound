@@ -174,7 +174,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         if(!"0".equals(lostdate_orig.substring(6, 7))){
             lostdate = lostdate + lostdate_orig.substring(6, 7);
         }
-        lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
+        lostdate = lostdate + lostdate_orig.substring(7,8)+"";
 
         int lostplace = dynamicItemBean.getThelost().getPlaceid();
         int losttype = dynamicItemBean.getThelost().getLosttype();

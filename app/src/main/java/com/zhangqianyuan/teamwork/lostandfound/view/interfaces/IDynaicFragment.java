@@ -1,5 +1,9 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+
+import java.util.List;
+
 /**
  * @author zhoudada
  * @version $Rev$
@@ -8,5 +12,5 @@ package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
  * @updateDes ${TODO}
  */
 public interface IDynaicFragment extends BaseView {
-    void  showData(int headImg,String neckname,String place,String time,String description,String thingType);
+    void  showData(Boolean status, List<DynamicItemBean> searchItemBeanArrayList);
 }

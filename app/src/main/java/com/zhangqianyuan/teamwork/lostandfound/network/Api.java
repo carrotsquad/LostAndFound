@@ -98,14 +98,14 @@ public interface Api {
     Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @PartMap Map<String,RequestBody> photos);
 
     //获取动态 失物 信息
-    @POST("")
+    @POST("/passlove/dynamics/0")
     @FormUrlEncoded
-    Call<DynamicItemBean> getDynamicLostData();
+    Observable<SearchBean> getDynamicLostData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //获取动态 招领 信息
-    @POST("")
+    @POST("/passlove/dynamics/1")
     @FormUrlEncoded
-    Call<DynamicItemBean> getDynamicFindData();
+    Observable<SearchBean> getDynamicFindData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //获取我的发布 信息
     @POST()

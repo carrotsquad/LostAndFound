@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 
@@ -48,6 +49,7 @@ import butterknife.ButterKnife;
      最开始时 默认预加载16条动态信息，动态中的count数目按照时间顺序 0到15排序
      上拉 或者 下拉时  count数目清零 再次向服务器请求16条数据.......
      */
+@SuppressLint("ValidFragment")
 public class DynamicFragment extends Fragment {
 
     @BindView(R.id.dynamic_fragment_tablayout)
@@ -56,7 +58,12 @@ public class DynamicFragment extends Fragment {
     @BindView(R.id.dynamic_viewpager)
     ViewPager mViewPager;
 
+    private String session="";
 
+    @SuppressLint("ValidFragment")
+    public DynamicFragment(String session){
+        this.session = session;
+    }
 
     @Nullable
     @Override
@@ -74,8 +81,8 @@ public class DynamicFragment extends Fragment {
           */
         List<Fragment> mFragments = new ArrayList<>();
         List<String>  title     = new ArrayList<>();
-        mFragments.add(com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicChildFragment.newInstance());
-        mFragments.add(com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicChildFragment.newInstance());
+        mFragments.add(new DynamicChildFragment(0,session));
+        mFragments.add(new DynamicChildFragment(1,session));
         title.add("失物");
         title.add("招领");
         FragmentManager man = getChildFragmentManager();
@@ -83,9 +90,9 @@ public class DynamicFragment extends Fragment {
         mViewPager.setAdapter(adapter);
         tab.setupWithViewPager(mViewPager);
 }
-    public static DynamicFragment newInstance(){
-        DynamicFragment fragment = new DynamicFragment();
-        return fragment;
-    }
+//    public static DynamicFragment newInstance(){
+//        DynamicFragment fragment = new DynamicFragment();
+//        return fragment;
+//    }
 
 }

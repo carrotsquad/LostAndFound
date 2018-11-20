@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
+
 /**
  * Description
  * 动态界面
@@ -10,6 +12,6 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
  * @updateDes ${TODO}
  */
 public interface IDynamicPresenter {
-    void getDynamicLostData();
-    void getDynamicFindData();
+    void getDynamicLostData(DynamicsRequestBean dynamicsRequestBean, String session);
+    void getDynamicFindData(DynamicsRequestBean dynamicsRequestBean, String session);
 }
