@@ -29,9 +29,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.provider.Telephony.Carriers.PASSWORD;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.OURJSESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeLittleImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.VerifyActivity.SIGNIN;
 
 /**
@@ -71,6 +73,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     private SharedPreferences.Editor editor;
 
     private Intent mIntent;
+    private String session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,10 +142,10 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             editor.putString(PNB,signInBean.getUser().getPhonenumber());
             editor.putString(USERPHOTO,signInBean.getUser().getPhoto());
             editor.putString(SESSION,signInBean.getJSESSIONID());
+            session = signInBean.getJSESSIONID();
             //去获取所有的丢失物品类型和地点
-            allTypesAndPlacesPresenter.getAllTypesAndPlaces(signInBean.getJSESSIONID());
             editor.commit();
-
+            allTypesAndPlacesPresenter.getAllTypesAndPlaces(signInBean.getJSESSIONID());
         }else {
             FancyToast.makeText(SignInActivity.this,"登录失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
@@ -163,7 +166,9 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             Log.e("SignIn",allPlaceBeanList.toString());
             Log.e("SignIn",allTypeBeanList.toString());
             Log.e("SignIn",allTypeImgsList.toString());
+            Log.e("SignIn",sharedPreferences.getString(SESSION,"null"));
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+            intent.putExtra(SESSION,session);
             startActivity(intent);
             FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             finish();

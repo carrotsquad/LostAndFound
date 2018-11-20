@@ -7,13 +7,11 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.ChangeUserNickNameBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.LoginBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.SendMyHistoryBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
@@ -99,26 +97,32 @@ public interface Api {
     @Multipart
     Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @PartMap Map<String,RequestBody> photos);
 
+    //获取动态 失物 信息
+    @POST("/passlove/dynamics/0")
+    @FormUrlEncoded
+    Observable<SearchBean> getDynamicLostData(@Field("requestData") String info, @Field("JSESSIONID") String session);
+
+    //获取动态 招领 信息
+    @POST("/passlove/dynamics/1")
+    @FormUrlEncoded
+    Observable<SearchBean> getDynamicFindData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //获取我的发布 信息
-    @POST("passlove/user/mypublish")
+    @POST()
     @FormUrlEncoded
-    Call<MyHistoryItem>  getMyLoadData(@Field("JSESSIONID") String jsessionid,
-                                              @Field("requestData")String bean);
+    Call<List<MyLoadItemBean>>  getMyLoadData();
 
     //获取我的历史 信息
-    @POST("passlove/user/myhistory")
+    @POST()
     @FormUrlEncoded
-    Call<MyHistoryItem> getMyHistoryData(@Field("JSESSIONID") String jsessionid,
-                                         @Field("requestData")String bean);
+    Call<List<MyHistoryItemBean>> getMyHistoryData();
 
 
 
 
     //退出登录
-    @FormUrlEncoded
     @POST("passlove/user/loginOut")
-    Call<StatusBean>  exitAccount(@Field("JSESSIONID") String jsessionId);
+    Call<StatusBean>  exitAccount(String jsessionId);
 
     //修改用户昵称
     @FormUrlEncoded

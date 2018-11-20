@@ -38,6 +38,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+
 
 /**
  * Description: 主页面
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final Integer FINE_INTERNET_STATUS = 200;
     public static final Integer BAD_INTERNET_STATUS = 400;
+    public static final String TYPEID = "TYPEID";
+    public static final String QISHILEIXING = "QISHILEIXING";
 
     /**
      * 几个常量
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView mBottomNav;
 
     private String[] titles = new String[]{"动态", "搜索", "消息","我的"};
+    private String session = "";
 
 
     @Override
@@ -86,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        Intent intent = getIntent();
+        session = intent.getStringExtra(SESSION);
        // getSharePrefrenceData();
     }
 
@@ -96,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView() throws NoSuchFieldException, IllegalAccessException {
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new DynamicFragment());
+        fragments.add(new DynamicFragment(session));
         fragments.add(SearchFragment.newInstance());
         fragments.add(MessageFragment.newInstance());
         fragments.add(new UserInfoFragment());
@@ -194,7 +201,9 @@ public class MainActivity extends AppCompatActivity {
         newShiWu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 startActivity(new Intent(view.getContext(),UploadActivity.class));
+                Intent intent = new  Intent(view.getContext(),UploadActivity.class);
+                intent.putExtra(QISHILEIXING,0);
+                startActivity(intent);
             }
         });
 
@@ -202,7 +211,9 @@ public class MainActivity extends AppCompatActivity {
         newZhaoLing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),UploadActivity.class));
+                Intent intent = new  Intent(view.getContext(),UploadActivity.class);
+                intent.putExtra(QISHILEIXING,1);
+                startActivity(intent);
             }
         });
 

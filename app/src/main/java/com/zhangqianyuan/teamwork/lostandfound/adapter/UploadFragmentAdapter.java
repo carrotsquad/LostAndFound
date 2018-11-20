@@ -24,6 +24,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TYPEID;
+
 /**
  * @author zhoudada
  * @version $Rev$
@@ -35,8 +37,7 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
     private List<UploadItemBean> lists;
 
     private Context mContext;
-
-
+    private Integer qishileixing;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -56,7 +57,8 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
         }
     }
 
-    public UploadFragmentAdapter(List<UploadItemBean> list){
+    public UploadFragmentAdapter(List<UploadItemBean> list,Integer qishileixing){
+        this.qishileixing = qishileixing;
         this.lists = list;
     }
     @NonNull
@@ -69,7 +71,9 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                parent.getContext().startActivity(new Intent(mContext,UploadFormActivity.class));
+                Intent intent = new Intent(mContext,UploadFormActivity.class);
+                intent.putExtra(TYPEID,qishileixing);
+                parent.getContext().startActivity(intent);
             }
         });
         return new ViewHolder(view);

@@ -217,6 +217,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             @Override
             public void onClick(View v) {
                 String keyword = searchInput.getText().toString();
+                if(keyword.length()==0){
+                    keyword = "";
+                }
                 String session = sharedPreferences.getString(SESSION,"null");
                 iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition-1, thingsTypePosition-1, session);
 

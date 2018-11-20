@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import butterknife.ButterKnife;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 /**
@@ -44,6 +46,8 @@ public class UploadActivity extends AppCompatActivity {
   private String typesImgBaseUrl = "http://111.230.235.15/passlove/img/losttype?";
 
   private SharedPreferences sharedPreferences;
+
+    private UploadFragmentAdapter uploadFragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,8 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     public void initView(){
+        Intent intent = getIntent();
+        Integer qishileixing = intent.getIntExtra(QISHILEIXING,0);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -73,7 +79,8 @@ public class UploadActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        mRecyclerView.setAdapter(new UploadFragmentAdapter(lists));
+        UploadFragmentAdapter uploadFragmentAdapter = new UploadFragmentAdapter(lists,qishileixing);
+        mRecyclerView.setAdapter(uploadFragmentAdapter);
     }
 
     public void initLists(){
