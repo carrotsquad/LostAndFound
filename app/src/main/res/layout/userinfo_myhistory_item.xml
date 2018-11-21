@@ -18,7 +18,7 @@
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="23dp" />
+            android:layout_marginStart="20dp" />
 
         <ImageView
             android:id="@+id/myhistory_thingtype_txt"
@@ -26,8 +26,8 @@
             android:layout_height="20dp"
             android:layout_alignTop="@+id/myhistory_thingtype"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="93dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginStart="83dp"
+           android:layout_marginTop="0dp" />
 
         <ImageView
             android:id="@+id/myhistory_eventtype"
@@ -35,7 +35,7 @@
             android:layout_height="20dp"
             android:layout_alignTop="@+id/myhistory_thingtype_txt"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="153dp" />
+            android:layout_marginStart="143dp" />
 
         <TextView
             android:id="@+id/myhistory_time"
@@ -79,6 +79,6 @@
             android:maxLines="2"
             android:text="递爱成功"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="23sp" />
     </RelativeLayout>
 </RelativeLayout>

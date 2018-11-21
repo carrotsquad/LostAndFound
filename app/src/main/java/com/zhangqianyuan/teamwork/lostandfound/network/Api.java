@@ -141,4 +141,9 @@ public interface Api {
     @POST("/passlove/user/update/photo")
     Call<StatusBean> uploadHeadImg(@Part("JSESSIONID") RequestBody JSESSIONID,
                                    @Part MultipartBody.Part photo);
+
+    //发送评论
+    @FormUrlEncoded
+    @POST("passlove/comment/publish")
+    Call<StatusBean> uploadComment(@Field("JSESSIONID") String jsessionid,@Field("requestData") String bean);
 }

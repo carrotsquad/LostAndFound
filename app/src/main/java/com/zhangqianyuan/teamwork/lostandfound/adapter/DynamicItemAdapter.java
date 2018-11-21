@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -153,12 +154,6 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DynamicItemBean dynamicItemBean = lists.get(position);
-//        if (dynamicItemBean.getThelost().getLosttype()==DynamicItemBean.TYPE_LOST){
-//        holder.mCardView.setBackgroundColor(Color.parseColor("FFE086A9"));
-//        }
-//       if (dynamicItemBean.getThelost().getLosttype()==DynamicItemBean.TYPE_FIND){
-//            holder.mCardView.setBackgroundColor(Color.parseColor("#ab47bc"));
-//       }
 
         /**
          * "publishtime": "20181105173056",

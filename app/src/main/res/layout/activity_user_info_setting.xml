@@ -9,11 +9,12 @@
     tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoSettingActivity">
 
 
-  <android.support.design.widget.AppBarLayout
+  <android.support.v7.widget.Toolbar
       android:id="@+id/setting_bar"
       android:background="@drawable/barbackgroud"
       android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize">
+      android:layout_height="?attr/actionBarSize"
+      >
 
     <TextView
         android:gravity="center"
@@ -23,7 +24,8 @@
         android:text="设置"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
-  </android.support.design.widget.AppBarLayout>
+
+  </android.support.v7.widget.Toolbar>
 
 
   <RelativeLayout
