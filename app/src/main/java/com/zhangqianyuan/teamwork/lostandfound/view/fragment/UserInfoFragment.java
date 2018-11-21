@@ -169,7 +169,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         @Override
         public void onHanlderFailure(int requestCode, String errorMsg) {
             Log.e("editinfo",errorMsg);
-            FancyToast.makeText(mContext,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+            FancyToast.makeText(mContext,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
     };
 

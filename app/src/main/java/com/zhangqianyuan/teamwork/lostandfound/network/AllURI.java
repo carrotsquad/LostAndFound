@@ -9,8 +9,6 @@ import java.util.List;
 public class AllURI {
     public static final String BaseUrl = "http://111.230.235.15/";
 
-    public static String OURJSESSION = "";
-
     public static List<String> allTypeBeanList = new ArrayList<>();
     public static List<String> allPlaceBeanList = new ArrayList<>();
     public static List<String> allTypeImgsList = new ArrayList<>();
