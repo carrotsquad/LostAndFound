@@ -89,10 +89,6 @@ public class DynamicFragment extends Fragment {
         TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man,mFragments,title);
         mViewPager.setAdapter(adapter);
         tab.setupWithViewPager(mViewPager);
-}
-//    public static DynamicFragment newInstance(){
-//        DynamicFragment fragment = new DynamicFragment();
-//        return fragment;
-//    }
+    }
 
 }

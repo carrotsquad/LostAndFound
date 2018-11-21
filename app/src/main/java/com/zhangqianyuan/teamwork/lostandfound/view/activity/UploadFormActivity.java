@@ -106,6 +106,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     private List<FormFile> files = new ArrayList<>();
 
+    private List<File> fileList = new ArrayList<>();
+
     private Integer placeid = 0;
 
     private String strphoto = "";
@@ -126,18 +128,18 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             @Override
             public void onClick(View v) {
                 jsession = sharedPreferences.getString(SESSION,"null");
-//                uploadPresenter.postUpload(jsession,bean,fileList);
-                Map<String, String> params = new HashMap<>();
-                Gson gson = new Gson();
-                params.put("JSESSIONID", sharedPreferences.getString(SESSION,"null"));
-                params.put("thelost",gson.toJson(bean));
-                Log.e("Upload",gson.toJson(bean));
-                final String[] res = new String[1];
-                try {
-                    Form.submit("http://111.230.235.15/passlove/user/publishlost",params,files);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                uploadPresenter.postUpload(jsession,bean,fileList);
+//                Map<String, String> params = new HashMap<>();
+//                Gson gson = new Gson();
+//                params.put("JSESSIONID", sharedPreferences.getString(SESSION,"null"));
+//                params.put("thelost",gson.toJson(bean));
+//                Log.e("Upload",gson.toJson(bean));
+//                final String[] res = new String[1];
+//                try {
+//                    Form.submit("http://111.230.235.15/passlove/user/publishlost",params,files);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 //
             }
         });
@@ -225,7 +227,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
 
-        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,9 ,mOnHandlerResultCallback);
+        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,1 ,mOnHandlerResultCallback);
     }
 
     private GalleryFinal.OnHanlderResultCallback mOnHandlerResultCallback = new GalleryFinal.OnHanlderResultCallback() {
@@ -241,8 +243,9 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 if(i>0){
                     strphoto = strphoto+",";
                 }
-                FormFile formFile = new FormFile("photos", "img/jpg", new File(resultList.get(i).getPhotoPath()));
-                files.add(formFile);
+//                FormFile formFile = new FormFile("photos", "img/jpg", new File(resultList.get(i).getPhotoPath()));
+//                files.add(formFile);
+                fileList.add(new File(resultList.get(i).getPhotoPath()));
                 strphoto = strphoto + resultList.get(i).getPhotoPath();
                 Log.e("ImgTest",resultList.get(i).getPhotoPath());
             }
@@ -267,6 +270,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     public void showStatus(Boolean status) {
         if(status){
             startActivity(new Intent(UploadFormActivity.this,UploadSuccessActivity.class));
+            finish();
             FancyToast.makeText(UploadFormActivity.this,"发布成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
         }else {
             FancyToast.makeText(UploadFormActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();

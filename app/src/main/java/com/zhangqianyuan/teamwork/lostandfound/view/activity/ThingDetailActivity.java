@@ -4,18 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.MyViewPagerAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.NetworkImageIndicatorView;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ThingDetailPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +31,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 
 /**
@@ -80,9 +91,23 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.thing_detail_back)
     ImageView back;
 
+    @BindView(R.id.thing_detail_viewpager)
+    ViewPager viewPager;
+
+//    @BindView(R.id.thing_detail_viewpager_indicator)
+    IndefinitePagerIndicator indicator;
+
+
     private String ID;
     private SharedPreferences sharedPreferences;
     private ThingDetailPresenter thingDetailPresenter;
+    ///////////////////////
+//    private List<ViewPagerAltBean> viewPagerAltBeanList;
+    private ViewPager activity_main_viewpager;
+    private LinearLayout activity_main_llpoints;
+    private List<ImageView> imageViewList;;
+    private int viewPagerLastIndex;
+
 
 
     @Override
@@ -92,7 +117,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         ButterKnife.bind(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this);
-        initDataFromLocal();
+        indicator = (IndefinitePagerIndicator)findViewById(R.id.thing_detail_viewpager_indicator);
+        String imgs=initDataFromLocal();
+        String[] a = imgs.split(",");
+        initViewPager(Arrays.asList(a));
 //        initDataFromWeb();
     }
 
@@ -102,7 +130,49 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         super.onDestroy();
     }
 
-    private void initDataFromLocal() {
+
+    private void initViewPager(List<String> urlList){
+        Log.e("ThingsDetail",urlList.toString());
+        imageViewList = new ArrayList<>();
+        ImageView imageView=null;
+        View point=null;
+        LinearLayout.LayoutParams params=null;
+        for (String s :
+                urlList) {
+            imageView = new ImageView(this);
+            Glide.with(this)
+                    .load(getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),s))
+                    .asBitmap()
+                    .into(imageView);
+            imageViewList.add(imageView);
+        }
+        viewPager.setAdapter(new MyViewPagerAdapter(imageViewList));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if(position==imageViewList.size()){
+                    viewPager.setCurrentItem(0);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position==imageViewList.size()){
+                    viewPager.setCurrentItem(0);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+//        viewPager.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//        });
+//        indicator.attachToViewPager(viewPager);
+    }
+
+    private String initDataFromLocal() {
         Intent intent = getIntent();
         /**
          * intent.putExtra(OTHERSIMG, searchItemBean.getPhoto());
@@ -119,8 +189,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String strdiushidate = intent.getStringExtra(OTHERSDIUSHIDATE);
         String strdiushileixing = intent.getStringExtra(OTHERSDIUSHILEIXING);
 
-        Bundle bundle = intent.getBundleExtra(OTHERSIMGS);
-        List<String> strThingsImgs = bundle.getStringArrayList(OTHERSIMGS);
+        String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         ID = intent.getStringExtra(OTHERSID);
 
         nickname.setText(strusernickname);
@@ -128,6 +197,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         fabiaodate.setText("发表于"+strfabiaodate);
         diushidate.setText(strdiushidate);
         place.setText(strplace);
+        return  strThingsImgs;
     }
 
     @OnClick({R.id.thing_detail_back})

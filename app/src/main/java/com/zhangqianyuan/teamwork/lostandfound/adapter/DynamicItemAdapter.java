@@ -101,7 +101,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
                 if(!"0".equals(date_orig.substring(6, 7))) {
                     fabaiodate = fabaiodate+date_orig.substring(6, 7);
                 }
-                fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
+                fabaiodate = fabaiodate + date_orig.substring(7,8)+"日";
 
                 String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
                 String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
@@ -138,9 +138,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
                 intent.putExtra(OTHERSDIUSHILEIXING, lostType);
                 intent.putExtra(OTHERSDIUSHIDATE, lostdate);
                 intent.putExtra(OTHERSPLACE,place);
-                Bundle bundle = new Bundle();
-                bundle.putString(OTHERSIMGS,  dynamicItemBean.getThelost().getPhoto());
-                intent.putExtra(OTHERSIMGS, bundle);
+                intent.putExtra(OTHERSIMGS, dynamicItemBean.getThelost().getPhoto());
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
                 mContext.startActivity(intent);
@@ -153,13 +151,6 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DynamicItemBean dynamicItemBean = lists.get(position);
-//        if (dynamicItemBean.getThelost().getLosttype()==DynamicItemBean.TYPE_LOST){
-//        holder.mCardView.setBackgroundColor(Color.parseColor("FFE086A9"));
-//        }
-//       if (dynamicItemBean.getThelost().getLosttype()==DynamicItemBean.TYPE_FIND){
-//            holder.mCardView.setBackgroundColor(Color.parseColor("#ab47bc"));
-//       }
-
         /**
          * "publishtime": "20181105173056",
          * "losttime": "2018110512",
@@ -169,7 +160,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         if(!"0".equals(date_orig.substring(6, 7))) {
             fabaiodate = fabaiodate+date_orig.substring(6, 7);
         }
-        fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
+        fabaiodate = fabaiodate + date_orig.substring(7,8)+"日";
         holder.publishdate.setText(fabaiodate+"发表");
 
         String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
@@ -190,6 +181,8 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
         String place = allPlaceBeanList.get(lostplace);
         String thingsType = allTypeBeanList.get(thingstype);
+
+        holder.timeandplace.setText(place+"   "+date_orig.substring(8,10)+":"+date_orig.substring(10,12));
 
         int lostType = 0;
         switch (losttype){

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,8 +26,6 @@ import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IDynaicFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.OURJSESSION;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 /**
  * Description
@@ -39,8 +38,9 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  */
 
 @SuppressLint("ValidFragment")
-public class DynamicChildFragment extends Fragment implements IDynaicFragment{
+public class DynamicChildFragment extends Fragment implements IDynaicFragment, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout refreshLayout;
     private DynamicItemAdapter mDynamicItemAdapter;
     private List<DynamicItemBean> lists = new ArrayList<>();
     private DynamicPresenter iDynamicPresenter;
@@ -48,6 +48,9 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment{
     private SharedPreferences sharedPreferences;
 
     private String session="";
+    //控制数量
+    private Integer newPosi;
+    private Integer oldPosi;
 
     @SuppressLint("ValidFragment")
     public DynamicChildFragment(int i,String session){
@@ -59,17 +62,21 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view= LayoutInflater.from(getContext()).inflate(R.layout.fragment_dynamic_lostorfind,container,false);
-        mRecyclerView = view.findViewById(R.id.dynamic_list);
+
+       newPosi = 15;
+       oldPosi = 15;
+       mRecyclerView = view.findViewById(R.id.dynamic_list);
+        refreshLayout = view.findViewById(R.id.dynamic_list_swipe);
         GridLayoutManager manager = new GridLayoutManager(getContext(),2);
 
         mRecyclerView.setLayoutManager(manager);
         mDynamicItemAdapter = new DynamicItemAdapter(lists);
         mRecyclerView.setAdapter(mDynamicItemAdapter);
+        refreshLayout.setOnRefreshListener(this);
         iDynamicPresenter = new DynamicPresenter();
         iDynamicPresenter.attachActivity(this);
         initLists();
 
-//        sharedPreferences = getContext().getSharedPreferences("users", Context.MODE_PRIVATE);
        return view;
     }
 
@@ -98,13 +105,44 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment{
     @Override
     public void showData(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
         if(status){
-            lists.clear();
+            if(!newPosi.equals(oldPosi)){
+                FancyToast.makeText(getContext(),"刷新成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            }
+            refreshLayout.setRefreshing(false);
             lists.addAll(searchItemBeanArrayList);
-            mDynamicItemAdapter.notifyDataSetChanged();
-//            searchItemAdapter.notifyItemChanged(this.searchItemBeanArrayList.size()-1);
-//            recyclerView.scrollToPosition(msgList.size() - 1);
+//            mDynamicItemAdapter.notifyDataSetChanged();
+            mDynamicItemAdapter.notifyItemChanged(this.lists.size()-1);
+//            mRecyclerView.scrollToPosition(lists.size() - 1);
         }else {
-            FancyToast.makeText(getContext(),"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            refreshLayout.setRefreshing(false);
+            if (!newPosi.equals(oldPosi)) {
+                FancyToast.makeText(getContext(), "刷新失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            } else {
+                FancyToast.makeText(getContext(), "出现了问题", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            }
+        }
+    }
+
+
+    /**
+     * 设置上拉刷新
+     */
+    @Override
+    public void onRefresh() {
+        oldPosi = newPosi;
+        newPosi = newPosi+6;
+        switch (pos){
+            case 0:{
+                iDynamicPresenter.getDynamicLostData(new DynamicsRequestBean(oldPosi,newPosi),session);
+                break;
+            }
+            case 1:{
+                iDynamicPresenter.getDynamicFindData(new DynamicsRequestBean(oldPosi,newPosi),session);
+                break;
+            }
+            default:{
+                break;
+            }
         }
     }
 }

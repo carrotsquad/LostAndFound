@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.provider.Telephony.Carriers.PASSWORD;
-import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.OURJSESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
@@ -88,11 +87,12 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         //如果已经登录过，再次登陆，进入主页面
         if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
 //            allTypesAndPlacesPresenter.getAllTypesAndPlaces(sharedPreferences.getString(SESSION, "balabala"));
-            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "balabala"),sharedPreferences.getString(SESSION, "balabala"));
-        }
-        mIntent=getIntent();
-        if(mIntent.getIntExtra(SIGNIN,0)==1){
-            signPresenter.getSignIn(mIntent.getStringExtra(EMAIL),mIntent.getStringExtra(PASSWORD));
+            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "balabala"),sharedPreferences.getString(PWD, "balabala"));
+        }else {
+            mIntent=getIntent();
+            if(mIntent.getIntExtra(SIGNIN,0)==1){
+                signPresenter.getSignIn(mIntent.getStringExtra(EMAIL),mIntent.getStringExtra(PWD));
+            }
         }
     }
 

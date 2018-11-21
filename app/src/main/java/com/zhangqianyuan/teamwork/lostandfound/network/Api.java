@@ -96,7 +96,7 @@ public interface Api {
      */
     @POST("/passlove/user/publishlost")
     @Multipart
-    Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @PartMap Map<String,RequestBody> photos);
+    Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
     //获取动态 失物 信息
     @POST("/passlove/dynamics/0")

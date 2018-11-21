@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -55,7 +56,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        CardView mCardView;
+        RelativeLayout relativeLayout;
         ImageView headimg;
         TextView neckname;
         TextView fabiaotime;
@@ -68,7 +69,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
         public ViewHolder(View view) {
             super(view);
-            mCardView = (CardView) view;
+            relativeLayout = (RelativeLayout) view;
             headimg = view.findViewById(R.id.search_item_thingsphoto);
             neckname = view.findViewById(R.id.search_item_userNickName);
             isNeedBounty = view.findViewById(R.id.search_item_isNeedBounty);
@@ -94,7 +95,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         View view = LayoutInflater.from(mContext).inflate(R.layout.search_item,parent,false);
         final ViewHolder holder = new ViewHolder(view);
 
-        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
@@ -142,9 +143,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 intent.putExtra(OTHERSDIUSHILEIXING, lostType);
                 intent.putExtra(OTHERSDIUSHIDATE, lostdate);
                 intent.putExtra(OTHERSPLACE,place);
-                Bundle bundle = new Bundle();
-                bundle.putString(OTHERSIMGS,  dynamicItemBean.getThelost().getPhoto());
-                intent.putExtra(OTHERSIMGS, bundle);
+                intent.putExtra(OTHERSIMGS, dynamicItemBean.getThelost().getPhoto());
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
                 mContext.startActivity(intent);
@@ -162,7 +161,11 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
          * "losttime": "2018110512",
          */
         String date_orig = dynamicItemBean.getThelost().getPublishtime();
-        String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
+        String fabaiodate = "";
+        if(!"0".equals(date_orig.substring(4, 5))){
+            fabaiodate = fabaiodate+"0";
+        }
+        fabaiodate = date_orig.substring(5, 6) + "月";
         if(!"0".equals(date_orig.substring(6, 7))) {
             fabaiodate = fabaiodate+date_orig.substring(6, 7);
         }
@@ -199,7 +202,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         //启事类型
         holder.qishileixing.setImageResource(lostType);
         //时间地点
-        holder.placeanddate.setText(lostdate+"   "+place);
+        holder.placeanddate.setText(place+"   "+lostdate);
         //标题
         holder.title.setText(dynamicItemBean.getThelost().getTitle());
         holder.neckname.setText(dynamicItemBean.getNickname());
