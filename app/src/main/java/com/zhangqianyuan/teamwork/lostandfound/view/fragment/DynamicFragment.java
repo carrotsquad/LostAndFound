@@ -44,7 +44,6 @@ import butterknife.ButterKnife;
  * 参数：
  *
  */
-// TODO: 2018/11/8  实现 动态加载数据  下拉刷新 上拉加载更多
     /*
      最开始时 默认预加载16条动态信息，动态中的count数目按照时间顺序 0到15排序
      上拉 或者 下拉时  count数目清零 再次向服务器请求16条数据.......
@@ -52,11 +51,9 @@ import butterknife.ButterKnife;
 @SuppressLint("ValidFragment")
 public class DynamicFragment extends Fragment {
 
-    @BindView(R.id.dynamic_fragment_tablayout)
-    TabLayout  tab;
+    private TabLayout  tab;
 
-    @BindView(R.id.dynamic_viewpager)
-    ViewPager mViewPager;
+    private ViewPager mViewPager;
 
     private String session="";
 
@@ -70,9 +67,17 @@ public class DynamicFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View  view = inflater.inflate(R.layout.fragment_dynamic,container,false);
         //bind（）参数为空间所在的layout
-        ButterKnife.bind(this,view);
-        linkBottomWithViewpager();
+        mViewPager = (ViewPager)view.findViewById(R.id.dynamic_viewpager);
+        tab = (TabLayout)view.findViewById(R.id.dynamic_fragment_tablayout);
+        if (savedInstanceState==null){
+            linkBottomWithViewpager();
+        }
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 
     public void linkBottomWithViewpager(){
@@ -89,6 +94,39 @@ public class DynamicFragment extends Fragment {
         TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man,mFragments,title);
         mViewPager.setAdapter(adapter);
         tab.setupWithViewPager(mViewPager);
+        tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 }

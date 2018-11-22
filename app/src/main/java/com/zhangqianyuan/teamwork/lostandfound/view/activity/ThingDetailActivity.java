@@ -54,6 +54,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     public static final String OTHERSTHINGSTYPE = "OTHERSTHINGSTYPE";
     public static final String OTHERSIMGS = "OTHERSIMGS";
     public static final String OTHERSID = "OTHERSID";
+    public static final String OTHERSDESC = "OTHERSDESC";
 
     //头像
     @BindView(R.id.thing_detail_thingsdetail_circleview)
@@ -130,7 +131,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         super.onDestroy();
     }
 
-
+    //初始化viewpager
     private void initViewPager(List<String> urlList){
         Log.e("ThingsDetail",urlList.toString());
         imageViewList = new ArrayList<>();
@@ -187,11 +188,17 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String strfabiaodate = intent.getStringExtra(OTHERSFABIAODATE);
         String strplace = intent.getStringExtra(OTHERSPLACE);
         String strdiushidate = intent.getStringExtra(OTHERSDIUSHIDATE);
-        String strdiushileixing = intent.getStringExtra(OTHERSDIUSHILEIXING);
-
+        String strdesc = intent.getStringExtra(OTHERSDESC);
         String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         ID = intent.getStringExtra(OTHERSID);
+        int qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
 
+        if(qishileixing==0){
+            type.setText("失物详情");
+        }else {
+            type.setText("寻物详情");
+        }
+        describe.setText(strdesc);
         nickname.setText(strusernickname);
         GetImageFromWeb.glideSetImageView(struserphoto,userimg,this);
         fabiaodate.setText("发表于"+strfabiaodate);
@@ -217,7 +224,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
      * 从网络获取数据
      */
     private void initDataFromWeb(){
-        String session=sharedPreferences.getString("SESSION","nought");
+        String session=sharedPreferences.getString(SESSION,"nought");
         thingDetailPresenter.getDataFromWeb(ID, session);
     }
 

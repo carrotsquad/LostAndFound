@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/deepskyblue">
+        android:background="@drawable/barbackgroud">
 
         <ImageView
             android:id="@+id/publishsuccess_back"
@@ -27,7 +27,7 @@
             android:layout_alignParentTop="true"
             android:gravity="center"
             android:text="发布结果"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="25sp" />
     </RelativeLayout>
 
@@ -60,20 +60,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="123dp"
+        android:layout_marginBottom="98dp"
         android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/publishsuccess_continue_newlost"
-            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
             android:text="继续发布失物启事"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,14 +83,14 @@
 
         <TextView
             android:id="@+id/publishsuccess_continue_newfind"
-            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
             android:text="继续发布招领启事"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,14 +100,14 @@
 
         <TextView
             android:id="@+id/publishsuccess_continue_returnmainactivity"
-            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
             android:text="返回主页"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

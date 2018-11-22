@@ -10,6 +10,7 @@
 
 
   <android.support.design.widget.AppBarLayout
+      android:fitsSystemWindows="true"
       android:id="@+id/setting_bar"
       android:background="@drawable/barbackgroud"
       android:layout_width="match_parent"

@@ -33,6 +33,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThin
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getUserPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSFABIAODATE;
@@ -121,31 +122,18 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
                 String place = allPlaceBeanList.get(lostplace);
                 String thingsType = allTypeBeanList.get(thingstype);
-                String lostType="";
-
-                switch (losttype){
-                    case 0:{
-                        lostType = "寻物启示";
-                        break;
-                    }
-                    case 1:{
-                        lostType = "招领启示";
-                    }
-                    default:{
-                        break;
-                    }
-                }
 
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
                 intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getNickname());
                 intent.putExtra(OTHERSPHOTO,dynamicItemBean.getUserphoto());
                 intent.putExtra(OTHERSFABIAODATE,fabaiodate);
-                intent.putExtra(OTHERSDIUSHILEIXING, lostType);
+                intent.putExtra(OTHERSDIUSHILEIXING, losttype);
                 intent.putExtra(OTHERSDIUSHIDATE, lostdate);
                 intent.putExtra(OTHERSPLACE,place);
                 intent.putExtra(OTHERSIMGS, dynamicItemBean.getThelost().getPhoto());
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
+                intent.putExtra(OTHERSDESC,dynamicItemBean.getThelost().getDescription());
                 mContext.startActivity(intent);
             }
         });

@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="0dp"
-        android:background="@color/deepskyblue"
+        android:background="@drawable/barbackgroud"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="失物/招领发布"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="25sp" />
     </RelativeLayout>
 

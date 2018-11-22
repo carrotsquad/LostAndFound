@@ -80,6 +80,9 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
        return view;
     }
 
+
+
+
     public void  initLists(){
         switch (pos){
             case 0:{
@@ -100,6 +103,12 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
     public void onDestroyView() {
         iDynamicPresenter.dettachActivity();
         super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        iDynamicPresenter.dettachActivity();
+        super.onDestroy();
     }
 
     @Override

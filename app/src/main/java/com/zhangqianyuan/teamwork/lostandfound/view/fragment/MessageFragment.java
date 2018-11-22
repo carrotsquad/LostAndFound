@@ -24,8 +24,7 @@ public class MessageFragment extends Fragment {
 
     private View view;
 
-    @BindView(R.id.message_recyclerview)
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     public static Fragment newInstance(){
         MessageFragment messageFragment = new MessageFragment();
@@ -36,7 +35,6 @@ public class MessageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_message, container,false);
-        ButterKnife.bind(this,view);
         initView();
         return view;
     }
@@ -51,5 +49,7 @@ public class MessageFragment extends Fragment {
         super.onDestroy();
     }
 
-    private void initView(){}
+    private void initView(){
+        recyclerView = view.findViewById(R.id.message_recyclerview);
+    }
 }

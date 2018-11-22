@@ -86,7 +86,8 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
         //如果已经登录过，再次登陆，进入主页面
         if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
-//            allTypesAndPlacesPresenter.getAllTypesAndPlaces(sharedPreferences.getString(SESSION, "balabala"));
+            email.setText(sharedPreferences.getString(EMAIL, "null"));
+            pwd.setText(sharedPreferences.getString(SESSION, "null"));
             signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "balabala"),sharedPreferences.getString(PWD, "balabala"));
         }else {
             mIntent=getIntent();
@@ -154,6 +155,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     @Override
     public void getIAllTypesAndPlaces(Boolean status, List<TypeBean> typeBeanList, List<PlaceBean> placeBeanList) {
         if(status){
+            FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             int i = typeBeanList.size();
             for (int k = 0; k<i;k++) {
                 allTypeBeanList.add(typeBeanList.get(k).getName());
@@ -170,7 +172,6 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             intent.putExtra(SESSION,session);
             startActivity(intent);
-            FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             finish();
         }else {
             FancyToast.makeText(SignInActivity.this,"无法获取丢失物品类型和地点",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();

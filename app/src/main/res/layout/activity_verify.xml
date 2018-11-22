@@ -9,7 +9,7 @@
         android:id="@+id/verify_loginbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background"
+        android:background="@drawable/barbackgroud"
         android:fitsSystemWindows="true">
 
         <TextView
@@ -17,15 +17,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#FFF"
-            android:text="验证"
-            android:textSize="18sp"/>
+            android:textColor="@color/black"
+            android:text="验   证"
+            android:textSize="20sp"/>
 
         <ImageView
             android:id="@+id/verify_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrows"
+            android:src="@drawable/back"
             android:contentDescription="TODO" />
 
     </android.support.v7.widget.Toolbar>
@@ -42,7 +42,8 @@
             android:id="@+id/verify_email"
             android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_marginTop="20dp"
@@ -51,6 +52,7 @@
             android:id="@+id/verify_qingshuru"
             android:textSize="20sp"
             android:text="请输入验证码"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -76,7 +78,7 @@
             android:id="@+id/verify_sure"
             android:layout_width="150dp"
             android:textSize="25sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:background="@drawable/shape_button"
             android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"

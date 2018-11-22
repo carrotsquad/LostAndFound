@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.squareup.leakcanary.LeakCanary;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
@@ -118,7 +119,17 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                if(position == 1||position==3){
+                    appBarLayout.setVisibility(View.GONE);
+                }else {
+                    appBarLayout.setVisibility(View.VISIBLE);
+                }
+                mTitleTv.setText(titles[position]);
+                if(position<=1){
+                    mBottomNav.getMenu().getItem(position).setChecked(true);
+                }else if(position>=2&&position<=3){
+                    mBottomNav.getMenu().getItem(position+1).setChecked(true);
+                }
             }
 
             private MenuItem prevMenuItem;
