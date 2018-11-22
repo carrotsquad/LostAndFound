@@ -11,21 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.MyHistoryPresenter;
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyHistoryActivity;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -100,9 +90,9 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
             holder.isdong.setText("递爱失败");
         }
         if (lists.get(position).getLosttype()==0){
-            //加载丢的图片
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost);
         }else if (lists.get(position).getLosttype()==1){
-            //加载拾的图片
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         // TODO: 2018/11/20  将类型小图片 用swith 方法进行选择加载
@@ -112,7 +102,7 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
          String   mouth = publishTime.substring(4,6);
          String    day = publishTime.substring(6,8);
          String    hours=publishTime.substring(8,10);
-            String time1 = mouth+" 月"+"  "+day+" 日";
+            String time1 = mouth+"月"+""+day+"日";
             String time2=  hours+":00";
             holder.time.setText(time1);
             holder.time2.setText(time2);

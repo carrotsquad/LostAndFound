@@ -100,9 +100,9 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
 
         holder.isdong.setText(lists.get(position).getDescription());
         if (lists.get(position).getLosttype()==0){
-            //加载丢的图片
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost);
         }else if (lists.get(position).getLosttype()==1){
-            //加载拾的图片
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         // TODO: 2018/11/20  将类型小图片 用swith 方法进行选择加载
@@ -112,7 +112,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             String   mouth = publishTime.substring(4,6);
             String    day = publishTime.substring(6,8);
             String    hours=publishTime.substring(8,10);
-            String time1 = mouth+" 月"+"  "+day+" 日";
+            String time1 = mouth+"月"+day+"日";
             String time2=  hours+":00";
             holder.time.setText(time1);
             holder.time2.setText(time2);

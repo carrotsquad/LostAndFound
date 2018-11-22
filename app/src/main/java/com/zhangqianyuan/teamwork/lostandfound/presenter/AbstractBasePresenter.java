@@ -15,4 +15,8 @@ public abstract class AbstractBasePresenter <V extends BaseView>{
         this.v=null;
     }
 
+    public boolean isAttachActivity(){
+        return this.v!=null;
+    }
+
 }
