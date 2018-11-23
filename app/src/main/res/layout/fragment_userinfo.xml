@@ -13,6 +13,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userinfo_head_img"
+            android:src="@mipmap/diai"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_alignParentTop="true"
