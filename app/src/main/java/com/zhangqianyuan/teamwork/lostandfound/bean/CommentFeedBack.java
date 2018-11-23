@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.bean;
 
+import java.util.List;
+
 /**
  * Description
  *
@@ -11,7 +13,7 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  */
 public class CommentFeedBack {
     private  int status;
-    private  Dynamics dynamics;
+    private List<Dynamics> dynamics;
 
    public  static class Dynamics{
         private String username;
@@ -99,11 +101,11 @@ public class CommentFeedBack {
         this.status = status;
     }
 
-    public Dynamics getDynamics() {
+    public List<Dynamics> getDynamics() {
         return dynamics;
     }
 
-    public void setDynamics(Dynamics dynamics) {
+    public void setDynamics(List<Dynamics> dynamics) {
         this.dynamics = dynamics;
     }
 }

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapEncoder;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
+import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 
 import java.util.List;

@@ -1,7 +1,9 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.google.gson.Gson;
+import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBackBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 
 import io.reactivex.Observer;
@@ -16,7 +18,7 @@ public class ThingDetailModel extends BaseModel implements IThingDetailModel{
     }
 
     @Override
-    public void getInternetData(String session, Integer id,int lostid, String time, String content, Callback<StatusBean> callback) {
+    public void sendInternetData(String session, Integer id,int lostid, String time, String content, Callback<StatusBean> callback) {
         ThingDetailBean  bean = new ThingDetailBean();
         ThingDetailBean.Comment con = new ThingDetailBean.Comment();
         con.setContent(content);
@@ -25,5 +27,14 @@ public class ThingDetailModel extends BaseModel implements IThingDetailModel{
         bean.setLostid(lostid);
         bean.setComment(con);
         api.uploadComment(session,new Gson().toJson(bean)).enqueue(callback);
+    }
+
+    @Override
+    public void getInternetData(String session, int lostid, int start, int end, Callback<CommentFeedBack> callback) {
+        ThingDetailBackBean backBean = new ThingDetailBackBean();
+        backBean.setLostid(lostid);
+        backBean.setStart(start);
+        backBean.setEnd(end);
+        api.getComment(session,new Gson().toJson(backBean)).enqueue(callback);
     }
 }

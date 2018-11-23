@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.UploadFragmentAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UploadItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +88,8 @@ public class UploadActivity extends AppCompatActivity {
         int i = allTypeImgsList.size();
         String session = sharedPreferences.getString(SESSION," ");
         for(int k = 0; k < i; k++){
-            String s = "";
-            s = typesImgBaseUrl + "JSESSIONID=" + session + "&" + "name=" + allTypeImgsList.get(k);
+            String s ;
+            s = AllURI.getTypePhoto(session,allTypeImgsList.get(k));
             UploadItemBean uploadItemBean = new UploadItemBean(s,allTypeBeanList.get(k));
             lists.add(uploadItemBean);
         }

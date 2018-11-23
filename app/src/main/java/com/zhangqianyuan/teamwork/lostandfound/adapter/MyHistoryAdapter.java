@@ -79,11 +79,16 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String s = AllURI.getUserPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
+        String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
         Glide.with(mContext)
                 .load(s)
                 .asBitmap()
                 .into(holder.thingtype);
+        String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());
+        Glide.with(mContext)
+                .load(x)
+                .asBitmap()
+                .into(holder.thingtypetxt);
         if (lists.get(position).getIshandled()==1){
             holder.isdong.setText("递爱成功");
         }else if (lists.get(position).getIshandled()==0){

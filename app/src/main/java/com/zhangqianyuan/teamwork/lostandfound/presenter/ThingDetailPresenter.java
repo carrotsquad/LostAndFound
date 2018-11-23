@@ -2,6 +2,7 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
 import android.util.Log;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.IThingDetailModel;
@@ -33,17 +34,38 @@ public class ThingDetailPresenter extends AbstractBasePresenter<IThingDetailActi
 
 
     @Override
-    public void getDataFromWeb(String session, Integer id, int lostid, String time, String content) {
+    public void sendDataToWeb(String session, Integer id, int lostid, String time, String content) {
         if (isAttachActivity()){
-            ThingDetailModel.getInternetData(session, id, lostid, time, content, new Callback<StatusBean>() {
+            ThingDetailModel.sendInternetData(session, id, lostid, time, content, new Callback<StatusBean>() {
                 @Override
                 public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
-                    v.showDataFromWeb(response.body().getStatus());
+                    v.sendDataToWeb(response.body().getStatus());
                 }
 
                 @Override
                 public void onFailure(Call<StatusBean> call, Throwable t) {
                     Log.d(T,"onfailure"+t.toString());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void getDataFromWeb(String session, int lostid, int start, int end) {
+        if (isAttachActivity()){
+            ThingDetailModel.getInternetData(session, lostid, start, end, new Callback<CommentFeedBack>() {
+                @Override
+                public void onResponse(Call<CommentFeedBack> call, Response<CommentFeedBack> response) {
+                    if (response.body().getStatus()==200){
+                        v.getDataFromWeb(response.body().getDynamics());
+                    }else if(response.body().getStatus()==400){
+                        Log.d("ThingDetailPresenter","status is 400");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CommentFeedBack> call, Throwable t) {
+                    Log.d("ThingDetailPresenter","error");
                 }
             });
         }

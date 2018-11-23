@@ -38,7 +38,7 @@
         <activity android:name=".view.activity.UploadFormActivity" />
         <activity
             android:name=".view.activity.UserInfoAboutUsActivity"
-            android:label="关于我们"
+            android:label=""
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.activity.UserInfoMyUpload"

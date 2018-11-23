@@ -29,6 +29,7 @@ import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
+//import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyHistory;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;

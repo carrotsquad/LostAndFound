@@ -1,17 +1,13 @@
 package com.zhangqianyuan.teamwork.lostandfound.bean;
 
+
+
+
+   public class ThingDetailBackBean{
 /**
  * Description
  * 接受评论发送bean
- * @author zhoudada
- * @version $Rev$
- * @des ${TODO}
- * @updateAuthor $Author$
- * @updateDes ${TODO}
- */
-public class ThingDetailBackBean {
-
-    /**
+ * @author zhoud
      * lostid : 1
      * start : 0
      * end : 15

@@ -99,17 +99,17 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
                 String date_orig = dynamicItemBean.getThelost().getPublishtime();
                 String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
-                if(!"0".equals(date_orig.substring(6, 7))) {
-                    fabaiodate = fabaiodate+date_orig.substring(6, 7);
+               if(!"0".equals(date_orig.substring(6, 7))) {
+                  fabaiodate = fabaiodate+date_orig.substring(6, 7);
                 }
                 fabaiodate = fabaiodate + date_orig.substring(7,8)+"日";
 
                 String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
-                String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
-                if(!"0".equals(lostdate_orig.substring(6, 7))){
+              String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
+              if(!"0".equals(lostdate_orig.substring(6, 7))){
                     lostdate = lostdate + lostdate_orig.substring(6, 7);
-                }
-                lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
+              }
+               lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
 
                 int lostplace = dynamicItemBean.getThelost().getPlaceid();
                 int losttype = dynamicItemBean.getThelost().getLosttype();
@@ -153,9 +153,9 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
         String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
         String lostdate = lostdate_orig.substring(0, 4) + "." + lostdate_orig.substring(4, 6) + ".";
-        if(!"0".equals(lostdate_orig.substring(6, 7))){
+       if(!"0".equals(lostdate_orig.substring(6, 7))){
             lostdate = lostdate + lostdate_orig.substring(6, 7);
-        }
+       }
         lostdate = lostdate + lostdate_orig.substring(7,8)+"";
 
 
@@ -165,12 +165,12 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
         int lostplace = dynamicItemBean.getThelost().getPlaceid();
         int losttype = dynamicItemBean.getThelost().getLosttype();
-        int thingstype = dynamicItemBean.getThelost().getTypeid();
+     int thingstype = dynamicItemBean.getThelost().getTypeid();
 
-        String place = allPlaceBeanList.get(lostplace);
-        String thingsType = allTypeBeanList.get(thingstype);
+      String place = allPlaceBeanList.get(lostplace);
+       String thingsType = allTypeBeanList.get(thingstype);
 
-        holder.timeandplace.setText(place+"   "+date_orig.substring(8,10)+":"+date_orig.substring(10,12));
+       holder.timeandplace.setText(place+"   "+date_orig.substring(8,10)+":"+date_orig.substring(10,12));
 
         int lostType = 0;
         switch (losttype){

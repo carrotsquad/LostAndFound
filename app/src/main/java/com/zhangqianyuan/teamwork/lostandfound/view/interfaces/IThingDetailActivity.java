@@ -1,6 +1,15 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
+import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBackBean;
+
+import java.util.List;
+
 // TODO: 2018/11/13 需完善
 public interface IThingDetailActivity extends BaseView{
-    void showDataFromWeb(int status);
+    //发送信息
+    void sendDataToWeb(int status);
+
+    //展示消息
+    void getDataFromWeb(List<CommentFeedBack.Dynamics> list);
 }

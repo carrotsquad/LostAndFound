@@ -5,6 +5,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ChangePhoneNumberBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ChangeUserNickNameBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.LoginBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
@@ -142,8 +143,14 @@ public interface Api {
     Call<StatusBean> uploadHeadImg(@Part("JSESSIONID") RequestBody JSESSIONID,
                                    @Part MultipartBody.Part photo);
 
-    //发送评论
-    @FormUrlEncoded
+    //发表评论
+   @FormUrlEncoded
     @POST("passlove/comment/publish")
     Call<StatusBean> uploadComment(@Field("JSESSIONID") String jsessionid,@Field("requestData") String bean);
+
+    //展示评论
+    @FormUrlEncoded
+    @POST("passlove/comment/get")
+    Call<CommentFeedBack>  getComment(@Field("JSESSIONID") String jsessionid,@Field("requestData") String bean);
+
 }

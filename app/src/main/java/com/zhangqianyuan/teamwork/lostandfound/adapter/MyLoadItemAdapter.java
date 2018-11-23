@@ -97,7 +97,11 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 .load(s)
                 .asBitmap()
                 .into(holder.thingtype);
-
+        String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());
+        Glide.with(mContext)
+                .load(x)
+                .asBitmap()
+                .into(holder.thingtypetxt);
         holder.isdong.setText(lists.get(position).getDescription());
         if (lists.get(position).getLosttype()==0){
             holder.eventtype.setImageResource(R.drawable.littleicon_type_lost);
