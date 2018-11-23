@@ -17,8 +17,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -49,7 +52,10 @@ import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 
+import static cn.finalteam.toolsfinal.DateUtils.getDay;
+import static cn.finalteam.toolsfinal.DateUtils.getMonth;
 import static cn.finalteam.toolsfinal.DateUtils.getTime;
+import static cn.finalteam.toolsfinal.DateUtils.getYear;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TYPEID;
@@ -62,39 +68,55 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  */
 public class UploadFormActivity extends AppCompatActivity implements IUploadFormActivity{
 
+    //返回按键
     @BindView(R.id.upload_lostorfind_back)
     ImageView btnBack;
 
+    //头部标题栏
     @BindView(R.id.upload_lostorfind_qishitype)
     TextView qishiType;
 
+    //选择时间
     @BindView(R.id.upload_lostorfind_time)
     TextView timeText;
 
-    @BindView(R.id.upload_lostorfind_where)
-    Spinner where;
+    //选择地点
+    @BindView(R.id.upload_lostorfind_place)
+    TextView textPlace;
 
+    //选择赏金
     @BindView(R.id.upload_lostorfind_bounty)
-    Spinner bounty;
+    TextView textBounty;
 
+    //编辑标题
     @BindView(R.id.upload_lostorfind_description_title)
     EditText titleEdit;
 
+    //编辑内容
     @BindView(R.id.upload_lostorfind_description_text)
     EditText descEdit;
 
+    //图片
     @BindView(R.id.upload_lostorfind_description_img)
     ImageView img;
 
+    //选择图片
     @BindView(R.id.upload_lostorfind_description_upload)
     TextView upload;
 
+    //确认发布按键
     @BindView(R.id.upload_lostorfind_sure)
     Button btnSure;
 
     private static final int REQUEST_CODE_GALLERY = 1;
     //时间选择器
     private TimePickerView pvTime;
+
+    //赏金选择器
+    private OptionsPickerView pvOptionsBounty;
+
+    //地点选择器
+    private OptionsPickerView pvOptionsPlace;
 
     private SharedPreferences sharedPreferences;
 
@@ -104,6 +126,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     private TheLostBean bean;
 
+    private Integer needBounty = 0;
+
     private List<FormFile> files = new ArrayList<>();
 
     private List<File> fileList = new ArrayList<>();
@@ -112,7 +136,11 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     private String strphoto = "";
 
-    private Integer strLostDate=0;
+    private String strLostDate;
+    private Integer qishileixing;
+    private Integer typeid;
+    private String strtitle;
+    private String strdescri;
 
 
     @Override
@@ -121,46 +149,60 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         setContentView(R.layout.activity_upload_form);
         ButterKnife.bind(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+        Intent intent = getIntent();
+        qishileixing =intent.getIntExtra(QISHILEIXING,1);
+        typeid =intent.getIntExtra(TYPEID,1);
+        strtitle = titleEdit.getText().toString();
+        strdescri = descEdit.getText().toString();
+
         initView();
         uploadPresenter = new UploadPresenter();
         uploadPresenter.attachActivity(this);
-        btnSure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jsession = sharedPreferences.getString(SESSION,"null");
-                uploadPresenter.postUpload(jsession,bean,fileList);
-//                Map<String, String> params = new HashMap<>();
-//                Gson gson = new Gson();
-//                params.put("JSESSIONID", sharedPreferences.getString(SESSION,"null"));
-//                params.put("thelost",gson.toJson(bean));
-//                Log.e("Upload",gson.toJson(bean));
-//                final String[] res = new String[1];
-//                try {
-//                    Form.submit("http://111.230.235.15/passlove/user/publishlost",params,files);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-            }
-        });
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        uploadPresenter.dettachActivity();
+        super.onDestroy();
     }
 
     @OnClick({R.id.upload_lostorfind_back,R.id.upload_lostorfind_time
-                ,R.id.upload_lostorfind_description_img,R.id.upload_lostorfind_description_upload})
+                ,R.id.upload_lostorfind_place,R.id.upload_lostorfind_bounty
+                ,R.id.upload_lostorfind_description_img,R.id.upload_lostorfind_description_upload
+                ,R.id.upload_lostorfind_sure})
     void onClicked(View view) {
         switch (view.getId()){
+            //返回
             case R.id.upload_lostorfind_back:{
                 finish();
                 break;
             }
+            //选择时间
             case R.id.upload_lostorfind_time:{
                 pvTime.show();
+                break;
+            }
+            //选择地点
+            case R.id.upload_lostorfind_place:{
+                pvOptionsPlace.show();
+                break;
+            }
+            //选择赏金
+            case R.id.upload_lostorfind_bounty:{
+                pvOptionsBounty.show();
                 break;
             }
             //选择图片
             case R.id.upload_lostorfind_description_img:
             case R.id.upload_lostorfind_description_upload:{
                 initGallery();
+                break;
+            }
+            //确认发布
+            case R.id.upload_lostorfind_sure:{
+                jsession = sharedPreferences.getString(SESSION,"null");
+                uploadPresenter.postUpload(jsession,bean,fileList);
                 break;
             }
             default:{
@@ -172,40 +214,99 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
 
     private void initView(){
+        if(qishileixing==0){
+            qishiType.setText("发布失物");
+        }else {
+            qishiType.setText("发布招领");
+        }
 
         List<String> isNeedBountyArray = new ArrayList<>();
         isNeedBountyArray.add("是");
         isNeedBountyArray.add("否");
-        ArrayAdapter<String> placeArrayAdapter = new ArrayAdapter<>(this,R.layout.spin_item, R.id.spin_text,allPlaceBeanList);
-        ArrayAdapter<String> isNeedBountyArrayAdapter = new ArrayAdapter<>(this,R.layout.spin_item, R.id.spin_text,isNeedBountyArray);
-        where.setAdapter(placeArrayAdapter);
-        bounty.setAdapter(isNeedBountyArrayAdapter);
+        //赏金选择
+        pvOptionsBounty = new OptionsPickerBuilder(UploadFormActivity.this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        needBounty = options1;
+                        textBounty.setText("是否有赏金:"+isNeedBountyArray.get(options1));
+                    }
+                });
+            }
+        })
+                //取消按钮文字
+                .setCancelText("取消")
+                //确认按钮文字
+                .setSubmitText("确定")
+                //是否显示为对话框样式
+                .isDialog(true)
+                //切换时是否还原，设置默认选中第一项。
+                .isRestoreItem(false)
+                .build();
+
+        pvOptionsBounty.setPicker(isNeedBountyArray);
+
+        //地点选择
+        pvOptionsPlace= new OptionsPickerBuilder(UploadFormActivity.this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        placeid = options1;
+                        textPlace.setText("丢失地点:"+allPlaceBeanList.get(options1));
+                    }
+                });
+            }
+        })
+                //取消按钮文字
+                .setCancelText("取消")
+                //确认按钮文字
+                .setSubmitText("确定")
+                //是否显示为对话框样式
+                .isDialog(true)
+                //切换时是否还原，设置默认选中第一项。
+                .isRestoreItem(false)
+                .build();
+        pvOptionsPlace.setPicker(allPlaceBeanList);
+
+
+//        ArrayAdapter<String> placeArrayAdapter = new ArrayAdapter<>(this,R.layout.spin_item, R.id.spin_text,allPlaceBeanList);
+//        ArrayAdapter<String> isNeedBountyArrayAdapter = new ArrayAdapter<>(this,R.layout.spin_item, R.id.spin_text,isNeedBountyArray);
+//        where.setAdapter(placeArrayAdapter);
+//        bounty.setAdapter(isNeedBountyArrayAdapter);
 
         //时间选择器
         pvTime = new TimePickerBuilder(UploadFormActivity.this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                strLostDate = 0;
-                strLostDate = date.getYear()+date.getMonth()+date.getDay();
-                Toast.makeText(UploadFormActivity.this, strLostDate.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }).build();
-
-        //地点选择
-        where.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                placeid=position;
+                strLostDate = "";
+                strLostDate = String.valueOf(getYear(date))+String.valueOf(getMonth(date))+String.valueOf(getDay(date));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        timeText.setText("丢失时间:"+String.valueOf(getYear(date))+"年"+String.valueOf(getMonth(date))+"月"+String.valueOf(getDay(date))+"日");
+                    }
+                });
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+        })
+                //取消按钮文字
+                .setCancelText("取消")
+                //确认按钮文字
+                .setSubmitText("确定")
+                //是否显示为对话框样式
+                .isDialog(true)
+                .build();
 
-            }
-        });
     }
 
-    //选择图片
+
+    /**
+     * 选择图片
+     */
     private void initGallery(){
         //设置主题
         //ThemeConfig.CYAN
@@ -222,13 +323,14 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
         //配置imageloader
         GlideImageLoader imageloader = new GlideImageLoader();
-        CoreConfig coreConfig = new CoreConfig.Builder(this, imageloader, theme)
+        CoreConfig coreConfig = new CoreConfig.Builder(UploadFormActivity.this, imageloader, theme)
                 .setDebug(BuildConfig.DEBUG)
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
 
         GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,1 ,mOnHandlerResultCallback);
     }
+
 
     private GalleryFinal.OnHanlderResultCallback mOnHandlerResultCallback = new GalleryFinal.OnHanlderResultCallback() {
         @Override
@@ -243,20 +345,13 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 if(i>0){
                     strphoto = strphoto+",";
                 }
-//                FormFile formFile = new FormFile("photos", "img/jpg", new File(resultList.get(i).getPhotoPath()));
-//                files.add(formFile);
                 fileList.add(new File(resultList.get(i).getPhotoPath()));
                 strphoto = strphoto + resultList.get(i).getPhotoPath();
                 Log.e("ImgTest",resultList.get(i).getPhotoPath());
             }
-            Intent intent = getIntent();
-            Integer qishileixing =intent.getIntExtra(QISHILEIXING,0);
-            Integer typeid =intent.getIntExtra(TYPEID,0);
-            String strtitle = titleEdit.getText().toString();
-            String strdescri = descEdit.getText().toString();
-
-            bean = new TheLostBean(typeid,qishileixing,strtitle,strdescri,placeid,"2018283281","201828",strphoto,0);
-
+            strdescri = descEdit.getText().toString();
+            strtitle = titleEdit.getText().toString();
+            bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
         }
 
         @Override
@@ -265,6 +360,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             FancyToast.makeText(UploadFormActivity.this,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
         }
     };
+
 
     @Override
     public void showStatus(Boolean status) {

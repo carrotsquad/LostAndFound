@@ -24,14 +24,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TYPEID;
 
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
- * @updateAuthor $Author$
- * @updateDes ${TODO}
  */
 public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAdapter.ViewHolder> {
     private List<UploadItemBean> lists;
@@ -68,20 +66,23 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
             mContext=parent.getContext();
         }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.upload_recycle_item,parent,false);
-        view.setOnClickListener(new View.OnClickListener() {
+        final UploadFragmentAdapter.ViewHolder viewHolder = new UploadFragmentAdapter.ViewHolder(view);
+        viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position = viewHolder.getAdapterPosition();
                 Intent intent = new Intent(mContext,UploadFormActivity.class);
-                intent.putExtra(TYPEID,qishileixing);
+                intent.putExtra(QISHILEIXING,qishileixing);
+                intent.putExtra(TYPEID,position);
                 parent.getContext().startActivity(intent);
             }
         });
-        return new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        UploadItemBean  bean = lists.get(position);
+        UploadItemBean bean = lists.get(position);
         Glide.with(mContext)
                 .load(bean.getTypeImgId())
                 .asBitmap()

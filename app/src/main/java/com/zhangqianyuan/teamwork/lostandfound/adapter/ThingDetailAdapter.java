@@ -26,9 +26,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * 评论adapter
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
- * @updateAuthor $Author$
- * @updateDes ${TODO}
  */
 public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.ViewHolder> {
     private List<CommentFeedBack.Dynamics>  bean;

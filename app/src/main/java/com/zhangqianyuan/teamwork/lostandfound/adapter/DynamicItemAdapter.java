@@ -44,9 +44,9 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des ${}
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes ${}
  */
 public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.ViewHolder> {
    private Context mContext;
@@ -168,7 +168,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         int thingstype = dynamicItemBean.getThelost().getTypeid();
 
         String place = allPlaceBeanList.get(lostplace);
-        String thingsType = allTypeBeanList.get(thingstype);
+//        String thingsType = allTypeBeanList.get(thingstype);
 
         holder.timeandplace.setText(place+"   "+date_orig.substring(8,10)+":"+date_orig.substring(10,12));
 

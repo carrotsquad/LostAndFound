@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
@@ -88,7 +89,7 @@ public class UploadActivity extends AppCompatActivity {
         String session = sharedPreferences.getString(SESSION," ");
         for(int k = 0; k < i; k++){
             String s = "";
-            s = typesImgBaseUrl + "JSESSIONID=" + session + "&" + "name=" + allTypeImgsList.get(k);
+            s = getTypePhoto(session,allTypeImgsList.get(k));
             UploadItemBean uploadItemBean = new UploadItemBean(s,allTypeBeanList.get(k));
             lists.add(uploadItemBean);
         }

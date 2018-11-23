@@ -14,9 +14,6 @@ import java.util.List;
  * 所以使用Tablayout 的dynamic切换栏
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
- * @updateAuthor $Author$
- * @updateDes ${TODO}
  */
 public class TabLayoutViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentLists ;

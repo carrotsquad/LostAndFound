@@ -20,6 +20,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyViewPagerAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.NetworkImageIndicatorView;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
+import com.zhangqianyuan.teamwork.lostandfound.model.ThingDetailModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ThingDetailPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
@@ -42,7 +43,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-// TODO: 2018/11/13 需要完善，网络数据获取，添加评论等
+// TODO: 2018/11/13 需要完善添加评论
 public class ThingDetailActivity extends AppCompatActivity implements IThingDetailActivity {
 
     public static final String OTHERSNICKNAME = "OTHERSNICKNAME";
@@ -95,7 +96,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.thing_detail_viewpager)
     ViewPager viewPager;
 
-//    @BindView(R.id.thing_detail_viewpager_indicator)
     IndefinitePagerIndicator indicator;
 
 
@@ -117,7 +117,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         setContentView(R.layout.activity_thing_detail);
         ButterKnife.bind(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
-        thingDetailPresenter = new ThingDetailPresenter(this);
+        thingDetailPresenter = new ThingDetailPresenter(this, new ThingDetailModel());
         indicator = (IndefinitePagerIndicator)findViewById(R.id.thing_detail_viewpager_indicator);
         String imgs=initDataFromLocal();
         String[] a = imgs.split(",");
@@ -140,8 +140,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         LinearLayout.LayoutParams params=null;
         for (String s :
                 urlList) {
+            Log.e("ThingsDetail",s);
             imageView = new ImageView(this);
-            Glide.with(this)
+            Glide.with(ThingDetailActivity.this)
                     .load(getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),s))
                     .asBitmap()
                     .into(imageView);
@@ -225,12 +226,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
      */
     private void initDataFromWeb(){
         String session=sharedPreferences.getString(SESSION,"nought");
-        thingDetailPresenter.getDataFromWeb(ID, session);
     }
 
-    // TODO: 2018/11/13 需完善
     @Override
-    public void showDataFromWeb() {
+    public void showDataFromWeb(int status) {
 
     }
 }
