@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         mainViewAdapter.setFragments(fragments);
 
         mViewPager.setAdapter(mainViewAdapter);
+       mViewPager.setOffscreenPageLimit(3);
 
         //划页监听器
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

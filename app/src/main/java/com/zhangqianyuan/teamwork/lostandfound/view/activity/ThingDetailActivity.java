@@ -146,7 +146,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @Override
     protected void onDestroy() {
         thingDetailPresenter.dettachActivity();
-        mPopupWindow.dismiss();
         super.onDestroy();
     }
 

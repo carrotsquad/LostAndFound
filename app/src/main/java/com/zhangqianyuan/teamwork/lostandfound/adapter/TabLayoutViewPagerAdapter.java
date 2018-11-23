@@ -17,13 +17,14 @@ import java.util.List;
  */
 public class TabLayoutViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentLists ;
-    private List<String >  tabTitle  ;
+    private List<String> tabTitle  ;
 
     public TabLayoutViewPagerAdapter(FragmentManager fm,List<Fragment> fragmentList,
-                                     List<String> tabTitle){
+                                   List<String> tab ){
         super(fm);
         this.fragmentLists = fragmentList;
-        this.tabTitle=tabTitle;
+        this.tabTitle = tab;
+
     }
 
 

@@ -154,7 +154,5 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
             }
         }
     }
-
-
 }
 

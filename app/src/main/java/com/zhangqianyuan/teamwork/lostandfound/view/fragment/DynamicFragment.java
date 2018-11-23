@@ -27,7 +27,6 @@ import com.zhangqianyuan.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapter
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.MatchResult;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +61,6 @@ public class DynamicFragment extends Fragment {
     public DynamicFragment(String session){
         this.session = session;
     }
-     private List<Fragment> mFragments = new ArrayList<>();
 
     @Nullable
     @Override
@@ -86,6 +84,7 @@ public class DynamicFragment extends Fragment {
         /*如果把这两个list写在外面，当跳转的Fragment过多时 这个fragment被销毁 ，但是数据任然保存，再次进入这个fragment会再次执行onCreateView方法
           导致这两个list的长度无限增加
           */
+        List<Fragment> mFragments = new ArrayList<>();
         List<String>  title     = new ArrayList<>();
         mFragments.add(new DynamicChildFragment(0,session));
         mFragments.add(new DynamicChildFragment(1,session));
@@ -129,5 +128,5 @@ public class DynamicFragment extends Fragment {
             }
         });
     }
-    
+
 }
