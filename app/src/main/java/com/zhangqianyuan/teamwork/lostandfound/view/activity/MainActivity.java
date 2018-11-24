@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         mainViewAdapter.setFragments(fragments);
 
         mViewPager.setAdapter(mainViewAdapter);
-       mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setOffscreenPageLimit(3);
 
         //划页监听器
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -139,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            private MenuItem prevMenuItem;
             @Override
             public void onPageSelected(int position) {
                 if(position == 1||position==3){

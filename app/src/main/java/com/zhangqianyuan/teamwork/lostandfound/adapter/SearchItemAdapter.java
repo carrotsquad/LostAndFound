@@ -1,30 +1,34 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.utils.ArrowPopWindows;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
@@ -33,6 +37,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeLitt
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getUserPhoto;
+import static com.zhangqianyuan.teamwork.lostandfound.utils.ArrowPopWindows.SHOW_TOP;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
@@ -51,10 +56,15 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
+// TODO: 2018/11/25 完善删除item
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
 
     private ArrayList<DynamicItemBean> searchItemBeanArrayList;
     private Context mContext;
+    private Boolean isMessage;
+    private PopupWindow popupView;
+    private ArrowPopWindows arrowPopWindows;
+    private Activity activity;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -84,8 +94,10 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
     }
 
-    public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList){
+    public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList, Activity activity, Boolean isMessage){
         this.searchItemBeanArrayList = searchItemBeanArrayList;
+        this.isMessage = isMessage;
+        this.activity = activity;
     }
 
     @NonNull
@@ -95,7 +107,37 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             mContext=parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.search_item,parent,false);
+
+        if(isMessage){
+
+            //popupwindow
+            arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {
+                @Override
+                public void onViewCreate(ViewGroup viewGroup) {
+                    //设置点击的回调
+                    viewGroup.getChildAt(0).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            FancyToast.makeText(mContext,"你点了删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                            arrowPopWindows.dismiss();
+                        }
+                    });
+                }
+            });
+
+        }
+
+
         final ViewHolder holder = new ViewHolder(view);
+
+        holder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                arrowPopWindows.show(view,SHOW_TOP);
+                return true;
+            }
+        });
+
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,7 +239,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         holder.neckname.setText(dynamicItemBean.getNickname());
 
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
-
         Log.e("ThingsType",allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1));
 
         //类型图片

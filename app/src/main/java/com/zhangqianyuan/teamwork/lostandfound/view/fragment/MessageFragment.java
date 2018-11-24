@@ -88,7 +88,7 @@ public class MessageFragment extends Fragment implements IMessageFragment{
     private void initView(){
         recyclerView = view.findViewById(R.id.message_recyclerview);
         gridLayoutManager = new GridLayoutManager(mContext,1);
-        searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list);
+        searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,getActivity(),true);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(searchItemAdapter);
     }

@@ -84,4 +84,33 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+    <style name="Animations"/>
+
+    <style name="Animations.PopUpMenu"/>
+
+    <style name="Animations.PopUpMenu.Center">
+        <item name="android:windowEnterAnimation">@anim/grow_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_top</item>
+    </style>
+
+    <style name="Animations.PopDownMenu"/>
+
+    <style name="Animations.PopDownMenu.Center">
+        <item name="android:windowEnterAnimation">@anim/grow_from_top</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_bottom</item>
+    </style>
+
+    <style name="Animations.PopUpRightMenu"/>
+    <style name="Animations.PopUpRightMenu.Center">
+        <item name="android:windowEnterAnimation">@anim/grow_from_right</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_right</item>
+    </style>
+
+    <style name="Animations.PopUpLeftMenu"/>
+    <style name="Animations.PopUpLeftMenu.Center">
+        <item name="android:windowEnterAnimation">@anim/grow_from_left</item>
+        <item name="android:windowExitAnimation">@anim/shrink_from_left</item>
+    </style>
+
 </resources>

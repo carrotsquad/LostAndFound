@@ -87,6 +87,9 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
     //断点下载库
     implementation 'com.mindorks.android:prdownloader:0.4.0'
+    //popupwindow
+    implementation 'com.github.razerdp:BasePopup:2.0.9'
+    implementation 'com.github.douglasjunior:android-simple-tooltip:0.2.2'
 
     //内存泄漏检查
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'

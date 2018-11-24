@@ -143,7 +143,7 @@
             android:drawableStart="@drawable/ic_time"
             android:ems="12"
             android:textColor="@color/black"
-            android:text="请点击选择丢失时间(必选)"
+            android:text="请选择丢失时间(必选)"
             android:inputType="datetime"
             android:textSize="20sp"
             tools:ignore="MissingConstraints" />
@@ -155,7 +155,7 @@
             android:layout_alignStart="@+id/upload_lostorfind_time"
             android:layout_below="@id/upload_lostorfind_time"
             android:drawableStart="@drawable/ic_where"
-            android:text="请点击选择丢失地点(必选)"
+            android:text="请选择丢失地点(必选)"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -167,7 +167,7 @@
             android:layout_below="@id/upload_lostorfind_place"
             android:layout_alignStart="@+id/upload_lostorfind_time"
             android:layout_marginBottom="12dp"
-            android:text="请点击选择丢失地点(可选,默认无)"
+            android:text="请选择是否要酬金(可选,默认无)"
             android:textColor="@color/black"
             android:drawableStart="@drawable/ic_bounty"
             android:textSize="20sp" />

@@ -152,7 +152,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         popupViews= Arrays.asList(diushitypesView, placesView, thingsView);
 
         //初始化recyclerView
-        searchItemAdapter = new SearchItemAdapter(searchItemBeanArrayList);
+        searchItemAdapter = new SearchItemAdapter(searchItemBeanArrayList,getActivity(),false);
         recyclerView = new RecyclerView(context);
         recyclerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         gridLayoutManager = new GridLayoutManager(context,1);
