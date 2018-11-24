@@ -15,6 +15,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.BAD_INTERNET_STATUS;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.FINE_INTERNET_STATUS;
+
 /**
  * Description: 失物/招领启事详情Presenter
  * Created at: 2018/11/13 13:28
@@ -56,9 +59,10 @@ public class ThingDetailPresenter extends AbstractBasePresenter<IThingDetailActi
             ThingDetailModel.getInternetData(session, lostid, start, end, new Callback<CommentFeedBack>() {
                 @Override
                 public void onResponse(Call<CommentFeedBack> call, Response<CommentFeedBack> response) {
-                    if (response.body().getStatus()==200){
+                    if (response.body()==null||response.body().getStatus()==BAD_INTERNET_STATUS){
+
+                    }else if(response.body().getStatus()==FINE_INTERNET_STATUS){
                         v.getDataFromWeb(response.body().getDynamics());
-                    }else if(response.body().getStatus()==400){
                         Log.d("ThingDetailPresenter","status is 400");
                     }
                 }

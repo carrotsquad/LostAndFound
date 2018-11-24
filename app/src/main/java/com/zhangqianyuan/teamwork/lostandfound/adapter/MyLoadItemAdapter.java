@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
@@ -38,7 +40,7 @@ import butterknife.ButterKnife;
  */
 
 public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.ViewHolder>  {
-    private List<MyHistoryItem.DataBean> lists ;
+    private List<TheLostBean> lists ;
     private Context mContext;
 
 
@@ -70,7 +72,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         }
     }
 
-    public MyLoadItemAdapter (List<MyHistoryItem.DataBean> list){
+    public MyLoadItemAdapter (List<TheLostBean> list){
         this.lists=list;
     }
     @NonNull

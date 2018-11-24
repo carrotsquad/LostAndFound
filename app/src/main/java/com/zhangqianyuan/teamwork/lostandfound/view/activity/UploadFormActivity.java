@@ -150,7 +150,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         ButterKnife.bind(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         Intent intent = getIntent();
-        qishileixing =intent.getIntExtra(QISHILEIXING,1);
+        qishileixing =intent.getIntExtra(QISHILEIXING,0);
         typeid =intent.getIntExtra(TYPEID,1);
         strtitle = titleEdit.getText().toString();
         strdescri = descEdit.getText().toString();
@@ -223,6 +223,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         List<String> isNeedBountyArray = new ArrayList<>();
         isNeedBountyArray.add("是");
         isNeedBountyArray.add("否");
+
         //赏金选择
         pvOptionsBounty = new OptionsPickerBuilder(UploadFormActivity.this, new OnOptionsSelectListener() {
             @Override
@@ -272,18 +273,24 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 .build();
         pvOptionsPlace.setPicker(allPlaceBeanList);
 
-
-//        ArrayAdapter<String> placeArrayAdapter = new ArrayAdapter<>(this,R.layout.spin_item, R.id.spin_text,allPlaceBeanList);
-//        ArrayAdapter<String> isNeedBountyArrayAdapter = new ArrayAdapter<>(this,R.layout.spin_item, R.id.spin_text,isNeedBountyArray);
-//        where.setAdapter(placeArrayAdapter);
-//        bounty.setAdapter(isNeedBountyArrayAdapter);
-
         //时间选择器
         pvTime = new TimePickerBuilder(UploadFormActivity.this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
                 strLostDate = "";
-                strLostDate = String.valueOf(getYear(date))+String.valueOf(getMonth(date))+String.valueOf(getDay(date));
+                String month = "";
+                String day = "";
+                if(getMonth(date)<=9){
+                    month = "0" + String.valueOf(getMonth(date));
+                }else {
+                    month = String.valueOf(getMonth(date));
+                }
+                if(getMonth(date)<=9){
+                    day = "0" + String.valueOf(getDay(date));
+                }else {
+                    day = String.valueOf(getDay(date));
+                }
+                strLostDate = String.valueOf(getYear(date))+month+day;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import java.util.List;
 import butterknife.BindView;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  */
 // TODO: 2018/11/15 完善服务器传递  item对象到list中
 public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.ViewHolder>  {
-    private List<MyHistoryItem.DataBean> lists ;
+    private List<TheLostBean> lists ;
     private Context mContext;
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
@@ -59,7 +60,7 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
         }
     }
 
-    public MyHistoryAdapter (List<MyHistoryItem.DataBean> lists){
+    public MyHistoryAdapter (List<TheLostBean> lists){
       this.lists=lists;
     }
     @NonNull

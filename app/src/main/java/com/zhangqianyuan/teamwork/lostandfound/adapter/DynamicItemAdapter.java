@@ -191,7 +191,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         //类型图片
         Glide.with(mContext)
-                .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid())))
+                .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
                 .asBitmap()
                 .into(holder.thingType);
 

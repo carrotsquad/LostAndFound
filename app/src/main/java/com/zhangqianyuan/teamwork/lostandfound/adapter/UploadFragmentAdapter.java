@@ -15,8 +15,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UploadItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
-import com.zhangqianyuan.teamwork.lostandfound.view.activity.UploadActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UploadFormActivity;
 
 import java.util.List;
@@ -83,10 +81,14 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UploadItemBean bean = lists.get(position);
-        Glide.with(mContext)
-                .load(bean.getTypeImgId())
-                .asBitmap()
-                .into(holder.img);
+        if(position==0){
+            holder.img.setImageResource(R.drawable.ic_keys);
+        }else {
+            Glide.with(mContext)
+                    .load(bean.getTypeImgId())
+                    .asBitmap()
+                    .into(holder.img);
+        }
         //       holder.img.setImageResource(bean.getTypeImgId());
         holder.text.setText(bean.getTypeText());
         Log.e("TypesImgUrl",bean.getTypeImgId());

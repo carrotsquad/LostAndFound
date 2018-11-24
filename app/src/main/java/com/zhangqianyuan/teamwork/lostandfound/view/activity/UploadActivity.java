@@ -55,7 +55,9 @@ public class UploadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
-        initLists();
+        if(savedInstanceState == null) {
+            initLists();
+        }
         initView();
     }
 
@@ -66,7 +68,6 @@ public class UploadActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        initLists();
         super.onResume();
     }
 
@@ -88,7 +89,7 @@ public class UploadActivity extends AppCompatActivity {
         int i = allTypeImgsList.size();
         String session = sharedPreferences.getString(SESSION," ");
         for(int k = 0; k < i; k++){
-            String s ;
+            String s = "";
             s = AllURI.getTypePhoto(session,allTypeImgsList.get(k));
             UploadItemBean uploadItemBean = new UploadItemBean(s,allTypeBeanList.get(k));
             lists.add(uploadItemBean);

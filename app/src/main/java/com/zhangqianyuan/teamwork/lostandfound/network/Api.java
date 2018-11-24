@@ -119,7 +119,10 @@ public interface Api {
     @FormUrlEncoded
     Call<MyHistoryItem> getMyHistoryData(@Field("JSESSIONID")String jsessionid,@Field("requestData") String bean);
 
-
+    //获取评论过的消息
+    @POST("/passlove/dynamics/commented")
+    @FormUrlEncoded
+    Observable<SearchBean> getMyCommentedData(@Field("JSESSIONID")String jsessionid);
 
 
     //退出登录
@@ -152,5 +155,6 @@ public interface Api {
     @FormUrlEncoded
     @POST("passlove/comment/get")
     Call<CommentFeedBack>  getComment(@Field("JSESSIONID") String jsessionid,@Field("requestData") String bean);
+
 
 }

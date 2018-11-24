@@ -12,6 +12,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyLoadItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MyHistoryPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyHistoryActivity;
@@ -31,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 // TODO: 2018/11/13  加入 上传item数据
 public class UserInfoMyUpload extends AppCompatActivity implements IMyHistoryActivity {
-    private List<MyHistoryItem.DataBean> lists = new ArrayList<>();
+    private List<TheLostBean> lists = new ArrayList<>();
     private MyHistoryPresenter presenter = new MyHistoryPresenter(new MyHistoryModel());
     private MyLoadItemAdapter  mAdapter ;
    @BindView(R.id.myhistory_myload_list)
@@ -51,16 +52,16 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyHistoryAct
         list.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @Override
-    public void showData(List<MyHistoryItem.DataBean> beans) {
-       lists.clear();
-       lists.addAll(beans);
-       mAdapter=new MyLoadItemAdapter(lists);
-       list.setAdapter(mAdapter);
-    }
-
     public void initMvp(){
         presenter.attachActivity(this);
         presenter.getMyHistoryData(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),0,15);
+    }
+
+    @Override
+    public void showData(List<TheLostBean> beans) {
+        lists.clear();
+        lists.addAll(beans);
+        mAdapter=new MyLoadItemAdapter(lists);
+        list.setAdapter(mAdapter);
     }
 }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -196,9 +197,12 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         holder.neckname.setText(dynamicItemBean.getNickname());
 
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
+
+        Log.e("ThingsType",allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1));
+
         //类型图片
         Glide.with(mContext)
-                .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid())))
+                .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
                 .asBitmap()
                 .into(holder.thingType);
 

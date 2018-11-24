@@ -1,15 +1,19 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,7 +25,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.leakcanary.LeakCanary;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
@@ -94,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Intent intent = getIntent();
         session = intent.getStringExtra(SESSION);
-       // getSharePrefrenceData();
+        initPermission();
     }
 
 
@@ -236,6 +242,38 @@ public class MainActivity extends AppCompatActivity {
                 mPopWindow.dismiss();
             }
         });
+    }
+
+
+    /**
+     * 申请权限
+     */
+    private void initPermission() {
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.INTERNET, Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        }
+    }
+
+    /**
+     * 申请权限回调
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 1:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                } else {
+                    FancyToast.makeText(MainActivity.this,"你拒绝了权限", FancyToast.ERROR, Toast.LENGTH_SHORT,false).show();
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     
