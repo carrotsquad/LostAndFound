@@ -112,7 +112,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         ActivityManager.getActivityManager().addF(this);
         getSharePrefrence();
         initMVP();
-        initView();
+
         return view;
     }
 
@@ -189,18 +189,18 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     public void getSharePrefrence(){
         SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
-        jsession=preferences.getString("SESSION","null");
-        nick=preferences.getString("NICKNAME","null");
+        jsession=preferences.getString("SESSION",null);
+        nick=preferences.getString("NICKNAME",null);
     }
 
-    public void initView(){
-        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
-        Glide.with(this)
-                .load(AllURI.getUserPhoto(preferences.getString("SESSION",null),preferences.getString("USERPHOTO",null)))
-                .asBitmap()
-                .into(headImg);
-        headTxt.setText(nick);
-    }
+//    public void initView(){
+//        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
+//        Glide.with(this)
+//                .load(AllURI.getUserPhoto(preferences.getString("SESSION",null),preferences.getString("USERPHOTO",null)))
+//                .asBitmap()
+//                .into(headImg);
+//        headTxt.setText(nick);
+//    }
 
 
     @OnClick({R.id.userinfo_head_img,R.id.userinfo_head_nick,R.id.userinfo_myupload_layout,
@@ -228,11 +228,13 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     @Override
     public  void onResume() {
+        Log.d("15486622","heihiehie");
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users",MODE_PRIVATE);
         Glide.with(mContext)
                 .load(AllURI.getUserPhoto(sharedPreferences.getString("SESSION",null),sharedPreferences.getString("USERPHOTO",null)))
                 .asBitmap()
                 .into(headImg);
+        Log.d("15486622",""+AllURI.getUserPhoto(sharedPreferences.getString("SESSION",null),sharedPreferences.getString("USERPHOTO",null)));
         headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString("NICKNAME",null));
         super.onResume();
     }

@@ -233,7 +233,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         if (status){
             Log.d("test","hahaha");
             SharedPreferences.Editor editor = getSharedPreferences("users",MODE_PRIVATE).edit();
-            editor.putString(signInBean.getUser().getPhoto(),null);
+            editor.putString("USERPHOTO",signInBean.getUser().getPhoto());
             editor.commit();
         }
         Log.d("test","xixixi");
