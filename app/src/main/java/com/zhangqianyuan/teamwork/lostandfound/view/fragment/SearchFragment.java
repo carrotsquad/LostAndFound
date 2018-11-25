@@ -30,6 +30,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ISearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.SearchPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
 
 import java.util.ArrayList;
@@ -99,6 +100,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         context = getContext();
         sharedPreferences = context.getSharedPreferences("users", Context.MODE_PRIVATE);
         iSearchPresenter = new SearchPresenter(SearchFragment.this);
+        ActivityManager.getActivityManager().addF(this);
         initView();
         setOnClick();
         return view;

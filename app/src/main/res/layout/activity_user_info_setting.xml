@@ -16,6 +16,12 @@
       android:layout_height="?attr/actionBarSize"
       >
 
+    <ImageView
+        android:id="@+id/setting_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/back" />
     <TextView
         android:gravity="center"
         android:layout_gravity="center"
@@ -93,7 +99,13 @@
           android:text="我是一个家用户"
           android:textColor="@color/black"
           android:textSize="15sp" />
-
+      <ImageView
+          android:src="@drawable/rightpoint"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="10dp"
+          android:layout_alignParentRight="true"
+          android:layout_width="20dp"
+          android:layout_height="30dp" />
       <View
           android:layout_alignParentBottom="true"
           android:layout_width="match_parent"
@@ -167,7 +179,13 @@
         android:text="我是一个家用户"
         android:textColor="@color/black"
         android:textSize="15sp" />
-
+      <ImageView
+          android:src="@drawable/rightpoint"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="10dp"
+          android:layout_alignParentRight="true"
+          android:layout_width="20dp"
+          android:layout_height="30dp" />
     <View
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -194,6 +212,14 @@
           android:text="修改密码"
           android:textColor="@color/black"
           android:textSize="15sp" />
+
+      <ImageView
+          android:src="@drawable/rightpoint"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="10dp"
+          android:layout_alignParentRight="true"
+          android:layout_width="20dp"
+          android:layout_height="30dp" />
 
       <View
           android:layout_alignParentBottom="true"

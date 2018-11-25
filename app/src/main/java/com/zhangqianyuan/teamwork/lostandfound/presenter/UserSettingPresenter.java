@@ -31,7 +31,7 @@ public class UserSettingPresenter extends BasePresenter<IUserSettingActivity>  i
         mUserSettingModel.exitAccount(jsessionId, new Callback<StatusBean>() {
             @Override
             public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
-                getV().onSuccess(response.body().getStatus());
+                getV().settingOnSuccess(response.body().getStatus());
                 Log.d(T,"response=="+response.body().toString());
             }
 

@@ -54,15 +54,15 @@ public class ThingDetailPresenter extends AbstractBasePresenter<IThingDetailActi
     }
 
     @Override
-    public void getDataFromWeb(String session, int lostid, int start, int end) {
+    public void getDataFromWeb(String session, int lostid) {
         if (isAttachActivity()){
-            ThingDetailModel.getInternetData(session, lostid, start, end, new Callback<CommentFeedBack>() {
+            ThingDetailModel.getInternetData(session, lostid, new Callback<CommentFeedBack>() {
                 @Override
                 public void onResponse(Call<CommentFeedBack> call, Response<CommentFeedBack> response) {
                     if (response.body()==null||response.body().getStatus()==BAD_INTERNET_STATUS){
 
                     }else if(response.body().getStatus()==FINE_INTERNET_STATUS){
-                        v.getDataFromWeb(response.body().getDynamics());
+                        v.getDataFromWeb(response.body().getComments());
                         Log.d("ThingDetailPresenter","status is 400");
                     }
                 }

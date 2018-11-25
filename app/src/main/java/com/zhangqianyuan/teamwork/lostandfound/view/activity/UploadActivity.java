@@ -17,6 +17,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.UploadFragmentAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UploadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class UploadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
+        ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         if(savedInstanceState == null) {
             initLists();

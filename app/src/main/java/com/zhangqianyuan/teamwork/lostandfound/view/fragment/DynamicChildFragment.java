@@ -21,6 +21,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.DynamicPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.IDynamicPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IDynaicFragment;
 
 import java.util.ArrayList;
@@ -68,6 +69,7 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
        mRecyclerView = view.findViewById(R.id.dynamic_list);
         refreshLayout = view.findViewById(R.id.dynamic_list_swipe);
         GridLayoutManager manager = new GridLayoutManager(getContext(),2);
+        ActivityManager.getActivityManager().addF(this);
 
         mRecyclerView.setLayoutManager(manager);
         mDynamicItemAdapter = new DynamicItemAdapter(lists);

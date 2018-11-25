@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +39,7 @@ public class InitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
         ButterKnife.bind(this);
+        ActivityManager.getActivityManager().add(this);
 
         //如果已经登录过，直接进入登陆界面
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);

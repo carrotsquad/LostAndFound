@@ -33,6 +33,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.MessageFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActivityManager.getActivityManager().add(this);
         ButterKnife.bind(this);
         try {
             initView();
@@ -299,6 +301,5 @@ public class MainActivity extends AppCompatActivity {
             Log.e("BNVHelper", "Unable to change value of shift mode", e);
         }
     }
-
 
 }

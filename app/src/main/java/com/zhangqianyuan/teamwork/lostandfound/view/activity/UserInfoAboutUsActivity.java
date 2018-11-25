@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,8 +63,10 @@ public class UserInfoAboutUsActivity extends AppCompatActivity {
             case R.id.aboutus_updatelayout:
                 break;
             case R.id.aboutus_applayout:
+                startActivity(new Intent(UserInfoAboutUsActivity.this,AbouDiAi.class));
                 break;
             case R.id.aboutus_mainze:
+                startActivity(new Intent(UserInfoAboutUsActivity.this,AboutUsDetailActivity.class));
                 break;
             case R.id.aboutus_web:
                 break;

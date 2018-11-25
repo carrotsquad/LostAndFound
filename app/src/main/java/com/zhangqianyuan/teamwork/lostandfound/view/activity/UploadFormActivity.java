@@ -32,6 +32,7 @@ import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.network.Form;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.IUploadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UploadPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUploadFormActivity;
 
 import java.io.File;
@@ -148,6 +149,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
         ButterKnife.bind(this);
+        ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         qishileixing =intent.getIntExtra(QISHILEIXING,0);

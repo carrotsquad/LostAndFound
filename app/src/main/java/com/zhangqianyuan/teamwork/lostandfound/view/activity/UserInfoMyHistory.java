@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyHistoryAdapter;
@@ -14,6 +16,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MyHistoryPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyHistoryActivity;
 
 
@@ -38,18 +41,28 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
     @BindView(R.id.myhistory_list)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.myhistory_back)
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_my_history);
+        ActivityManager.getActivityManager().add(this);
         initView();
         initMvp();
+
     }
 
     public void initView(){
         ButterKnife.bind(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 

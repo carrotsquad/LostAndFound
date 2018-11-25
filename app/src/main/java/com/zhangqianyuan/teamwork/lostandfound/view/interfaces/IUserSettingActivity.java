@@ -9,5 +9,5 @@ package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
  */
 public interface IUserSettingActivity extends BaseView {
 
-    void onSuccess(int status);
+    void settingOnSuccess(int status);
 }

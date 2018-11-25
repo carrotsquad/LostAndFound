@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout      xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload">
+    tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.AbouDiAi">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/setting_bar"
         android:background="@drawable/barbackgroud"
@@ -12,28 +13,43 @@
         android:layout_height="?attr/actionBarSize">
 
         <ImageView
-            android:id="@+id/myupload_back"
+            android:id="@+id/aboutdiail_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:src="@drawable/back" />
+
         <TextView
-            android:gravity="center"
-            android:layout_gravity="center"
             android:textColor="@color/white"
-            android:textSize="25dp"
-            android:text="我的发布"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:text="关于递爱"
+            android:layout_gravity="center"
+            android:id="@+id/aboutus_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
+
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
+
+    <RelativeLayout
         android:layout_below="@id/setting_bar"
-        android:id="@+id/myhistory_myload_list"
+        android:id="@+id/aboutus_headlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="160dp" >
+        <ImageView
+            android:src="@mipmap/diai"
+            android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </RelativeLayout>
 
-    </android.support.v7.widget.RecyclerView>
-
+    <TextView
+        android:paddingStart="5dp"
+        android:layout_below="@id/aboutus_headlayout"
+        android:textColor="@color/black"
+        android:id="@+id/aboutdiai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

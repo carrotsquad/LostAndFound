@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.model.EditInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.EditInfoPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IEditInfoActivity;
 
 import butterknife.BindView;
@@ -29,10 +31,14 @@ public class ChangeNickNameActivity extends AppCompatActivity implements IEditIn
     @BindView(R.id.edit_nicklayout_txt)
     EditText  nick;
 
+    @BindView(R.id.changenick_back)
+    ImageView back;
+
     private EditInfoPresenter mEditInfoPresenter;
     private SharedPreferences mSharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActivityManager.getActivityManager().add(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_nick_name);
         ButterKnife.bind(this);
@@ -46,13 +52,22 @@ public class ChangeNickNameActivity extends AppCompatActivity implements IEditIn
     }
 
 
-    @OnClick({R.id.edit_nickname_ok})
+    @OnClick({R.id.edit_nickname_ok,R.id.changenick_back})
     public void onClick(View view){
-        if (!nick.getText().toString().equals("")){
-            mEditInfoPresenter.uploadNeckName(mSharedPreferences.getString("SESSION",null),nick.getText().toString());
-        }else{
-            Toast.makeText(ChangeNickNameActivity.this,"请输入昵称",Toast.LENGTH_SHORT).show();
+        switch (view.getId()){
+            case R.id.edit_nickname_ok:
+                if (!nick.getText().toString().equals("")){
+                    mEditInfoPresenter.uploadNeckName(mSharedPreferences.getString("SESSION",null),nick.getText().toString());
+                }else{
+                    Toast.makeText(ChangeNickNameActivity.this,"请输入昵称",Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.changenick_back:
+                finish();
+                break;
+
         }
+
     }
 
     @Override

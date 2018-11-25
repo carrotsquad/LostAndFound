@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class CommentFeedBack {
     private  int status;
-    private List<Dynamics> dynamics;
+    private List<Comments> comments;
 
-   public  static class Dynamics{
+   public  static class Comments{
         private String username;
         private String nickname;
         private String  photo;
@@ -101,11 +101,11 @@ public class CommentFeedBack {
         this.status = status;
     }
 
-    public List<Dynamics> getDynamics() {
-        return dynamics;
+    public List<Comments> getComments() {
+        return comments;
     }
 
-    public void setDynamics(List<Dynamics> dynamics) {
-        this.dynamics = dynamics;
+    public void setComments(List<Comments> dynamics) {
+        this.comments = dynamics;
     }
 }

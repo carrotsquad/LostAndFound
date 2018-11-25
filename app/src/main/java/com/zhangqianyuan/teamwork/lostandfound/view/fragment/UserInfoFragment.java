@@ -28,6 +28,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
 //import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
@@ -108,6 +109,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         View view = inflater.inflate(R.layout.fragment_userinfo,container,false);
         ButterKnife.bind(this,view);
         mContext = getContext();
+        ActivityManager.getActivityManager().addF(this);
         getSharePrefrence();
         initMVP();
         initView();
@@ -226,6 +228,11 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     @Override
     public  void onResume() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users",MODE_PRIVATE);
+        Glide.with(mContext)
+                .load(AllURI.getUserPhoto(sharedPreferences.getString("SESSION",null),sharedPreferences.getString("USERPHOTO",null)))
+                .asBitmap()
+                .into(headImg);
         headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString("NICKNAME",null));
         super.onResume();
     }

@@ -21,14 +21,17 @@
         <activity
             android:name=".view.activity.LogInActivity"
             android:label="@string/title_activity_log_in"
-            android:theme="@style/AppTheme"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".view.activity.VerifyActivity"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".view.activity.SignInActivity"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".view.activity.ThingDetailActivity"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.activity.VerifyActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".view.activity.SignInActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".view.activity.ThingDetailActivity"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".view.activity.UserInfoSettingActivity"
             android:label="@string/editInfo"
@@ -44,7 +47,7 @@
             android:name=".view.activity.UserInfoMyUpload"
             android:label="我的发布"
             android:theme="@style/AppTheme" />
-        <!--<activity android:name=".view.activity.UserSettingEditInfoActivity" />-->
+        <!-- <activity android:name=".view.activity.UserSettingEditInfoActivity" /> -->
         <activity android:name=".view.activity.InitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,7 +58,10 @@
         <activity android:name=".view.activity.UploadSuccessActivity" />
         <activity android:name=".view.activity.ChangeNickNameActivity" />
         <activity android:name=".view.activity.ChangePhoneActivty" />
-        <!--<activity android:name=".view.activity.ChangePasswordsActivity"></activity>-->
+        <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
+        <activity android:name=".view.activity.AboutUsDetailActivity" />
+        <activity android:name=".view.activity.AbouDiAi" />
+        <activity android:name=".view.activity.OurWebActivity"></activity>
     </application>
 
 </manifest>

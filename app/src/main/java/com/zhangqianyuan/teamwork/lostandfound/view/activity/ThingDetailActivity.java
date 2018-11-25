@@ -19,6 +19,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,9 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.model.ThingDetailModel;
+import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ThingDetailPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
 import java.util.ArrayList;
@@ -107,6 +110,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.thing_detail_viewpager)
     ViewPager viewPager;
 
+   @BindView(R.id.clicktocomment_layout)
+    RelativeLayout clicktocomment;
+
 
     private int lostid;
     private SharedPreferences sharedPreferences;
@@ -117,7 +123,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private LinearLayout activity_main_llpoints;
     private List<ImageView> imageViewList;;
     private int viewPagerLastIndex;
-    private List<CommentFeedBack.Dynamics> mCommentList  =new ArrayList<>();
+    private List<CommentFeedBack.Comments> mCommentList  =new ArrayList<>();
     private ThingDetailAdapter adapter;
 
 
@@ -127,6 +133,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thing_detail);
         ButterKnife.bind(this);
+        ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this,new ThingDetailModel());
 
@@ -134,13 +141,23 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String[] a = imgs.split(",");
         initViewPager(Arrays.asList(a));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid,0,15);
-        userimg.setOnClickListener(new View.OnClickListener() {
+        thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
+        initHeadImg();
+        clicktocomment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popup();
             }
         });
+    }
+
+
+    public void initHeadImg(){
+        Glide.with(this)
+                .load(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
+                        getSharedPreferences("users",MODE_PRIVATE).getString("USERPHOTO",null)))
+                .asBitmap()
+                .into(userimg);
     }
 
     @Override
@@ -266,6 +283,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                     newComment.setTime(null);
                     newComment.setContent(s);
                     thingDetailPresenter.sendDataToWeb(sharedPreferences.getString("SESSION",null),null,lostid,null,s);
+                    thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
                     commentInput.setText("");
                 }else{
                     Toast.makeText(ThingDetailActivity.this,"没有输入内容哦",Toast.LENGTH_SHORT).show();
@@ -293,15 +311,16 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     }
 
     @Override
-    public void getDataFromWeb(List<CommentFeedBack.Dynamics> list) {
+    public void getDataFromWeb(List<CommentFeedBack.Comments> list) {
         if(list!=null){
+            mCommentList.clear();
         this.mCommentList = list;
-        adapter = new ThingDetailAdapter(mCommentList);
+        Log.d("commentfuck",""+list.toString());
+        adapter = new ThingDetailAdapter(mCommentList,this);
         recyclerView.setAdapter(adapter);
     }
 
     }
-
 
 }
 

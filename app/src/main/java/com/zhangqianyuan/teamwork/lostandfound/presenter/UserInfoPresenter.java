@@ -31,26 +31,6 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoFragment> implemen
         this.mUserInfoModel = model;
     }
 
-//    @Override
-//    public void getUserInfoData() {
-//        if (isAttachActivity()){
-//          mUserInfoModel.getUserInfoData(new Callback<UserInfoBean>() {
-//              @Override
-//              public void onResponse( Call<UserInfoBean> call, Response<UserInfoBean> response) throws NullPointerException{
-//                  if (!response.body().toString().equals("")){
-//                      Log.d(T,"response is not null");
-//                      assert response.body() != null;
-//                      getV().showData(response.body().getHeadImg(),response.body().getNeckname(),response.body().getPhone(),response.body().getEmai());
-//                  }
-//              }
-//
-//              @Override
-//              public void onFailure(Call<UserInfoBean> call, Throwable t) {
-//                   Log.d(T,"error"+t.toString());
-//              }
-//          });
-//        }
-//    }
 
     @Override
     public void uploadHeadImg(String jsessionId, File imgFile) {

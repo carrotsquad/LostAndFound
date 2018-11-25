@@ -18,6 +18,7 @@ import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.IMyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
 
 import java.util.ArrayList;
@@ -61,6 +62,7 @@ public class MessageFragment extends Fragment implements IMessageFragment{
         mContext = getContext();
         messagePresenter = new MessagePresenter(this);
         sharedPreferences = mContext.getSharedPreferences("users",Context.MODE_PRIVATE);
+        ActivityManager.getActivityManager().addF(this);
         initView();
         if(savedInstanceState == null) {
             initList();

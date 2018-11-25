@@ -7,12 +7,18 @@
     tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.ChangeNickNameActivity">
 
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
         android:id="@+id/setting_bar"
         android:background="@drawable/barbackgroud"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
+        <ImageView
+            android:id="@+id/changenick_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back" />
         <TextView
             android:gravity="center"
             android:layout_gravity="center"
@@ -21,7 +27,7 @@
             android:text="修改昵称"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
-    </android.support.design.widget.AppBarLayout>
+    </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
         android:layout_marginTop="20dp"

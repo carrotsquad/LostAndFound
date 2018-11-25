@@ -5,6 +5,6 @@ public interface IThingDetailPresenter {
     void sendDataToWeb(String session, Integer id,int lostid, String time, String content);
 
     //得到评论
-    void getDataFromWeb(String session,int lostid,int start,int end);
+    void getDataFromWeb(String session,int lostid);
 
 }

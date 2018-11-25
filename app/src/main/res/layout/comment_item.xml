@@ -26,6 +26,7 @@
         />
 
     <TextView
+        android:textSize="11dp"
         android:textColor="@color/black"
         android:layout_marginTop="2dp"
         android:id="@+id/comment_item_date"

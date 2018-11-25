@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 
 import com.zhangqianyuan.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapter;
-
+import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 
 
 import java.util.ArrayList;
@@ -67,6 +67,7 @@ public class DynamicFragment extends Fragment {
         //bind（）参数为空间所在的layout
         mViewPager = (ViewPager)view.findViewById(R.id.dynamic_viewpager);
         tab = (TabLayout)view.findViewById(R.id.dynamic_fragment_tablayout);
+        ActivityManager.getActivityManager().addF(this);
         if (savedInstanceState==null){
             linkBottomWithViewpager();
         }

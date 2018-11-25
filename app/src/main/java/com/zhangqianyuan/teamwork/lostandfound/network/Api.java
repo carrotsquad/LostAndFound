@@ -154,7 +154,7 @@ public interface Api {
     //展示评论
     @FormUrlEncoded
     @POST("passlove/comment/get")
-    Call<CommentFeedBack>  getComment(@Field("JSESSIONID") String jsessionid,@Field("requestData") String bean);
+    Call<CommentFeedBack>  getComment(@Field("JSESSIONID") String jsessionid,@Field("lostid") int bean);
 
 
 }

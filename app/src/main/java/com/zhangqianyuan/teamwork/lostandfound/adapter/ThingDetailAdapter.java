@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.List;
 
@@ -29,9 +31,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @version $Rev$
  */
 public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.ViewHolder> {
-    private List<CommentFeedBack.Dynamics>  bean;
+    private List<CommentFeedBack.Comments>  bean;
     private Context mContext;
     private SharedPreferences mSharedPreferences;
+    private ThingDetailActivity mThingDetailActivity;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.comment_item_photo)
@@ -52,8 +55,9 @@ public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.
         }
     }
 
-    public ThingDetailAdapter( List<CommentFeedBack.Dynamics> list){
+    public ThingDetailAdapter(List<CommentFeedBack.Comments> list, ThingDetailActivity activity){
         this.bean = list;
+        mThingDetailActivity = activity;
     }
 
 
@@ -62,6 +66,12 @@ public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         View view = LayoutInflater.from(mContext).inflate(R.layout.comment_item,parent,false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mThingDetailActivity.popup();
+            }
+        });
         return new ViewHolder(view);
     }
 
