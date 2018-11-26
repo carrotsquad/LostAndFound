@@ -2,7 +2,9 @@ package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
@@ -21,9 +23,12 @@ public class OurWebActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_our_web);
         ButterKnife.bind(this);
-        web.getSettings().setJavaScriptEnabled(true);
-        web.getSettings().setDomStorageEnabled(true);//打开DOM存储API
-        web.setWebChromeClient(new WebChromeClient());
-        web.loadUrl(OurWebsite);
+        WebSettings webSettings = web.getSettings();//获取webview设置属性
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);//把html中的内容放大webview等宽的一列中
+        webSettings.setJavaScriptEnabled(true);//支持js
+        webSettings.setBuiltInZoomControls(true); // 显示放大缩小
+        webSettings.setSupportZoom(true); // 可以缩放
+
+
     }
 }

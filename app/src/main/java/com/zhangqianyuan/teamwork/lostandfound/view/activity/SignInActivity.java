@@ -73,6 +73,8 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
 
     private Intent mIntent;
     private String session;
+    //判断是否用户自己选择退出
+    private boolean  isExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,18 +86,24 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         register.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
         signPresenter = new SignPresenter(this);
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
+        isExit = getIntent().getBooleanExtra("isExit",false);
+        Log.d("hashmap","hahaha"+isExit);
         //如果已经登录过，再次登陆，进入主页面
-        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
+        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))&&!isExit){
             email.setText(sharedPreferences.getString(EMAIL, "null"));
             pwd.setText(sharedPreferences.getString(SESSION, "null"));
             signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "balabala"),sharedPreferences.getString(PWD, "balabala"));
-        }else {
+        }else if (isExit) {
+            email.setText("");
+            pwd.setText("");
+            isExit=false;
+        }else{
             mIntent=getIntent();
             if(mIntent.getIntExtra(SIGNIN,0)==1){
                 signPresenter.getSignIn(mIntent.getStringExtra(EMAIL),mIntent.getStringExtra(PWD));
-            }
-        }
-    }
+            }}}
+
+
 
     @Override
     protected void onDestroy() {

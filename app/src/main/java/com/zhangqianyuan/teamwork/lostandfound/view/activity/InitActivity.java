@@ -45,6 +45,7 @@ public class InitActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
             startActivity(new Intent(InitActivity.this,SignInActivity.class));
+            finish();
         }
     }
 

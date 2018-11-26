@@ -77,7 +77,7 @@ public class UserInfoAboutUsActivity extends AppCompatActivity {
             case R.id.aboutus_web:
                 Uri uri = Uri.parse(OurWebsite);
                 Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-//                Intent intent = new Intent(UserInfoAboutUsActivity.this, OurWebActivity.class);
+           //    Intent intent = new Intent(UserInfoAboutUsActivity.this, OurWebActivity.class);
                 startActivity(intent);
                 break;
                 default:

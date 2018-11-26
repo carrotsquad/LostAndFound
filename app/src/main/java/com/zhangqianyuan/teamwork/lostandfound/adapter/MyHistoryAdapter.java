@@ -109,7 +109,7 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
          String    day = publishTime.substring(6,8);
          String    hours=publishTime.substring(8,10);
             String time1 = mouth+"月"+""+day+"日";
-            String time2=  hours+":00";
+            String time2=  hours+"点";
             holder.time.setText(time1);
             holder.time2.setText(time2);
         }

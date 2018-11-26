@@ -35,7 +35,7 @@
             android:layout_height="20dp"
             android:layout_alignTop="@id/myhistory_thingtype_txt"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="143dp" />
+            android:layout_marginStart="133dp" />
 
         <TextView
             android:id="@+id/myhistory_time"
@@ -44,7 +44,7 @@
             android:layout_alignTop="@id/myhistory_thingtype"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="-1dp"
-            android:layout_marginEnd="132dp"
+            android:layout_marginEnd="135dp"
             android:text="8月12号"
             android:textColor="@color/black" />
 
@@ -54,7 +54,7 @@
             android:layout_height="16dp"
             android:layout_alignTop="@id/myhistory_thingtype"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="78dp"
+            android:layout_marginEnd="90dp"
             android:text="16:00"
             android:textColor="@color/black" />
 
@@ -64,7 +64,7 @@
             android:layout_height="16dp"
             android:layout_alignTop="@id/myhistory_thingtype"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="31dp"
+            android:layout_marginEnd="20dp"
             android:text="八教"
             android:textColor="@color/black" />
 

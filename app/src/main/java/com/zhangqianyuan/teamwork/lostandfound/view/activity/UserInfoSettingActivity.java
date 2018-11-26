@@ -59,7 +59,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  *我的界面 中的 设置 界面
  * @author  zhou
  */
-// TODO: 2018/11/25   同步设置头像 和我的头像上传
+// TODO: 2018/11/27   询问后端为什么第二次退出登录后没有返回结果
 public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment,IUserSettingActivity {
     private static final int REQUEST_CODE_GALLERY = 1;
 
@@ -182,10 +182,14 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 mUserSettingPresenter.exitAccount(jsessionid);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
+                Intent  intent = new Intent(UserInfoSettingActivity.this, SignInActivity.class);
+                intent.putExtra("isExit",true);
+                startActivity(intent);
                 ActivityManager.getActivityManager().removeAll();
                 ActivityManager.getActivityManager().removeFAll();
-                startActivity(new Intent(UserInfoSettingActivity.this, InitActivity.class));
-                onDestroy();
+                //跳转到 登录界面 并且不自动进入 清空输入栏
+
+                finish();
                 break;
             case R.id.setting_back:
                 finish();

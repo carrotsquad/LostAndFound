@@ -114,4 +114,6 @@ public class MessageFragment extends Fragment implements IMessageFragment{
 //            FancyToast.makeText(mContext,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
     }
+
+
 }

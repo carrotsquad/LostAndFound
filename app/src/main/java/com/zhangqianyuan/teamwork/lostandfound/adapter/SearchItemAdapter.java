@@ -24,11 +24,14 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.utils.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
+import com.zhangqianyuan.teamwork.lostandfound.view.fragment.MessageFragment;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
+
+
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
@@ -60,7 +63,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
 
     private ArrayList<DynamicItemBean> searchItemBeanArrayList;
-    private Context mContext;
+    public  Context mContext;
     private Boolean isMessage;
     private PopupWindow popupView;
     private ArrowPopWindows arrowPopWindows;
@@ -78,6 +81,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         ImageView qishileixing;
         ImageView isNeedBounty;
         CircleImageView userphoto;
+
 
         public ViewHolder(View view) {
             super(view);
