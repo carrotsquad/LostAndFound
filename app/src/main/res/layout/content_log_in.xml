@@ -132,7 +132,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="已有账号,点击登陆"
-        android:textColor="@color/grey_600"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.971"

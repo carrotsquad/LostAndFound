@@ -129,14 +129,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
 
         final ViewHolder holder = new ViewHolder(view);
+        if(isMessage) {
 
-        holder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                arrowPopWindows.show(view,SHOW_TOP);
-                return true;
-            }
-        });
+            holder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    arrowPopWindows.show(view, SHOW_TOP);
+                    return true;
+                }
+            });
+        }
 
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +243,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         Log.e("ThingsType",allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1));
 
-        //类型图片
+        //类型小标签
         Glide.with(mContext)
                 .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
                 .asBitmap()

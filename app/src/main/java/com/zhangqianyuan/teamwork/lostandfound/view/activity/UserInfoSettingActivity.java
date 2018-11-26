@@ -51,6 +51,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
 
 /**
@@ -59,7 +60,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author  zhou
  */
 // TODO: 2018/11/25   同步设置头像 和我的头像上传
-public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment,IUserSettingActivity,ISignInActivity {
+public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment,IUserSettingActivity {
     private static final int REQUEST_CODE_GALLERY = 1;
 
   @BindView(R.id.setting_headlayout)
@@ -101,7 +102,6 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     private UserSettingPresenter mUserSettingPresenter;
     private SharedPreferences sharedPreferences  ;
     private UserInfoPresenter mPresenter;
-    private SignPresenter  mSignPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +109,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         setContentView(R.layout.activity_user_info_setting);
         ButterKnife.bind(this);
         ActivityManager.getActivityManager().add(this);
+        sharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
         initData();
         initView();
     }
@@ -150,8 +151,6 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
             headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UserInfoSettingActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
             //上传
-
-
         }
 
         @Override
@@ -185,20 +184,22 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 editor.clear();
                 ActivityManager.getActivityManager().removeAll();
                 ActivityManager.getActivityManager().removeFAll();
+                startActivity(new Intent(UserInfoSettingActivity.this, InitActivity.class));
+                onDestroy();
                 break;
             case R.id.setting_back:
                 finish();
                 break;
+                default:
+                    break;
         }
     }
 
     public void initData(){
         mUserSettingPresenter = new UserSettingPresenter(new UserSettingModel());
         mUserSettingPresenter.attachActivity(this);
-        mSignPresenter  = new SignPresenter(this);
         mPresenter  = new UserInfoPresenter(new UserInfoModel());
         mPresenter.attachActivity(this);
-        sharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
         email.setText(sharedPreferences.getString("EMAIL",null));
         jsessionid=sharedPreferences.getString("SESSION",null);
         nickname.setText(sharedPreferences.getString("NICKNAME",null));
@@ -207,36 +208,22 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     }
 
     @Override
-    public void onSuccess(int status) {
-        mSignPresenter.getSignIn(getSharedPreferences("users",MODE_PRIVATE).getString("EMAIL",null),
-                getSharedPreferences("users",MODE_PRIVATE).getString("PWD",null));
-    }
-
-    @Override
     protected void onResume() {
         Log.d("onResume",sharedPreferences.getString("NICKNAME",null));
         nickname.setText(sharedPreferences.getString("NICKNAME",null));
         phone.setText(sharedPreferences.getString("PNB",null));
-        super.onResume();
-    }
-    public void initView(){
-        SharedPreferences preferences =getSharedPreferences("users",Context.MODE_PRIVATE);
         Glide.with(this)
-                .load(AllURI.getUserPhoto(preferences.getString("SESSION",null),preferences.getString("USERPHOTO",null)))
+                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
                 .asBitmap()
                 .into(headImg);
+        super.onResume();
     }
 
-
-    @Override
-    public void showSignInStatus(Boolean status, SignInBean signInBean) {
-        if (status){
-            Log.d("test","hahaha");
-            SharedPreferences.Editor editor = getSharedPreferences("users",MODE_PRIVATE).edit();
-            editor.putString("USERPHOTO",signInBean.getUser().getPhoto());
-            editor.commit();
-        }
-        Log.d("test","xixixi");
+    public void initView(){
+        Glide.with(this)
+                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
+                .asBitmap()
+                .into(headImg);
     }
 
 
@@ -247,6 +234,24 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
             Toast.makeText(UserInfoSettingActivity.this,"退出成功",Toast.LENGTH_SHORT).show();
         }else if (status==400){
             Toast.makeText(UserInfoSettingActivity.this,"退出失败",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onSuccess(int status, String userphoto) {
+        Boolean success = (status==200);
+        if (success){
+            //更新头像
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(USERPHOTO,userphoto);
+            editor.commit();
+            Glide.with(this)
+                    .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
+                    .asBitmap()
+                    .into(headImg);
+            Toast.makeText(UserInfoSettingActivity.this,"头像上传成功",Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(UserInfoSettingActivity.this, "头像上传失败", Toast.LENGTH_SHORT).show();
         }
     }
 }

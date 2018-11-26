@@ -1,10 +1,10 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +15,8 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.OurWebsite;
 
 
 /**
@@ -60,16 +62,26 @@ public class UserInfoAboutUsActivity extends AppCompatActivity {
     @OnClick({R.id.aboutus_applayout,R.id.aboutus_mainze,R.id.aboutus_updatelayout,R.id.aboutus_web})
     public void onClick(View view){
         switch (view.getId()){
+                //点击更新
             case R.id.aboutus_updatelayout:
                 break;
+                //关于我们
             case R.id.aboutus_applayout:
-                startActivity(new Intent(UserInfoAboutUsActivity.this,AbouDiAi.class));
+                startActivity(new Intent(UserInfoAboutUsActivity.this,AboutDiAi.class));
                 break;
+                //点击免责声明
             case R.id.aboutus_mainze:
                 startActivity(new Intent(UserInfoAboutUsActivity.this,AboutUsDetailActivity.class));
                 break;
+                //点击官网
             case R.id.aboutus_web:
+                Uri uri = Uri.parse(OurWebsite);
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+//                Intent intent = new Intent(UserInfoAboutUsActivity.this, OurWebActivity.class);
+                startActivity(intent);
                 break;
+                default:
+                    break;
         }
     }
 
@@ -80,6 +92,8 @@ public class UserInfoAboutUsActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
+                default:
+                    break;
         }
         return true;
 }}

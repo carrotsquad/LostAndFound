@@ -3,6 +3,7 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UserImgBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
@@ -35,20 +36,23 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoFragment> implemen
     @Override
     public void uploadHeadImg(String jsessionId, File imgFile) {
         if (isAttachActivity()){
-            mUserInfoModel.changeHeadImg(jsessionId, imgFile, new Callback<StatusBean>() {
+            mUserInfoModel.changeHeadImg(jsessionId, imgFile, new Callback<UserImgBean>() {
                 @Override
-                public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
+                public void onResponse(Call<UserImgBean> call, Response<UserImgBean> response) {
                     if(response.body()==null){
-                        getV().onSuccess(400);
+                        getV().onSuccess(400,"");
                     }else {
-                        getV().onSuccess(response.body().getStatus());
+                        UserImgBean userImgBean = response.body();
+                        getV().onSuccess(userImgBean.getStatus(),userImgBean.getPhoto());
                     }
                 }
+
                 @Override
-                public void onFailure(Call<StatusBean> call, Throwable t) {
-                     Log.d(T,"error"+t.toString());
+                public void onFailure(Call<UserImgBean> call, Throwable t) {
+                    Log.d(T,"error"+t.toString());
                 }
             });
         }
     }
+
 }

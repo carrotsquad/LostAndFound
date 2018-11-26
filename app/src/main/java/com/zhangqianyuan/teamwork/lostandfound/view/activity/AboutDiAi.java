@@ -11,7 +11,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AbouDiAi extends AppCompatActivity {
+public class AboutDiAi extends AppCompatActivity {
 
     @BindView(R.id.aboutdiail_back)
     ImageView back;

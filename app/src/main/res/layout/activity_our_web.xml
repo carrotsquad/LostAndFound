@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.OurWebActivity">
 
     <android.support.v7.widget.Toolbar
@@ -30,12 +30,19 @@
             android:layout_height="match_parent" />
 
     </android.support.v7.widget.Toolbar>
-
-    <WebView
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_below="@id/setting_bar"
-        android:id="@+id/ourweb"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="WebViewLayout">
+        <WebView
+            android:id="@+id/ourweb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+
 
 
 </RelativeLayout>

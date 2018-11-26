@@ -58,6 +58,7 @@ import static cn.finalteam.toolsfinal.DateUtils.getMonth;
 import static cn.finalteam.toolsfinal.DateUtils.getTime;
 import static cn.finalteam.toolsfinal.DateUtils.getYear;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TYPEID;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
@@ -137,7 +138,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     private String strphoto = "";
 
-    private String strLostDate;
+    private String strLostDate = "";
     private Integer qishileixing;
     private Integer typeid;
     private String strtitle;
@@ -202,9 +203,13 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 break;
             }
             //确认发布
-            case R.id.upload_lostorfind_sure:{
-                jsession = sharedPreferences.getString(SESSION,"null");
-                uploadPresenter.postUpload(jsession,bean,fileList);
+            case R.id.upload_lostorfind_sure: {
+                if ("".equals(strdescri) || "".equals(strtitle) || "".equals(strLostDate) || 0 == placeid) {
+                    FancyToast.makeText(UploadFormActivity.this, "填写不规范", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                } else {
+                    jsession = sharedPreferences.getString(SESSION, "null");
+                    uploadPresenter.postUpload(jsession, bean, fileList);
+                }
                 break;
             }
             default:{
@@ -216,10 +221,11 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
 
     private void initView(){
+        String strthingtype = allTypeBeanList.get(typeid);
         if(qishileixing==0){
-            qishiType.setText("发布失物");
+            qishiType.setText("发布失物—"+strthingtype);
         }else {
-            qishiType.setText("发布招领");
+            qishiType.setText("发布招领—"+strthingtype);
         }
 
         List<String> isNeedBountyArray = new ArrayList<>();

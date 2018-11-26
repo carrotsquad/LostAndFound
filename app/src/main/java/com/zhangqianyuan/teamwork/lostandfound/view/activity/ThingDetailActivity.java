@@ -47,6 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
@@ -57,7 +58,6 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-// TODO: 2018/11/13 需要完善，网络数据获取，添加评论等
 public class ThingDetailActivity extends AppCompatActivity implements IThingDetailActivity {
 
     public static final String OTHERSNICKNAME = "OTHERSNICKNAME";
@@ -91,6 +91,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.thing_detail_thingsdetail_place)
     TextView place;
 
+    //失物类型
+    @BindView(R.id.thing_detail_thingsdetail_thingstype)
+    ImageView thingstype;
+
     //描述
     @BindView(R.id.thing_detail_thingsdetail_describe)
     TextView describe;
@@ -107,11 +111,13 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.thing_detail_back)
     ImageView back;
 
+    //启事图片
     @BindView(R.id.thing_detail_viewpager)
     ViewPager viewPager;
 
-   @BindView(R.id.clicktocomment_layout)
-    RelativeLayout clicktocomment;
+    //点击评论按键
+    @BindView(R.id.clicktocomment)
+    TextView clicktocomment;
 
 
     private int lostid;
@@ -141,8 +147,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String[] a = imgs.split(",");
         initViewPager(Arrays.asList(a));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ThingDetailAdapter(mCommentList,this);
+        recyclerView.setAdapter(adapter);
         thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
-        initHeadImg();
+
         clicktocomment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,13 +159,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         });
     }
 
-
-    public void initHeadImg(){
-        Glide.with(this)
-                .load(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
-                        getSharedPreferences("users",MODE_PRIVATE).getString("USERPHOTO",null)))
-                .asBitmap()
-                .into(userimg);
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -203,11 +207,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 
             }
         });
-//        viewPager.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-//        });
-//        indicator.attachToViewPager(viewPager);
     }
 
+    //初始化控件
     private String initDataFromLocal() {
         Intent intent = getIntent();
         /**
@@ -224,21 +226,22 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String strplace = intent.getStringExtra(OTHERSPLACE);
         String strdiushidate = intent.getStringExtra(OTHERSDIUSHIDATE);
         String strdesc = intent.getStringExtra(OTHERSDESC);
+        int intthingstype = intent.getIntExtra(OTHERSTHINGSTYPE,1);
         String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         lostid = intent.getIntExtra(OTHERSID,-1);
         int qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
-
-        lostid = intent.getIntExtra(OTHERSID,-1);
-
 
         if(qishileixing==0){
             type.setText("失物详情");
         }else {
             type.setText("寻物详情");
         }
+        GetImageFromWeb.glideSetImageView(AllURI.getTypeLittlePhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
+                allTypeImgsList.get(intthingstype-1)),thingstype,this);
         describe.setText(strdesc);
         nickname.setText(strusernickname);
-        GetImageFromWeb.glideSetImageView(struserphoto,userimg,this);
+        GetImageFromWeb.glideSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
+                struserphoto),userimg,this);
         fabiaodate.setText("发表于"+strfabiaodate);
         diushidate.setText(strdiushidate);
         place.setText(strplace);
@@ -302,9 +305,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @Override
     public void sendDataToWeb(int status) {
         if (status==200){
-
             Toast.makeText(ThingDetailActivity.this,"发送成功",Toast.LENGTH_SHORT).show();
-
+            //刷新列表
+            thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
         }else if(status==400){
             Toast.makeText(ThingDetailActivity.this,"发送失败",Toast.LENGTH_SHORT).show();
         }
@@ -313,12 +316,14 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @Override
     public void getDataFromWeb(List<CommentFeedBack.Comments> list) {
         if(list!=null){
+            if(list.size()!=0){
+                clicktocomment.setVisibility(View.GONE);
+            }
             mCommentList.clear();
-        this.mCommentList = list;
-        Log.d("commentfuck",""+list.toString());
-        adapter = new ThingDetailAdapter(mCommentList,this);
-        recyclerView.setAdapter(adapter);
-    }
+            this.mCommentList.addAll(list);
+            adapter.notifyDataSetChanged();
+            Log.d("commentfuck",""+list.toString());
+        }
 
     }
 

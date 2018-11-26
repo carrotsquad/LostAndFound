@@ -19,6 +19,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UploadBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UserImgBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 
@@ -143,8 +144,8 @@ public interface Api {
     //修改头像
     @Multipart
     @POST("/passlove/user/update/photo")
-    Call<StatusBean> uploadHeadImg(@Part("JSESSIONID") RequestBody JSESSIONID,
-                                   @Part MultipartBody.Part photo);
+    Call<UserImgBean> uploadHeadImg(@Part("JSESSIONID") RequestBody JSESSIONID,
+                                    @Part MultipartBody.Part photo);
 
     //发表评论
    @FormUrlEncoded

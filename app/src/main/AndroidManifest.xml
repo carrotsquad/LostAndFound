@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.activity.MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".view.activity.LogInActivity"
             android:label="@string/title_activity_log_in"
@@ -60,7 +61,7 @@
         <activity android:name=".view.activity.ChangePhoneActivty" />
         <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
         <activity android:name=".view.activity.AboutUsDetailActivity" />
-        <activity android:name=".view.activity.AbouDiAi" />
+        <activity android:name=".view.activity.AboutDiAi" />
         <activity android:name=".view.activity.OurWebActivity"></activity>
     </application>
 

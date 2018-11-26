@@ -10,8 +10,8 @@ import android.os.IBinder;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class getNewMessageService extends Service {
-    public getNewMessageService() {
+public class UpdateMessageService extends Service {
+    public UpdateMessageService() {
     }
 
     @Override

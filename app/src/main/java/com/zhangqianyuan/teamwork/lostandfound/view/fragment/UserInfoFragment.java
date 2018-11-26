@@ -29,8 +29,6 @@ import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
-import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
-//import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyHistory;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
@@ -57,6 +55,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.content.Context.MODE_PRIVATE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
 /**
  * Description
@@ -91,17 +90,15 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     @BindView(R.id.userinfo_setting_layout)
     RelativeLayout setting;
 
-
     private  Context mContext;
     private boolean success;            //用于判断是否上传头像成功
     private String  photoPath;          //头像文件路径
     private String  nick;               //昵称
     private String  jsession;
 
-
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
     private UserInfoPresenter mPresenter;
-
-
 
     @Nullable
     @Override
@@ -111,16 +108,27 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         mContext = getContext();
         ActivityManager.getActivityManager().addF(this);
         getSharePrefrence();
+        initView();
         initMVP();
 
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        mPresenter.dettachActivity();
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        mPresenter.dettachActivity();
+        super.onDestroy();
+    }
 
     public void initMVP(){
         mPresenter = new UserInfoPresenter(new UserInfoModel());
         mPresenter.attachActivity(this);
-//        mPresenter.getUserInfoData();
     }
 
 
@@ -163,7 +171,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             photoPath = resultList.get(0).getPhotoPath();
             Log.e("ImgTest",photoPath);
             headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
-            FancyToast.makeText(mContext,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
+            FancyToast.makeText(mContext,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传
             jsession = getActivity().getSharedPreferences("users",Context.MODE_PRIVATE).getString(SESSION,"null");
             mPresenter.uploadHeadImg(jsession,new File(photoPath));
@@ -176,31 +184,22 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         }
     };
 
-    @Override
-    public void onSuccess(int status) {
-        success = (status==200);
-        if (success){
-            Toast.makeText(mContext,"头像上传成功",Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
-        }
-    }
-
 
     public void getSharePrefrence(){
-        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
+        preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
         jsession=preferences.getString("SESSION",null);
         nick=preferences.getString("NICKNAME",null);
+        editor = preferences.edit();
     }
 
-//    public void initView(){
-//        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
-//        Glide.with(this)
-//                .load(AllURI.getUserPhoto(preferences.getString("SESSION",null),preferences.getString("USERPHOTO",null)))
-//                .asBitmap()
-//                .into(headImg);
-//        headTxt.setText(nick);
-//    }
+    public void initView(){
+        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
+        Glide.with(mContext)
+                .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
+                .asBitmap()
+                .into(headImg);
+        headTxt.setText(nick);
+    }
 
 
     @OnClick({R.id.userinfo_head_img,R.id.userinfo_head_nick,R.id.userinfo_myupload_layout,
@@ -223,6 +222,8 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             case R.id.userinfo_setting_layout:
                 startActivity(new Intent(mContext,UserInfoSettingActivity.class));
                 break;
+                default:
+                    break;
         }
     }
 
@@ -231,11 +232,28 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         Log.d("15486622","heihiehie");
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users",MODE_PRIVATE);
         Glide.with(mContext)
-                .load(AllURI.getUserPhoto(sharedPreferences.getString("SESSION",null),sharedPreferences.getString("USERPHOTO",null)))
+                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
                 .asBitmap()
                 .into(headImg);
-        Log.d("15486622",""+AllURI.getUserPhoto(sharedPreferences.getString("SESSION",null),sharedPreferences.getString("USERPHOTO",null)));
-        headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString("NICKNAME",null));
+        Log.d("15486622",""+AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)));
+        headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString(NICKNAME,null));
         super.onResume();
+    }
+
+    @Override
+    public void onSuccess(int status, String userphoto) {
+        success = (status==200);
+        if (success){
+            //更新头像
+            editor.putString(USERPHOTO,userphoto);
+            editor.commit();
+            Glide.with(this)
+                    .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
+                    .asBitmap()
+                    .into(headImg);
+            Toast.makeText(mContext,"头像上传成功",Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
+        }
     }
 }

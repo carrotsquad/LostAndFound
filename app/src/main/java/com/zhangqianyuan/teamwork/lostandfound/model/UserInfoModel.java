@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UserImgBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
 
 import java.io.File;
@@ -26,7 +27,7 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
     }
 
     @Override
-    public void changeHeadImg(String jsessionId, File imgFile, Callback<StatusBean> callback) {
+    public void changeHeadImg(String jsessionId, File imgFile, Callback<UserImgBean> callback) {
        api.uploadHeadImg(createRequestbody(jsessionId),createMultipartBody(imgFile)).enqueue(callback);
     }
 
