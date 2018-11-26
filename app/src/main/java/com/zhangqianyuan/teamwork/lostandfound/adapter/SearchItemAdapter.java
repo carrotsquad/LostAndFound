@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,23 +21,22 @@ import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.utils.ArrowPopWindows;
-import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
+import com.zhangqianyuan.teamwork.lostandfound.utils.popupwindow.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IPopupEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
-import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeLittleImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getUserPhoto;
-import static com.zhangqianyuan.teamwork.lostandfound.utils.ArrowPopWindows.SHOW_TOP;
+import static com.zhangqianyuan.teamwork.lostandfound.utils.popupwindow.ArrowPopWindows.SHOW_TOP;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
@@ -62,9 +61,18 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
     private ArrayList<DynamicItemBean> searchItemBeanArrayList;
     private Context mContext;
     private Boolean isMessage;
-    private PopupWindow popupView;
+    private List<Integer> changeNumList;
     private ArrowPopWindows arrowPopWindows;
     private Activity activity;
+    private IPopupEvent popupEvent;
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public void setPopupEvent(IPopupEvent popupEvent) {
+        this.popupEvent = popupEvent;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -78,6 +86,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         ImageView qishileixing;
         ImageView isNeedBounty;
         CircleImageView userphoto;
+        TextView newMsg;
 
         public ViewHolder(View view) {
             super(view);
@@ -91,13 +100,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             placeanddate = view.findViewById(R.id.search_item_placeanddate);
             qishileixing = view.findViewById(R.id.search_item_qishileixing);
             thingType = view.findViewById(R.id.search_item_thingstype);
+            newMsg = view.findViewById(R.id.search_item_newmessage);
         }
     }
 
-    public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList, Activity activity, Boolean isMessage){
+    public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList, List<Integer> changeNumList, Activity activity, IPopupEvent popupEvent, Boolean isMessage){
         this.searchItemBeanArrayList = searchItemBeanArrayList;
         this.isMessage = isMessage;
         this.activity = activity;
+        this.changeNumList = changeNumList;
+        this.popupEvent = popupEvent;
     }
 
     @NonNull
@@ -107,30 +119,9 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             mContext=parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.search_item,parent,false);
-
-        if(isMessage){
-
-            //popupwindow
-            arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {
-                @Override
-                public void onViewCreate(ViewGroup viewGroup) {
-                    //设置点击的回调
-                    viewGroup.getChildAt(0).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            FancyToast.makeText(mContext,"你点了删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
-                            arrowPopWindows.dismiss();
-                        }
-                    });
-                }
-            });
-
-        }
-
-
         final ViewHolder holder = new ViewHolder(view);
-        if(isMessage) {
 
+        if(isMessage) {
             holder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -138,6 +129,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     return true;
                 }
             });
+
+
         }
 
 
@@ -189,6 +182,10 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
+        Integer changenum = 0;
+        if(isMessage) {
+             changenum = changeNumList.get(position);
+        }
         /**
          * "publishtime": "20181105173056",
          * "losttime": "2018110512",
@@ -263,6 +260,37 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
         //赏金
         holder.isNeedBounty.setVisibility(View.INVISIBLE);
+
+        //新消息气泡
+        if(isMessage) {
+            if(changenum!=0) {
+                holder.newMsg.setText("+"+changenum.toString());
+            }else {
+                holder.newMsg.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        //是否是消息
+        if(isMessage){
+            //popupwindow
+            arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {
+                @Override
+                public void onViewCreate(ViewGroup viewGroup) {
+                    //设置点击的回调
+                    viewGroup.getChildAt(0).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //在主程序回调
+                            arrowPopWindows.dismiss();
+                            popupEvent.onDelete(holder.getAdapterPosition());
+                        }
+                    });
+                }
+            });
+
+        }else {
+            holder.newMsg.setVisibility(View.INVISIBLE);
+        }
 
     }
 

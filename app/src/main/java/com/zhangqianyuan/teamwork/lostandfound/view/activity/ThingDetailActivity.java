@@ -49,6 +49,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 
@@ -121,6 +122,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 
 
     private int lostid;
+    private int intthingstype;
     private SharedPreferences sharedPreferences;
     private ThingDetailPresenter thingDetailPresenter;
     private PopupWindow mPopupWindow;
@@ -171,43 +173,54 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     }
 
     //初始化viewpager
-    private void initViewPager(List<String> urlList){
-        Log.e("ThingsDetail",urlList.toString());
+    private void initViewPager(List<String> urlList) {
+        Log.e("ThingsDetail", urlList.toString());
         imageViewList = new ArrayList<>();
-        ImageView imageView=null;
-        View point=null;
-        LinearLayout.LayoutParams params=null;
-        for (String s :
-                urlList) {
-            imageView = new ImageView(this);
+        ImageView imageView = null;
+        View point = null;
+        LinearLayout.LayoutParams params = null;
+        //如果长度为0，加入默认图片
+        if (urlList.size() != 0) {
+            for (String s :
+                    urlList) {
+                imageView = new ImageView(this);
+                Glide.with(this)
+                        .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), s))
+                        .asBitmap()
+                        .into(imageView);
+                imageViewList.add(imageView);
+            }
+        } else {
             Glide.with(this)
-                    .load(getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),s))
+                    .load(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(intthingstype - 1)))
                     .asBitmap()
                     .into(imageView);
             imageViewList.add(imageView);
         }
-        viewPager.setAdapter(new MyViewPagerAdapter(imageViewList));
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(position==imageViewList.size()){
-                    viewPager.setCurrentItem(0);
+
+
+            viewPager.setAdapter(new MyViewPagerAdapter(imageViewList));
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    if (position == imageViewList.size()) {
+                        viewPager.setCurrentItem(0);
+                    }
                 }
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-                if(position==imageViewList.size()){
-                    viewPager.setCurrentItem(0);
+                @Override
+                public void onPageSelected(int position) {
+                    if (position == imageViewList.size()) {
+                        viewPager.setCurrentItem(0);
+                    }
                 }
-            }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
+                @Override
+                public void onPageScrollStateChanged(int state) {
 
-            }
-        });
-    }
+                }
+            });
+        }
 
     //初始化控件
     private String initDataFromLocal() {
@@ -226,7 +239,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String strplace = intent.getStringExtra(OTHERSPLACE);
         String strdiushidate = intent.getStringExtra(OTHERSDIUSHIDATE);
         String strdesc = intent.getStringExtra(OTHERSDESC);
-        int intthingstype = intent.getIntExtra(OTHERSTHINGSTYPE,1);
+        intthingstype = intent.getIntExtra(OTHERSTHINGSTYPE,1);
         String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         lostid = intent.getIntExtra(OTHERSID,-1);
         int qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);

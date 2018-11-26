@@ -62,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String TYPEID = "TYPEID";
     public static final String QISHILEIXING = "QISHILEIXING";
 
+    /** 上次点击返回键的时间 */
+    private long lastBackPressed;
+
+    /** 两次点击的间隔时间 */
+    private static final int QUIT_INTERVAL = 2000;
+
     /**
      * 几个常量
      */
@@ -274,6 +280,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 break;
+        }
+    }
+
+
+    /**
+     * 重写返回键响应函数，按两次才退出
+     */
+    @Override
+    public void onBackPressed() {
+        long backPressed = System.currentTimeMillis();
+        if (backPressed - lastBackPressed > QUIT_INTERVAL) {
+            lastBackPressed = backPressed;
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_LONG).show();
+        } else {
+            finish();
+            System.exit(0);
         }
     }
 

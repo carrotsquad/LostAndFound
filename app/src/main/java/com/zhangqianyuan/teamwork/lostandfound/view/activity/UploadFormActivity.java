@@ -204,6 +204,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             }
             //确认发布
             case R.id.upload_lostorfind_sure: {
+                strdescri = descEdit.getText().toString();
+                strtitle = titleEdit.getText().toString();
                 if ("".equals(strdescri) || "".equals(strtitle) || "".equals(strLostDate) || 0 == placeid) {
                     FancyToast.makeText(UploadFormActivity.this, "填写不规范", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 } else {

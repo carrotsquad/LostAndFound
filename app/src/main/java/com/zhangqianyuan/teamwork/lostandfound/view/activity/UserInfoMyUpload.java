@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +33,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
+
 /**
  * Description
  * 我的板块中 我的发布板块
@@ -41,6 +47,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     private List<TheLostBean> lists = new ArrayList<>();
     private MyLoadPresenter presenter = new MyLoadPresenter(new MyLoadModel());
     private MyLoadItemAdapter  mAdapter ;
+    private SharedPreferences sharedPreferences;
    @BindView(R.id.myhistory_myload_list)
    RecyclerView list;
 
@@ -57,9 +64,13 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     }
 
     public void initView(){
+        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         ButterKnife.bind(this);
         Log.d("123456","success");
         list.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter=new MyLoadItemAdapter(lists,sharedPreferences.getString(USERPHOTO,"null"),sharedPreferences.getString(EMAIL,"null")
+                ,sharedPreferences.getString(NICKNAME,"null"));
+        list.setAdapter(mAdapter);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +88,6 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     public void showData(List<TheLostBean> beans) {
         lists.clear();
         lists.addAll(beans);
-        mAdapter=new MyLoadItemAdapter(lists);
-        list.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 }

@@ -8,9 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
@@ -20,6 +22,7 @@ import com.zhangqianyuan.teamwork.lostandfound.presenter.IMyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IPopupEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +41,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class MessageFragment extends Fragment implements IMessageFragment{
+public class MessageFragment extends Fragment implements IMessageFragment,IPopupEvent{
 
     private View view;
     private Context mContext;
@@ -49,6 +52,7 @@ public class MessageFragment extends Fragment implements IMessageFragment{
     private GridLayoutManager gridLayoutManager;
     private SearchItemAdapter searchItemAdapter;
     private SharedPreferences sharedPreferences;
+    private List<Integer> changelist = new ArrayList<>();
 
     public static Fragment newInstance(){
         MessageFragment messageFragment = new MessageFragment();
@@ -90,7 +94,7 @@ public class MessageFragment extends Fragment implements IMessageFragment{
     private void initView(){
         recyclerView = view.findViewById(R.id.message_recyclerview);
         gridLayoutManager = new GridLayoutManager(mContext,1);
-        searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,getActivity(),true);
+        searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),this,true);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(searchItemAdapter);
     }
@@ -110,8 +114,22 @@ public class MessageFragment extends Fragment implements IMessageFragment{
         }else {
             list.clear();
             list.addAll(dynamicItemBeanList);
+            for (int i =0 ; i<list.size(); i++) {
+                changelist.add(0);
+            }
             searchItemAdapter.notifyDataSetChanged();
 //            FancyToast.makeText(mContext,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
     }
+
+    //item的poupwindow的删除的回调
+    @Override
+    public void onDelete(int position) {
+        Log.e("DELETE",String.valueOf(position));
+        list.remove(position);
+        FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+//        searchItemAdapter.notifyItemRemoved(position);
+        searchItemAdapter.notifyDataSetChanged();;
+    }
+
 }
