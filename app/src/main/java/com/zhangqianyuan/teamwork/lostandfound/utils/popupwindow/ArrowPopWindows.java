@@ -1,14 +1,11 @@
-package com.zhangqianyuan.teamwork.lostandfound.utils;
+package com.zhangqianyuan.teamwork.lostandfound.utils.popupwindow;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBean
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getUserPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
@@ -196,10 +198,23 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
                 .into(holder.thingType);
 
         //事件图片
-        Glide.with(mContext)
-                .load(getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getThelost().getPhoto()))
-                .asBitmap()
-                .into(holder.thingphoto);
+        String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
+
+        if(a.length==0){
+            String b = getTypePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1));
+            Glide.with(mContext)
+                    .load(b)
+                    .asBitmap()
+                    .into(holder.thingphoto);
+        }else {
+            Log.e("PHOTO",a[0]);
+            String c = getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),a[0]);
+            Glide.with(mContext)
+                    .load(c)
+                    .asBitmap()
+                    .into(holder.thingphoto);
+        }
+
 
         //用户头像
         Glide.with(mContext)

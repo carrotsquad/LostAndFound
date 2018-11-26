@@ -51,6 +51,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     public static final String USERPHOTO = "USERPHOTO";
     public static final String ALLTYPES ="ALLTYPES";
     public static final String ALLPLACES = "ALLPLACES";
+//    public static final String DElETED_NUM_LIST = "DElETED_NUM_LIST";
 
     @BindView(R.id.signin_signin)
     Button signin;
@@ -145,6 +146,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         if(status){
             FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             editor = sharedPreferences.edit();
+            int[] arrayint = new int[10000];
             editor.putString(EMAIL,signInBean.getUser().getUsername());
             editor.putString(PWD,signInBean.getUser().getPassword());
             editor.putString(NICKNAME,signInBean.getUser().getNickname());
