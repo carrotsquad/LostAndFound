@@ -210,7 +210,13 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                     FancyToast.makeText(UploadFormActivity.this, "填写不规范", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 } else {
                     jsession = sharedPreferences.getString(SESSION, "null");
-                    uploadPresenter.postUpload(jsession, bean, fileList);
+                    if(fileList.size()==0){
+                        bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
+                        uploadPresenter.postUpload(jsession,bean);
+                    }else {
+                        uploadPresenter.postUpload(jsession, bean, fileList);
+                    }
+
                 }
                 break;
             }

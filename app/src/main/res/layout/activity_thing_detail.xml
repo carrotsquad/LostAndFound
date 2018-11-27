@@ -38,17 +38,22 @@
             android:layout_marginTop="5dp"
             android:layout_marginHorizontal="10dp"
             android:layout_height="232dp" >
-
-            <android.support.v4.view.ViewPager
-                android:layout_marginTop="8dp"
-                android:id="@+id/thing_detail_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator
-                android:id="@+id/thing_viewpager_pager_indicator"
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-            />
+                android:layout_height="wrap_content">
+            </com.youth.banner.Banner>
+
+            <!--<android.support.v4.view.ViewPager-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:id="@+id/thing_detail_viewpager"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
+            <!--<com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator-->
+                <!--android:id="@+id/thing_viewpager_pager_indicator"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+            <!--/>-->
 
 
             <!--<include layout="@layout/imageindicatorview_layout"/>-->
@@ -207,7 +212,8 @@
                 android:layout_below="@id/clicktocomment"
                 android:id="@+id/thing_detail_comment_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
             </android.support.v7.widget.RecyclerView>
         </RelativeLayout>
 

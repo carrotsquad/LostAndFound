@@ -197,23 +197,23 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
                 .asBitmap()
                 .into(holder.thingType);
 
+        Log.e("PHOTO",String.valueOf(position));
+        Log.e("PHOTO",dynamicItemBean.getThelost().getPhoto());
+
+
+        //默认图片，
+        Glide.with(mContext)
+                .load(getTypePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
+                .asBitmap()
+                .into(holder.thingphoto);
+
         //事件图片
         String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
-
-        if(a.length==0){
-            String b = getTypePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1));
-            Glide.with(mContext)
-                    .load(b)
-                    .asBitmap()
-                    .into(holder.thingphoto);
-        }else {
-            Log.e("PHOTO",a[0]);
-            String c = getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),a[0]);
-            Glide.with(mContext)
-                    .load(c)
-                    .asBitmap()
-                    .into(holder.thingphoto);
-        }
+        String c = getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),a[0]);
+        Glide.with(mContext)
+                .load(c)
+                .asBitmap()
+                .into(holder.thingphoto);
 
 
         //用户头像

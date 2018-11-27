@@ -82,9 +82,6 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
        return view;
     }
 
-
-
-
     public void  initLists(){
         switch (pos){
             case 0:{
@@ -115,17 +112,17 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
 
     @Override
     public void showData(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
+        refreshLayout.setRefreshing(false);
         if(status){
             if(!newPosi.equals(oldPosi)){
                 FancyToast.makeText(getContext(),"刷新成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+                //轮动到刷新的位置
+                mRecyclerView.scrollToPosition(oldPosi - 1);
             }
-            refreshLayout.setRefreshing(false);
             lists.addAll(searchItemBeanArrayList);
 //            mDynamicItemAdapter.notifyDataSetChanged();
             mDynamicItemAdapter.notifyItemChanged(this.lists.size()-1);
-//            mRecyclerView.scrollToPosition(lists.size() - 1);
         }else {
-            refreshLayout.setRefreshing(false);
             if (!newPosi.equals(oldPosi)) {
                 FancyToast.makeText(getContext(), "刷新失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
             } else {

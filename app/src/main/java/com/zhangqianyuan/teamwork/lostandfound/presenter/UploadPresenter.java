@@ -38,6 +38,37 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
 
 
     @Override
+    public void postUpload(String session, TheLostBean bean) {
+        if (isAttachActivity()) {
+            mUploadModel.postUpload(session, bean, new Observer<StatusBean>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(StatusBean statusBean) {
+                    if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
+                        getV().showStatus(false);
+                    } else {
+                        getV().showStatus(true);
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    getV().showStatus(false);
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
+        }
+    }
+
+    @Override
     public void postUpload(String session, TheLostBean bean, List<File> fileList) {
         if (isAttachActivity()) {
             mUploadModel.postUpload(session, bean, fileList, new Observer<StatusBean>() {

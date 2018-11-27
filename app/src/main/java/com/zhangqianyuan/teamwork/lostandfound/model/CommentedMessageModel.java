@@ -1,19 +1,10 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
-import com.google.gson.Gson;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.SendMyHistoryBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
-
-import java.io.File;
-import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Callback;
 
 
 /**

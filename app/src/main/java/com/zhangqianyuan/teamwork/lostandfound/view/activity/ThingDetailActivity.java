@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
+import com.youth.banner.Banner;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyViewPagerAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.NetworkImageIndicatorView;
@@ -32,6 +33,7 @@ import com.zhangqianyuan.teamwork.lostandfound.adapter.ThingDetailAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
+import com.zhangqianyuan.teamwork.lostandfound.image.WebImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.model.ThingDetailModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ThingDetailPresenter;
@@ -112,15 +114,19 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.thing_detail_back)
     ImageView back;
 
-    //启事图片
-    @BindView(R.id.thing_detail_viewpager)
-    ViewPager viewPager;
+//    //启事图片
+//    @BindView(R.id.thing_detail_viewpager)
+//    ViewPager viewPager;
+
+    @BindView(R.id.banner)
+    Banner banner;
 
     //点击评论按键
     @BindView(R.id.clicktocomment)
     TextView clicktocomment;
 
 
+    private String imgs = "";
     private int lostid;
     private int intthingstype;
     private SharedPreferences sharedPreferences;
@@ -145,9 +151,11 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this,new ThingDetailModel());
 
-        String imgs=initDataFromLocal();
+        imgs=initDataFromLocal();
+        Log.e("IMGS",imgs);
         String[] a = imgs.split(",");
-        initViewPager(Arrays.asList(a));
+//        initViewPager(Arrays.asList(a));
+        initBanner(Arrays.asList(a));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ThingDetailAdapter(mCommentList,this);
         recyclerView.setAdapter(adapter);
@@ -172,55 +180,75 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         super.onDestroy();
     }
 
-    //初始化viewpager
-    private void initViewPager(List<String> urlList) {
-        Log.e("ThingsDetail", urlList.toString());
-        imageViewList = new ArrayList<>();
-        ImageView imageView = null;
-        View point = null;
-        LinearLayout.LayoutParams params = null;
-        //如果长度为0，加入默认图片
-        if (urlList.size() != 0) {
-            for (String s :
+    private void initBanner(List<String> urlList){
+        List<String> s = new ArrayList<>();
+        if("".equals(imgs)){
+            s.add(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(intthingstype - 1)));
+            banner.setImages(s)
+                    .setImageLoader(new WebImageLoader());
+        }else {
+            for (String e :
                     urlList) {
-                imageView = new ImageView(this);
-                Glide.with(this)
-                        .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), s))
-                        .asBitmap()
-                        .into(imageView);
-                imageViewList.add(imageView);
+                s.add(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), e));
             }
-        } else {
-            Glide.with(this)
-                    .load(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(intthingstype - 1)))
-                    .asBitmap()
-                    .into(imageView);
-            imageViewList.add(imageView);
+            banner.setImages(s)
+                    .setImageLoader(new WebImageLoader());
         }
+        banner.start();
+        banner.startAutoPlay();
 
+    }
 
-            viewPager.setAdapter(new MyViewPagerAdapter(imageViewList));
-            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    if (position == imageViewList.size()) {
-                        viewPager.setCurrentItem(0);
-                    }
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-                    if (position == imageViewList.size()) {
-                        viewPager.setCurrentItem(0);
-                    }
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
-        }
+//    //初始化viewpager
+//    private void initViewPager(List<String> urlList) {
+//        Log.e("ThingsDetail", urlList.toString());
+//        imageViewList = new ArrayList<>();
+//
+//        View point = null;
+//        LinearLayout.LayoutParams params = null;
+//        //如果长度为0，加入默认图片
+//        if (urlList.size() != 0) {
+//            for (String s :
+//                    urlList) {
+//                ImageView imageView = new ImageView(this);
+//                Glide.with(this)
+//                        .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), s))
+//                        .asBitmap()
+//                        .into(imageView);
+//                imageViewList.add(imageView);
+//            }
+//        } else {
+//            ImageView imageView = new ImageView(this);
+//            Glide.with(this)
+//                    .load(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(intthingstype - 1)))
+//                    .asBitmap()
+//                    .into(imageView);
+//            imageViewList.add(imageView);
+//        }
+//
+//
+//            viewPager.setAdapter(new MyViewPagerAdapter(imageViewList));
+//            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//                @Override
+//                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                    if (position == imageViewList.size()) {
+//                        viewPager.setCurrentItem(0);
+//                    }
+//                }
+//
+//                @Override
+//                public void onPageSelected(int position) {
+//                    if (position == imageViewList.size()) {
+//                        viewPager.setCurrentItem(0);
+//                    }
+//                }
+//
+//                @Override
+//                public void onPageScrollStateChanged(int state) {
+//
+//                }
+//            });
+//        }
 
     //初始化控件
     private String initDataFromLocal() {

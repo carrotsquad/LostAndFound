@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,17 +42,19 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class MessageFragment extends Fragment implements IMessageFragment,IPopupEvent{
+public class MessageFragment extends Fragment implements IMessageFragment,IPopupEvent, SwipeRefreshLayout.OnRefreshListener {
 
     private View view;
     private Context mContext;
 
+    private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private List<DynamicItemBean> list = new ArrayList<>();
     private MessagePresenter messagePresenter;
     private GridLayoutManager gridLayoutManager;
     private SearchItemAdapter searchItemAdapter;
     private SharedPreferences sharedPreferences;
+    private Boolean isFresh = false;
     private List<Integer> changelist = new ArrayList<>();
 
     public static Fragment newInstance(){
@@ -68,9 +71,7 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
         sharedPreferences = mContext.getSharedPreferences("users",Context.MODE_PRIVATE);
         ActivityManager.getActivityManager().addF(this);
         initView();
-        if(savedInstanceState == null) {
-            initList();
-        }
+        initList();
         return view;
     }
 
@@ -81,18 +82,24 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
 
     @Override
     public void onDestroy() {
+        searchItemAdapter.setPopupEvent(null);
+        searchItemAdapter.setActivity(null);
         messagePresenter.dettachActivity();
         super.onDestroy();
     }
 
     @Override
     public void onDestroyView() {
+        searchItemAdapter.setPopupEvent(null);
+        searchItemAdapter.setActivity(null);
         messagePresenter.dettachActivity();
         super.onDestroyView();
     }
 
     private void initView(){
+        refreshLayout = view.findViewById(R.id.message_swiperefresh);
         recyclerView = view.findViewById(R.id.message_recyclerview);
+        refreshLayout.setOnRefreshListener(this);
         gridLayoutManager = new GridLayoutManager(mContext,1);
         searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),this,true);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -104,21 +111,25 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
         String userphoto = sharedPreferences.getString(USERPHOTO,"null");
         String usernickname = sharedPreferences.getString(NICKNAME,"null");
         String jsessionid = sharedPreferences.getString(SESSION,"null");
-        messagePresenter.getMessageData(usernickname,userphoto,username,jsessionid,0,100);
+        messagePresenter.getMessageData(usernickname,userphoto,username,jsessionid,0,500);
     }
 
     @Override
     public void onDataBack(Boolean status, List<DynamicItemBean> dynamicItemBeanList) {
+        refreshLayout.setRefreshing(false);
         if(!status){
             FancyToast.makeText(mContext,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }else {
+            if(isFresh){
+                isFresh = false;
+                FancyToast.makeText(mContext,"刷新成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            }
             list.clear();
             list.addAll(dynamicItemBeanList);
             for (int i =0 ; i<list.size(); i++) {
                 changelist.add(0);
             }
             searchItemAdapter.notifyDataSetChanged();
-//            FancyToast.makeText(mContext,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
     }
 
@@ -132,4 +143,9 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
         searchItemAdapter.notifyDataSetChanged();;
     }
 
+    @Override
+    public void onRefresh() {
+        isFresh = true;
+        initList();
+    }
 }

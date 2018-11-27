@@ -100,6 +100,12 @@ public interface Api {
     @Multipart
     Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
+
+    @POST("/passlove/user/publishlost")
+    @FormUrlEncoded
+    Observable<StatusBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
+
+
     //获取动态 失物 信息
     @POST("/passlove/dynamics/0")
     @FormUrlEncoded

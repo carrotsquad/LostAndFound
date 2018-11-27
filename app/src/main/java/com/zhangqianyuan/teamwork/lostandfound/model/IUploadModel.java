@@ -16,4 +16,5 @@ import retrofit2.Callback;
  */
 public interface IUploadModel {
     void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer);
+    void postUpload(String session, TheLostBean bean, Observer<StatusBean> observer);
 }

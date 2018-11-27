@@ -13,6 +13,6 @@ import java.util.List;
  * @updateDes ${TODO}
  */
 public interface IUploadPresenter {
-
+    void postUpload(String session, TheLostBean bean);
     void postUpload(String session, TheLostBean bean, List<File> fileList);
 }

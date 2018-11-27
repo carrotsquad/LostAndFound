@@ -1,9 +1,12 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
 import android.support.v4.view.PagerAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.zhangqianyuan.teamwork.lostandfound.R;
 
 import java.util.List;
 
@@ -41,6 +44,6 @@ public class MyViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
+        container.removeView(imageViewList.get(position));
     }
 }

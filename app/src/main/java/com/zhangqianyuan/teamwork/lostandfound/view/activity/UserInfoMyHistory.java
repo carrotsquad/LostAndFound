@@ -37,6 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryActivity {
     private MyHistoryAdapter mAdapter;
     private List<TheLostBean> lists =new ArrayList<>();
+    private MyHistoryPresenter presenter;
 
     @BindView(R.id.myhistory_list)
     RecyclerView mRecyclerView;
@@ -66,8 +67,14 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
 
     }
 
+    @Override
+    protected void onDestroy() {
+        presenter.dettachActivity();
+        super.onDestroy();
+    }
+
     public void initMvp(){
-        MyHistoryPresenter presenter = new MyHistoryPresenter(new MyHistoryModel());
+        presenter = new MyHistoryPresenter(new MyHistoryModel());
         presenter.attachActivity(this);
         presenter.getMyHistoryData(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),0,15);
     }

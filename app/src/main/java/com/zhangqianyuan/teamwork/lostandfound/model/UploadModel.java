@@ -37,13 +37,35 @@ public class UploadModel extends BaseModel implements IUploadModel {
     @Override
     public void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer) {
         Gson gson = new Gson();
-        api.postUpload(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)))
+        //传图片时
+        if(fileList.size()!=0){
+            api.postUpload(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)))
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        }else {
+            RequestBody body = RequestBody.create(MediaType.parse("image/"+" "),"");
+            //image为name参数的值，file.getname为filename参数的名字，body为请求体
+            MultipartBody.Part part = MultipartBody.Part.createFormData("photos","",body);
+            api.postUpload(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),part)
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        }
+
+    }
+
+    @Override
+    public void postUpload(String session, TheLostBean bean, Observer<StatusBean> observer) {
+        api.postUpload(session,new Gson().toJson(bean))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-
     }
+
 
     /*创建图片 的MultipartBody
       也可以用requestbody 但是这样就需要在参数里加入请求头中的name =  +filename =
@@ -64,22 +86,5 @@ public class UploadModel extends BaseModel implements IUploadModel {
     }
 
 
-
-//
-//    @Override
-//    public void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer) {
-//        Map<String, RequestBody> imgMap= new HashMap<>();
-//        for(int l = 0; l<fileList.size(); l++){
-//            imgMap.put(fileList.get(l).getName(),RequestBody.create(MediaType.parse("image/" + fileList.get(l).getName().substring(fileList.get(l).getName().lastIndexOf(".") + 1, fileList.get(l).getName().length())),fileList.get(l)));
-//        }
-//        Gson gson = new Gson();
-//        api.postUpload(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),imgMap)
-//                .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(observer);
-//
-//    }
-//
 
 }

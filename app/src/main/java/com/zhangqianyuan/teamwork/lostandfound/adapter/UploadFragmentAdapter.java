@@ -89,7 +89,6 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
                     .asBitmap()
                     .into(holder.img);
         }
-        //       holder.img.setImageResource(bean.getTypeImgId());
         holder.text.setText(bean.getTypeText());
         Log.e("TypesImgUrl",bean.getTypeImgId());
 
