@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
+import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserSettingModel;
@@ -98,6 +99,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
 
 
 
+  private String  photoPath;
     private String  jsessionid;
     private UserSettingPresenter mUserSettingPresenter;
     private SharedPreferences sharedPreferences  ;
@@ -144,11 +146,10 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
             //进行图片上传与置换
             //置换
-           String  photoPath = resultList.get(0).getPhotoPath();
+            photoPath = resultList.get(0).getPhotoPath();
             Log.e("ImgTest",photoPath);
             String jsession = getSharedPreferences("users",Context.MODE_PRIVATE).getString(SESSION,"null");
             mPresenter.uploadHeadImg(jsession,new File(photoPath));
-            headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UserInfoSettingActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
             //上传
         }
@@ -216,14 +217,18 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         Log.d("onResume",sharedPreferences.getString("NICKNAME",null));
         nickname.setText(sharedPreferences.getString("NICKNAME",null));
         phone.setText(sharedPreferences.getString("PNB",null));
-        Glide.with(this)
-                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
-                .asBitmap()
-                .into(headImg);
+        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
+                headImg,this);
+//        Glide.with(this)
+//                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
+//                .asBitmap()
+//                .into(headImg);
         super.onResume();
     }
 
     public void initView(){
+//        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
+//                headImg,this);
         Glide.with(this)
                 .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
                 .asBitmap()
@@ -249,10 +254,11 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(USERPHOTO,userphoto);
             editor.commit();
-            Glide.with(this)
-                    .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
-                    .asBitmap()
-                    .into(headImg);
+            headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+//            Glide.with(this)
+//                    .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
+//                    .asBitmap()
+//                    .into(headImg);
             Toast.makeText(UserInfoSettingActivity.this,"头像上传成功",Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(UserInfoSettingActivity.this, "头像上传失败", Toast.LENGTH_SHORT).show();

@@ -25,6 +25,7 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 
 
+import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
@@ -170,9 +171,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             //置换
             photoPath = resultList.get(0).getPhotoPath();
             Log.e("ImgTest",photoPath);
-            headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(mContext,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-            //上传
             jsession = getActivity().getSharedPreferences("users",Context.MODE_PRIVATE).getString(SESSION,"null");
             mPresenter.uploadHeadImg(jsession,new File(photoPath));
         }
@@ -193,11 +192,14 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     }
 
     public void initView(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users",MODE_PRIVATE);
         SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
-        Glide.with(mContext)
-                .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
-                .asBitmap()
-                .into(headImg);
+        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
+                headImg,getActivity());
+//        Glide.with(mContext)
+//                .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
+//                .asBitmap()
+//                .into(headImg);
         headTxt.setText(nick);
     }
 
@@ -231,10 +233,12 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     public  void onResume() {
         Log.d("15486622","heihiehie");
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users",MODE_PRIVATE);
-        Glide.with(mContext)
-                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
-                .asBitmap()
-                .into(headImg);
+        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
+                headImg,getActivity());
+//        Glide.with(mContext)
+//                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
+//                .asBitmap()
+//                .into(headImg);
         Log.d("15486622",""+AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)));
         headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString(NICKNAME,null));
         super.onResume();
@@ -247,10 +251,17 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             //更新头像
             editor.putString(USERPHOTO,userphoto);
             editor.commit();
-            Glide.with(this)
-                    .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
-                    .asBitmap()
-                    .into(headImg);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+                }
+            });
+
+//            Glide.with(this)
+//                    .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
+//                    .asBitmap()
+//                    .into(headImg);
             Toast.makeText(mContext,"头像上传成功",Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
