@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -120,6 +121,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 
     @BindView(R.id.banner)
     Banner banner;
+
+    @BindView(R.id.thing_detail_usercard)
+    CardView usercard;
 
     //点击评论按键
     @BindView(R.id.clicktocomment)
@@ -289,11 +293,15 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         return  strThingsImgs;
     }
 
-    @OnClick({R.id.thing_detail_back})
+    @OnClick({R.id.thing_detail_back,R.id.thing_detail_usercard})
     void onClick(View view){
         switch (view.getId()){
             case R.id.thing_detail_back:{
                 finish();
+                break;
+            }
+            case R.id.thing_detail_usercard:{
+                popup();
                 break;
             }
             default:{
