@@ -18,7 +18,7 @@ public class SearchModel extends BaseModel implements ISearchModel{
     public void getSearch(String keyword, int diushileixing, int place, int thingstypes, String session, Observer<SearchBean> searchBeanObserver) {
         SearchRequestBean searchRequestBean = new SearchRequestBean();
         searchRequestBean.setStart(0);
-        searchRequestBean.setEnd(10);
+        searchRequestBean.setEnd(1000000);
         searchRequestBean.setKeyword(keyword);
         searchRequestBean.setLosttype(diushileixing);
         searchRequestBean.setTypeid(thingstypes);
