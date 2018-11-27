@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.List;
@@ -53,6 +55,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
 public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.ViewHolder> {
    private Context mContext;
    private List<DynamicItemBean> lists;
+   private Activity activity;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -80,7 +83,8 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
            publishdate = view.findViewById(R.id.dynamic_card_publishdate);
        }
    }
-    public DynamicItemAdapter(List<DynamicItemBean> list){
+    public DynamicItemAdapter(List<DynamicItemBean> list, Activity activity){
+        this.activity = activity;
         this.lists = list;
     }
 
@@ -202,10 +206,16 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
 
         //默认图片，
-        Glide.with(mContext)
-                .load(getTypePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
-                .asBitmap()
-                .into(holder.thingphoto);
+//        Glide.with(mContext)
+//                .load(getTypePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
+//                .asBitmap()
+//                .into(holder.thingphoto);
+
+        if("".equals(dynamicItemBean.getThelost().getPhoto())) {
+            GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
+                    , holder.thingphoto
+                    , activity);
+        }
 
         //事件图片
         String[] a = dynamicItemBean.getThelost().getPhoto().split(",");

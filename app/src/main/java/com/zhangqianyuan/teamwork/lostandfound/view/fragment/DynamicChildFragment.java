@@ -72,7 +72,7 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
         ActivityManager.getActivityManager().addF(this);
 
         mRecyclerView.setLayoutManager(manager);
-        mDynamicItemAdapter = new DynamicItemAdapter(lists);
+        mDynamicItemAdapter = new DynamicItemAdapter(lists, getActivity());
         mRecyclerView.setAdapter(mDynamicItemAdapter);
         refreshLayout.setOnRefreshListener(this);
         iDynamicPresenter = new DynamicPresenter();

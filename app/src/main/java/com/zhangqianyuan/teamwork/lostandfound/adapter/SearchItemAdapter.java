@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.utils.popupwindow.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IPopupEvent;
@@ -35,6 +36,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBean
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getUserPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.utils.popupwindow.ArrowPopWindows.SHOW_TOP;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
@@ -245,6 +247,12 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
                 .asBitmap()
                 .into(holder.thingType);
+
+        if(dynamicItemBean.getThelost().getPhoto().equals("")) {
+            GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
+                    , holder.headimg
+                    , activity);
+        }
 
         //事件图片
         Glide.with(mContext)
