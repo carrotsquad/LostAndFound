@@ -41,6 +41,18 @@ public class InitActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ActivityManager.getActivityManager().add(this);
 
+        SharedPreferences preferences = getSharedPreferences("guideActivity", Context.MODE_PRIVATE);
+
+        // 判断是不是首次登录,若是
+        if (preferences.getBoolean("firstStart", true)) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("firstStart",false);
+            editor.commit();
+            startActivity(new Intent(InitActivity.this,GuideActivity.class));
+//            finish();
+        }
+
+
         //如果已经登录过，直接进入登陆界面
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){

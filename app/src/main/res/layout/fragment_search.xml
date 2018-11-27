@@ -22,7 +22,6 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:maxLines="1"
-            android:hint="请输入关键词"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
