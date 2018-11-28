@@ -160,8 +160,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 int losttype = dynamicItemBean.getThelost().getLosttype();
                 int thingstype = dynamicItemBean.getThelost().getTypeid();
 
-                String place = allPlaceBeanList.get(lostplace);
-                String thingsType = allTypeBeanList.get(thingstype);
+                String place = allPlaceBeanList.get(lostplace-1);
+//                String thingsType = allTypeBeanList.get(thingstype);
 
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
                 intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getNickname());
@@ -215,8 +215,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         int losttype = dynamicItemBean.getThelost().getLosttype();
         int thingstype = dynamicItemBean.getThelost().getTypeid();
 
-        String place = allPlaceBeanList.get(lostplace);
-        String thingsType = allTypeBeanList.get(thingstype);
+        String place = allPlaceBeanList.get(lostplace-1);
+//        String thingsType = allTypeBeanList.get(thingstype);
 
         int lostType = 0;
         switch (losttype){

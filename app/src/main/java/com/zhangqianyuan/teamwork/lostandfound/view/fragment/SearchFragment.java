@@ -64,7 +64,7 @@ public class SearchFragment extends Fragment implements ISearchFragment,IPopupEv
     private List<String> places = new ArrayList<>();
     private List<String> thingstypes = new ArrayList<>();
     private Integer diushiTypePosition = 0;
-    private Integer placePosition = -1;
+    private Integer placePosition = 0;
     private Integer thingsTypePosition = -1;
 
     private Integer thingsPosition = 0;
@@ -201,7 +201,7 @@ public class SearchFragment extends Fragment implements ISearchFragment,IPopupEv
             public void onClick(View v) {
                 //其内部已经设置了记录当前tab位置的参数，该参数会随tab被点击而改变，所以这里直接设置tab值即可
                 //此处若想获得constellations第一个值“不限”，可修改constellationPosition初始值为-1，且这里代码改为constellationPosition == -1)
-                dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : thingstypes.get(placePosition));
+                dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : thingstypes.get(thingsPosition));
 //                thingstype = thingstypes[thingsPosition];
                 dropDownMenu.closeMenu();
 //                changeContentView();   //在这里可以请求获得经筛选后要显示的内容
@@ -225,7 +225,16 @@ public class SearchFragment extends Fragment implements ISearchFragment,IPopupEv
                     keyword = "";
                 }
                 String session = sharedPreferences.getString(SESSION,"null");
-                iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition-1, thingsTypePosition-1, session);
+                if(placePosition==0){
+                    placePosition=-1;
+                }
+//                if(diushiTypePosition==0){
+//                    diushiTypePosition=-1;
+//                }
+                if(thingsPosition==0){
+                    thingsPosition=-1;
+                }
+                iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
 
             }
         });

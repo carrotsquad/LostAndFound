@@ -121,8 +121,8 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
                 int losttype = dynamicItemBean.getThelost().getLosttype();
                 int thingstype = dynamicItemBean.getThelost().getTypeid();
 
-                String place = allPlaceBeanList.get(lostplace);
-                String thingsType = allTypeBeanList.get(thingstype);
+                String place = allPlaceBeanList.get(lostplace-1);
+//                String thingsType = allTypeBeanList.get(thingstype);
 
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
                 intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getNickname());
@@ -173,7 +173,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         int losttype = dynamicItemBean.getThelost().getLosttype();
         int thingstype = dynamicItemBean.getThelost().getTypeid();
 
-        String place = allPlaceBeanList.get(lostplace);
+        String place = allPlaceBeanList.get(lostplace-1);
 //        String thingsType = allTypeBeanList.get(thingstype);
 
         holder.timeandplace.setText(place+"   "+date_orig.substring(8,10)+":"+date_orig.substring(10,12));
