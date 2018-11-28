@@ -195,11 +195,18 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         holder.qishileixing.setImageResource(lostType);
 
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
+
+        Log.e("PHOTO",allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1));
         //类型图片
-        Glide.with(mContext)
-                .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
-                .asBitmap()
-                .into(holder.thingType);
+        if(dynamicItemBean.getThelost().getTypeid()==1){
+            holder.thingType.setImageResource(R.drawable.littleicon_keys);
+        }else {
+            Glide.with(mContext)
+                    .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1)))
+                    .asBitmap()
+                    .into(holder.thingType);
+        }
+
 
         Log.e("PHOTO",String.valueOf(position));
         Log.e("PHOTO",dynamicItemBean.getThelost().getPhoto());
@@ -215,15 +222,16 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
             GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
                     , holder.thingphoto
                     , activity);
-        }
+        }else {
 
-        //事件图片
-        String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
-        String c = getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),a[0]);
-        Glide.with(mContext)
-                .load(c)
-                .asBitmap()
-                .into(holder.thingphoto);
+            //事件图片
+            String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
+            String c = getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), a[0]);
+            Glide.with(mContext)
+                    .load(c)
+                    .asBitmap()
+                    .into(holder.thingphoto);
+        }
 
 
         //用户头像

@@ -243,22 +243,29 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         Log.e("ThingsType",allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1));
 
         //类型小标签
-        Glide.with(mContext)
-                .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
-                .asBitmap()
-                .into(holder.thingType);
+
+        //类型图片
+        if(dynamicItemBean.getThelost().getTypeid()==1){
+            holder.thingType.setImageResource(R.drawable.littleicon_keys);
+        }else {
+            Glide.with(mContext)
+                    .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1)))
+                    .asBitmap()
+                    .into(holder.thingType);
+        }
 
         if(dynamicItemBean.getThelost().getPhoto().equals("")) {
             GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
                     , holder.headimg
                     , activity);
-        }
+        }else {
 
-        //事件图片
-        Glide.with(mContext)
-                .load(getLostThingsPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getThelost().getPhoto()))
-                .asBitmap()
-                .into(holder.headimg);
+            //事件图片
+            Glide.with(mContext)
+                    .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getThelost().getPhoto()))
+                    .asBitmap()
+                    .into(holder.headimg);
+        }
 
         //用户头像
         Glide.with(mContext)

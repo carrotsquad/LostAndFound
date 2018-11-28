@@ -20,6 +20,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
+import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+
 /**
  * @author zhoudada
  * @version $Rev$
@@ -85,11 +89,17 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
                 .load(s)
                 .asBitmap()
                 .into(holder.thingtype);
-        String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
-        Glide.with(mContext)
-                .load(x)
-                .asBitmap()
-                .into(holder.thingtypetxt);
+
+        if(lists.get(position).getTypeid()==1){
+            holder.thingtypetxt.setImageResource(R.drawable.littleicon_keys);
+        }else {
+            String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
+            Glide.with(mContext)
+                    .load(x)
+                    .asBitmap()
+                    .into(holder.thingtypetxt);
+        }
+
         if (lists.get(position).getIshandled()==1){
             holder.isdong.setText("递爱成功");
         }else if (lists.get(position).getIshandled()==0){

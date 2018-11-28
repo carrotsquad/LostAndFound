@@ -285,8 +285,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 allTypeImgsList.get(intthingstype-1)),thingstype,this);
         describe.setText(strdesc);
         nickname.setText(strusernickname);
-        GetImageFromWeb.glideSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
+        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
                 struserphoto),userimg,this);
+//        GetImageFromWeb.glideSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
+//                struserphoto),userimg,this);
         fabiaodate.setText("发表于"+strfabiaodate);
         diushidate.setText(strdiushidate);
         place.setText(strplace);
