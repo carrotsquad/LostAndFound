@@ -113,15 +113,18 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
     @Override
     public void showData(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
         refreshLayout.setRefreshing(false);
+        lists.clear();
+        lists.addAll(searchItemBeanArrayList);
+//            mDynamicItemAdapter.notifyDataSetChanged();
+        mDynamicItemAdapter.notifyItemChanged(this.lists.size()-1);
         if(status){
             if(!newPosi.equals(oldPosi)){
                 FancyToast.makeText(getContext(),"刷新成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                 //轮动到刷新的位置
-                mRecyclerView.scrollToPosition(oldPosi - 1);
+//                mRecyclerView.scrollToPosition(oldPosi - 1);
             }
-            lists.addAll(searchItemBeanArrayList);
-//            mDynamicItemAdapter.notifyDataSetChanged();
-            mDynamicItemAdapter.notifyItemChanged(this.lists.size()-1);
+
+
         }else {
             if (!newPosi.equals(oldPosi)) {
                 FancyToast.makeText(getContext(), "刷新失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
@@ -138,14 +141,14 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
     @Override
     public void onRefresh() {
         oldPosi = newPosi;
-        newPosi = newPosi+6;
+        newPosi = newPosi+1;
         switch (pos){
             case 0:{
-                iDynamicPresenter.getDynamicLostData(new DynamicsRequestBean(oldPosi,newPosi),session);
+                iDynamicPresenter.getDynamicLostData(new DynamicsRequestBean(0,100),session);
                 break;
             }
             case 1:{
-                iDynamicPresenter.getDynamicFindData(new DynamicsRequestBean(oldPosi,newPosi),session);
+                iDynamicPresenter.getDynamicFindData(new DynamicsRequestBean(0,100),session);
                 break;
             }
             default:{

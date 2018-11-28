@@ -128,13 +128,13 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     private TheLostBean bean;
 
-    private Integer needBounty = 0;
+    private Integer needBounty = -1;
 
     private List<FormFile> files = new ArrayList<>();
 
     private List<File> fileList = new ArrayList<>();
 
-    private Integer placeid = 0;
+    private Integer placeid = -1;
 
     private String strphoto = "";
 
@@ -206,14 +206,17 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             case R.id.upload_lostorfind_sure: {
                 strdescri = descEdit.getText().toString();
                 strtitle = titleEdit.getText().toString();
-                if ("".equals(strdescri) || "".equals(strtitle) || "".equals(strLostDate) || 0 == placeid) {
+                if ("".equals(strdescri) || "".equals(strtitle) || "".equals(strLostDate) || -1 == placeid) {
                     FancyToast.makeText(UploadFormActivity.this, "填写不规范", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 } else {
                     jsession = sharedPreferences.getString(SESSION, "null");
-                    if(fileList.size()==0){
+                    if("".equals(strphoto)){
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
+                        Log.e("THELOSTBEAN",bean.toString());
                         uploadPresenter.postUpload(jsession,bean);
                     }else {
+                        bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
+                        Log.e("THELOSTBEAN",bean.toString());
                         uploadPresenter.postUpload(jsession, bean, fileList);
                     }
 
@@ -372,9 +375,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 strphoto = strphoto + resultList.get(i).getPhotoPath();
                 Log.e("ImgTest",resultList.get(i).getPhotoPath());
             }
-            strdescri = descEdit.getText().toString();
-            strtitle = titleEdit.getText().toString();
-            bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
         }
 
         @Override
