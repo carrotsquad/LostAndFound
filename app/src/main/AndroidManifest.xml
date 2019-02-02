@@ -17,37 +17,32 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.activity.MainActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".view.activity.LogInActivity"
             android:label="@string/title_activity_log_in"
-            android:launchMode="singleInstance"
-            android:theme="@style/AppTheme" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".view.activity.VerifyActivity"
             android:launchMode="singleInstance" />
         <activity
             android:name=".view.activity.SignInActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".view.activity.ThingDetailActivity"
             android:launchMode="singleInstance" />
         <activity
             android:name=".view.activity.UserInfoSettingActivity"
-            android:label="@string/editInfo"
-            android:theme="@style/AppTheme" />
+            android:label="@string/editInfo" />
         <activity android:name=".view.activity.UploadActivity" />
         <activity android:name=".view.activity.UserInfoMyHistory" />
         <activity android:name=".view.activity.UploadFormActivity" />
         <activity
             android:name=".view.activity.UserInfoAboutUsActivity"
-            android:label=""
-            android:theme="@style/AppTheme" />
+            android:label="" />
         <activity
             android:name=".view.activity.UserInfoMyUpload"
-            android:label="我的发布"
-            android:theme="@style/AppTheme" />
+            android:label="我的发布" />
         <!-- <activity android:name=".view.activity.UserSettingEditInfoActivity" /> -->
         <activity android:name=".view.activity.InitActivity">
             <intent-filter>
@@ -63,7 +58,7 @@
         <activity android:name=".view.activity.AboutUsDetailActivity" />
         <activity android:name=".view.activity.AboutDiAi" />
         <activity android:name=".view.activity.OurWebActivity" />
-        <activity android:name=".view.activity.GuideActivity"></activity>
+        <activity android:name=".view.activity.GuideActivity" />
     </application>
 
 </manifest>

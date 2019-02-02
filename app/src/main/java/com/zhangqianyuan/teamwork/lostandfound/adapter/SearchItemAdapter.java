@@ -7,22 +7,18 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
-import com.zhangqianyuan.teamwork.lostandfound.utils.popupwindow.ArrowPopWindows;
+import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IPopupEvent;
 
@@ -32,13 +28,12 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
-import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getUserPhoto;
-import static com.zhangqianyuan.teamwork.lostandfound.utils.popupwindow.ArrowPopWindows.SHOW_TOP;
+import static com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows.SHOW_TOP;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;

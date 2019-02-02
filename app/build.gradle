@@ -90,6 +90,8 @@ dependencies {
     //popupwindow
     implementation 'com.github.razerdp:BasePopup:2.0.9'
     implementation 'com.github.douglasjunior:android-simple-tooltip:0.2.2'
+    //状态栏
+//    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
     //内存泄漏检查
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'

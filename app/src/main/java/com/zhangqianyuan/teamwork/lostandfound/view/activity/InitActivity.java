@@ -10,7 +10,6 @@ import android.widget.Button;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -40,21 +39,16 @@ public class InitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_init);
         ButterKnife.bind(this);
         ActivityManager.getActivityManager().add(this);
-
-        SharedPreferences preferences = getSharedPreferences("guideActivity", Context.MODE_PRIVATE);
-
-        // 判断是不是首次登录,若是
-        if (preferences.getBoolean("firstStart", true)) {
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("firstStart",false);
-            editor.commit();
-            startActivity(new Intent(InitActivity.this,GuideActivity.class));
-//            finish();
-        }
-
-
         //如果已经登录过，直接进入登陆界面
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+
+        // 判断是不是首次登录,若是
+        if (sharedPreferences.getBoolean("firstStart", true)) {
+            Intent intent=new Intent(InitActivity.this,GuideActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
             startActivity(new Intent(InitActivity.this,SignInActivity.class));
             finish();
@@ -67,13 +61,11 @@ public class InitActivity extends AppCompatActivity {
             case R.id.select_register:{
                 Intent intent = new Intent(InitActivity.this,LogInActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             }
             case R.id.select_signin:{
                 Intent intent = new Intent(InitActivity.this,SignInActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             }
             default:{

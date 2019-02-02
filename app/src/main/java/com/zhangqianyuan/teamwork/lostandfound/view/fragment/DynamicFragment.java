@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  * @author zhoudada
  * @version $Rev$
  * @des ${TODO}
- * @updateAuthor $Author$
+ * @updateAuthor $Zhangqianyuan$
  * @updateDes ${TODO}
  */
 

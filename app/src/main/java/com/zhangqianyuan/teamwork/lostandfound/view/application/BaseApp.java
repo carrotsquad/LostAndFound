@@ -23,5 +23,6 @@ public class BaseApp extends Application {
 //            return;
 //        }
 //        LeakCanary.install(this);
+
     }
 }

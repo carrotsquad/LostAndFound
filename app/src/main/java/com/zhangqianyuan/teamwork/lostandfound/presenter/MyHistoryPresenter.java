@@ -28,7 +28,6 @@ public class MyHistoryPresenter extends BasePresenter<IMyHistoryActivity> implem
         this.mMyHistoryModel = model;
     }
 
-
     @Override
     public void getMyHistoryData(String jsessionid,int start,int end) {
         if (isAttachActivity()){
