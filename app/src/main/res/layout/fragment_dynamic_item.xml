@@ -11,32 +11,58 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/dynamic_card_thingsphoto"
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="wrap_content" />
 
-        <ImageView
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/dynamic_card_thingtype"
-            android:layout_width="30dp"
-            android:layout_height="16dp"
-            android:src="@drawable/littleicon_uflash"
-            android:layout_below="@+id/dynamic_card_thingsphoto"/>
-
-        <ImageView
-            android:layout_below="@id/dynamic_card_thingsphoto"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/dynamic_card_thingtype"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/dynamic_card_qishileixin"
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/dynamic_card_linear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/littleicon_type_lost"
-            />
+            android:orientation="horizontal"
+            android:layout_below="@+id/dynamic_card_thingsphoto">
+
+            <ImageView
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/dynamic_card_thingtype"
+                android:layout_width="30dp"
+                android:layout_height="16dp"
+                android:src="@drawable/littleicon_uflash"
+                />
+
+            <ImageView
+                android:layout_below="@id/dynamic_card_thingsphoto"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/dynamic_card_thingtype"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/dynamic_card_qishileixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/littleicon_type_lost"
+                />
+
+            <TextView
+                android:id="@+id/dynamic_card_dateandplace"
+                android:layout_below="@id/dynamic_card_thingsphoto"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/dynamic_card_qishileixin"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="四教   10:10"
+                android:textColor="#111"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+
+
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/dynamic_card_headimg"
@@ -44,6 +70,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="3dp"
             android:layout_below="@+id/dynamic_card_title"
             android:src="@mipmap/diai" />
 
@@ -51,9 +78,11 @@
             android:id="@+id/dynamic_card_neckname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/dynamic_card_qishileixin"
-            android:layout_marginBottom="17dp"
+            android:layout_toRightOf="@+id/dynamic_card_headimg"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/dynamic_card_title"
+            android:layout_alignParentBottom="false"
+
             android:text="heator"
             android:textColor="#111"
             android:textSize="14sp" />
@@ -70,26 +99,15 @@
             <!--android:text="今天10:10"-->
             <!--android:textColor="#111"-->
             <!--android:textSize="14sp" />-->
-        <TextView
-            android:id="@+id/dynamic_card_dateandplace"
-            android:layout_below="@id/dynamic_card_thingsphoto"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/dynamic_card_qishileixin"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="四教   10:10"
-            android:textColor="#111"
-            android:textSize="14sp"/>
+
 
         <TextView
             android:id="@+id/dynamic_card_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dynamic_card_thingtype"
+            android:layout_below="@id/dynamic_card_linear"
             android:layout_marginStart="15dp"
             android:layout_marginTop="3dp"
-            android:maxLines="2"
             android:singleLine="false"
             android:textSize="16sp"
             android:text="我的钥匙掉在昨晚掉在2014了你们能帮我一下么"

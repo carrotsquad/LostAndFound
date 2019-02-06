@@ -83,7 +83,7 @@
         android:layout_marginTop="20dp"
         android:drawableStart="@drawable/phone_ic"
         android:ems="10"
-        android:hint="请输入手机号(可选)"
+        android:hint="请输入手机号"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"

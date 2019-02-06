@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.network.Api;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -30,6 +32,7 @@ public abstract class BaseModel {
 
         okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .connectTimeout(10,TimeUnit.SECONDS)
                 .build();
         retrofit  = new Retrofit.Builder()
                 .client(okHttpClient)

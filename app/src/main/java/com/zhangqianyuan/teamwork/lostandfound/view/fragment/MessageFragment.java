@@ -136,11 +136,11 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
     //item的poupwindow的删除的回调
     @Override
     public void onDelete(int position) {
-        Log.e("DELETE",String.valueOf(position));
-        list.remove(position);
-        FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
-//        searchItemAdapter.notifyItemRemoved(position);
-        searchItemAdapter.notifyDataSetChanged();;
+//        Log.e("DELETE",String.valueOf(position));
+//        list.remove(position);
+//        FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+////        searchItemAdapter.notifyItemRemoved(position);
+//        searchItemAdapter.notifyDataSetChanged();
     }
 
     @Override

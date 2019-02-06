@@ -59,11 +59,11 @@ public class GuideActivity extends AppCompatActivity {
         switch (view.getId()){
             case R.id.start_to_diai:{
 
-                SharedPreferences preferences = getSharedPreferences("guideActivity", Context.MODE_PRIVATE);
+                SharedPreferences preferences = getSharedPreferences("users", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("firstStart",false);
                 editor.commit();
-//                startActivity(new Intent(GuideActivity.this,InitActivity.class));
+                startActivity(new Intent(GuideActivity.this,InitActivity.class));
                 finish();
                 break;
             }

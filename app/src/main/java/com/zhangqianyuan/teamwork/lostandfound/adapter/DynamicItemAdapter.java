@@ -53,37 +53,38 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
  * @updateDes ${}
  */
 public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.ViewHolder> {
-   private Context mContext;
-   private List<DynamicItemBean> lists;
-   private Activity activity;
+    private Context mContext;
+    private List<DynamicItemBean> lists;
+    private Activity activity;
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-       CardView mCardView;
-       CircleImageView headimg;
-       TextView        neckname;
-       TextView        timeandplace;
-       TextView        title;
-       ImageView thingType;
-       ImageView qishileixing;
-       ImageView thingphoto;
-       TextView publishdate;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        CardView mCardView;
+        CircleImageView headimg;
+        TextView neckname;
+        TextView timeandplace;
+        TextView title;
+        ImageView thingType;
+        ImageView qishileixing;
+        ImageView thingphoto;
+        TextView publishdate;
 
 
-       public ViewHolder(View view){
-           super(view);
-           mCardView = view.findViewById(R.id.dynamic_card);
-           headimg = view.findViewById(R.id.dynamic_card_headimg);
-           neckname = view.findViewById(R.id.dynamic_card_neckname);
-           timeandplace  = view.findViewById(R.id.dynamic_card_dateandplace);
-           title = view.findViewById(R.id.dynamic_card_title);
-           thingType = view.findViewById(R.id.dynamic_card_thingtype);
-           qishileixing = view.findViewById(R.id.dynamic_card_qishileixin);
-           thingphoto = view.findViewById(R.id.dynamic_card_thingsphoto);
-           publishdate = view.findViewById(R.id.dynamic_card_publishdate);
-       }
-   }
-    public DynamicItemAdapter(List<DynamicItemBean> list, Activity activity){
+        public ViewHolder(View view) {
+            super(view);
+            mCardView = view.findViewById(R.id.dynamic_card);
+            headimg = view.findViewById(R.id.dynamic_card_headimg);
+            neckname = view.findViewById(R.id.dynamic_card_neckname);
+            timeandplace = view.findViewById(R.id.dynamic_card_dateandplace);
+            title = view.findViewById(R.id.dynamic_card_title);
+            thingType = view.findViewById(R.id.dynamic_card_thingtype);
+            qishileixing = view.findViewById(R.id.dynamic_card_qishileixin);
+            thingphoto = view.findViewById(R.id.dynamic_card_thingsphoto);
+            publishdate = view.findViewById(R.id.dynamic_card_publishdate);
+        }
+    }
+
+    public DynamicItemAdapter(List<DynamicItemBean> list, Activity activity) {
         this.activity = activity;
         this.lists = list;
     }
@@ -91,10 +92,10 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (mContext==null){
+        if (mContext == null) {
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_dynamic_item,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_dynamic_item, parent, false);
         final DynamicItemAdapter.ViewHolder holder = new DynamicItemAdapter.ViewHolder(view);
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
@@ -105,36 +106,36 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
                 String date_orig = dynamicItemBean.getThelost().getPublishtime();
                 String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
-                if(!"0".equals(date_orig.substring(6, 7))) {
-                    fabaiodate = fabaiodate+date_orig.substring(6, 7);
+                if (!"0".equals(date_orig.substring(6, 7))) {
+                    fabaiodate = fabaiodate + date_orig.substring(6, 7);
                 }
-                fabaiodate = fabaiodate + date_orig.substring(7,8)+"日";
+                fabaiodate = fabaiodate + date_orig.substring(7, 8) + "日";
 
                 String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
                 String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
-                if(!"0".equals(lostdate_orig.substring(6, 7))){
+                if (!"0".equals(lostdate_orig.substring(6, 7))) {
                     lostdate = lostdate + lostdate_orig.substring(6, 7);
                 }
-                lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
+                lostdate = lostdate + lostdate_orig.substring(7, 8) + "日";
 
                 int lostplace = dynamicItemBean.getThelost().getPlaceid();
                 int losttype = dynamicItemBean.getThelost().getLosttype();
                 int thingstype = dynamicItemBean.getThelost().getTypeid();
 
-                String place = allPlaceBeanList.get(lostplace-1);
+                String place = allPlaceBeanList.get(lostplace - 1);
 //                String thingsType = allTypeBeanList.get(thingstype);
 
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
-                intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getNickname());
-                intent.putExtra(OTHERSPHOTO,dynamicItemBean.getUserphoto());
-                intent.putExtra(OTHERSFABIAODATE,fabaiodate);
+                intent.putExtra(OTHERSNICKNAME, dynamicItemBean.getNickname());
+                intent.putExtra(OTHERSPHOTO, dynamicItemBean.getUserphoto());
+                intent.putExtra(OTHERSFABIAODATE, fabaiodate);
                 intent.putExtra(OTHERSDIUSHILEIXING, losttype);
                 intent.putExtra(OTHERSDIUSHIDATE, lostdate);
-                intent.putExtra(OTHERSPLACE,place);
+                intent.putExtra(OTHERSPLACE, place);
                 intent.putExtra(OTHERSIMGS, dynamicItemBean.getThelost().getPhoto());
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
-                intent.putExtra(OTHERSDESC,dynamicItemBean.getThelost().getDescription());
+                intent.putExtra(OTHERSDESC, dynamicItemBean.getThelost().getDescription());
                 mContext.startActivity(intent);
             }
         });
@@ -151,18 +152,18 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
          */
         String date_orig = dynamicItemBean.getThelost().getPublishtime();
         String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
-        if(!"0".equals(date_orig.substring(6, 7))) {
-            fabaiodate = fabaiodate+date_orig.substring(6, 7);
+        if (!"0".equals(date_orig.substring(6, 7))) {
+            fabaiodate = fabaiodate + date_orig.substring(6, 7);
         }
-        fabaiodate = fabaiodate + date_orig.substring(7,8)+"日";
-        holder.publishdate.setText(fabaiodate+"发表");
+        fabaiodate = fabaiodate + date_orig.substring(7, 8) + "日";
+        holder.publishdate.setText(fabaiodate + "发表");
 
         String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
         String lostdate = lostdate_orig.substring(0, 4) + "." + lostdate_orig.substring(4, 6) + ".";
-        if(!"0".equals(lostdate_orig.substring(6, 7))){
+        if (!"0".equals(lostdate_orig.substring(6, 7))) {
             lostdate = lostdate + lostdate_orig.substring(6, 7);
         }
-        lostdate = lostdate + lostdate_orig.substring(7,8)+"";
+        lostdate = lostdate + lostdate_orig.substring(7, 8) + "";
 
 
         holder.neckname.setText(dynamicItemBean.getNickname());
@@ -173,21 +174,21 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         int losttype = dynamicItemBean.getThelost().getLosttype();
         int thingstype = dynamicItemBean.getThelost().getTypeid();
 
-        String place = allPlaceBeanList.get(lostplace-1);
+        String place = allPlaceBeanList.get(lostplace - 1);
 //        String thingsType = allTypeBeanList.get(thingstype);
 
-        holder.timeandplace.setText(place+"   "+date_orig.substring(8,10)+":"+date_orig.substring(10,12));
+        holder.timeandplace.setText(place + "  " + date_orig.substring(8, 10) + ":" + date_orig.substring(10, 12));
 
         int lostType = 0;
-        switch (losttype){
-            case 0:{
+        switch (losttype) {
+            case 0: {
                 lostType = R.drawable.littleicon_type_lost;
                 break;
             }
-            case 1:{
+            case 1: {
                 lostType = R.drawable.littleicon_type_find;
             }
-            default:{
+            default: {
                 break;
             }
         }
@@ -196,11 +197,11 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
 
-        Log.e("PHOTO",allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1));
+        Log.e("PHOTO", allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1));
         //类型图片
-        if(dynamicItemBean.getThelost().getTypeid()==1){
+        if (dynamicItemBean.getThelost().getTypeid() == 1) {
             holder.thingType.setImageResource(R.drawable.littleicon_keys);
-        }else {
+        } else {
             Glide.with(mContext)
                     .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1)))
                     .asBitmap()
@@ -208,8 +209,8 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         }
 
 
-        Log.e("PHOTO",String.valueOf(position));
-        Log.e("PHOTO",dynamicItemBean.getThelost().getPhoto());
+        Log.e("PHOTO", String.valueOf(position));
+        Log.e("PHOTO", dynamicItemBean.getThelost().getPhoto());
 
 
         //默认图片，
@@ -218,11 +219,15 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 //                .asBitmap()
 //                .into(holder.thingphoto);
 
-        if("".equals(dynamicItemBean.getThelost().getPhoto())) {
-            GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
-                    , holder.thingphoto
-                    , activity);
-        }else {
+        if ("".equals(dynamicItemBean.getThelost().getPhoto())) {
+            Glide.with(mContext)
+                .load(getTypePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
+                .asBitmap()
+                .into(holder.thingphoto);
+//            GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
+//                    , holder.thingphoto
+//                    , activity);
+        } else {
 
             //事件图片
             String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
@@ -236,14 +241,14 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
 
         //用户头像
         Glide.with(mContext)
-                .load(getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getUserphoto()))
+                .load(getUserPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getUserphoto()))
                 .asBitmap()
                 .into(holder.headimg);
     }
 
     @Override
     public int getItemCount() {
-        return  lists.size();
+        return lists.size();
     }
 
 }

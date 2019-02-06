@@ -10,11 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
@@ -34,6 +38,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLitt
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypePhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getUserPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows.SHOW_TOP;
+import static com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows.SHOW_VERTICAL_AUTO;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
@@ -73,6 +78,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        SwipeMenuLayout swipeMenuLayout;
         RelativeLayout relativeLayout;
         ImageView headimg;
         TextView neckname;
@@ -84,10 +90,12 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         ImageView isNeedBounty;
         CircleImageView userphoto;
         TextView newMsg;
+        Button btnDlt;
 
         public ViewHolder(View view) {
             super(view);
-            relativeLayout = (RelativeLayout) view;
+            swipeMenuLayout = (SwipeMenuLayout) view;
+            relativeLayout= view.findViewById(R.id.search_item_relativeview);
             headimg = view.findViewById(R.id.search_item_thingsphoto);
             neckname = view.findViewById(R.id.search_item_userNickName);
             isNeedBounty = view.findViewById(R.id.search_item_isNeedBounty);
@@ -98,6 +106,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             qishileixing = view.findViewById(R.id.search_item_qishileixing);
             thingType = view.findViewById(R.id.search_item_thingstype);
             newMsg = view.findViewById(R.id.search_item_newmessage);
+            btnDlt=view.findViewById(R.id.search_item_delete);
         }
     }
 
@@ -122,16 +131,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             holder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    arrowPopWindows.show(view, SHOW_TOP);
+                    arrowPopWindows.show(view, SHOW_VERTICAL_AUTO);
                     return true;
                 }
             });
-
-
+        }else {
+            holder.swipeMenuLayout.setSwipeEnable(false);
         }
 
 
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        holder.swipeMenuLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
@@ -282,6 +291,14 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
         //是否是消息
         if(isMessage){
+
+            holder.btnDlt.setOnClickListener(v->{
+                searchItemBeanArrayList.remove(position);
+                FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+
             //popupwindow
             arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {
                 @Override
@@ -292,7 +309,12 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                         public void onClick(View v) {
                             //在主程序回调
                             arrowPopWindows.dismiss();
-                            popupEvent.onDelete(holder.getAdapterPosition());
+                            Log.e("DELETE",String.valueOf(position));
+                            searchItemBeanArrayList.remove(position);
+                            FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                            notifyItemRemoved(position);
+                            notifyDataSetChanged();
+//                            popupEvent.onDelete(holder.getAdapterPosition());
                         }
                     });
                 }

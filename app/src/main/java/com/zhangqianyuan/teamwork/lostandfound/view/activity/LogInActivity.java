@@ -15,10 +15,12 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.LogInPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ILogInActivity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
@@ -61,9 +63,10 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     private String pnb;
     private String email;
     private String nickname;
-
-
     private LogInPresenter iLogInPresenter;
+
+    public static final int pwdshortestlength = 8;
+    public static final int pwdlongestlength = 24;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,7 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         setContentView(R.layout.activity_log_in);
         ButterKnife.bind(this);
         //加下划线
-        tosignin.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
+        tosignin.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         iLogInPresenter = new LogInPresenter(this);
     }
 
@@ -81,59 +84,83 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.login_sure,R.id.login_tosignin})
-    void onClicked(View view){
-        switch (view.getId()){
-            case R.id.login_sure:{
+    @OnClick({R.id.login_sure, R.id.login_tosignin})
+    void onClicked(View view) {
+        switch (view.getId()) {
+            case R.id.login_sure: {
                 pwd = loginPassword.getText().toString();
                 repwd = loginRepassword.getText().toString();
                 pnb = loginPhone.getText().toString();
                 email = loginEmail.getText().toString();
                 nickname = loginNickname.getText().toString();
-                if(!pwd.equals(repwd)&&!"".equals(pwd)&&!"".equals(repwd)&&!"".equals(pnb)&&!"".equals(email)&&!"".equals(nickname)){
-                    FancyToast.makeText(this,"密码不一致或者其他错误",Toast.LENGTH_SHORT,FancyToast.ERROR,true).show();
-                }else {
+                if ("".equals(pwd) || "".equals(repwd) || "".equals(pnb) || "".equals(email) || "".equals(nickname)) {
+                    FancyToast.makeText(this, "请填写完整", Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                }else if (!pwd.equals(repwd)) {
+                    FancyToast.makeText(this, "密码不一致", Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                } else if (pwd.length()<pwdshortestlength||pwd.length()>pwdlongestlength){
+                    FancyToast.makeText(this, "密码长度8～24位", Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                } else if(!isEmail(email)) {
+                    FancyToast.makeText(this, "邮箱格式错误", Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                } else if (!isPhonenumber(pnb)) {
+                    FancyToast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                } else {
                     iLogInPresenter.getCodeStatus(email);
                 }
                 break;
             }
-            case R.id.login_tosignin:{
-                Intent intent = new Intent(LogInActivity.this,SignInActivity.class);
+            case R.id.login_tosignin: {
+                Intent intent = new Intent(LogInActivity.this, SignInActivity.class);
                 startActivity(intent);
                 finish();
                 break;
             }
-            default:{
+            default: {
                 break;
             }
         }
     }
 
     @Override
-    public void showEmailStatus(Integer status,String session) {
-        switch (status){
-            case 200:{
-                FancyToast.makeText(this,"发送验证码成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-                Intent intent = new Intent(LogInActivity.this,VerifyActivity.class);
-                intent.putExtra(PWD,pwd);
-                intent.putExtra(PNB,pnb);
-                intent.putExtra(EMAIL,email);
-                intent.putExtra(NICKNAME,nickname);
-                intent.putExtra(SESSION,session);
+    public void showEmailStatus(Integer status, String session) {
+        switch (status) {
+            case 200: {
+                FancyToast.makeText(this, "发送验证码成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                Intent intent = new Intent(LogInActivity.this, VerifyActivity.class);
+                intent.putExtra(PWD, pwd);
+                intent.putExtra(PNB, pnb);
+                intent.putExtra(EMAIL, email);
+                intent.putExtra(NICKNAME, nickname);
+                intent.putExtra(SESSION, session);
                 startActivity(intent);
                 break;
             }
-            case 201:{
-                FancyToast.makeText(this,"邮箱已经存在",FancyToast.LENGTH_SHORT,FancyToast.WARNING,false).show();
+            case 201: {
+                FancyToast.makeText(this, "邮箱已经存在", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
                 break;
             }
-            case 400:{
-                FancyToast.makeText(this,"发送验证码失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            case 400: {
+                FancyToast.makeText(this, "发送验证码失败或邮箱不存在", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 break;
             }
-            default:{
+            default: {
                 break;
             }
         }
+    }
+
+    //验证邮箱格式
+    public static boolean isEmail(String strEmail) {
+        String strPattern = "^[a-zA-Z]*[\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9]*[\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        Pattern p = Pattern.compile(strPattern);
+        Matcher m = p.matcher(strEmail);
+        return m.matches();
+    }
+
+    //验证手机号格式
+    public static boolean isPhonenumber(String strnumber) {
+        String pattern = "^1\\d{10}$";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(strnumber);
+        return m.matches();
     }
 }

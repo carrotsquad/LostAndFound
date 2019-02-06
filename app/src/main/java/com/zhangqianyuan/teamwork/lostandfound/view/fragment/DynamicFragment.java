@@ -33,14 +33,9 @@ import butterknife.ButterKnife;
  * Description 动态界面
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Zhangqianyuan$
- * @updateDes ${TODO}
- */
-
-/**
- * 参数：
- *
+ * @updateDes
  */
     /*
      最开始时 默认预加载16条动态信息，动态中的count数目按照时间顺序 0到15排序

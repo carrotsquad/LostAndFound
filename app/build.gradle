@@ -20,6 +20,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.example.myapp.MyEventBusIndex' ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -76,7 +81,6 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.youth.banner:banner:1.4.10'
-
     implementation 'cn.finalteam:galleryfinal:1.4.3'
     implementation 'com.ufo:DWImageSelector:0.9.5'
     //RecyclerView
@@ -90,6 +94,9 @@ dependencies {
     //popupwindow
     implementation 'com.github.razerdp:BasePopup:2.0.9'
     implementation 'com.github.douglasjunior:android-simple-tooltip:0.2.2'
+
+    //事件总线注解
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
     //状态栏
 //    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
@@ -99,5 +106,9 @@ dependencies {
     // Optional, if you use support library fragments:
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
 
+    //log库，Simple, pretty and powerful logger for android
+    implementation 'com.orhanobut:logger:2.2.0'
 
+    //侧滑删除库
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
 }

@@ -49,10 +49,10 @@ public class InitActivity extends AppCompatActivity {
             finish();
         }
 
-        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
-            startActivity(new Intent(InitActivity.this,SignInActivity.class));
-            finish();
-        }
+//        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))){
+//            startActivity(new Intent(InitActivity.this,SignInActivity.class));
+//            finish();
+//        }
     }
 
     @OnClick({R.id.select_register,R.id.select_signin})
