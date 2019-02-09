@@ -92,8 +92,7 @@ dependencies {
     //断点下载库
     implementation 'com.mindorks.android:prdownloader:0.4.0'
     //popupwindow
-    implementation 'com.github.razerdp:BasePopup:2.0.9'
-    implementation 'com.github.douglasjunior:android-simple-tooltip:0.2.2'
+    implementation 'com.github.xujiaji:happy-bubble:1.1.6'
 
     //事件总线注解
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'

@@ -18,13 +18,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
+import com.orhanobut.logger.Logger;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IPopupEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,22 +64,17 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
     private Context mContext;
     private Boolean isMessage;
     private List<Integer> changeNumList;
-    private ArrowPopWindows arrowPopWindows;
     private Activity activity;
-    private IPopupEvent popupEvent;
 
     public void setActivity(Activity activity) {
         this.activity = activity;
-    }
-
-    public void setPopupEvent(IPopupEvent popupEvent) {
-        this.popupEvent = popupEvent;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         SwipeMenuLayout swipeMenuLayout;
         RelativeLayout relativeLayout;
+        ArrowPopWindows arrowPopWindows;
         ImageView headimg;
         TextView neckname;
         TextView fabiaotime;
@@ -110,12 +105,11 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
     }
 
-    public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList, List<Integer> changeNumList, Activity activity, IPopupEvent popupEvent, Boolean isMessage){
+    public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList, List<Integer> changeNumList, Activity activity,Boolean isMessage){
         this.searchItemBeanArrayList = searchItemBeanArrayList;
         this.isMessage = isMessage;
         this.activity = activity;
         this.changeNumList = changeNumList;
-        this.popupEvent = popupEvent;
     }
 
     @NonNull
@@ -128,21 +122,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         final ViewHolder holder = new ViewHolder(view);
 
         if(isMessage) {
-            holder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    arrowPopWindows.show(view, SHOW_VERTICAL_AUTO);
+            holder.relativeLayout.setOnLongClickListener(v->{
+                    holder.arrowPopWindows.show(view, SHOW_TOP);
                     return true;
                 }
-            });
+            );
         }else {
             holder.swipeMenuLayout.setSwipeEnable(false);
         }
 
-
-        holder.swipeMenuLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.relativeLayout.setOnClickListener(v->{
                 int position = holder.getAdapterPosition();
                 DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
 
@@ -179,8 +168,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
                 intent.putExtra(OTHERSDESC,dynamicItemBean.getThelost().getDescription());
                 mContext.startActivity(intent);
-            }
-        });
+            });
 
         return holder;
     }
@@ -263,7 +251,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     , holder.headimg
                     , activity);
         }else {
-
             //事件图片
             Glide.with(mContext)
                     .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getThelost().getPhoto()))
@@ -292,29 +279,28 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         //是否是消息
         if(isMessage){
 
+            //侧滑删除
             holder.btnDlt.setOnClickListener(v->{
+                holder.swipeMenuLayout.quickClose();
                 searchItemBeanArrayList.remove(position);
                 FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
             });
 
-            //popupwindow
-            arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {
+            //popupwindow弹出删除
+            holder.arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {
                 @Override
                 public void onViewCreate(ViewGroup viewGroup) {
-                    //设置点击的回调
                     viewGroup.getChildAt(0).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //在主程序回调
-                            arrowPopWindows.dismiss();
-                            Log.e("DELETE",String.valueOf(position));
+                            holder.arrowPopWindows.dismiss();
                             searchItemBeanArrayList.remove(position);
                             FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
                             notifyItemRemoved(position);
                             notifyDataSetChanged();
-//                            popupEvent.onDelete(holder.getAdapterPosition());
+//
                         }
                     });
                 }

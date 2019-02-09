@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +24,6 @@ import com.zhangqianyuan.teamwork.lostandfound.presenter.IMyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IPopupEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class MessageFragment extends Fragment implements IMessageFragment,IPopupEvent, SwipeRefreshLayout.OnRefreshListener {
+public class MessageFragment extends Fragment implements IMessageFragment, SwipeRefreshLayout.OnRefreshListener {
 
     private View view;
     private Context mContext;
@@ -82,7 +82,6 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
 
     @Override
     public void onDestroy() {
-        searchItemAdapter.setPopupEvent(null);
         searchItemAdapter.setActivity(null);
         messagePresenter.dettachActivity();
         super.onDestroy();
@@ -90,7 +89,6 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
 
     @Override
     public void onDestroyView() {
-        searchItemAdapter.setPopupEvent(null);
         searchItemAdapter.setActivity(null);
         messagePresenter.dettachActivity();
         super.onDestroyView();
@@ -101,7 +99,7 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
         recyclerView = view.findViewById(R.id.message_recyclerview);
         refreshLayout.setOnRefreshListener(this);
         gridLayoutManager = new GridLayoutManager(mContext,1);
-        searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),this,true);
+        searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),true);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(searchItemAdapter);
     }
@@ -131,16 +129,6 @@ public class MessageFragment extends Fragment implements IMessageFragment,IPopup
             }
             searchItemAdapter.notifyDataSetChanged();
         }
-    }
-
-    //item的poupwindow的删除的回调
-    @Override
-    public void onDelete(int position) {
-//        Log.e("DELETE",String.valueOf(position));
-//        list.remove(position);
-//        FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
-////        searchItemAdapter.notifyItemRemoved(position);
-//        searchItemAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -29,7 +29,6 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.FormFile;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
-import com.zhangqianyuan.teamwork.lostandfound.network.Form;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.IUploadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UploadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;

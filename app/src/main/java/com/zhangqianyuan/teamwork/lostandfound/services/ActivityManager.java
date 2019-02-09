@@ -11,9 +11,9 @@ import java.util.Stack;
  * 活动管理类
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class ActivityManager {
     //活动栈

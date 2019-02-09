@@ -31,7 +31,6 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ISearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.SearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IPopupEvent;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
 
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class SearchFragment extends Fragment implements ISearchFragment,IPopupEvent {
+public class SearchFragment extends Fragment implements ISearchFragment {
 
     private EditText searchInput;
     private Button sure;
@@ -156,7 +155,7 @@ public class SearchFragment extends Fragment implements ISearchFragment,IPopupEv
 
         //初始化recyclerView
         List<Integer> list = new ArrayList<>();
-        searchItemAdapter = new SearchItemAdapter(searchItemBeanArrayList,list,getActivity(),this,false);
+        searchItemAdapter = new SearchItemAdapter(searchItemBeanArrayList,list,getActivity(),false);
         recyclerView = new RecyclerView(context);
         recyclerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         gridLayoutManager = new GridLayoutManager(context,1);
@@ -251,10 +250,5 @@ public class SearchFragment extends Fragment implements ISearchFragment,IPopupEv
         }else {
             FancyToast.makeText(context,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
-    }
-
-    @Override
-    public void onDelete(int position) {
-
     }
 }
