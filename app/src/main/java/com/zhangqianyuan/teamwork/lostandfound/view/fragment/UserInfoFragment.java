@@ -45,6 +45,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import cn.finalteam.galleryfinal.BuildConfig;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
@@ -63,9 +64,9 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * 用户资料界面
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $zhangqianyuan$
- * @updateDes ${TODO}
+ * @updateDes ButterKnife的unbind
  */
 
 // TODO: 2018/11/15  图片尚未加载
@@ -100,12 +101,13 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private UserInfoPresenter mPresenter;
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_userinfo,container,false);
-        ButterKnife.bind(this,view);
+        unbinder=ButterKnife.bind(this,view);
         mContext = getContext();
         ActivityManager.getActivityManager().addF(this);
         getSharePrefrence();
@@ -118,12 +120,14 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     @Override
     public void onDestroyView() {
         mPresenter.dettachActivity();
+        unbinder.unbind();
         super.onDestroyView();
     }
 
     @Override
     public void onDestroy() {
         mPresenter.dettachActivity();
+        unbinder.unbind();
         super.onDestroy();
     }
 
