@@ -41,12 +41,7 @@ public class AboutUsDetailActivity extends AppCompatActivity {
                 "\n  8.“递爱”使用者因为违反本声明的规定而触犯中华人民共和国法律的，一切后果自己负责，“递爱”不承担任何责任。\n" +
                 " \n9.本声明未涉及的问题参见国家有关法律法规,当本声明");
 
-       back.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               finish();
-           }
-       });
+       back.setOnClickListener(v->finish());
     }
 
 

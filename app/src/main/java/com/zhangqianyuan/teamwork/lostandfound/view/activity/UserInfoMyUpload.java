@@ -40,18 +40,19 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
 /**
  * Description
  * 我的板块中 我的发布板块
- * @author  zhou
+ *
+ * @author zhou
  */
 // TODO: 2018/11/13  加入 上传item数据
 public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivity {
     private List<TheLostBean> lists = new ArrayList<>();
     private MyLoadPresenter presenter = new MyLoadPresenter(new MyLoadModel());
-    private MyLoadItemAdapter  mAdapter ;
+    private MyLoadItemAdapter mAdapter;
     private SharedPreferences sharedPreferences;
-   @BindView(R.id.myhistory_myload_list)
-   RecyclerView list;
+    @BindView(R.id.myhistory_myload_list)
+    RecyclerView list;
 
-   @BindView(R.id.myupload_back)
+    @BindView(R.id.myupload_back)
     ImageView back;
 
     @Override
@@ -63,25 +64,20 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
         initView();
     }
 
-    public void initView(){
+    public void initView() {
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         ButterKnife.bind(this);
-        Log.d("123456","success");
+        Log.d("123456", "success");
         list.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter=new MyLoadItemAdapter(lists,sharedPreferences.getString(USERPHOTO,"null"),sharedPreferences.getString(EMAIL,"null")
-                ,sharedPreferences.getString(NICKNAME,"null"));
+        mAdapter = new MyLoadItemAdapter(lists, sharedPreferences.getString(USERPHOTO, "null"), sharedPreferences.getString(EMAIL, "null")
+                , sharedPreferences.getString(NICKNAME, "null"));
         list.setAdapter(mAdapter);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        back.setOnClickListener(view->finish());
     }
 
-    public void initMvp(){
+    public void initMvp() {
         presenter.attachActivity(this);
-        presenter.getMyloadData(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),0,15);
+        presenter.getMyloadData(getSharedPreferences("users", MODE_PRIVATE).getString("SESSION", null), 0, 15);
     }
 
     @Override

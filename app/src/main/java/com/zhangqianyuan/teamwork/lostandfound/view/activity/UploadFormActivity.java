@@ -243,18 +243,12 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         isNeedBountyArray.add("否");
 
         //赏金选择
-        pvOptionsBounty = new OptionsPickerBuilder(UploadFormActivity.this, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+        pvOptionsBounty = new OptionsPickerBuilder(UploadFormActivity.this,(int options1, int options2, int options3, View v)->{
+                runOnUiThread(()->{
                         needBounty = options1;
                         textBounty.setText("是否有赏金:"+isNeedBountyArray.get(options1));
-                    }
-                });
-            }
-        })
+                    });
+            })
                 //取消按钮文字
                 .setCancelText("取消")
                 //确认按钮文字

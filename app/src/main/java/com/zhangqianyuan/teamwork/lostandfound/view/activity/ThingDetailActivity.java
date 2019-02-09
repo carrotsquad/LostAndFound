@@ -144,8 +144,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private List<CommentFeedBack.Comments> mCommentList  =new ArrayList<>();
     private ThingDetailAdapter adapter;
 
-
-
     @Override
      protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,12 +163,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         recyclerView.setAdapter(adapter);
         thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
 
-        clicktocomment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popup();
-            }
-        });
+        clicktocomment.setOnClickListener(v-> popup());
     }
 
     @Override
@@ -325,9 +318,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         mPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         mPopupWindow.setFocusable(true);
         mPopupWindow.setOutsideTouchable(true);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        ok.setOnClickListener(v->{
                 if (!commentInput.getText().toString().equals("")){
                     String s = commentInput.getText().toString();
                     Log.d("10086",s);
@@ -342,8 +333,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 }else{
                     Toast.makeText(ThingDetailActivity.this,"没有输入内容哦",Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            });
     }
 
     public void popup(){

@@ -57,52 +57,52 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
 
 /**
  * Description
- *我的界面 中的 设置 界面
- * @author  zhou
+ * 我的界面 中的 设置 界面
+ *
+ * @author zhou
  */
 // TODO: 2018/11/27   询问后端为什么第二次退出登录后没有返回结果
-public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment,IUserSettingActivity {
+public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment, IUserSettingActivity {
     private static final int REQUEST_CODE_GALLERY = 1;
 
-  @BindView(R.id.setting_headlayout)
+    @BindView(R.id.setting_headlayout)
     RelativeLayout headlayout;
 
-  @BindView(R.id.setting_headlayout_img)
-  CircleImageView  headImg;
+    @BindView(R.id.setting_headlayout_img)
+    CircleImageView headImg;
 
-  @BindView(R.id.setting_nicklayout)
-  RelativeLayout  nicklayout;
+    @BindView(R.id.setting_nicklayout)
+    RelativeLayout nicklayout;
 
-  @BindView(R.id.setting_nicklayout_txt)
-  TextView  nickname;
+    @BindView(R.id.setting_nicklayout_txt)
+    TextView nickname;
 
-  @BindView(R.id.setting_emaillayout)
-  RelativeLayout  emaillayout;
+    @BindView(R.id.setting_emaillayout)
+    RelativeLayout emaillayout;
 
-  @BindView(R.id.setting_emaillayout_txt)
-  TextView  email;
+    @BindView(R.id.setting_emaillayout_txt)
+    TextView email;
 
-  @BindView(R.id.setting_phonelayout)
-  RelativeLayout  phonelayout;
+    @BindView(R.id.setting_phonelayout)
+    RelativeLayout phonelayout;
 
-  @BindView(R.id.setting_phonelayout_txt)
-  TextView  phone;
+    @BindView(R.id.setting_phonelayout_txt)
+    TextView phone;
 
-  @BindView(R.id.setting_passwordlayout)
-  RelativeLayout passwordlayout;
+    @BindView(R.id.setting_passwordlayout)
+    RelativeLayout passwordlayout;
 
-  @BindView(R.id.exit_account)
-   Button  exitaccount;
+    @BindView(R.id.exit_account)
+    Button exitaccount;
 
-  @BindView(R.id.setting_back)
+    @BindView(R.id.setting_back)
     ImageView back;
 
 
-
-  private String  photoPath;
-    private String  jsessionid;
+    private String photoPath;
+    private String jsessionid;
     private UserSettingPresenter mUserSettingPresenter;
-    private SharedPreferences sharedPreferences  ;
+    private SharedPreferences sharedPreferences;
     private UserInfoPresenter mPresenter;
 
     @Override
@@ -111,13 +111,13 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         setContentView(R.layout.activity_user_info_setting);
         ButterKnife.bind(this);
         ActivityManager.getActivityManager().add(this);
-        sharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
         initData();
         initView();
     }
 
     //选择图片
-    private void initGallery(){
+    private void initGallery() {
         //设置主题
         //ThemeConfig.CYAN
         ThemeConfig theme = new ThemeConfig.Builder().build();
@@ -147,44 +147,44 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
             //进行图片上传与置换
             //置换
             photoPath = resultList.get(0).getPhotoPath();
-            Log.e("ImgTest",photoPath);
-            String jsession = getSharedPreferences("users",Context.MODE_PRIVATE).getString(SESSION,"null");
-            mPresenter.uploadHeadImg(jsession,new File(photoPath));
-            FancyToast.makeText(UserInfoSettingActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
+            Log.e("ImgTest", photoPath);
+            String jsession = getSharedPreferences("users", Context.MODE_PRIVATE).getString(SESSION, "null");
+            mPresenter.uploadHeadImg(jsession, new File(photoPath));
+            FancyToast.makeText(UserInfoSettingActivity.this, "取得照片", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
             //上传
         }
 
         @Override
         public void onHanlderFailure(int requestCode, String errorMsg) {
-            Log.e("editinfo",errorMsg);
-            FancyToast.makeText(UserInfoSettingActivity.this,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            Log.e("editinfo", errorMsg);
+            FancyToast.makeText(UserInfoSettingActivity.this, errorMsg, FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     };
 
 
-    @OnClick({R.id.setting_headlayout,R.id.setting_headlayout_img,R.id.setting_nicklayout
-            ,R.id.setting_phonelayout,R.id.setting_passwordlayout,R.id.exit_account,R.id.setting_back})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.setting_headlayout, R.id.setting_headlayout_img, R.id.setting_nicklayout
+            , R.id.setting_phonelayout, R.id.setting_passwordlayout, R.id.exit_account, R.id.setting_back})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.setting_headlayout:
             case R.id.setting_headlayout_img:
                 initGallery();
                 break;
             case R.id.setting_nicklayout:
-                startActivity(new Intent(UserInfoSettingActivity.this,ChangeNickNameActivity.class));
+                startActivity(new Intent(UserInfoSettingActivity.this, ChangeNickNameActivity.class));
                 break;
             case R.id.setting_phonelayout:
-                startActivity(new Intent(UserInfoSettingActivity.this,ChangePhoneActivty.class));
+                startActivity(new Intent(UserInfoSettingActivity.this, ChangePhoneActivty.class));
                 break;
             case R.id.setting_passwordlayout:
                 break;
             case R.id.exit_account:
-                Log.d("1549","click this");
+                Log.d("1549", "click this");
                 mUserSettingPresenter.exitAccount(jsessionid);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
-                Intent  intent = new Intent(UserInfoSettingActivity.this, SignInActivity.class);
-                intent.putExtra("isExit",true);
+                Intent intent = new Intent(UserInfoSettingActivity.this, SignInActivity.class);
+                intent.putExtra("isExit", true);
                 startActivity(intent);
                 ActivityManager.getActivityManager().removeAll();
                 ActivityManager.getActivityManager().removeFAll();
@@ -195,30 +195,30 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
             case R.id.setting_back:
                 finish();
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
     }
 
-    public void initData(){
+    public void initData() {
         mUserSettingPresenter = new UserSettingPresenter(new UserSettingModel());
         mUserSettingPresenter.attachActivity(this);
-        mPresenter  = new UserInfoPresenter(new UserInfoModel());
+        mPresenter = new UserInfoPresenter(new UserInfoModel());
         mPresenter.attachActivity(this);
-        email.setText(sharedPreferences.getString("EMAIL",null));
-        jsessionid=sharedPreferences.getString("SESSION",null);
-        nickname.setText(sharedPreferences.getString("NICKNAME",null));
-        phone.setText(sharedPreferences.getString("PNB",null));
+        email.setText(sharedPreferences.getString("EMAIL", null));
+        jsessionid = sharedPreferences.getString("SESSION", null);
+        nickname.setText(sharedPreferences.getString("NICKNAME", null));
+        phone.setText(sharedPreferences.getString("PNB", null));
 
     }
 
     @Override
     protected void onResume() {
-        Log.d("onResume",sharedPreferences.getString("NICKNAME",null));
-        nickname.setText(sharedPreferences.getString("NICKNAME",null));
-        phone.setText(sharedPreferences.getString("PNB",null));
-        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
-                headImg,this);
+        Log.d("onResume", sharedPreferences.getString("NICKNAME", null));
+        nickname.setText(sharedPreferences.getString("NICKNAME", null));
+        phone.setText(sharedPreferences.getString("PNB", null));
+        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)),
+                headImg, this);
 //        Glide.with(this)
 //                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
 //                .asBitmap()
@@ -226,41 +226,40 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         super.onResume();
     }
 
-    public void initView(){
+    public void initView() {
 //        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
 //                headImg,this);
         Glide.with(this)
-                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
+                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)))
                 .asBitmap()
                 .into(headImg);
     }
 
 
-
     @Override
     public void settingOnSuccess(int status) {
-        if (status==200){
-            Toast.makeText(UserInfoSettingActivity.this,"退出成功",Toast.LENGTH_SHORT).show();
-        }else if (status==400){
-            Toast.makeText(UserInfoSettingActivity.this,"退出失败",Toast.LENGTH_SHORT).show();
+        if (status == 200) {
+            Toast.makeText(UserInfoSettingActivity.this, "退出成功", Toast.LENGTH_SHORT).show();
+        } else if (status == 400) {
+            Toast.makeText(UserInfoSettingActivity.this, "退出失败", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onSuccess(int status, String userphoto) {
-        Boolean success = (status==200);
-        if (success){
+        Boolean success = (status == 200);
+        if (success) {
             //更新头像
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(USERPHOTO,userphoto);
+            editor.putString(USERPHOTO, userphoto);
             editor.commit();
             headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
 //            Glide.with(this)
 //                    .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
 //                    .asBitmap()
 //                    .into(headImg);
-            Toast.makeText(UserInfoSettingActivity.this,"头像上传成功",Toast.LENGTH_SHORT).show();
-        }else {
+            Toast.makeText(UserInfoSettingActivity.this, "头像上传成功", Toast.LENGTH_SHORT).show();
+        } else {
             Toast.makeText(UserInfoSettingActivity.this, "头像上传失败", Toast.LENGTH_SHORT).show();
         }
     }

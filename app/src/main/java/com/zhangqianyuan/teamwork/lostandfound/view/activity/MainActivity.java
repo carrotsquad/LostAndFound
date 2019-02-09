@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
      * Description: 初始化界面
      */
     private void initView() throws NoSuchFieldException, IllegalAccessException {
-
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new DynamicFragment(session));
         fragments.add(SearchFragment.newInstance());
@@ -176,9 +175,7 @@ public class MainActivity extends AppCompatActivity {
         disableShiftMode(mBottomNav);
 
         //加入底部导航监听
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mBottomNav.setOnNavigationItemSelectedListener((@NonNull MenuItem item) ->{
                 switch (item.getItemId()){
                     case R.id.dongtai_ui:{
                         mViewPager.setCurrentItem(DONGTAI_FRAGMENT);
@@ -204,8 +201,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 }
-            }
-        });
+            });
     }
 
     /**
@@ -227,32 +223,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         //新建失物
-        newShiWu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        newShiWu.setOnClickListener(view->{
                 Intent intent = new  Intent(view.getContext(),UploadActivity.class);
                 intent.putExtra(QISHILEIXING,0);
                 startActivity(intent);
-            }
-        });
+            });
 
         //ic_newzhaolin
-        newZhaoLing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        newZhaoLing.setOnClickListener(view->{
                 Intent intent = new  Intent(view.getContext(),UploadActivity.class);
                 intent.putExtra(QISHILEIXING,1);
                 startActivity(intent);
-            }
-        });
+            });
 
         //取消
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPopWindow.dismiss();
-            }
-        });
+        cancel.setOnClickListener(view-> mPopWindow.dismiss());
     }
 
 

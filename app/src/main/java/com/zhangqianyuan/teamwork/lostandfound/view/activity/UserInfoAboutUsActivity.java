@@ -22,7 +22,8 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.OurWebsite;
 /**
  * Description
  * 我的板块 中 关于我们的界面
- * @author  zhou
+ *
+ * @author zhou
  */
 // TODO: 2018/11/13  关于我们中的各个子界面 以及点击事件
 public class UserInfoAboutUsActivity extends AppCompatActivity {
@@ -41,6 +42,7 @@ public class UserInfoAboutUsActivity extends AppCompatActivity {
 
     @BindView(R.id.aboutus_web)
     RelativeLayout web;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,52 +50,53 @@ public class UserInfoAboutUsActivity extends AppCompatActivity {
         initView();
     }
 
-    public void initView(){
+    public void initView() {
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
+        if (actionBar != null) {
             //设置返回键
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
     }
 
-    @OnClick({R.id.aboutus_applayout,R.id.aboutus_mainze,R.id.aboutus_updatelayout,R.id.aboutus_web})
-    public void onClick(View view){
-        switch (view.getId()){
-                //点击更新
+    @OnClick({R.id.aboutus_applayout, R.id.aboutus_mainze, R.id.aboutus_updatelayout, R.id.aboutus_web})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            //点击更新
             case R.id.aboutus_updatelayout:
                 break;
-                //关于我们
+            //关于我们
             case R.id.aboutus_applayout:
-                startActivity(new Intent(UserInfoAboutUsActivity.this,AboutDiAi.class));
+                startActivity(new Intent(UserInfoAboutUsActivity.this, AboutDiAi.class));
                 break;
-                //点击免责声明
+            //点击免责声明
             case R.id.aboutus_mainze:
-                startActivity(new Intent(UserInfoAboutUsActivity.this,AboutUsDetailActivity.class));
+                startActivity(new Intent(UserInfoAboutUsActivity.this, AboutUsDetailActivity.class));
                 break;
-                //点击官网
+            //点击官网
             case R.id.aboutus_web:
                 Uri uri = Uri.parse(OurWebsite);
-                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-           //    Intent intent = new Intent(UserInfoAboutUsActivity.this, OurWebActivity.class);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                //    Intent intent = new Intent(UserInfoAboutUsActivity.this, OurWebActivity.class);
                 startActivity(intent);
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
     }
 
     //设置返回键点击事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-                default:
-                    break;
+            default:
+                break;
         }
         return true;
-}}
+    }
+}

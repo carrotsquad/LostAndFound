@@ -30,6 +30,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
 /**
  * Description: 验证activity
  * Created at: 2018/11/3 10:27
+ *
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
@@ -71,31 +72,31 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
         super.onDestroy();
     }
 
-    private void initData(){
+    private void initData() {
         Intent intent = getIntent();
         pwd = intent.getStringExtra(PWD);
         eemail = intent.getStringExtra(EMAIL);
         pnb = intent.getStringExtra(PNB);
         nickname = intent.getStringExtra(NICKNAME);
         session = intent.getStringExtra(SESSION);
-        email.setText("验证码已发送到关联邮箱 "+eemail);
+        email.setText("验证码已发送到关联邮箱 " + eemail);
     }
 
-    @OnClick({R.id.verify_sure,R.id.verify_back})
-    void onClicked(View view){
-        switch (view.getId()){
-            case R.id.verify_sure:{
+    @OnClick({R.id.verify_sure, R.id.verify_back})
+    void onClicked(View view) {
+        switch (view.getId()) {
+            case R.id.verify_sure: {
                 String checkcode = verificationCodeView.getInputContent();
-                Log.e("Verify",checkcode);
-                Log.e("Verify",eemail+nickname+pwd+pnb+session);
-                verifyPresenter.getRegister(checkcode,eemail,nickname,pwd,pnb,session);
+                Log.e("Verify", checkcode);
+                Log.e("Verify", eemail + nickname + pwd + pnb + session);
+                verifyPresenter.getRegister(checkcode, eemail, nickname, pwd, pnb, session);
                 break;
             }
-            case R.id.verify_back:{
+            case R.id.verify_back: {
                 onDestroy();
                 break;
             }
-            default:{
+            default: {
                 break;
             }
         }
@@ -103,28 +104,28 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
 
     @Override
     public void getregister(Boolean status) {
-        if(status){
-            FancyToast.makeText(VerifyActivity.this,"注册成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-            Intent intent = new Intent(VerifyActivity.this,SignInActivity.class);
-            intent.putExtra(PWD,pwd);
-            intent.putExtra(PNB,pnb);
-            intent.putExtra(EMAIL,eemail);
-            intent.putExtra(NICKNAME,nickname);
-            intent.putExtra(SESSION,session);
-            intent.putExtra(SIGNIN,1);
+        if (status) {
+            FancyToast.makeText(VerifyActivity.this, "注册成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+            Intent intent = new Intent(VerifyActivity.this, SignInActivity.class);
+            intent.putExtra(PWD, pwd);
+            intent.putExtra(PNB, pnb);
+            intent.putExtra(EMAIL, eemail);
+            intent.putExtra(NICKNAME, nickname);
+            intent.putExtra(SESSION, session);
+            intent.putExtra(SIGNIN, 1);
             startActivity(intent);
             onDestroy();
-        }else {
-            FancyToast.makeText(VerifyActivity.this,"注册失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+        } else {
+            FancyToast.makeText(VerifyActivity.this, "注册失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
 
     @Override
     public void showcheckcodestatus(Boolean status) {
-        if(status){
+        if (status) {
 //            FancyToast.makeText(VerifyActivity.this,"验证码一致",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-        }else {
-            FancyToast.makeText(VerifyActivity.this,"验证码不一致",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+        } else {
+            FancyToast.makeText(VerifyActivity.this, "验证码不一致", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
 }
