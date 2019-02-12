@@ -14,6 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
+
 /**
  * Description: 发布成功后跳转
  * Created at: 2018/11/19 0:09
@@ -33,12 +35,15 @@ public class UploadSuccessActivity extends AppCompatActivity {
 
     @BindView(R.id.publishsuccess_continue_returnmainactivity)
     TextView returnmain;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_success);
         ButterKnife.bind(this);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
         ActivityManager.getActivityManager().add(this);
     }
 

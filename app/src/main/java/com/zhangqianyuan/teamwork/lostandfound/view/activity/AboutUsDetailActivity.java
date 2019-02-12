@@ -11,6 +11,8 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
+
 public class AboutUsDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.aboutus_detail_title)
@@ -24,6 +26,8 @@ public class AboutUsDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.aboutus_detail_back)
     ImageView  back;
+    private View statusBarView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,9 @@ public class AboutUsDetailActivity extends AppCompatActivity {
                 " \n9.本声明未涉及的问题参见国家有关法律法规,当本声明");
 
        back.setOnClickListener(v->finish());
+
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
     }
 
 

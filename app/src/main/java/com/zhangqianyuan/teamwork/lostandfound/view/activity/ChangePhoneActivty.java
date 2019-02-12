@@ -19,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
+
 /**
  * 改号码
  */
@@ -36,12 +38,16 @@ public class ChangePhoneActivty extends AppCompatActivity implements IEditInfoAc
 
     private EditInfoPresenter mEditInfoPresenter;
     private SharedPreferences  mSharedPreferences;
+    private View statusBarView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActivityManager.getActivityManager().add(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_phone_activty);
         ButterKnife.bind(this);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
         initMvp();
     }
 

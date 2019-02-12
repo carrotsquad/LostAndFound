@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PNB;
@@ -67,6 +68,7 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
 
     public static final int pwdshortestlength = 8;
     public static final int pwdlongestlength = 24;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,8 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         ButterKnife.bind(this);
         //加下划线
         tosignin.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
         iLogInPresenter = new LogInPresenter(this);
     }
 

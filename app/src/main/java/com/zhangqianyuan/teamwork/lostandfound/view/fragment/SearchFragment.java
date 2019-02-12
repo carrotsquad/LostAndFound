@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
@@ -82,10 +83,10 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     private SearchItemAdapter searchItemAdapter;
     private ArrayList<DynamicItemBean> searchItemBeanArrayList = new ArrayList<>();
 
-    private ISearchPresenter iSearchPresenter;
+    private SearchPresenter iSearchPresenter;
 
     private SharedPreferences sharedPreferences;
-
+    private Unbinder unbinder;
 
     public static Fragment newInstance(){
         SearchFragment fragment = new SearchFragment();
@@ -113,7 +114,8 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
     @Override
     public void onDestroyView() {
-
+        iSearchPresenter.dettachActivity();
+        unbinder.unbind();
         super.onDestroyView();
     }
 
@@ -126,7 +128,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         thingstypes.add("不限");
         thingstypes.addAll(allTypeBeanList);
         
-        ButterKnife.bind(view);
+        unbinder=ButterKnife.bind(view);
         searchInput = view.findViewById(R.id.search_input);
         sure = view.findViewById(R.id.search_sure);
         dropDownMenu = view.findViewById(R.id.search_dropDownMenu);
@@ -167,58 +169,43 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
         //设置dropDownMenu
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, recyclerView);
-        
-
     }
 
     /**
      * Description: 设置Listener
      */
     private void setOnClick(){
-        diushitypesView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        diushitypesView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id)->{
                 diushitypeAdapter.setCheckItem(position);
                 dropDownMenu.setTabText(position == 0 ? headers[0] : diushitypes[position]);
                 diushiTypePosition = position;
                 dropDownMenu.closeMenu();
             }
-        });
+        );
 
-        placesView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        placesView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id)->{
                 placesAdapter.setCheckItem(position);
                 dropDownMenu.setTabText(position == 0 ? headers[1] : places.get(position));
                 placePosition = position;
                 dropDownMenu.closeMenu();
-            }
-        });
+            });
 
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        ok.setOnClickListener(v->{
                 //其内部已经设置了记录当前tab位置的参数，该参数会随tab被点击而改变，所以这里直接设置tab值即可
                 //此处若想获得constellations第一个值“不限”，可修改constellationPosition初始值为-1，且这里代码改为constellationPosition == -1)
                 dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : thingstypes.get(thingsPosition));
 //                thingstype = thingstypes[thingsPosition];
                 dropDownMenu.closeMenu();
 //                changeContentView();   //在这里可以请求获得经筛选后要显示的内容
-            }
-        });
+            });
 
-        thingsConstellationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        thingsConstellationView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id)->{
                 thingsAdapter.setCheckItem(position);
                 thingsPosition = position;
-            }
-        });
+            });
 
         //点击搜索按键后
-        sure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        sure.setOnClickListener(v->{
                 String keyword = searchInput.getText().toString();
                 if(keyword.length()==0){
                     keyword = "";
@@ -235,8 +222,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                 }
                 iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
 
-            }
-        });
+            });
     }
 
     @Override

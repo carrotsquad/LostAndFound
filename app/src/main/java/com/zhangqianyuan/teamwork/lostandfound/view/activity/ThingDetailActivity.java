@@ -53,6 +53,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypePhoto;
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 
@@ -143,12 +144,15 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private int viewPagerLastIndex;
     private List<CommentFeedBack.Comments> mCommentList  =new ArrayList<>();
     private ThingDetailAdapter adapter;
+    private View statusBarView;
 
     @Override
      protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thing_detail);
         ButterKnife.bind(this);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
         ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this,new ThingDetailModel());

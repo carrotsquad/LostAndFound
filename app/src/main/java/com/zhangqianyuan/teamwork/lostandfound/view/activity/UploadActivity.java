@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
@@ -50,6 +52,7 @@ public class UploadActivity extends AppCompatActivity {
   private SharedPreferences sharedPreferences;
 
     private UploadFragmentAdapter uploadFragmentAdapter;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,8 @@ public class UploadActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Integer qishileixing = intent.getIntExtra(QISHILEIXING,0);
         ButterKnife.bind(this);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar!=null){

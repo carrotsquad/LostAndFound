@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -48,6 +50,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 
@@ -78,12 +81,6 @@ public class MainActivity extends AppCompatActivity {
     private final int MESSAGE_FRAGMENT = 2;
     private final int MINE_FRAGMENT = 3;
 
-    @BindView(R.id.app_bar)
-    AppBarLayout appBarLayout;
-
-    @BindView(R.id.main_title_tv)
-    TextView mTitleTv;
-
     @BindView(R.id.main_view_pager)
     ViewPager mViewPager;
 
@@ -93,14 +90,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String[] titles = new String[]{"动态", "搜索", "消息","我的"};
     private String session = "";
-
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);
-
         ActivityManager.getActivityManager().add(this);
         ButterKnife.bind(this);
         try {
@@ -113,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         session = intent.getStringExtra(SESSION);
         initPermission();
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
     }
 
 
@@ -137,12 +135,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(position == 1||position==3){
-                    appBarLayout.setVisibility(View.GONE);
-                }else {
-                    appBarLayout.setVisibility(View.VISIBLE);
-                }
-                mTitleTv.setText(titles[position]);
                 if(position<=1){
                     mBottomNav.getMenu().getItem(position).setChecked(true);
                 }else if(position>=2&&position<=3){
@@ -152,12 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 1||position==3){
-                    appBarLayout.setVisibility(View.GONE);
-                }else {
-                    appBarLayout.setVisibility(View.VISIBLE);
-                }
-                mTitleTv.setText(titles[position]);
                 if(position<=1){
                     mBottomNav.getMenu().getItem(position).setChecked(true);
                 }else if(position>=2&&position<=3){

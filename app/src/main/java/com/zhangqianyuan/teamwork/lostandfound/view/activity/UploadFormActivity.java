@@ -58,6 +58,7 @@ import static cn.finalteam.toolsfinal.DateUtils.getTime;
 import static cn.finalteam.toolsfinal.DateUtils.getYear;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TYPEID;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
@@ -142,6 +143,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     private Integer typeid;
     private String strtitle;
     private String strdescri;
+    private View statusBarView;
 
 
     @Override
@@ -149,6 +151,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
         ButterKnife.bind(this);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
         ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         Intent intent = getIntent();

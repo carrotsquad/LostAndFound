@@ -11,6 +11,8 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
+
 public class AboutDiAi extends AppCompatActivity {
 
     @BindView(R.id.aboutdiail_back)
@@ -18,6 +20,8 @@ public class AboutDiAi extends AppCompatActivity {
 
     @BindView(R.id.aboutdiai)
     TextView   info;
+    private View statusBarView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,5 +36,8 @@ public class AboutDiAi extends AppCompatActivity {
                 "      ①帮助你发布寻物启事，方便拾物者联系找到你；\n" +
                 "      ②帮助你随手做公益，体验助人为乐的快乐善举；\n" +
                 "      ③提高整体校园的拾物招领意识，丰富大学生的精神文明世界，创造高素质的大学校园。");
+
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
     }
 }

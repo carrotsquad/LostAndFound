@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.OurWebsite;
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 
 
 /**
@@ -42,11 +43,14 @@ public class UserInfoAboutUsActivity extends AppCompatActivity {
 
     @BindView(R.id.aboutus_web)
     RelativeLayout web;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_about_us);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
         initView();
     }
 

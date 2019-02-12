@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PNB;
@@ -56,6 +57,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
     private String session;
 
     private VerifyPresenter verifyPresenter;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
         ButterKnife.bind(this);
         verifyPresenter = new VerifyPresenter(this);
         initData();
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
     }
 
     @Override

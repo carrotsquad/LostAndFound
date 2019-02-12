@@ -33,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
@@ -54,6 +55,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
 
     @BindView(R.id.myupload_back)
     ImageView back;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,8 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
         initMvp();
         ActivityManager.getActivityManager().add(this);
         initView();
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
     }
 
     public void initView() {

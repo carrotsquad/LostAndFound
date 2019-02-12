@@ -27,6 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
+
 /**
  * Description
  * 我的板块 我的历史界面
@@ -44,6 +46,7 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
 
     @BindView(R.id.myhistory_back)
     ImageView back;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,8 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
         ActivityManager.getActivityManager().add(this);
         initView();
         initMvp();
-
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
     }
 
     public void initView(){

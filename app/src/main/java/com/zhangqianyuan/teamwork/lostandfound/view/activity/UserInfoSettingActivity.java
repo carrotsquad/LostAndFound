@@ -51,6 +51,7 @@ import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
@@ -62,6 +63,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author zhou
  */
 // TODO: 2018/11/27   询问后端为什么第二次退出登录后没有返回结果
+// TODO: 2019/2/12     把修改昵称和密码换成poupwindow
 public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment, IUserSettingActivity {
     private static final int REQUEST_CODE_GALLERY = 1;
 
@@ -104,6 +106,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     private UserSettingPresenter mUserSettingPresenter;
     private SharedPreferences sharedPreferences;
     private UserInfoPresenter mPresenter;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +117,8 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
         initData();
         initView();
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
     }
 
     //选择图片
@@ -177,6 +182,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 startActivity(new Intent(UserInfoSettingActivity.this, ChangePhoneActivty.class));
                 break;
             case R.id.setting_passwordlayout:
+                // TODO: 2019/2/12 待添加
                 break;
             case R.id.exit_account:
                 Log.d("1549", "click this");

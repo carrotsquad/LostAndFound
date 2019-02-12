@@ -33,15 +33,17 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBea
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeLittleImgsList;
+import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.VerifyActivity.SIGNIN;
 
 /**
  * Description: 登陆activity
  * Created at: 2018/11/13 10:51
+ *
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class SignInActivity extends AppCompatActivity implements ISignInActivity ,IAllTypesAndPlaces{
+public class SignInActivity extends AppCompatActivity implements ISignInActivity, IAllTypesAndPlaces {
 
     public static final String PWD = "PWD";
     public static final String PNB = "PNB";
@@ -49,7 +51,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     public static final String NICKNAME = "NICKNAME";
     public static final String SESSION = "SESSION";
     public static final String USERPHOTO = "USERPHOTO";
-    public static final String ALLTYPES ="ALLTYPES";
+    public static final String ALLTYPES = "ALLTYPES";
     public static final String ALLPLACES = "ALLPLACES";
 //    public static final String DElETED_NUM_LIST = "DElETED_NUM_LIST";
 
@@ -75,35 +77,39 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     private Intent mIntent;
     private String session;
     //判断是否用户自己选择退出
-    private boolean  isExit;
+    private boolean isExit;
+    private View statusBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         //字体
-        register.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
+        register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         signPresenter = new SignPresenter(this);
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
-        isExit = getIntent().getBooleanExtra("isExit",false);
-        Log.d("hashmap","hahaha"+isExit);
+        isExit = getIntent().getBooleanExtra("isExit", false);
+        Log.d("hashmap", "hahaha" + isExit);
         //如果已经登录过，再次登陆，进入主页面
-        if(!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala"))&&!"balabala".equals(sharedPreferences.getString(SESSION, "balabala"))&&!isExit){
+        if (!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala")) && !"balabala".equals(sharedPreferences.getString(SESSION, "balabala")) && !isExit) {
             email.setText(sharedPreferences.getString(EMAIL, "null"));
             pwd.setText(sharedPreferences.getString(SESSION, "null"));
-            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "balabala"),sharedPreferences.getString(PWD, "balabala"));
-        }else if (isExit) {
+            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "balabala"), sharedPreferences.getString(PWD, "balabala"));
+        } else if (isExit) {
             email.setText("");
             pwd.setText("");
-            isExit=false;
-        }else{
-            mIntent=getIntent();
-            if(mIntent.getIntExtra(SIGNIN,0)==1){
-                signPresenter.getSignIn(mIntent.getStringExtra(EMAIL),mIntent.getStringExtra(PWD));
-            }}}
-
+            isExit = false;
+        } else {
+            mIntent = getIntent();
+            if (mIntent.getIntExtra(SIGNIN, 0) == 1) {
+                signPresenter.getSignIn(mIntent.getStringExtra(EMAIL), mIntent.getStringExtra(PWD));
+            }
+        }
+    }
 
 
     @Override
@@ -113,28 +119,28 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         super.onDestroy();
     }
 
-    @OnClick({R.id.signin_tologin,R.id.signin_signin})
-    void onClicked(View view){
-        switch (view.getId()){
+    @OnClick({R.id.signin_tologin, R.id.signin_signin})
+    void onClicked(View view) {
+        switch (view.getId()) {
             //点击登陆
-            case R.id.signin_signin:{
-                if("".equals(pwd.getText().toString())||"".equals(email.getText().toString())){
-                    FancyToast.makeText(SignInActivity.this,"输入有问题",FancyToast.LENGTH_SHORT,FancyToast.WARNING,false).show();
-                }else {
+            case R.id.signin_signin: {
+                if ("".equals(pwd.getText().toString()) || "".equals(email.getText().toString())) {
+                    FancyToast.makeText(SignInActivity.this, "输入有问题", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
+                } else {
                     String eemail = email.getText().toString();
                     String password = pwd.getText().toString();
-                    signPresenter.getSignIn(eemail,password);
+                    signPresenter.getSignIn(eemail, password);
                 }
                 break;
             }
             //点击“未有账号，点击注册”
-            case R.id.signin_tologin:{
-                Intent intent = new Intent(SignInActivity.this,LogInActivity.class);
+            case R.id.signin_tologin: {
+                Intent intent = new Intent(SignInActivity.this, LogInActivity.class);
                 startActivity(intent);
                 finish();
                 break;
             }
-            default:{
+            default: {
                 break;
             }
         }
@@ -143,48 +149,48 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
 
     @Override
     public void showSignInStatus(Boolean status, SignInBean signInBean) {
-        if(status){
-            FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+        if (status) {
+            FancyToast.makeText(SignInActivity.this, "登录成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
             editor = sharedPreferences.edit();
             int[] arrayint = new int[10000];
-            editor.putString(EMAIL,signInBean.getUser().getUsername());
-            editor.putString(PWD,signInBean.getUser().getPassword());
-            editor.putString(NICKNAME,signInBean.getUser().getNickname());
-            editor.putString(PNB,signInBean.getUser().getPhonenumber());
-            editor.putString(USERPHOTO,signInBean.getUser().getPhoto());
-            editor.putString(SESSION,signInBean.getJSESSIONID());
+            editor.putString(EMAIL, signInBean.getUser().getUsername());
+            editor.putString(PWD, signInBean.getUser().getPassword());
+            editor.putString(NICKNAME, signInBean.getUser().getNickname());
+            editor.putString(PNB, signInBean.getUser().getPhonenumber());
+            editor.putString(USERPHOTO, signInBean.getUser().getPhoto());
+            editor.putString(SESSION, signInBean.getJSESSIONID());
             session = signInBean.getJSESSIONID();
             //去获取所有的丢失物品类型和地点
             editor.commit();
             allTypesAndPlacesPresenter.getAllTypesAndPlaces(signInBean.getJSESSIONID());
-        }else {
-            FancyToast.makeText(SignInActivity.this,"登录失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+        } else {
+            FancyToast.makeText(SignInActivity.this, "登录失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
 
     @Override
     public void getIAllTypesAndPlaces(Boolean status, List<TypeBean> typeBeanList, List<PlaceBean> placeBeanList) {
-        if(status){
-            FancyToast.makeText(SignInActivity.this,"登录成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+        if (status) {
+            FancyToast.makeText(SignInActivity.this, "登录成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
             int i = typeBeanList.size();
-            for (int k = 0; k<i;k++) {
+            for (int k = 0; k < i; k++) {
                 allTypeBeanList.add(typeBeanList.get(k).getName());
                 allTypeImgsList.add(typeBeanList.get(k).getPhoto());
             }
             i = placeBeanList.size();
-            for (int k = 0; k<i;k++) {
+            for (int k = 0; k < i; k++) {
                 allPlaceBeanList.add(placeBeanList.get(k).getName());
             }
-            Log.e("SignIn",allPlaceBeanList.toString());
-            Log.e("SignIn",allTypeBeanList.toString());
-            Log.e("SignIn",allTypeImgsList.toString());
-            Log.e("SignIn",sharedPreferences.getString(SESSION,"null"));
+            Log.e("SignIn", allPlaceBeanList.toString());
+            Log.e("SignIn", allTypeBeanList.toString());
+            Log.e("SignIn", allTypeImgsList.toString());
+            Log.e("SignIn", sharedPreferences.getString(SESSION, "null"));
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-            intent.putExtra(SESSION,session);
+            intent.putExtra(SESSION, session);
             startActivity(intent);
             finish();
-        }else {
-            FancyToast.makeText(SignInActivity.this,"无法获取丢失物品类型和地点",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+        } else {
+            FancyToast.makeText(SignInActivity.this, "无法获取丢失物品类型和地点", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
 }
