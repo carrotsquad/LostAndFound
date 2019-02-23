@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserSettingModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IUserSettingPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserSettingActivity;
 
 import retrofit2.Call;

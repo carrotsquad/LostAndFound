@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ISearchModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.SearchModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.ISearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
 
 import io.reactivex.Observer;
@@ -19,7 +20,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class SearchPresenter extends AbstractBasePresenter<ISearchFragment> implements ISearchPresenter{
+public class SearchPresenter extends AbstractBasePresenter<ISearchFragment> implements ISearchPresenter {
 
     private ISearchModel iSearchModel;
 

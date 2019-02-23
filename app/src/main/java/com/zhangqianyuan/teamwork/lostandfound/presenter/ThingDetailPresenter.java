@@ -4,13 +4,10 @@ import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.IThingDetailModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.ThingDetailModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IThingDetailPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

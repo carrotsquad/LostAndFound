@@ -2,11 +2,14 @@ package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.MessageQueue;
 import android.support.annotation.NonNull;
@@ -35,13 +38,17 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.leakcanary.LeakCanary;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.event.MessageEvent;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
+import com.zhangqianyuan.teamwork.lostandfound.services.UpdateMessageService;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.MessageFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.UserInfoFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -49,6 +56,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.finalteam.toolsfinal.Logger;
 
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
@@ -92,6 +100,30 @@ public class MainActivity extends AppCompatActivity {
     private String session = "";
     private View statusBarView;
 
+    //服务
+    private UpdateMessageService.MsgBinder msgBinder;
+    private UpdateMessageService updateMessageService;
+
+    //服务连接
+    private ServiceConnection serviceConnection=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            msgBinder=(UpdateMessageService.MsgBinder)service;
+            updateMessageService=msgBinder.getService();
+            updateMessageService.setUpdateMessageListenser(messageEvent->{
+                EventBus.getDefault().post(messageEvent);
+                Logger.e("Service Test");
+            });
+            updateMessageService.startService();
+            //先设置listener
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,8 +141,29 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         session = intent.getStringExtra(SESSION);
         initPermission();
+        initService();
         //实现渐变式状态栏
         setGradientStatusBarColor(this,statusBarView);
+    }
+
+    /**
+     * 注销EventBus
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(serviceConnection);
+        stopService(new Intent(this,UpdateMessageService.class));
+    }
+
+    /**
+     * 初始化服务
+     */
+    public void initService() {
+        //绑定服务
+        Intent intent=new Intent(this,UpdateMessageService.class);
+//        startService(intent);
+        bindService(intent,serviceConnection,BIND_AUTO_CREATE);
     }
 
 

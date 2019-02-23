@@ -3,11 +3,9 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IMyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

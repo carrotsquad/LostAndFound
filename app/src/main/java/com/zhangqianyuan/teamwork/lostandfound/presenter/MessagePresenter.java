@@ -8,6 +8,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.CommentedMessageModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IMessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class MessagePresenter extends AbstractBasePresenter<IMessageFragment> implements IMessagePresenter{
+public class MessagePresenter extends AbstractBasePresenter<IMessageFragment> implements IMessagePresenter {
 
     private CommentedMessageModel commentedMessageModel;
     private MyLoadModel myLoadModel;

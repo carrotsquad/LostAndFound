@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/diai"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name=".services.UpdateMessageService"/>
         <activity
             android:name=".view.activity.MainActivity"
             android:launchMode="singleTop" />

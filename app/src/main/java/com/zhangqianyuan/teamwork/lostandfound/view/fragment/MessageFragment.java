@@ -8,9 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +18,18 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.IMyLoadPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.event.MessageEvent;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Logger;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
@@ -72,6 +72,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         ActivityManager.getActivityManager().addF(this);
         initView();
         initList();
+        EventBus.getDefault().register(this);
         return view;
     }
 
@@ -82,6 +83,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
 
     @Override
     public void onDestroy() {
+        EventBus.getDefault().unregister(this);
         searchItemAdapter.setActivity(null);
         messagePresenter.dettachActivity();
         super.onDestroy();
@@ -110,6 +112,16 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         String usernickname = sharedPreferences.getString(NICKNAME,"null");
         String jsessionid = sharedPreferences.getString(SESSION,"null");
         messagePresenter.getMessageData(usernickname,userphoto,username,jsessionid,0,500);
+    }
+
+
+    /**
+     * 处理更新消息事件,TODO:待完善
+     * @param messageEvent
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updateMessage(MessageEvent messageEvent) {
+        Toast.makeText(getContext(),messageEvent.toString(),Toast.LENGTH_SHORT).show();
     }
 
     @Override

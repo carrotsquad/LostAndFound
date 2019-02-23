@@ -5,6 +5,7 @@ import android.util.Log;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ISignModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.SignModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.ISignPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISignInActivity;
 
 import io.reactivex.Observer;

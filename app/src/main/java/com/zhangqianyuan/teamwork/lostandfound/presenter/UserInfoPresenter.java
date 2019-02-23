@@ -2,16 +2,13 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
 import android.util.Log;
 
-import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserImgBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IUserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
 
 import java.io.File;
 
-import io.reactivex.annotations.NonNull;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

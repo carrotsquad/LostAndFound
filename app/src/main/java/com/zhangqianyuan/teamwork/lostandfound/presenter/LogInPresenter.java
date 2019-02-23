@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ILogInModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.LogInModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.ILogInPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ILogInActivity;
 
 import io.reactivex.Observer;
@@ -16,7 +17,7 @@ import io.reactivex.disposables.Disposable;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class LogInPresenter extends AbstractBasePresenter<ILogInActivity> implements ILogInPresenter{
+public class LogInPresenter extends AbstractBasePresenter<ILogInActivity> implements ILogInPresenter {
 
     private ILogInModel iLogInModel;
 

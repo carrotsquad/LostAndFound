@@ -3,6 +3,7 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.VerifyModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IVerifyPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IVerifyActivity;
 
 import io.reactivex.Observer;

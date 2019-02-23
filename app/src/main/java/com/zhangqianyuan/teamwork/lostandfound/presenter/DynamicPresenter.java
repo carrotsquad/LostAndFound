@@ -3,6 +3,7 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.DynamicModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IDynamicPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IDynaicFragment;
 
 import io.reactivex.Observer;

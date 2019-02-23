@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.EditInfoModel;
-import com.zhangqianyuan.teamwork.lostandfound.model.IEditInfoModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IEditInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IEditInfoActivity;
 
 import retrofit2.Call;

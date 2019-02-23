@@ -27,8 +27,6 @@ import com.zhangqianyuan.teamwork.lostandfound.adapter.GirdDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.ListDropDownAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.ISearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.SearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
