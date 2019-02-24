@@ -1,12 +1,15 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -65,6 +68,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
 /**
  * Description: 主页面
  * Created at: 2018/10/30 0:08
+ *
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
@@ -75,10 +79,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String TYPEID = "TYPEID";
     public static final String QISHILEIXING = "QISHILEIXING";
 
-    /** 上次点击返回键的时间 */
+    /**
+     * 上次点击返回键的时间
+     */
     private long lastBackPressed;
 
-    /** 两次点击的间隔时间 */
+    /**
+     * 两次点击的间隔时间
+     */
     private static final int QUIT_INTERVAL = 2000;
 
     /**
@@ -96,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView mBottomNav;
 
-    private String[] titles = new String[]{"动态", "搜索", "消息","我的"};
+    private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
     private String session = "";
     private View statusBarView;
 
@@ -105,12 +113,12 @@ public class MainActivity extends AppCompatActivity {
     private UpdateMessageService updateMessageService;
 
     //服务连接
-    private ServiceConnection serviceConnection=new ServiceConnection() {
+    private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            msgBinder=(UpdateMessageService.MsgBinder)service;
-            updateMessageService=msgBinder.getService();
-            updateMessageService.setUpdateMessageListenser(messageEvent->{
+            msgBinder = (UpdateMessageService.MsgBinder) service;
+            updateMessageService = msgBinder.getService();
+            updateMessageService.setUpdateMessageListenser(messageEvent -> {
                 EventBus.getDefault().post(messageEvent);
                 Logger.e("Service Test");
             });
@@ -143,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         initPermission();
         initService();
         //实现渐变式状态栏
-        setGradientStatusBarColor(this,statusBarView);
+        setGradientStatusBarColor(this, statusBarView);
     }
 
     /**
@@ -153,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(serviceConnection);
-        stopService(new Intent(this,UpdateMessageService.class));
+        stopService(new Intent(this, UpdateMessageService.class));
     }
 
     /**
@@ -161,9 +169,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public void initService() {
         //绑定服务
-        Intent intent=new Intent(this,UpdateMessageService.class);
+        Intent intent = new Intent(this, UpdateMessageService.class);
 //        startService(intent);
-        bindService(intent,serviceConnection,BIND_AUTO_CREATE);
+        bindService(intent, serviceConnection, BIND_AUTO_CREATE);
     }
 
 
@@ -188,19 +196,19 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(position<=1){
+                if (position <= 1) {
                     mBottomNav.getMenu().getItem(position).setChecked(true);
-                }else if(position>=2&&position<=3){
-                    mBottomNav.getMenu().getItem(position+1).setChecked(true);
+                } else if (position >= 2 && position <= 3) {
+                    mBottomNav.getMenu().getItem(position + 1).setChecked(true);
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
-                if(position<=1){
+                if (position <= 1) {
                     mBottomNav.getMenu().getItem(position).setChecked(true);
-                }else if(position>=2&&position<=3){
-                    mBottomNav.getMenu().getItem(position+1).setChecked(true);
+                } else if (position >= 2 && position <= 3) {
+                    mBottomNav.getMenu().getItem(position + 1).setChecked(true);
                 }
 
             }
@@ -214,69 +222,130 @@ public class MainActivity extends AppCompatActivity {
         disableShiftMode(mBottomNav);
 
         //加入底部导航监听
-        mBottomNav.setOnNavigationItemSelectedListener((@NonNull MenuItem item) ->{
-                switch (item.getItemId()){
-                    case R.id.dongtai_ui:{
-                        mViewPager.setCurrentItem(DONGTAI_FRAGMENT);
-                        return true;
-                    }
-                    case R.id.search_ui:{
-                        mViewPager.setCurrentItem(SEARCH_FRAGMENT);
-                        return true;
-                    }
-                    case R.id.newmessage_ui:{
-                        showPopUpWindow();
-                        return true;
-                    }
-                    case R.id.message_ui:{
-                        mViewPager.setCurrentItem(MESSAGE_FRAGMENT);
-                        return true;
-                    }
-                    case R.id.mine_ui:{
-                        mViewPager.setCurrentItem(MINE_FRAGMENT);
-                        return true;
-                    }
-                    default:{
-                        return true;
-                    }
+        mBottomNav.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
+            switch (item.getItemId()) {
+                case R.id.dongtai_ui: {
+                    mViewPager.setCurrentItem(DONGTAI_FRAGMENT);
+                    return true;
                 }
-            });
+                case R.id.search_ui: {
+                    mViewPager.setCurrentItem(SEARCH_FRAGMENT);
+                    return true;
+                }
+                case R.id.newmessage_ui: {
+                    showPopUpWindow();
+                    return false;
+                }
+                case R.id.message_ui: {
+                    mViewPager.setCurrentItem(MESSAGE_FRAGMENT);
+                    return true;
+                }
+                case R.id.mine_ui: {
+                    mViewPager.setCurrentItem(MINE_FRAGMENT);
+                    return true;
+                }
+                default: {
+                    return true;
+                }
+            }
+        });
     }
 
     /**
-     * popupWindows
+     * popupWindow
      */
     private void showPopUpWindow() {
         View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.choose, null);
         final PopupWindow mPopWindow = new PopupWindow(contentView,
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
         mPopWindow.setContentView(contentView);
+        //popupWindow出场动画
+//        mPopWindow.setAnimationStyle(R.style.xinjian_popUp_style);
         ImageView newShiWu = contentView.findViewById(R.id.newShiWu);
         ImageView newZhaoLing = contentView.findViewById(R.id.newZhaoLing);
         ImageView cancel = contentView.findViewById(R.id.cancel);
+        TextView textView=contentView.findViewById(R.id.textView);
+        TextView textView1=contentView.findViewById(R.id.textView2);
 
         View rootView = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_main, null);
         mPopWindow.setTouchable(true);
         mPopWindow.setOutsideTouchable(true);
         mPopWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
 
+        //❌号旋转动画
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(cancel, "rotation", 0f, 180f);
+        objectAnimator.setDuration(500);
+        objectAnimator.start();
+
+        //平移动画
+        int bottom = dip2px(this, 220);
+        float[] dist = new float[]{bottom, 60, -30, -20 - 10, 0};
+        startTranslationAnimation(newShiWu, 500, dist);
+        startTranslationAnimation(newZhaoLing, 500, dist);
+        startTranslationAnimation(textView, 500, dist);
+        startTranslationAnimation(textView1, 500, dist);
 
         //新建失物
-        newShiWu.setOnClickListener(view->{
-                Intent intent = new  Intent(view.getContext(),UploadActivity.class);
-                intent.putExtra(QISHILEIXING,0);
-                startActivity(intent);
-            });
+        newShiWu.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), UploadActivity.class);
+            intent.putExtra(QISHILEIXING, 0);
+            startActivity(intent);
+        });
 
         //ic_newzhaolin
-        newZhaoLing.setOnClickListener(view->{
-                Intent intent = new  Intent(view.getContext(),UploadActivity.class);
-                intent.putExtra(QISHILEIXING,1);
-                startActivity(intent);
-            });
+        newZhaoLing.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), UploadActivity.class);
+            intent.putExtra(QISHILEIXING, 1);
+            startActivity(intent);
+        });
 
         //取消
-        cancel.setOnClickListener(view-> mPopWindow.dismiss());
+        cancel.setOnClickListener(view -> {
+            closeTranslationAnimation(newShiWu,300,bottom);
+            closeTranslationAnimation(newZhaoLing,300,bottom);
+            closeTranslationAnimation(textView,300,bottom);
+            closeTranslationAnimation(textView1,300,bottom);
+            contentView.postDelayed(()-> mPopWindow.dismiss(),300);
+        });
+    }
+
+
+    /**
+     * 平移动画
+     *
+     * @param view     view
+     * @param duration 执行时长
+     * @param distance 执行的轨迹数组
+     */
+    private void startTranslationAnimation(View view, int duration, float[] distance) {
+        ObjectAnimator anim = ObjectAnimator.ofFloat(view, "translationY", distance);
+        anim.setDuration(duration);
+        anim.start();
+    }
+
+    /**
+     * 关闭 popupWindow 时的动画
+     *
+     * @param view     mView
+     * @param duration 动画执行时长
+     * @param next     平移量
+     */
+    private void closeTranslationAnimation(View view, int duration, int next) {
+        ObjectAnimator anim = ObjectAnimator.ofFloat(view, "translationY", 0f, next);
+        anim.setDuration(duration);
+        anim.start();
+    }
+
+    /**
+     * dp转化为px
+     *
+     * @param context  context
+     * @param dipValue dp value
+     * @return 转换之后的px值
+     */
+    public static int dip2px(Context context, float dipValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
     }
 
 
@@ -284,26 +353,27 @@ public class MainActivity extends AppCompatActivity {
      * 申请权限
      */
     private void initPermission() {
-        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.INTERNET, Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.INTERNET, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
     }
 
     /**
      * 申请权限回调
+     *
      * @param requestCode
      * @param permissions
      * @param grantResults
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
+        switch (requestCode) {
             case 1:
-                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 } else {
-                    FancyToast.makeText(MainActivity.this,"你拒绝了权限", FancyToast.ERROR, Toast.LENGTH_SHORT,false).show();
+                    FancyToast.makeText(MainActivity.this, "你拒绝了权限", FancyToast.ERROR, Toast.LENGTH_SHORT, false).show();
                 }
                 break;
             default:
@@ -327,15 +397,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    
+
     /**
      * Description: 反射解决使用的时候 item 数大于 3 个时会有位移
      */
     @SuppressLint("RestrictedApi")
     public void disableShiftMode(BottomNavigationView view) throws NoSuchFieldException, IllegalAccessException {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
-        try { Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
-            shiftingMode.setAccessible(true); shiftingMode.setBoolean(menuView, false);
+        try {
+            Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
+            shiftingMode.setAccessible(true);
+            shiftingMode.setBoolean(menuView, false);
             shiftingMode.setAccessible(false);
             for (int i = 0; i < menuView.getChildCount(); i++) {
                 BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
@@ -344,7 +416,7 @@ public class MainActivity extends AppCompatActivity {
                 // set once again checked value, so view will be updated
                 // noinspection RestrictedApi
                 item.setChecked(item.getItemData().isChecked());
-                }
+            }
         } catch (NoSuchFieldException e) {
             Log.e("BNVHelper", "Unable to get shift mode field", e);
         } catch (IllegalAccessException e) {

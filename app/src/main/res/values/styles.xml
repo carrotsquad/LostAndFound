@@ -115,5 +115,10 @@
         <item name="android:windowEnterAnimation">@anim/grow_from_left</item>
         <item name="android:windowExitAnimation">@anim/shrink_from_left</item>
     </style>
+    
+    <style name="xinjian_popUp_style">
+        <item name="android:windowEnterAnimation">@anim/xinjian_pop_in</item>
+        <item name="android:windowExitAnimation">@anim/xinjian_pop_out</item>
+    </style>
 
 </resources>
