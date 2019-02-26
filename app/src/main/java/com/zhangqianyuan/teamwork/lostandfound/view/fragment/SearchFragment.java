@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,9 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yyydjk.library.DropDownMenu;
 import com.zhangqianyuan.teamwork.lostandfound.R;
@@ -34,6 +37,7 @@ import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -50,7 +54,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  */
 public class SearchFragment extends Fragment implements ISearchFragment {
 
-    private EditText searchInput;
+    private SearchView searchInput;
     private Button sure;
     private DropDownMenu dropDownMenu;
     private List<View> popupViews = new ArrayList<>();
@@ -128,6 +132,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         
         unbinder=ButterKnife.bind(view);
         searchInput = view.findViewById(R.id.search_input);
+        searchInput.setSubmitButtonEnabled(false);
+        searchInput.findViewById(android.support.v7.appcompat.R.id.search_plate).setBackground(null);
+        searchInput.findViewById(android.support.v7.appcompat.R.id.submit_area).setBackground(null);
         sure = view.findViewById(R.id.search_sure);
         dropDownMenu = view.findViewById(R.id.search_dropDownMenu);
 
@@ -202,24 +209,33 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                 thingsPosition = position;
             });
 
+        searchInput.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        searchInput.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                Logger.e(query);
+//                Toast.makeText(getActivity(),query,Toast.LENGTH_SHORT).show();
+//                search(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+
         //点击搜索按键后
         sure.setOnClickListener(v->{
-                String keyword = searchInput.getText().toString();
-                if(keyword.length()==0){
-                    keyword = "";
-                }
-                String session = sharedPreferences.getString(SESSION,"null");
-                if(placePosition==0){
-                    placePosition=-1;
-                }
-//                if(diushiTypePosition==0){
-//                    diushiTypePosition=-1;
-//                }
-                if(thingsPosition==0){
-                    thingsPosition=-1;
-                }
-                iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
-
+                String keyword = searchInput.getQuery().toString();
+                search(keyword);
             });
     }
 
@@ -234,5 +250,24 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         }else {
             FancyToast.makeText(context,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
+    }
+
+    private void search(String str){
+        String keyword = str;
+        if(keyword.length()==0){
+            keyword = "";
+        }
+        String session = sharedPreferences.getString(SESSION,"null");
+        if(placePosition==0){
+            placePosition=-1;
+        }
+//                if(diushiTypePosition==0){
+//                    diushiTypePosition=-1;
+//                }
+        if(thingsPosition==0){
+            thingsPosition=-1;
+        }
+        iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
+
     }
 }
