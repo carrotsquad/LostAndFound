@@ -5,9 +5,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * 修改用户昵称
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class ChangeUserNickNameBean {
             private String nickname;

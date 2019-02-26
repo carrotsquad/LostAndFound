@@ -1,12 +1,13 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IAllTypesModel;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class AllTypesModel extends BaseModel implements IAllTypesModel{
+public class AllTypesModel extends BaseModel implements IAllTypesModel {
 
     public AllTypesModel(){
         super();

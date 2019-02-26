@@ -14,9 +14,9 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes${TODO}
+ * @updateDes
  */
 public class DynamicPresenter extends BasePresenter<IDynaicFragment> implements IDynamicPresenter {
     private DynamicModel mDynamicModel;

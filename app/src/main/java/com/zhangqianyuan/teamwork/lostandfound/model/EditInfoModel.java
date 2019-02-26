@@ -4,17 +4,18 @@ import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ChangePhoneNumberBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ChangeUserNickNameBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IEditInfoModel;
 
 import retrofit2.Callback;
 
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
-public class EditInfoModel extends BaseModel  implements IEditInfoModel{
+public class EditInfoModel extends BaseModel  implements IEditInfoModel {
     public EditInfoModel(){
         super();
     }

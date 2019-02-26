@@ -4,8 +4,8 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.AllPlacesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.AllPlacesModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.AllTypesModel;
-import com.zhangqianyuan.teamwork.lostandfound.model.IAllPlacesModel;
-import com.zhangqianyuan.teamwork.lostandfound.model.IAllTypesModel;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IAllPlacesModel;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IAllTypesModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IAllTypesAndPlacesPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IAllTypesAndPlaces;
 

@@ -1,4 +1,4 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 

@@ -4,13 +4,11 @@ import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IThingDetailModel;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Callback;
 
-public class ThingDetailModel extends BaseModel implements IThingDetailModel{
+public class ThingDetailModel extends BaseModel implements IThingDetailModel {
 
     public ThingDetailModel(){
         super();

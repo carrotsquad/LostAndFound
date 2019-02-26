@@ -2,6 +2,7 @@ package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IVerifyModel;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

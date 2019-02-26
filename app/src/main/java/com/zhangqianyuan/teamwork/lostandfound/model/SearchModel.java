@@ -3,12 +3,13 @@ package com.zhangqianyuan.teamwork.lostandfound.model;
 import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchRequestBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ISearchModel;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class SearchModel extends BaseModel implements ISearchModel{
+public class SearchModel extends BaseModel implements ISearchModel {
 
     public SearchModel(){
         super();

@@ -7,9 +7,9 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
  * 动态界面
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface IDynamicPresenter {
     void getDynamicLostData(DynamicsRequestBean dynamicsRequestBean, String session);

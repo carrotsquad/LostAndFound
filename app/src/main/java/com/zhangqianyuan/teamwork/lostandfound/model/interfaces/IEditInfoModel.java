@@ -1,16 +1,16 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 
-import retrofit2.Call;
 import retrofit2.Callback;
 /**
  * Description
  * 设置 界面中 修改昵称和电话号码
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface IEditInfoModel {
     void  uploadNeckName(String jsessionId,String nickName,Callback<StatusBean> callback);

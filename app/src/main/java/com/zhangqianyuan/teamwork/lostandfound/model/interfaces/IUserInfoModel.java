@@ -1,22 +1,17 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 
-import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserImgBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
 
 import java.io.File;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface IUserInfoModel {
 

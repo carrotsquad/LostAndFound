@@ -5,9 +5,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * api修改电话号码 参数类
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class ChangePhoneNumberBean {
 

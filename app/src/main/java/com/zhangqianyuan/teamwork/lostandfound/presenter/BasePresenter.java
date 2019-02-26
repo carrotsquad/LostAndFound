@@ -7,9 +7,9 @@ import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.BaseView;
  * presenter基类 用于管理View
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class BasePresenter<V extends BaseView> {
     private V  v;

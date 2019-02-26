@@ -3,31 +3,25 @@ package com.zhangqianyuan.teamwork.lostandfound.model;
 import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IUploadModel;
 
 import java.io.File;
-import java.net.FileNameMap;
-import java.net.URLConnection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import retrofit2.Callback;
 
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $zhangqianyuan$
- * @updateDes ${TODO}
+ * @updateDes
  */
-// TODO: 2018/11/19 需要完善
 public class UploadModel extends BaseModel implements IUploadModel {
 
     public UploadModel(){

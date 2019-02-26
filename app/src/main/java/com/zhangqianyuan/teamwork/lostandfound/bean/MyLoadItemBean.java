@@ -5,9 +5,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * 我的中 我的发布 中事件 Item
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class MyLoadItemBean {
     public static final int  TYPE_LOST=0; //丢失

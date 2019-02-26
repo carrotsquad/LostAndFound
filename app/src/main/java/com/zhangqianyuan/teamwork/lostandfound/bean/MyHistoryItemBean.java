@@ -6,9 +6,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * 包括 类型图象  类型（丢捡）  是否成功  对方是谁以及 完成时间
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class MyHistoryItemBean {
     private  int  typeImg;

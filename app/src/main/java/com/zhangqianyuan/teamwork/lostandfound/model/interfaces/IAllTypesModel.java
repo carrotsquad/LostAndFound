@@ -1,6 +1,4 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
-
-import android.database.Observable;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 

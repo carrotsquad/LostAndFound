@@ -1,8 +1,8 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
+
 import retrofit2.Callback;
 
 public interface IThingDetailModel {

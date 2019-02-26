@@ -6,9 +6,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * 发送类
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class SendMyHistoryBean {
 

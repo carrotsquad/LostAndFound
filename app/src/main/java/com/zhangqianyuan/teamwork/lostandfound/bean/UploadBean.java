@@ -7,9 +7,9 @@ import java.util.List;
  * 发布失物/招领 的bean 并非recycleview bean
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class UploadBean {
     private   int  lostOrFind;   //事务类型

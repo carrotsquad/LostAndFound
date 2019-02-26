@@ -3,12 +3,13 @@ package com.zhangqianyuan.teamwork.lostandfound.model;
 import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.LoginBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ISignModel;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class SignModel extends BaseModel implements ISignModel{
+public class SignModel extends BaseModel implements ISignModel {
 
     public SignModel(){
         super();

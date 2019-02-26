@@ -5,9 +5,9 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces;
  * 设置中修改电话号码 和昵称
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface IEditInfoPresenter {
     void  uploadNeckName(String jsessionId,String nickName);

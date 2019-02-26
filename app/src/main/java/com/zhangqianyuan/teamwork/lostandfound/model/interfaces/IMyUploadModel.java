@@ -1,8 +1,6 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 
-import java.util.List;
+import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 
 import retrofit2.Callback;
 /**
@@ -10,9 +8,9 @@ import retrofit2.Callback;
  * 我的 我的发布model
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface IMyUploadModel {
     /**

@@ -1,24 +1,22 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.google.gson.Gson;
-import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IDynamicModel;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Callback;
 
 /**
  * Description
  * 动态  子Fragment model
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class DynamicModel extends BaseModel implements IDynamicModel {
     public DynamicModel (){

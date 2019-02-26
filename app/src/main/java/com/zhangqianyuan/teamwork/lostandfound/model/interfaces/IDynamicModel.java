@@ -1,18 +1,16 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 
-import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface IDynamicModel {
 

@@ -2,47 +2,26 @@ package com.zhangqianyuan.teamwork.lostandfound.network;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllPlacesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.ChangePhoneNumberBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.ChangeUserNickNameBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
-import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.LoginBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.UploadBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserImgBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.UserInfoBean;
-import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
-
-import java.io.File;
-import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
-import retrofit2.http.Query;
-
-// TODO: 2018/11/12 需完善
 /**
  * Description: Api
  * Created at: 2018/11/3 11:07

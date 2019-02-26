@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ICommentedMessageModel;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

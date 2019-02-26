@@ -14,9 +14,9 @@ import retrofit2.Response;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class EditInfoPresenter extends BasePresenter<IEditInfoActivity> implements IEditInfoPresenter {
 

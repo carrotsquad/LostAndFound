@@ -3,8 +3,8 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 import android.annotation.SuppressLint;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.ILogInModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.LogInModel;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ILogInModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.ILogInPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ILogInActivity;
 

@@ -3,9 +3,9 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface IMyLoadPresenter  {
     void getMyloadData(String jsessionid,int start,int end);

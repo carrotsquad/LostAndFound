@@ -1,31 +1,25 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
-
-
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
+import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
@@ -34,10 +28,7 @@ import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoAboutUsActi
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyHistory;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoMyUpload;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoSettingActivity;
-
-import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
-
 
 import java.io.File;
 import java.util.List;
@@ -68,8 +59,6 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @updateAuthor $zhangqianyuan$
  * @updateDes ButterKnife的unbind
  */
-
-// TODO: 2018/11/15  图片尚未加载
 public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     private static final int REQUEST_CODE_GALLERY = 1;

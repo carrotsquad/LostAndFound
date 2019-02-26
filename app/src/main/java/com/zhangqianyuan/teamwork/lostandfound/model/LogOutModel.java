@@ -1,12 +1,11 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ILogOutModel;
 
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
-public class LogOutModel extends BaseModel implements ILogOutModel{
+public class LogOutModel extends BaseModel implements ILogOutModel {
 
     public LogOutModel(){
         super();

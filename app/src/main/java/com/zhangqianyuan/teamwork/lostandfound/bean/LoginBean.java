@@ -5,9 +5,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * 登录 的json类
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class LoginBean {
         private String username;

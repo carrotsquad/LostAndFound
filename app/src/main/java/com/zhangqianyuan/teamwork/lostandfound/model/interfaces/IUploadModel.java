@@ -1,4 +1,5 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 
@@ -6,13 +7,12 @@ import java.io.File;
 import java.util.List;
 
 import io.reactivex.Observer;
-import retrofit2.Callback;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface IUploadModel {
     void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer);

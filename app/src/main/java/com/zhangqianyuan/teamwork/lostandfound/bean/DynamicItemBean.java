@@ -4,9 +4,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * Description 动态Fragment 中的每个事件的类
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class DynamicItemBean {
 

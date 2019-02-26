@@ -3,8 +3,8 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 import android.support.annotation.Nullable;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.ISearchModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.SearchModel;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ISearchModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.ISearchPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISearchFragment;
 

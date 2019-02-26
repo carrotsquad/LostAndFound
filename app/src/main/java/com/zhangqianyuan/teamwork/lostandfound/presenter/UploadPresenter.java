@@ -17,9 +17,9 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class UploadPresenter extends BasePresenter<IUploadFormActivity> implements IUploadPresenter {
     private UploadModel mUploadModel;

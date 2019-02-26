@@ -1,8 +1,8 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.ILogOutModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.LogOutModel;
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ILogOutModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.ILogOutPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ILogOut;
 

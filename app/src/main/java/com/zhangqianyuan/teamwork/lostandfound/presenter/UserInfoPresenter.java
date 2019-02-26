@@ -16,9 +16,9 @@ import retrofit2.Response;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class UserInfoPresenter extends BasePresenter<IUserInfoFragment> implements IUserInfoPresenter {
 

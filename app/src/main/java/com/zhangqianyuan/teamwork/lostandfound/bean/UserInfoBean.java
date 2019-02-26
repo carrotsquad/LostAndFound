@@ -5,9 +5,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * 我的界面 数据类
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class UserInfoBean {
     private String headImg;       //头像

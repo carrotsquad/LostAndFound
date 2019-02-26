@@ -7,9 +7,9 @@ import java.util.List;
  *
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class CommentFeedBack {
     private  int status;

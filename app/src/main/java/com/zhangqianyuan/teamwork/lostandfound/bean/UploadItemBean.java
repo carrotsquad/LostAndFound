@@ -3,9 +3,9 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class UploadItemBean {
     private String  typeImgId;

@@ -3,7 +3,6 @@ package com.zhangqianyuan.teamwork.lostandfound.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,19 +16,9 @@ import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyLoadItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.MyHistoryModel;
-import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.MyHistoryPresenter;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyHistoryActivity;
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -51,9 +40,9 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 
 public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.ViewHolder>  {
@@ -131,7 +120,6 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
-        // TODO: 2018/11/20  将类型小图片 用swith 方法进行选择加载
         holder.where.setText(lostPlace);
         String publishTime= lists.get(position).getPublishtime();
         if (!publishTime.equals("")){

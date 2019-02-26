@@ -1,16 +1,14 @@
 package com.zhangqianyuan.teamwork.lostandfound.bean;
 
 
-import org.w3c.dom.Comment;
-
 /**
  * Description
  * 发送评论的bean
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class ThingDetailBean {
 

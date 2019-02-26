@@ -1,4 +1,4 @@
-package com.zhangqianyuan.teamwork.lostandfound.model;
+package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 
 import retrofit2.Callback;
@@ -7,11 +7,10 @@ import retrofit2.Callback;
  * 设置界面 的所有操作model
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
-// TODO: 2018/11/16 一些其他功能需要加上去
 public interface IUserSettingModel {
     //退出账号
     void  exitAccount(String jsessionId, Callback<StatusBean> callback);

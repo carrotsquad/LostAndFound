@@ -3,9 +3,9 @@ package com.zhangqianyuan.teamwork.lostandfound.view.interfaces;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface BaseView {
 }

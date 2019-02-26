@@ -1,37 +1,31 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
-import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
+
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
-import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
-// TODO: 2018/11/15 完善服务器传递  item对象到list中
 public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.ViewHolder>  {
     private List<TheLostBean> lists ;
     private Context mContext;
@@ -111,7 +105,6 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
             holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
-        // TODO: 2018/11/20  将类型小图片 用swith 方法进行选择加载
         holder.where.setText(lostPlace);
         String publishTime= lists.get(position).getPublishtime();
         if (!publishTime.equals("")){
