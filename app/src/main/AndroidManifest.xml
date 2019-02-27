@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/diai"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".services.UpdateMessageService"/>
+        <activity android:name=".view.activity.BufferPageActivity"></activity>
+
+        <service android:name=".services.UpdateMessageService" />
+
         <activity
             android:name=".view.activity.MainActivity"
             android:launchMode="singleTop" />
@@ -43,8 +46,7 @@
             android:label="" />
         <activity
             android:name=".view.activity.UserInfoMyUpload"
-            android:label="我的发布" />
-        <!-- <activity android:name=".view.activity.UserSettingEditInfoActivity" /> -->
+            android:label="我的发布" /> <!-- <activity android:name=".view.activity.UserSettingEditInfoActivity" /> -->
         <activity android:name=".view.activity.InitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,8 +56,7 @@
         </activity>
         <activity android:name=".view.activity.UploadSuccessActivity" />
         <activity android:name=".view.activity.ChangeNickNameActivity" />
-        <activity android:name=".view.activity.ChangePhoneActivty" />
-        <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
+        <activity android:name=".view.activity.ChangePhoneActivty" /> <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
         <activity android:name=".view.activity.AboutUsDetailActivity" />
         <activity android:name=".view.activity.AboutDiAi" />
         <activity android:name=".view.activity.OurWebActivity" />

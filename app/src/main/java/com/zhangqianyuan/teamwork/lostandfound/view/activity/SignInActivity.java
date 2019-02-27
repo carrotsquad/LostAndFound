@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -150,7 +151,6 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     @Override
     public void showSignInStatus(Boolean status, SignInBean signInBean) {
         if (status) {
-            FancyToast.makeText(SignInActivity.this, "登录成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
             editor = sharedPreferences.edit();
             int[] arrayint = new int[10000];
             editor.putString(EMAIL, signInBean.getUser().getUsername());
@@ -171,7 +171,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     @Override
     public void getIAllTypesAndPlaces(Boolean status, List<TypeBean> typeBeanList, List<PlaceBean> placeBeanList) {
         if (status) {
-            FancyToast.makeText(SignInActivity.this, "登录成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+
             int i = typeBeanList.size();
             for (int k = 0; k < i; k++) {
                 allTypeBeanList.add(typeBeanList.get(k).getName());
@@ -185,7 +185,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             Log.e("SignIn", allTypeBeanList.toString());
             Log.e("SignIn", allTypeImgsList.toString());
             Log.e("SignIn", sharedPreferences.getString(SESSION, "null"));
-            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignInActivity.this, BufferPageActivity.class);
             intent.putExtra(SESSION, session);
             startActivity(intent);
             finish();

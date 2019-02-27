@@ -22,7 +22,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ eventBusIndex : 'com.example.myapp.MyEventBusIndex' ]
+                arguments = [eventBusIndex: 'com.example.myapp.MyEventBusIndex']
             }
         }
     }
