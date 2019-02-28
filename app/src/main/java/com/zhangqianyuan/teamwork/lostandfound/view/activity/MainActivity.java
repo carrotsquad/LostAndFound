@@ -74,6 +74,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  */
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TO_SIGN_IN="to sign in";
     public static final Integer FINE_INTERNET_STATUS = 200;
     public static final Integer BAD_INTERNET_STATUS = 400;
     public static final String TYPEID = "TYPEID";
@@ -137,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this, statusBarView);
         ActivityManager.getActivityManager().add(this);
         ButterKnife.bind(this);
         try {
@@ -150,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
         session = intent.getStringExtra(SESSION);
         initPermission();
         initService();
-        //实现渐变式状态栏
-        setGradientStatusBarColor(this, statusBarView);
     }
 
     /**

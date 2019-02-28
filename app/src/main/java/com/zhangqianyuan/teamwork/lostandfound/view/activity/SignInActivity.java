@@ -28,6 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.toolsfinal.Logger;
 
 import static android.provider.Telephony.Carriers.PASSWORD;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
@@ -86,20 +87,19 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
-        //实现渐变式状态栏
-        setGradientStatusBarColor(this,statusBarView);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
-        //字体
-        register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         signPresenter = new SignPresenter(this);
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
         isExit = getIntent().getBooleanExtra("isExit", false);
-        Log.d("hashmap", "hahaha" + isExit);
-        //如果已经登录过，再次登陆，进入主页面
-        if (!"balabala".equals(sharedPreferences.getString(EMAIL, "balabala")) && !"balabala".equals(sharedPreferences.getString(SESSION, "balabala")) && !isExit) {
-            email.setText(sharedPreferences.getString(EMAIL, "null"));
-            pwd.setText(sharedPreferences.getString(SESSION, "null"));
-            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "balabala"), sharedPreferences.getString(PWD, "balabala"));
+        //如果已经登录过，再次登陆，直接进入缓冲页
+        if (!"".equals(sharedPreferences.getString(EMAIL, "null")) && !"".equals(sharedPreferences.getString(SESSION, "null")) && !isExit) {
+            Logger.e("SignIn");
+            Intent intent = new Intent(SignInActivity.this, BufferPageActivity.class);
+            startActivity(intent);
+            finish();
+//            email.setText(sharedPreferences.getString(EMAIL, "null"));
+//            pwd.setText(sharedPreferences.getString(PWD, "null"));
+//            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "null"), sharedPreferences.getString(PWD, "null"));
         } else if (isExit) {
             email.setText("");
             pwd.setText("");
@@ -110,6 +110,10 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
                 signPresenter.getSignIn(mIntent.getStringExtra(EMAIL), mIntent.getStringExtra(PWD));
             }
         }
+        //实现渐变式状态栏
+        setGradientStatusBarColor(this,statusBarView);
+        //字体
+        register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
 

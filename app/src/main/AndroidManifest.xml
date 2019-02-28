@@ -17,7 +17,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".view.activity.BufferPageActivity"></activity>
 
-        <service android:name=".services.UpdateMessageService" />
+        <service
+            android:name=".services.UpdateMessageService"
+            android:icon="@mipmap/diai"/>
 
         <activity
             android:name=".view.activity.MainActivity"

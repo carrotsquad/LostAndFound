@@ -29,7 +29,6 @@ import java.util.List;
 /**
  * Description
  * 动态板块子页面（分为失物/招领）
- *
  * @author zhoudada
  * @version $Rev$
  * @des
