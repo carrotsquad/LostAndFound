@@ -36,12 +36,12 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBean
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeLittleImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TO_SIGN_IN;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.VerifyActivity.SIGNIN;
 
 /**
  * Description: 登陆activity
  * Created at: 2018/11/13 10:51
- *
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
@@ -92,8 +92,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
         isExit = getIntent().getBooleanExtra("isExit", false);
         //如果已经登录过，再次登陆，直接进入缓冲页
-        if (!"".equals(sharedPreferences.getString(EMAIL, "null")) && !"".equals(sharedPreferences.getString(SESSION, "null")) && !isExit) {
-            Logger.e("SignIn");
+        if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && !isExit) {
             Intent intent = new Intent(SignInActivity.this, BufferPageActivity.class);
             startActivity(intent);
             finish();
@@ -104,12 +103,13 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             email.setText("");
             pwd.setText("");
             isExit = false;
-        } else {
-            mIntent = getIntent();
-            if (mIntent.getIntExtra(SIGNIN, 0) == 1) {
-                signPresenter.getSignIn(mIntent.getStringExtra(EMAIL), mIntent.getStringExtra(PWD));
-            }
         }
+//        else {
+//            mIntent = getIntent();
+//            if (!mIntent.getBooleanExtra(TO_SIGN_IN, true)) {
+//                signPresenter.getSignIn(mIntent.getStringExtra(EMAIL), mIntent.getStringExtra(PWD));
+//            }
+//        }
         //实现渐变式状态栏
         setGradientStatusBarColor(this,statusBarView);
         //字体

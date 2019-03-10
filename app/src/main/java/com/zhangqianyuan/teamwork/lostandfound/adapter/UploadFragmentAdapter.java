@@ -86,7 +86,6 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
         }else {
             Glide.with(mContext)
                     .load(bean.getTypeImgId())
-                    .asBitmap()
                     .into(holder.img);
         }
         holder.text.setText(bean.getTypeText());

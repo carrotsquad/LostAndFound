@@ -36,20 +36,19 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
 /**
  * Description
  * 上传失物/招领启事界面
+ *
  * @author zhou
  */
 public class UploadActivity extends AppCompatActivity {
-  private List<UploadItemBean> lists = new ArrayList<>();
+    private List<UploadItemBean> lists = new ArrayList<>();
 
-  @BindView(R.id.upload_list)
-   RecyclerView mRecyclerView;
+    @BindView(R.id.upload_list)
+    RecyclerView mRecyclerView;
 
-  @BindView(R.id.upload_toolbar)
+    @BindView(R.id.upload_toolbar)
     Toolbar mToolbar;
 
-  private String typesImgBaseUrl = "http://111.230.235.15/passlove/img/losttype?";
-
-  private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
 
     private UploadFragmentAdapter uploadFragmentAdapter;
     private View statusBarView;
@@ -60,7 +59,7 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload);
         ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             initLists();
         }
         initView();
@@ -76,43 +75,43 @@ public class UploadActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    public void initView(){
+    public void initView() {
         Intent intent = getIntent();
-        Integer qishileixing = intent.getIntExtra(QISHILEIXING,0);
+        Integer qishileixing = intent.getIntExtra(QISHILEIXING, 0);
         ButterKnife.bind(this);
         //实现渐变式状态栏
-        setGradientStatusBarColor(this,statusBarView);
+        setGradientStatusBarColor(this, statusBarView);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this,4));
-        UploadFragmentAdapter uploadFragmentAdapter = new UploadFragmentAdapter(lists,qishileixing);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        UploadFragmentAdapter uploadFragmentAdapter = new UploadFragmentAdapter(lists, qishileixing);
         mRecyclerView.setAdapter(uploadFragmentAdapter);
     }
 
-    public void initLists(){
+    public void initLists() {
         int i = allTypeImgsList.size();
-        String session = sharedPreferences.getString(SESSION," ");
-        for(int k = 0; k < i; k++){
+        String session = sharedPreferences.getString(SESSION, " ");
+        for (int k = 0; k < i; k++) {
             String s = "";
-            s = AllURI.getTypePhoto(session,allTypeImgsList.get(k));
-            UploadItemBean uploadItemBean = new UploadItemBean(s,allTypeBeanList.get(k));
+            s = AllURI.getTypePhoto(session, allTypeImgsList.get(k));
+            UploadItemBean uploadItemBean = new UploadItemBean(s, allTypeBeanList.get(k));
             lists.add(uploadItemBean);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.upload,menu);
+        getMenuInflater().inflate(R.menu.upload, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
+        switch (item.getItemId()) {
+            case android.R.id.home: {
                 finish();
                 break;
             }
@@ -127,7 +126,7 @@ public class UploadActivity extends AppCompatActivity {
                 item.setChecked(true);
                 break;
             }
-            case  R.id.upload_find: {
+            case R.id.upload_find: {
                 /*
                  同上
                  */
@@ -137,11 +136,11 @@ public class UploadActivity extends AppCompatActivity {
                 item.setChecked(true);
                 break;
             }
-            default:{
+            default: {
                 break;
             }
         }
-        return  true;
+        return true;
     }
 
 }

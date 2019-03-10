@@ -36,7 +36,7 @@ public class SignPresenter extends AbstractBasePresenter<ISignInActivity> implem
 
             @Override
             public void onNext(SignInBean signInBean) {
-                if (signInBean==null||signInBean.getStatus()==200) {
+                if (signInBean!=null&&signInBean.getStatus()==200) {
                     v.showSignInStatus(true,signInBean);
                 }else {
                     v.showSignInStatus(false,null);

@@ -55,9 +55,8 @@ public class InitActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            if (!"".equals(sharedPreferences.getString(EMAIL, "null")) && !"".equals(sharedPreferences.getString(SESSION, "null"))) {
+            if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, ""))) {
                 Intent intent=new Intent(InitActivity.this, SignInActivity.class);
-                intent.putExtra(TO_SIGN_IN,true);
                 startActivity(intent);
                 finish();
             }

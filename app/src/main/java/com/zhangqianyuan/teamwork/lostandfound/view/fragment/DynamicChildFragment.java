@@ -61,7 +61,6 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_dynamic_lostorfind, container, false);
-
         newPosi = 15;
         oldPosi = 15;
         mRecyclerView = view.findViewById(R.id.dynamic_list);
@@ -76,7 +75,6 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
         iDynamicPresenter = new DynamicPresenter();
         iDynamicPresenter.attachActivity(this);
         initLists();
-
         return view;
     }
 

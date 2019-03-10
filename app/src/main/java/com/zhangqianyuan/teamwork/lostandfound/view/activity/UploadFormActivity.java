@@ -70,15 +70,15 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     //选择时间
     @BindView(R.id.upload_lostorfind_time)
-    TextView timeText;
+    Button timeText;
 
     //选择地点
     @BindView(R.id.upload_lostorfind_place)
-    TextView textPlace;
+    Button textPlace;
 
     //选择赏金
     @BindView(R.id.upload_lostorfind_bounty)
-    TextView textBounty;
+    Button textBounty;
 
     //编辑标题
     @BindView(R.id.upload_lostorfind_description_title)
@@ -240,7 +240,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         pvOptionsBounty = new OptionsPickerBuilder(UploadFormActivity.this,(int options1, int options2, int options3, View v)->{
                 runOnUiThread(()->{
                         needBounty = options1;
-                        textBounty.setText("是否有赏金:"+isNeedBountyArray.get(options1));
+                        textBounty.setText(isNeedBountyArray.get(options1));
                     });
             })
                 //取消按钮文字
@@ -263,7 +263,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                     @Override
                     public void run() {
                         placeid = options1;
-                        textPlace.setText("丢失地点:"+allPlaceBeanList.get(options1));
+                        textPlace.setText(allPlaceBeanList.get(options1));
                     }
                 });
             }
@@ -300,7 +300,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        timeText.setText("丢失时间:"+String.valueOf(getYear(date))+"年"+String.valueOf(getMonth(date))+"月"+String.valueOf(getDay(date))+"日");
+                        timeText.setText(String.valueOf(getYear(date))+"年"+String.valueOf(getMonth(date))+"月"+String.valueOf(getDay(date))+"日");
                     }
                 });
             }

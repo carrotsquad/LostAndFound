@@ -124,9 +124,6 @@ public class BufferPageActivity extends AppCompatActivity implements ISignInActi
             for (int k = 0; k < i; k++) {
                 allPlaceBeanList.add(placeBeanList.get(k).getName());
             }
-            Log.e("SignIn", allPlaceBeanList.toString());
-            Log.e("SignIn", allTypeBeanList.toString());
-            Log.e("SignIn", allTypeImgsList.toString());
             Log.e("SignIn", sharedPreferences.getString(SESSION, "null"));
             Intent intent = new Intent(BufferPageActivity.this, MainActivity.class);
             intent.putExtra(SESSION, session);
