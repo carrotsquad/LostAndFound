@@ -133,7 +133,7 @@ public interface Api {
                                     @Part MultipartBody.Part photo);
 
     //发表评论
-   @FormUrlEncoded
+    @FormUrlEncoded
     @POST("passlove/comment/publish")
     Call<StatusBean> uploadComment(@Field("JSESSIONID") String jsessionid,@Field("requestData") String bean);
 
