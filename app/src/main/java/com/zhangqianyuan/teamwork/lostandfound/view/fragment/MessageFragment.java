@@ -121,7 +121,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateMessage(MessageEvent messageEvent) {
-        Toast.makeText(getContext(),messageEvent.toString(),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(),messageEvent.toString(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
