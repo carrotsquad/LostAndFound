@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -54,7 +55,7 @@ public class UpdateMessageService extends Service implements IMessageFragment {
      */
     public void startService() {
         //每隔30秒轮询
-        Observable.interval(30,30, TimeUnit.SECONDS)
+        Disposable disposable = Observable.interval(30,30, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())

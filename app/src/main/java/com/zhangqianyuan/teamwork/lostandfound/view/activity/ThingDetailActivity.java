@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyViewPagerAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.NetworkImageIndicatorView;
@@ -197,7 +199,26 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         }
         banner.start();
         banner.startAutoPlay();
-
+        //Banner加载图片
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Dialog dialog = new Dialog(ThingDetailActivity.this,R.style.Dialog_Fullscreen);
+                dialog.setContentView(R.layout.dialog_pic);
+                ImageView image = dialog.findViewById(R.id.dialog_pic);
+                Glide.with(dialog.getContext())
+                        .load(s.get(position))
+                        .into(image);
+                dialog.show();
+                dialog.setCancelable(true);
+                image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
     }
 
 //    //初始化viewpager
