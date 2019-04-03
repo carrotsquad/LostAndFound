@@ -42,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
+            android:background="@drawable/click_style"
             android:id="@+id/aboutus_updatelayout"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -62,13 +63,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <View
-
-                android:layout_alignParentBottom="true"
-                android:id="@+id/aboutus_1"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="70dp"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="@color/grey_200"
+                android:layout_marginEnd="30dp"
+                android:layout_alignParentBottom="true" />
         </RelativeLayout>
         <RelativeLayout
+            android:background="@drawable/click_style"
             android:layout_below="@id/aboutus_updatelayout"
             android:id="@+id/aboutus_applayout"
             android:layout_width="match_parent"
@@ -90,9 +94,13 @@
                android:layout_height="30dp" />
 
             <View
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="70dp"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="@color/grey_200"
+                android:layout_marginEnd="30dp"
+                android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
     </RelativeLayout>
@@ -104,6 +112,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:background="@drawable/click_style"
             android:id="@+id/aboutus_mainze"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -124,12 +133,17 @@
                 android:layout_height="30dp" />
 
             <View
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="70dp"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="@color/grey_200"
+                android:layout_marginEnd="30dp"
+                android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:background="@drawable/click_style"
             android:layout_below="@id/aboutus_mainze"
             android:id="@+id/aboutus_web"
             android:layout_width="match_parent"
@@ -150,9 +164,13 @@
                 android:layout_width="20dp"
                 android:layout_height="30dp" />
             <View
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="70dp"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="@color/grey_200"
+                android:layout_marginEnd="30dp"
+                android:layout_alignParentBottom="true" />
         </RelativeLayout>
     </RelativeLayout>
 
