@@ -79,7 +79,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     private Intent mIntent;
     private String session;
     //判断是否用户自己选择退出
-    private boolean isExit;
+    private boolean isExit ;
     private View statusBarView;
 
     @Override

@@ -16,9 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.zhangqianyuan.teamwork.lostandfound.R;
-
 import com.zhangqianyuan.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 
@@ -28,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * Description 动态界面

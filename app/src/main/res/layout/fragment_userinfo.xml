@@ -5,7 +5,6 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-
         android:id="@+id/userinfo_headlayout"
         android:layout_width="match_parent"
         android:layout_height="220dp"
@@ -29,24 +28,23 @@
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="我是只橘猫"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24dp" />
     </RelativeLayout>
 
     <RelativeLayout
+
         android:id="@+id/userinfo_biglayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="238dp">
+        android:layout_below="@+id/userinfo_headlayout">
 
         <RelativeLayout
-            android:background="@drawable/click_style"
             android:id="@+id/userinfo_myupload_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:background="@drawable/click_style">
 
             <ImageView
                 android:id="@+id/userinfo_myupload_layout_img"
@@ -67,24 +65,24 @@
                 android:textSize="16dp" />
 
             <View
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="70dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
                 android:layout_marginEnd="30dp"
-                android:background="@color/grey_200"
-                android:layout_alignParentBottom="true" />
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/grey_200" />
 
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:background="@drawable/click_style"
             android:id="@+id/userinfo_myhistory_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@id/userinfo_myupload_layout"
-            android:layout_marginTop="0dp">
+            android:layout_marginTop="0dp"
+            android:background="@drawable/click_style">
 
             <ImageView
                 android:id="@+id/userinfo_myhistory_layout_img"
@@ -109,17 +107,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="70dp"
                 android:layout_marginEnd="30dp"
+                android:layout_marginStart="70dp"
                 android:background="@color/grey_200" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:background="@drawable/click_style"
             android:id="@+id/userinfo_aboutus_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/userinfo_myhistory_layout">
+            android:layout_below="@id/userinfo_myhistory_layout"
+            android:background="@drawable/click_style">
 
             <ImageView
                 android:id="@+id/userinfo_aboutus_layout_img"
@@ -143,8 +141,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="70dp"
                 android:layout_marginEnd="30dp"
+                android:layout_marginStart="70dp"
                 android:background="@color/grey_200" />
         </RelativeLayout>
 
@@ -156,7 +154,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/userinfo_biglayout1"
-        >
+        android:layout_marginTop="10dp">
 
         <RelativeLayout
             android:background="@drawable/click_style"
@@ -181,15 +179,6 @@
                 android:text="设置"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
-
-            <View
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="70dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey_200"
-                android:layout_marginEnd="30dp"
-                android:layout_alignParentBottom="true" />
         </RelativeLayout>
     </RelativeLayout>
 

@@ -60,17 +60,14 @@
 
         </LinearLayout>
 
-
-
-
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/dynamic_card_headimg"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="3dp"
+            android:layout_marginRight="3dp"
             android:layout_below="@+id/dynamic_card_title"
             android:src="@mipmap/diai" />
 
@@ -79,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/dynamic_card_headimg"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/dynamic_card_title"
             android:layout_alignParentBottom="false"
 
