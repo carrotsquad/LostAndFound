@@ -7,4 +7,7 @@
     <string name="find">招领</string>
     <string name="upload">上传</string>
     <string name="editInfo">编辑信息</string>
+
+    <string name="toolbar_scroll_behavior" translatable="false">
+         com.zhangqianyuan.teamwork.lostandfound.view.Widget.ToolBarScrollBehavior</string>
 </resources>
