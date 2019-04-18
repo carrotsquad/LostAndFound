@@ -197,7 +197,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 Intent intent = new Intent(UserInfoSettingActivity.this, SignInActivity.class);
-                intent.putExtra("isExit", true);
+                intent.putExtra("isExit", false);
                 startActivity(intent);
                 ActivityManager.getActivityManager().removeAll();
                 ActivityManager.getActivityManager().removeFAll();

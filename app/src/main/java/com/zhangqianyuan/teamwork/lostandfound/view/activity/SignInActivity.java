@@ -92,7 +92,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
         isExit = getIntent().getBooleanExtra("isExit", false);
         //如果已经登录过，再次登陆，直接进入缓冲页
-        if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && !isExit) {
+        if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && isExit) {
             Intent intent = new Intent(SignInActivity.this, BufferPageActivity.class);
             startActivity(intent);
             finish();
