@@ -14,7 +14,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="登 录"
-        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textColor="#ffd145"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +67,6 @@
             android:inputType="text"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
             android:textSize="17sp" />
 
         <EditText
@@ -82,7 +82,6 @@
             android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
             android:textSize="17sp" />
 
         <Button
@@ -98,7 +97,7 @@
             android:background="@drawable/shape_button"
             android:gravity="center"
             android:text="登   录"
-            android:textColor="#111111"
+            android:textColor="@android:color/white"
             android:textSize="20sp" />
     </RelativeLayout>
 
@@ -111,7 +110,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="232dp"
         android:text="未有账号，点击注册"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.899"

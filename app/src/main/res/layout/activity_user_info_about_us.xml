@@ -98,6 +98,30 @@
             android:layout_width="match_parent"
             android:layout_height="1dp" />
 
+        <RelativeLayout
+            android:layout_marginTop="1dp"
+            android:background="@drawable/click_style"
+            android:layout_below="@id/aboutus_applayout"
+            android:id="@+id/aboutus_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_marginStart="15dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:text="我要反馈"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@drawable/rightpoint"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="20dp"
+                android:layout_height="30dp" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <RelativeLayout

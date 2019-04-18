@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,9 +9,13 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +25,11 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.model.EditInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserInfoModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.UserSettingModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.EditInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserSettingPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
@@ -93,6 +100,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     ImageView back;
 
 
+
     private String photoPath;
     private String jsessionid;
     private UserSettingPresenter mUserSettingPresenter;
@@ -125,12 +133,12 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 .build();
         //配置功能
         FunctionConfig functionConfig = new FunctionConfig.Builder()
-                .setEnableCamera(true)
+                .setEnableCamera(false)
                 .setEnableEdit(true)
                 .setEnableCrop(true)
                 .setEnableRotate(true)
                 .setCropSquare(true)
-                .setEnablePreview(true)
+                .setEnablePreview(false)
                 .build();
 
         //配置imageloader
@@ -173,10 +181,12 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 initGallery();
                 break;
             case R.id.setting_nicklayout:
-                startActivity(new Intent(UserInfoSettingActivity.this, ChangeNickNameActivity.class));
+                //startActivity(new Intent(UserInfoSettingActivity.this, ChangeNickNameActivity.class));
+                changeNickName();
                 break;
             case R.id.setting_phonelayout:
-                startActivity(new Intent(UserInfoSettingActivity.this, ChangePhoneActivty.class));
+                //startActivity(new Intent(UserInfoSettingActivity.this, ChangePhoneActivty.class));
+                changePhone();
                 break;
             case R.id.setting_passwordlayout:
                 // TODO: 2019/2/12 待添加
@@ -202,6 +212,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 break;
         }
     }
+
 
     public void initData() {
         mUserSettingPresenter = new UserSettingPresenter(new UserSettingModel());
@@ -266,4 +277,110 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
             Toast.makeText(UserInfoSettingActivity.this, "头像上传失败", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    /**
+     * 修改昵称和电话 popupwindow
+     * 之前用的是Activity
+     * Boomerr
+     * 2019/4/18
+     */
+    //修改昵称
+    private void changeNickName() {
+
+        View view = View.inflate(UserInfoSettingActivity.this,R.layout.change_popupwindow,null);
+        PopupWindow mChange = new PopupWindow(view);
+        mChange.setWidth(WindowManager.LayoutParams.FILL_PARENT);
+        mChange.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        //必须设置以下两项，否则弹出窗口无法取消
+        mChange.setFocusable(true);
+        setBackgroundAlpha(0.5f);
+        mChange.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        mChange.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                // popupWindow隐藏时恢复屏幕正常透明度
+                setBackgroundAlpha(1.0f);
+            }
+        });
+        EditText change_edt = (EditText) view.findViewById(R.id.change_edt);
+        Button change_btn = (Button) view.findViewById(R.id.change_btn);
+        View.OnClickListener listener1 = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                switch(view.getId()){
+                    case R.id.change_btn:
+                        String msg = change_edt.getText().toString();
+                        if(msg.equals("")){
+                            FancyToast.makeText(UserInfoSettingActivity.this,"填写为空",
+                                    Toast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                        }else{
+                            //写入修改昵称逻辑
+                        }
+                        mChange.dismiss();
+                        break;
+                    default:
+                        break;
+                }
+            }};
+
+        change_btn.setOnClickListener(listener1);
+        mChange.showAtLocation(view, Gravity.CENTER, 0, 0);
+    }
+    //修改联系电话
+    private void changePhone() {
+        SharedPreferences mSharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
+        EditInfoPresenter mEditInfoPresenter = new EditInfoPresenter(new EditInfoModel());
+        View view = View.inflate(UserInfoSettingActivity.this,R.layout.change_popupwindow,null);
+        PopupWindow mChange = new PopupWindow(view);
+        mChange.setWidth(WindowManager.LayoutParams.FILL_PARENT);
+        mChange.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        //必须设置以下两项，否则弹出窗口无法取消
+        mChange.setFocusable(true);
+        setBackgroundAlpha(0.5f);
+        mChange.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        mChange.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                // popupWindow隐藏时恢复屏幕正常透明度
+                setBackgroundAlpha(1.0f);
+            }
+        });
+        EditText change_edt = (EditText) view.findViewById(R.id.change_edt);
+        Button change_btn = (Button) view.findViewById(R.id.change_btn);
+        View.OnClickListener listener2 = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                switch(view.getId()){
+                    case R.id.change_btn:
+                        String msg = change_edt.getText().toString();
+                        if(msg.equals("")){
+                            FancyToast.makeText(UserInfoSettingActivity.this,"填写为空",
+                                    Toast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                        }else{
+                            //写入修改电话逻辑
+                        }
+                        mChange.dismiss();
+                        break;
+                    default:
+                        break;
+                }
+            }};
+
+        change_btn.setOnClickListener(listener2);
+        mChange.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+    }
+
+    //设置屏幕的透明度
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = ((Activity) UserInfoSettingActivity.this).getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        ((Activity)UserInfoSettingActivity.this).getWindow().setAttributes(lp);
+    }
+
+
 }

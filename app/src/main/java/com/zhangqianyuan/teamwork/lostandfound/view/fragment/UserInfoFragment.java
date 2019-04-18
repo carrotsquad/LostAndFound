@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +86,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     @BindView(R.id.userinfo_setting_layout)
     RelativeLayout setting;
+
 
     private  Context mContext;
     private boolean success;            //用于判断是否上传头像成功
@@ -223,8 +229,8 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             case R.id.userinfo_setting_layout:
                 startActivity(new Intent(mContext,UserInfoSettingActivity.class));
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
     }
 
@@ -266,4 +272,5 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

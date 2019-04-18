@@ -106,6 +106,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         ActivityManager.getActivityManager().addF(this);
         initView();
         setOnClick();
+        search("");
         return view;
     }
 
