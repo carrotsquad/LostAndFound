@@ -114,7 +114,7 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
             }
             case R.id.login_tosignin: {
                 Intent intent = new Intent(LogInActivity.this, SignInActivity.class);
-                intent.putExtra("isExit", false);
+                intent.putExtra("isExit1", true);
                 startActivity(intent);
                 finish();
                 break;

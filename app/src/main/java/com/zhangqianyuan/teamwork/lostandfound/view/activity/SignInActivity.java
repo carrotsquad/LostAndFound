@@ -55,6 +55,9 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     public static final String USERPHOTO = "USERPHOTO";
     public static final String ALLTYPES = "ALLTYPES";
     public static final String ALLPLACES = "ALLPLACES";
+    public static final String ISEXIT = "isExit";
+    public static final String EXIT_BACK = "isExit1";
+
 //    public static final String DElETED_NUM_LIST = "DElETED_NUM_LIST";
 
     @BindView(R.id.signin_signin)
@@ -90,9 +93,21 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         signPresenter = new SignPresenter(this);
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
-        isExit = getIntent().getBooleanExtra("isExit", false);
+        boolean isExit = Boolean.parseBoolean(sharedPreferences.getString(ISEXIT,"true"));
+        boolean isExit1 = getIntent().getBooleanExtra(EXIT_BACK,false);
+        Log.d("Boomerr---日志打印", String.valueOf(isExit));
+        /**
+         * isExit是写入缓存中判断当前用户是否退出了登录  默认是true
+         * 当用户登陆成功后会将这个值重写为false
+         * isExit1是用户从设置界面退出后传出的值，一边情况设置为false  当用户退出登录的时候回传一个true 阻止直接跳过登录页面
+         *
+         * */
+        if(isExit1){
+            sharedPreferences.edit().putString(ISEXIT,"true").commit();
+            Log.d("Boomerr日志打印","更新isEixt" + sharedPreferences.getString(ISEXIT,"true"));
+        }
         //如果已经登录过，再次登陆，直接进入缓冲页
-        if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && isExit) {
+        if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && !isExit && !isExit1) {
             Intent intent = new Intent(SignInActivity.this, BufferPageActivity.class);
             startActivity(intent);
             finish();
@@ -163,6 +178,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             editor.putString(PNB, signInBean.getUser().getPhonenumber());
             editor.putString(USERPHOTO, signInBean.getUser().getPhoto());
             editor.putString(SESSION, signInBean.getJSESSIONID());
+            editor.putString(ISEXIT,"false");
             session = signInBean.getJSESSIONID();
             //去获取所有的丢失物品类型和地点
             editor.commit();

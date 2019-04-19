@@ -76,7 +76,7 @@ public class ChangePhoneActivty extends AppCompatActivity implements IEditInfoAc
     }
 
     @Override
-    public void onSuccess(int status) {
+    public void onSuccess1(int status) {
         if (status==200){
             Toast.makeText(ChangePhoneActivty.this,"修改成功",Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor = mSharedPreferences.edit();
@@ -86,5 +86,10 @@ public class ChangePhoneActivty extends AppCompatActivity implements IEditInfoAc
         }else if (status==400){
             Toast.makeText(ChangePhoneActivty.this,"修改失败",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onSuccess2(int status) {
+
     }
 }

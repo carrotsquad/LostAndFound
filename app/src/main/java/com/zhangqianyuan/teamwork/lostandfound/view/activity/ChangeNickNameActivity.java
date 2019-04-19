@@ -77,7 +77,7 @@ public class ChangeNickNameActivity extends AppCompatActivity implements IEditIn
     }
 
     @Override
-    public void onSuccess(int status) {
+    public void onSuccess1(int status) {
         if (status==200){
             Toast.makeText(ChangeNickNameActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor = mSharedPreferences.edit();
@@ -88,5 +88,10 @@ public class ChangeNickNameActivity extends AppCompatActivity implements IEditIn
         }else if (status==400){
             Toast.makeText(ChangeNickNameActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onSuccess2(int status) {
+
     }
 }

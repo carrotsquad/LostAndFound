@@ -19,7 +19,7 @@ import retrofit2.Response;
  * @updateDes
  */
 public class EditInfoPresenter extends BasePresenter<IEditInfoActivity> implements IEditInfoPresenter {
-
+    //public class EditInfoPresenter extends BasePresenter<IEditInfoActivity> implements IEditInfoPresenter {
     public static final String T = "EditInfoPresenter";
     private  EditInfoModel mEditInfoModel;
 
@@ -34,7 +34,7 @@ public class EditInfoPresenter extends BasePresenter<IEditInfoActivity> implemen
             mEditInfoModel.uploadNeckName(jsessionId, nickName, new Callback<StatusBean>() {
                 @Override
                 public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
-                    getV().onSuccess(response.body().getStatus());
+                    getV().onSuccess1(response.body().getStatus());
                 }
 
                 @Override
@@ -51,7 +51,7 @@ public class EditInfoPresenter extends BasePresenter<IEditInfoActivity> implemen
             mEditInfoModel.uploadPhoneNumber(jsessionId, phoneNumber, new Callback<StatusBean>() {
                 @Override
                 public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
-                    getV().onSuccess(response.body().getStatus());
+                    getV().onSuccess2(response.body().getStatus());
                 }
 
                 @Override

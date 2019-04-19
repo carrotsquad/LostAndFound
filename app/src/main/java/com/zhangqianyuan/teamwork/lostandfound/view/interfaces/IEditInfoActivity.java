@@ -11,6 +11,8 @@ public interface IEditInfoActivity extends BaseView {
     /*
     用于判断是否成功
      */
-    void  onSuccess(int status);
+    void  onSuccess1(int status);
+
+    void onSuccess2(int status);
 
 }

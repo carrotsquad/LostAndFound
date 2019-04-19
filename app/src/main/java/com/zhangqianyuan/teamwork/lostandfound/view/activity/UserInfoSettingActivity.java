@@ -33,6 +33,7 @@ import com.zhangqianyuan.teamwork.lostandfound.presenter.EditInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UserSettingPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IEditInfoActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUserSettingActivity;
 
@@ -63,7 +64,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  */
 // TODO: 2018/11/27   询问后端为什么第二次退出登录后没有返回结果
 // TODO: 2019/2/12     把修改昵称和密码换成poupwindow
-public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment, IUserSettingActivity {
+public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment, IUserSettingActivity,IEditInfoActivity {
     private static final int REQUEST_CODE_GALLERY = 1;
 
     @BindView(R.id.setting_headlayout)
@@ -107,6 +108,11 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     private SharedPreferences sharedPreferences;
     private UserInfoPresenter mPresenter;
     private View statusBarView;
+
+    private EditInfoPresenter mEditInfoPresenter;
+
+    private String change_nick = null;
+    private String change_phone = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,7 +203,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 Intent intent = new Intent(UserInfoSettingActivity.this, SignInActivity.class);
-                intent.putExtra("isExit", false);
+                intent.putExtra("isExit1", true);
                 startActivity(intent);
                 ActivityManager.getActivityManager().removeAll();
                 ActivityManager.getActivityManager().removeFAll();
@@ -223,7 +229,8 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         jsessionid = sharedPreferences.getString("SESSION", null);
         nickname.setText(sharedPreferences.getString("NICKNAME", null));
         phone.setText(sharedPreferences.getString("PNB", null));
-
+        mEditInfoPresenter = new EditInfoPresenter(new EditInfoModel());
+        mEditInfoPresenter.attachActivity(this);
     }
 
     @Override
@@ -304,19 +311,19 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 setBackgroundAlpha(1.0f);
             }
         });
-        EditText change_edt = (EditText) view.findViewById(R.id.change_edt);
+        EditText change_edt_nick = (EditText) view.findViewById(R.id.change_edt);
         Button change_btn = (Button) view.findViewById(R.id.change_btn);
         View.OnClickListener listener1 = new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 switch(view.getId()){
                     case R.id.change_btn:
-                        String msg = change_edt.getText().toString();
-                        if(msg.equals("")){
-                            FancyToast.makeText(UserInfoSettingActivity.this,"填写为空",
-                                    Toast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                        change_nick = change_edt_nick.getText().toString();
+                        if (!change_edt_nick.getText().toString().equals("")){
+                            mEditInfoPresenter.uploadNeckName(sharedPreferences.getString("SESSION",null),change_edt_nick
+                                    .getText().toString());
                         }else{
-                            //写入修改昵称逻辑
+                            FancyToast.makeText(UserInfoSettingActivity.this,"请输入",FancyToast.WARNING).show();
                         }
                         mChange.dismiss();
                         break;
@@ -330,8 +337,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     }
     //修改联系电话
     private void changePhone() {
-        SharedPreferences mSharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
-        EditInfoPresenter mEditInfoPresenter = new EditInfoPresenter(new EditInfoModel());
+
         View view = View.inflate(UserInfoSettingActivity.this,R.layout.change_popupwindow,null);
         PopupWindow mChange = new PopupWindow(view);
         mChange.setWidth(WindowManager.LayoutParams.FILL_PARENT);
@@ -348,19 +354,19 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 setBackgroundAlpha(1.0f);
             }
         });
-        EditText change_edt = (EditText) view.findViewById(R.id.change_edt);
+        EditText change_edt_phone = (EditText) view.findViewById(R.id.change_edt);
         Button change_btn = (Button) view.findViewById(R.id.change_btn);
         View.OnClickListener listener2 = new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 switch(view.getId()){
                     case R.id.change_btn:
-                        String msg = change_edt.getText().toString();
-                        if(msg.equals("")){
-                            FancyToast.makeText(UserInfoSettingActivity.this,"填写为空",
-                                    Toast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                        change_phone = change_edt_phone.getText().toString();
+                        if (!change_edt_phone.getText().toString().equals("")){
+                            mEditInfoPresenter.uoloadPhoneNumber(sharedPreferences.getString("SESSION",null),change_edt_phone
+                                    .getText().toString());
                         }else{
-                            //写入修改电话逻辑
+                            FancyToast.makeText(UserInfoSettingActivity.this,"请输入",FancyToast.WARNING).show();
                         }
                         mChange.dismiss();
                         break;
@@ -382,5 +388,36 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         ((Activity)UserInfoSettingActivity.this).getWindow().setAttributes(lp);
     }
 
+    //昵称 修改结果回调
+    @Override
+    public void onSuccess1(int status) {
 
+        if (status==200){
+            FancyToast.makeText(UserInfoSettingActivity.this,"修改成功",FancyToast.SUCCESS).show();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("NICKNAME",change_nick);
+            editor.commit();
+            Log.d("onChangeNickName",sharedPreferences.getString("NICKNAME",null) );
+            finish();
+        }else if (status==400){
+            FancyToast.makeText(UserInfoSettingActivity.this,"修改失败",FancyToast.ERROR).show();
+        }
+
+    }
+    //电话号码 修改结果回调
+    @Override
+    public void onSuccess2(int status) {
+
+        if (status==200){
+            FancyToast.makeText(UserInfoSettingActivity.this,"修改成功",FancyToast.SUCCESS).show();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("PNB",change_phone);
+            editor.commit();
+            Log.d("onChangeNickName",sharedPreferences.getString("PNB",null) );
+            finish();
+        }else if (status==400){
+            FancyToast.makeText(UserInfoSettingActivity.this,"修改失败",FancyToast.ERROR).show();
+        }
+
+    }
 }
