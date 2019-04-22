@@ -15,11 +15,11 @@
         android:roundIcon="@mipmap/diai"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.BufferPageActivity"></activity>
+        <activity android:name=".view.activity.BufferPageActivity" />
 
         <service
             android:name=".services.UpdateMessageService"
-            android:icon="@mipmap/diai"/>
+            android:icon="@mipmap/diai" />
 
         <activity
             android:name=".view.activity.MainActivity"
@@ -63,6 +63,8 @@
         <activity android:name=".view.activity.AboutDiAi" />
         <activity android:name=".view.activity.OurWebActivity" />
         <activity android:name=".view.activity.GuideActivity" />
+        <activity android:name=".view.activity.ReturnActivity" />
+        <activity android:name=".view.activity.FoundActivity"></activity>
     </application>
 
 </manifest>

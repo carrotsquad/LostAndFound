@@ -151,6 +151,9 @@
                 tools:ignore="MissingConstraints" />
 
             <Button
+                android:textColor="@android:color/white"
+                android:layout_margin="5dp"
+                android:background="@drawable/barbackgroud"
                 android:id="@+id/upload_lostorfind_time"
                 android:text="(必选)"
                 android:layout_width="wrap_content"
@@ -176,6 +179,9 @@
                 android:textSize="20sp" />
 
             <Button
+                android:textColor="@android:color/white"
+                android:layout_margin="5dp"
+                android:background="@drawable/barbackgroud"
                 android:text="(必选)"
                 android:id="@+id/upload_lostorfind_place"
                 android:layout_width="wrap_content"
@@ -196,6 +202,9 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
             <Button
+                android:textColor="@android:color/white"
+                android:layout_margin="5dp"
+                android:background="@drawable/barbackgroud"
                 android:layout_gravity="center_vertical"
                 android:id="@+id/upload_lostorfind_bounty"
                 android:text="(可选)"

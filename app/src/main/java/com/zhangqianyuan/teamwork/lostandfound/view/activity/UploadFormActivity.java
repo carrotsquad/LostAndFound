@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -323,15 +324,20 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     private void initGallery(){
         //设置主题
         //ThemeConfig.CYAN
-        ThemeConfig theme = new ThemeConfig.Builder().build();
+        ThemeConfig theme = new ThemeConfig.Builder()
+                .setTitleBarBgColor(Color.rgb(0xF4, 0x7C, 0x00))
+                .setFabNornalColor(Color.rgb(0xF4, 0x7C, 0x00))
+                .setFabPressedColor(Color.rgb(0xF4, 0x7C, 0x00))
+                .setCropControlColor(Color.rgb(0xFF, 0xFF, 0xFF))
+                .build();
         //配置功能
         FunctionConfig functionConfig = new FunctionConfig.Builder()
-                .setEnableCamera(true)
+                .setEnableCamera(false)
                 .setEnableEdit(true)
                 .setEnableCrop(true)
                 .setEnableRotate(true)
                 .setCropSquare(true)
-                .setEnablePreview(true)
+                .setEnablePreview(false)
                 .build();
 
         //配置imageloader

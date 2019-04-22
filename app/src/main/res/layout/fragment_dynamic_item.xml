@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/dynamic_card_thingsphoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="200dp"
+            android:layout_height="200dp" />
 
         <LinearLayout
             android:layout_centerHorizontal="true"
@@ -99,6 +99,8 @@
 
 
         <TextView
+            android:maxLines="1"
+            android:maxEms="10"
             android:id="@+id/dynamic_card_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

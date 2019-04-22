@@ -44,6 +44,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPHOTO;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPLACE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPE;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTITLE;
 
 /**
  * @author zhoudada
@@ -136,6 +137,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
                 intent.putExtra(OTHERSDESC, dynamicItemBean.getThelost().getDescription());
+                intent.putExtra(OTHERSTITLE,dynamicItemBean.getThelost().getTitle());
                 mContext.startActivity(intent);
             }
         });

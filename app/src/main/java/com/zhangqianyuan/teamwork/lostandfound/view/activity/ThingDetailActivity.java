@@ -77,6 +77,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     public static final String OTHERSIMGS = "OTHERSIMGS";
     public static final String OTHERSID = "OTHERSID";
     public static final String OTHERSDESC = "OTHERSDESC";
+    public static final String OTHERSTITLE = "OTHERSTITLE";
 
     //头像
     @BindView(R.id.thing_detail_thingsdetail_circleview)
@@ -131,6 +132,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     //点击评论按键
     @BindView(R.id.clicktocomment)
     TextView clicktocomment;
+
+    @BindView(R.id.thing_detail_thingsdetail_name)
+    TextView name;
 
 
     private String imgs = "";
@@ -289,6 +293,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String strplace = intent.getStringExtra(OTHERSPLACE);
         String strdiushidate = intent.getStringExtra(OTHERSDIUSHIDATE);
         String strdesc = intent.getStringExtra(OTHERSDESC);
+        String title = intent.getStringExtra(OTHERSTITLE);
         intthingstype = intent.getIntExtra(OTHERSTHINGSTYPE,1);
         String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         lostid = intent.getIntExtra(OTHERSID,-1);
@@ -310,6 +315,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         fabiaodate.setText("发表于"+strfabiaodate);
         diushidate.setText(strdiushidate);
         place.setText(strplace);
+        name.setText(title);
         return  strThingsImgs;
     }
 
