@@ -80,6 +80,8 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         //实现渐变式状态栏
         setGradientStatusBarColor(this,statusBarView);
         iLogInPresenter = new LogInPresenter(this);
+
+
     }
 
     @Override

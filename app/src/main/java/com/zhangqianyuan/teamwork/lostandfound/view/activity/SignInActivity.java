@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TypeBean;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.AllTypesAndPlacesPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.SignPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.utils.EditUtil;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IAllTypesAndPlaces;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.ISignInActivity;
 
@@ -71,6 +73,15 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
 
     @BindView(R.id.signin_tologin)
     TextView register;
+
+    @BindView(R.id.wrong1)
+    TextView wrong1;
+
+    @BindView(R.id.reset_password)
+    TextView reset_password;
+
+    @BindView(R.id.all_clear)
+    Button all_clear;
 
     private SignPresenter signPresenter;
     private AllTypesAndPlacesPresenter allTypesAndPlacesPresenter;
@@ -129,6 +140,9 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         setGradientStatusBarColor(this,statusBarView);
         //字体
         register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        reset_password.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+
+        EditUtil.EditAllClear(all_clear,pwd);
     }
 
 
@@ -139,7 +153,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         super.onDestroy();
     }
 
-    @OnClick({R.id.signin_tologin, R.id.signin_signin})
+    @OnClick({R.id.signin_tologin, R.id.signin_signin,R.id.all_clear})
     void onClicked(View view) {
         switch (view.getId()) {
             //点击登陆
@@ -159,6 +173,11 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
                 startActivity(intent);
                 finish();
                 break;
+            }
+
+            case R.id.all_clear:{
+                pwd.setText("");
+                pwd.requestFocusFromTouch();
             }
             default: {
                 break;
@@ -184,7 +203,8 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             editor.commit();
             allTypesAndPlacesPresenter.getAllTypesAndPlaces(signInBean.getJSESSIONID());
         } else {
-            FancyToast.makeText(SignInActivity.this, "登录失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            wrong1.setText("  您输入的账号或密码错误！");
+            //FancyToast.makeText(SignInActivity.this, "登录失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
 
