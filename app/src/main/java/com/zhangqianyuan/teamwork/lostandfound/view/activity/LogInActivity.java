@@ -31,7 +31,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
 
 
 /**
- * Description: 注册页面,英文单词好像弄错了
+ * Description: 这是注册页面！！！！！！
  * Created at: 2018/10/31 22:06
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
