@@ -91,6 +91,7 @@
             android:layout_alignLeft="@+id/signin_pwd"
             android:textSize="14sp"
             android:textColor="#ff0000"/>
+
         <Button
             android:id="@+id/all_clear"
             android:layout_width="16dp"
