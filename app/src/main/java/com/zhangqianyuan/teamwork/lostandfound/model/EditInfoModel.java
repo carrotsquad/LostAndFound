@@ -8,13 +8,8 @@ import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IEditInfoModel;
 
 import retrofit2.Callback;
 
-/**
- * @author zhoudada
- * @version $Rev$
- * @des
- * @updateAuthor $Author$
- * @updateDes
- */
+
+
 public class EditInfoModel extends BaseModel  implements IEditInfoModel {
     public EditInfoModel(){
         super();
