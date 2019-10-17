@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/diai"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.activity.ForgetPasswordActivity"></activity>
         <activity android:name=".view.activity.BufferPageActivity" />
 
         <service
@@ -64,7 +65,7 @@
         <activity android:name=".view.activity.OurWebActivity" />
         <activity android:name=".view.activity.GuideActivity" />
         <activity android:name=".view.activity.ReturnActivity" />
-        <activity android:name=".view.activity.FoundActivity"></activity>
+        <activity android:name=".view.activity.FoundActivity" />
     </application>
 
 </manifest>

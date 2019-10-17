@@ -153,7 +153,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         super.onDestroy();
     }
 
-    @OnClick({R.id.signin_tologin, R.id.signin_signin,R.id.all_clear})
+    @OnClick({R.id.signin_tologin, R.id.signin_signin,R.id.all_clear,R.id.reset_password})
     void onClicked(View view) {
         switch (view.getId()) {
             //点击登陆
@@ -178,6 +178,13 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             case R.id.all_clear:{
                 pwd.setText("");
                 pwd.requestFocusFromTouch();
+            }
+
+            case R.id.reset_password:{
+                Intent intent = new Intent(SignInActivity.this,ForgetPasswordActivity.class);
+                startActivity(intent);
+                finish();
+                break;
             }
             default: {
                 break;

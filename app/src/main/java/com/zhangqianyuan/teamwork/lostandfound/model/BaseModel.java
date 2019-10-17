@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.BaseUrl;
 
-public abstract class BaseModel {
+public abstract class BaseModel{
 
     Retrofit retrofit;
     Api api;

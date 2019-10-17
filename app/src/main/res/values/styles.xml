@@ -127,4 +127,8 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
+    <style name="MyEditText">
+        <item   name="colorControlNormal">@color/them</item>
+        <item name="colorControlActivated">@color/them</item></style>
+
 </resources>
