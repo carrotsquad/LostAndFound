@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ForgetPasswordModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IForgetPasswordPresenter;
@@ -41,5 +42,31 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
             }
         });
 
+    }
+
+    @Override
+    public void reset(String checkCode,String session) {
+        forgetPasswordModel.CheckCode(new Observer<CheckCodeBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(CheckCodeBean checkCodeBean) {
+                v.showcheckcodestatus(checkCodeBean.getStatus());
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        },checkCode,session);
     }
 }

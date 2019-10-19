@@ -3,25 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+     android:background="">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="登 录"
-        android:textStyle="bold"
-        android:textColor="#FFF1833B"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:text="登 录"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="#FFF1833B"-->
+<!--        android:textSize="30sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/cardView"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.109"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="1.0" />-->
 
 
 
@@ -42,7 +43,7 @@
 
     <RelativeLayout
         android:id="@+id/cardView"
-        android:layout_width="341dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="27dp"
         android:layout_marginRight="27dp"
@@ -51,37 +52,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347">
+        app:layout_constraintVertical_bias="0.4">
 
         <EditText
             android:id="@+id/signin_username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="18dp"
             android:layout_marginTop="23dp"
             android:layout_marginRight="18dp"
-            android:drawableStart="@drawable/ic_people"
             android:drawablePadding="10dp"
-            android:hint="请输入学号/邮箱"
+            android:background="@drawable/shape"
+            android:hint="   输入学号"
+            android:textColorHint="@color/white"
             android:inputType="text"
             android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textColor="@color/white"
+            android:textSize="17sp"/>
+<!--            android:drawableStart="@drawable/ic_people"/>-->
 
         <EditText
             android:id="@+id/signin_pwd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="18dp"
             android:layout_marginTop="110dp"
             android:layout_marginRight="18dp"
-            android:drawableStart="@drawable/ic_lock"
+            android:background="@drawable/shape"
             android:drawablePadding="10dp"
-            android:hint="请输入密码"
+            android:hint="   输入密码"
+            android:textColorHint="@color/white"
             android:inputType="textPassword"
             android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textColor="@color/white"
+            android:textSize="17sp"/>
+           />/ android:drawableStart="@drawable/ic_lock"/>
 
         <TextView
             android:id="@+id/wrong1"
@@ -90,15 +95,17 @@
             android:layout_below="@+id/signin_pwd"
             android:layout_alignLeft="@+id/signin_pwd"
             android:textSize="14sp"
-            android:textColor="#ff0000"/>
+            android:textColor="#ff0000" />
 
         <Button
             android:id="@+id/all_clear"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_alignEnd="@+id/signin_pwd"
             android:layout_alignTop="@+id/signin_pwd"
-            android:background="@drawable/all_clear"/>
+            android:layout_alignEnd="@+id/signin_pwd"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="-16dp"
+            android:background="@drawable/all_clear" />
 
         <Button
             android:id="@+id/signin_signin"
