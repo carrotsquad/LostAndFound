@@ -175,10 +175,12 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
                 break;
             }
 
+            //一键清除清除文本框
             case R.id.all_clear:{
                 pwd.setText("");
                 pwd.requestFocusFromTouch();
             }
+            //重置密码
 
             case R.id.reset_password:{
                 Intent intent = new Intent(SignInActivity.this,ForgetPasswordActivity.class);
