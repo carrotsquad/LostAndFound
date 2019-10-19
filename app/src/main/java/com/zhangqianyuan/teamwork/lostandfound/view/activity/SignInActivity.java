@@ -171,7 +171,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             case R.id.signin_tologin: {
                 Intent intent = new Intent(SignInActivity.this, LogInActivity.class);
                 startActivity(intent);
-                finish();
+
                 break;
             }
 
@@ -185,7 +185,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             case R.id.reset_password:{
                 Intent intent = new Intent(SignInActivity.this,ForgetPasswordActivity.class);
                 startActivity(intent);
-                finish();
+
                 break;
             }
             default: {

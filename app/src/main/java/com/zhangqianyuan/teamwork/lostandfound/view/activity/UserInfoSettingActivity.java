@@ -234,8 +234,8 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     }
 
     @Override
-    protected void onResume() {
-        Log.d("onResume", sharedPreferences.getString("NICKNAME", null));
+    protected void onResume() {//2019.10.19由NICKNAME改成STU，否则点击设置时闪退
+        Log.d("onResume", sharedPreferences.getString("STU", null));
         nickname.setText(sharedPreferences.getString("NICKNAME", null));
         phone.setText(sharedPreferences.getString("PNB", null));
         GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)),
