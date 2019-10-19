@@ -1,120 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_login"
+    android:background="@null"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity"
     tools:showIn="@layout/activity_log_in">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="注 册"
-        android:textColor="#FFF1833B"
-        android:textSize="35sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
     <EditText
-        android:id="@+id/login_email"
+        android:id="@+id/login_student"
         android:layout_width="300dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="44dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:drawableStart="@drawable/email_ic"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:drawableStart="@drawable/rename_ic"
         android:ems="10"
-        android:hint="请输入注册邮箱"
-        android:inputType="textEmailAddress"
+        android:hint="请输入学号"
+        android:inputType="number"
+        android:maxLength="10"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageview" />
+
+    <Button
+        android:id="@+id/all_clear"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/all_clear"
+        app:layout_constraintBottom_toBottomOf="@+id/login_password"
+        app:layout_constraintEnd_toEndOf="@+id/login_password"
+        app:layout_constraintTop_toTopOf="@+id/login_password" />
+
+    <Button
+        android:id="@+id/all_clear2"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_alignTop="@+id/signin_pwd"
+        android:layout_alignEnd="@+id/signin_pwd"
+        android:background="@drawable/all_clear"
+        app:layout_constraintBottom_toTopOf="@+id/checkout"
+        app:layout_constraintEnd_toEndOf="@+id/login_repassword"
+        app:layout_constraintTop_toTopOf="@+id/login_repassword" />
 
     <EditText
         android:id="@+id/login_password"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:drawableStart="@drawable/password_ic"
         android:ems="10"
         android:hint="请输入密码"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_email" />
-
-    <EditText
-        android:id="@+id/login_nickname"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:drawableStart="@drawable/rename_ic"
-        android:ems="10"
-        android:hint="请输入昵称"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_repassword" />
-
-    <EditText
-        android:id="@+id/login_phonenumber"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:drawableStart="@drawable/phone_ic"
-        android:ems="10"
-        android:hint="请输入手机号"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_nickname" />
-
-    <Button
-        android:id="@+id/login_sure"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="270dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/barbackgroud"
-        android:text="注  册"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_phonenumber" />
+        app:layout_constraintTop_toBottomOf="@+id/login_student" />
 
     <EditText
         android:id="@+id/login_repassword"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:drawableStart="@drawable/password_ic"
         android:ems="10"
         android:hint="请再次输入密码"
@@ -125,19 +90,97 @@
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
     <TextView
-        android:id="@+id/login_tosignin"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/checkout"
+        android:layout_width="300dp"
+        android:layout_height="15dp"
+        android:text="        两次密码输入不一致"
+        android:textColor="#e53935"
+        android:textSize="10dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/login_repassword"
+        app:layout_constraintStart_toStartOf="@+id/login_repassword"
+        app:layout_constraintTop_toBottomOf="@+id/login_repassword" />
+
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="已有账号,点击登陆"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/email_ic"
+        android:ems="10"
+        android:hint="请输入邮箱"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_sure"
-        app:layout_constraintVertical_bias="0.017" />
+        app:layout_constraintTop_toBottomOf="@+id/login_repassword" />
+
+    <EditText
+        android:id="@+id/login_phonenumber"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/phone_ic"
+        android:ems="10"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:maxLength="11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_email" />
+
+    <Button
+        android:id="@+id/login_sure"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/barbackgroud"
+        android:text="注  册"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_phonenumber" />
+
+
+    <TextView
+        android:id="@+id/tv_usdetail"
+        android:layout_width="210dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="120dp"
+        android:text="---------------------注册即代表阅读并同意"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_sure" />
+
+    <Button
+        android:id="@+id/btn_usdetail"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="104dp"
+        android:background="@null"
+        android:text="免责声明"
+        android:textSize="17dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_usdetail"
+        app:layout_constraintTop_toBottomOf="@+id/login_sure" />
+
+    <TextView
+        android:id="@+id/tv_usdetail2"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="120dp"
+        android:text=" -----------------------------"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@+id/btn_usdetail"
+        app:layout_constraintTop_toBottomOf="@+id/login_sure" />
 
 </android.support.constraint.ConstraintLayout>

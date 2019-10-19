@@ -52,8 +52,8 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
 /**
@@ -245,7 +245,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 //                .asBitmap()
 //                .into(headImg);
         Log.d("15486622",""+AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)));
-        headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString(NICKNAME,null));
+        headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString(STU,null));
         super.onResume();
     }
 

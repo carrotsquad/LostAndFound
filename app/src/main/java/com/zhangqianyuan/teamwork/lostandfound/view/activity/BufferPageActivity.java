@@ -32,10 +32,10 @@ import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBea
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PNB;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PWD;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
 /**
@@ -141,7 +141,7 @@ public class BufferPageActivity extends AppCompatActivity implements ISignInActi
             int[] arrayint = new int[10000];
             editor.putString(EMAIL, signInBean.getUser().getUsername());
             editor.putString(PWD, signInBean.getUser().getPassword());
-            editor.putString(NICKNAME, signInBean.getUser().getNickname());
+            editor.putString(STU, signInBean.getUser().getNickname());
             editor.putString(PNB, signInBean.getUser().getPhonenumber());
             editor.putString(USERPHOTO, signInBean.getUser().getPhoto());
             editor.putString(SESSION, signInBean.getJSESSIONID());

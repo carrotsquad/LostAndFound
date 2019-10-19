@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
 /**
@@ -64,7 +64,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
         Log.d("123456", "success");
         list.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new MyLoadItemAdapter(lists, sharedPreferences.getString(USERPHOTO, "null"), sharedPreferences.getString(EMAIL, "null")
-                , sharedPreferences.getString(NICKNAME, "null"));
+                , sharedPreferences.getString(STU, "null"));
         list.setAdapter(mAdapter);
         back.setOnClickListener(view->finish());
     }

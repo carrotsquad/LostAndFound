@@ -22,7 +22,7 @@ import butterknife.OnClick;
 
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PNB;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PWD;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
@@ -53,7 +53,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
     private String pwd;
     private String pnb;
     private String eemail;
-    private String nickname;
+    private String stu;
     private String session;
 
     private VerifyPresenter verifyPresenter;
@@ -81,7 +81,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
         pwd = intent.getStringExtra(PWD);
         eemail = intent.getStringExtra(EMAIL);
         pnb = intent.getStringExtra(PNB);
-        nickname = intent.getStringExtra(NICKNAME);
+        stu = intent.getStringExtra(STU);
         session = intent.getStringExtra(SESSION);
         email.setText("验证码已发送到关联邮箱 " + eemail);
     }
@@ -92,8 +92,8 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
             case R.id.verify_sure: {
                 String checkcode = verificationCodeView.getInputContent();
                 Log.e("Verify", checkcode);
-                Log.e("Verify", eemail + nickname + pwd + pnb + session);
-                verifyPresenter.getRegister(checkcode, eemail, nickname, pwd, pnb, session);
+                Log.e("Verify", eemail + stu + pwd + pnb + session);
+                verifyPresenter.getRegister(checkcode, eemail, stu, pwd, pnb, session);
                 break;
             }
             case R.id.verify_back: {
@@ -114,7 +114,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
             intent.putExtra(PWD, pwd);
             intent.putExtra(PNB, pnb);
             intent.putExtra(EMAIL, eemail);
-            intent.putExtra(NICKNAME, nickname);
+            intent.putExtra(STU, stu);
             intent.putExtra(SESSION, session);
             intent.putExtra(SIGNIN, 1);
             startActivity(intent);

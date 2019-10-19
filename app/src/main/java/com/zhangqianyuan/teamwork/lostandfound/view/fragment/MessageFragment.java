@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
 /**
@@ -109,7 +109,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     private void initList(){
         String username = sharedPreferences.getString(EMAIL,"null");
         String userphoto = sharedPreferences.getString(USERPHOTO,"null");
-        String usernickname = sharedPreferences.getString(NICKNAME,"null");
+        String usernickname = sharedPreferences.getString(STU,"null");
         String jsessionid = sharedPreferences.getString(SESSION,"null");
         messagePresenter.getMessageData(usernickname,userphoto,username,jsessionid,0,500);
     }
