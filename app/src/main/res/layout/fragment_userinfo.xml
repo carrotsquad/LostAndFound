@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/userinfo_backgroud"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/userinfo_headlayout"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:background="@drawable/userinfo_background">
+        android:layout_height="220dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userinfo_head_img"
@@ -17,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="38dp"
-            android:src="@mipmap/diai" />
+            android:src="@mipmap/user" />
 
         <TextView
             android:id="@+id/userinfo_head_nick"
@@ -27,9 +27,9 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="我是只橘猫"
-            android:textColor="@color/white"
-            android:textSize="24dp" />
+            android:text="我是一个真用户"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -43,136 +43,178 @@
         <RelativeLayout
             android:id="@+id/userinfo_myupload_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/click_style">
+            android:layout_height="70dp">
 
             <ImageView
                 android:id="@+id/userinfo_myupload_layout_img"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/myupload" />
+                android:layout_marginStart="30dp"
+                android:background="@drawable/myupload" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="270dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/userinfo_myupload_layout_img"
                 android:gravity="center_vertical"
-                android:text="我的发布"
+                android:text="   我的发布"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:background="@color/babyblue"/>
 
-
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/arrows"/>
         </RelativeLayout>
-        <View
-            android:layout_below="@id/userinfo_myupload_layout"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/grey_200" />
 
         <RelativeLayout
             android:id="@+id/userinfo_myhistory_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:layout_below="@id/userinfo_myupload_layout"
-            android:layout_marginTop="1dp"
-            android:background="@drawable/click_style">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/userinfo_myhistory_layout_img"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/myhistory" />
+                android:layout_marginStart="30dp"
+                android:background="@drawable/myhistory" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="270dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/userinfo_myhistory_layout_img"
                 android:gravity="center_vertical"
-                android:text="我的历史"
+                android:text="   我的历史"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:background="@color/babyblue"/>
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/arrows"/>
         </RelativeLayout>
 
-        <View
+        <RelativeLayout
+            android:id="@+id/userinfo_feedback_layout"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="70dp"
             android:layout_below="@id/userinfo_myhistory_layout"
-            android:background="@color/grey_200" />
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/userinfo_feedback_layout_img"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/feedback" />
+
+            <TextView
+                android:layout_width="270dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/userinfo_feedback_layout_img"
+                android:gravity="center_vertical"
+                android:text="   反馈"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:background="@color/babyblue"/>
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/arrows"/>
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/userinfo_aboutus_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="1dp"
-            android:layout_below="@id/userinfo_myhistory_layout"
-            android:background="@drawable/click_style">
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/userinfo_feedback_layout">
 
             <ImageView
                 android:id="@+id/userinfo_aboutus_layout_img"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/aboutus" />
+                android:layout_marginStart="30dp"
+                android:background="@drawable/aboutus" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="270dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/userinfo_aboutus_layout_img"
                 android:gravity="center_vertical"
-                android:text="关于我们"
+                android:text="   关于我们"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:background="@color/babyblue"/>
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/arrows"/>
 
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/userinfo_aboutus_layout"
-            android:background="@color/grey_200" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/userinfo_biglayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/userinfo_biglayout1"
-        android:layout_marginTop="10dp">
-
         <RelativeLayout
-            android:background="@drawable/click_style"
             android:id="@+id/userinfo_setting_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/userinfo_aboutus_layout">
 
             <ImageView
                 android:id="@+id/userinfo_setting_layout_img"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/setting" />
+                android:layout_marginStart="30dp"
+                android:background="@drawable/setting" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="270dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/userinfo_setting_layout_img"
                 android:gravity="center_vertical"
-                android:text="设置"
+                android:text="   设置"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
-        </RelativeLayout>
-    </RelativeLayout>
+                android:textSize="15dp"
+                android:background="@color/babyblue" />
 
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/arrows"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

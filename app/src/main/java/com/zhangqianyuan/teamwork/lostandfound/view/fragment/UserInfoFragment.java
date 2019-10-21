@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,9 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     @BindView(R.id.userinfo_myhistory_layout)
     RelativeLayout  myhistory;
+
+    @BindView(R.id.userinfo_feedback_layout)
+    RelativeLayout feedback;
 
     @BindView(R.id.userinfo_aboutus_layout)
     RelativeLayout aboutus;
@@ -210,7 +214,8 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
 
     @OnClick({R.id.userinfo_head_img,R.id.userinfo_head_nick,R.id.userinfo_myupload_layout,
-            R.id.userinfo_myhistory_layout,R.id.userinfo_aboutus_layout,R.id.userinfo_setting_layout})
+            R.id.userinfo_myhistory_layout,R.id.userinfo_aboutus_layout,R.id.userinfo_setting_layout,
+    R.id.userinfo_feedback_layout})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.userinfo_head_img:
@@ -222,6 +227,9 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
                 break;
             case R.id.userinfo_myhistory_layout:
                 startActivity(new Intent(mContext,UserInfoMyHistory.class));
+                break;
+            case R.id.userinfo_feedback_layout:
+                feedBack();
                 break;
             case  R.id.userinfo_aboutus_layout:
                 startActivity(new Intent(mContext,UserInfoAboutUsActivity.class));
@@ -271,6 +279,64 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         }else {
             Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     *
+     * 反馈信息
+     * 2019/4/18
+     * Boomerr
+     */
+    private void feedBack() {
+        View view = View.inflate(getContext(),R.layout.feedback_popupwindow,null);
+        PopupWindow mFeedBack = new PopupWindow(view);
+        mFeedBack.setWidth(WindowManager.LayoutParams.FILL_PARENT);
+        mFeedBack.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        //必须设置以下两项，否则弹出窗口无法取消
+        mFeedBack.setFocusable(true);
+        setBackgroundAlpha(0.5f);
+        mFeedBack.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        mFeedBack.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                // popupWindow隐藏时恢复屏幕正常透明度
+                setBackgroundAlpha(1.0f);
+            }
+        });
+        EditText feedback_edt = (EditText) view.findViewById(R.id.feedback_edt);
+        Button feedback_btn = (Button) view.findViewById(R.id.feedback_btn);
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                switch(view.getId()){
+                    case R.id.feedback_btn:
+                        String msg = feedback_edt.getText().toString();
+                        if(msg.equals("")){
+                            FancyToast.makeText(getContext(),"填写为空",
+                                    Toast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                        }else{
+                            FancyToast.makeText(getContext(),
+                                    "感谢您衷心的意见，我们会尽快更改",Toast.LENGTH_SHORT,FancyToast.SUCCESS
+                                    ,false).show();
+                        }
+                        mFeedBack.dismiss();
+                        break;
+                    default:
+                        break;
+                }
+            }};
+        feedback_btn.setOnClickListener(listener);
+        mFeedBack.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+
+
+    }
+    //设置屏幕的透明度
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = (getActivity()).getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        (getActivity()).getWindow().setAttributes(lp);
     }
 
 }
