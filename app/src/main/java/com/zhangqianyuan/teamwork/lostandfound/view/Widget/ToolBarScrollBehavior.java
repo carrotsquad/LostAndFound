@@ -13,6 +13,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 
@@ -51,7 +53,6 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
             depencyView = new WeakReference<>(dependency);
             tabLayout = new WeakReference<>((TabLayout)((LinearLayout)child).getChildAt(0));
             return true;
-
         }
         return false;
     }
