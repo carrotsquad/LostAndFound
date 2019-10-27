@@ -5,30 +5,29 @@
 
     <item
         android:id="@+id/dongtai_ui"
-        android:icon="@drawable/bottom_dynamics"
+        android:icon="@drawable/select1"
         android:title="动态"
         app:showAsAction="collapseActionView" />
 
 
     <item
         android:id="@+id/search_ui"
-        android:icon="@drawable/bottom_search"
+        android:icon="@drawable/select2"
         android:title="搜索" />
 
     <item
-        android:id="@+id/newmessage_ui"
-        android:icon="@drawable/newbuild_icon"
-        android:title="新建" />
+        android:id="@+id/fabu"
+        android:title="" />
 
     <item
         android:id="@+id/message_ui"
-        android:icon="@drawable/bottom_message"
+        android:icon="@drawable/select3"
         android:title="消息" />
 
     <!--android:icon="@drawable/personage_bt"-->
     <item
         android:id="@+id/mine_ui"
-        android:icon="@drawable/bottom_mine"
+        android:icon="@drawable/select4"
         android:title="我的" />
 
 </menu>

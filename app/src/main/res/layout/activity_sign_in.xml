@@ -55,6 +55,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4">
 
+
         <EditText
             android:id="@+id/signin_username"
             android:layout_width="match_parent"
@@ -69,9 +70,15 @@
             android:inputType="text"
             android:singleLine="true"
             android:textColor="@color/white"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 <!--            android:drawableStart="@drawable/ic_people"/>-->
 
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/kongbai"/>
         <EditText
             android:id="@+id/signin_pwd"
             android:layout_width="match_parent"
@@ -86,8 +93,9 @@
             android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="@color/white"
-            android:textSize="17sp"/>
-           />/ android:drawableStart="@drawable/ic_lock"/>
+            android:textSize="17sp"
+            android:padding="10dp"/>
+
 
         <TextView
             android:id="@+id/wrong1"

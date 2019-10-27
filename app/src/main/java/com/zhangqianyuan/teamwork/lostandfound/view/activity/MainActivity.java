@@ -9,7 +9,10 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -20,6 +23,7 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -105,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView mBottomNav;
 
+    @BindView(R.id.fabu)
+    FloatingActionButton floatingActionButton;
+
     private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
     private String session = "";
     private View statusBarView;
@@ -164,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
         unbindService(serviceConnection);
         stopService(new Intent(this, UpdateMessageService.class));
     }
+
 
     /**
      * 初始化服务
@@ -233,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                     mViewPager.setCurrentItem(SEARCH_FRAGMENT);
                     return true;
                 }
-                case R.id.newmessage_ui: {
+                case R.id.fabu: {
                     showPopUpWindow();
                     return false;
                 }
