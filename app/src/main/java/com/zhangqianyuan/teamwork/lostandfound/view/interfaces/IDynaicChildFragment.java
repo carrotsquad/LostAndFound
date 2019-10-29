@@ -11,6 +11,6 @@ import java.util.List;
  * @updateAuthor $Author$
  * @updateDes
  */
-public interface IDynaicFragment extends BaseView {
+public interface IDynaicChildFragment extends BaseView {
     void  showData(Boolean status, List<DynamicItemBean> searchItemBeanArrayList);
 }

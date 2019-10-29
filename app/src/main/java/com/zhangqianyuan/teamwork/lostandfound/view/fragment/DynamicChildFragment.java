@@ -1,26 +1,21 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
-import com.zhangqianyuan.teamwork.lostandfound.adapter.DynamicItemAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.DynamicPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.DynamicChildPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IDynaicFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,19 +32,19 @@ import java.util.List;
  */
 
 @SuppressLint("ValidFragment")
-public class DynamicChildFragment extends Fragment implements IDynaicFragment, SwipeRefreshLayout.OnRefreshListener {
-    private RecyclerView mRecyclerView;
-    private SwipeRefreshLayout refreshLayout;
-    private DynamicItemAdapter mDynamicItemAdapter;
+public class DynamicChildFragment extends Fragment {
+
     private List<DynamicItemBean> lists = new ArrayList<>();
-    private DynamicPresenter iDynamicPresenter;
     private int pos;
-    private SharedPreferences sharedPreferences;
 
     private String session = "";
-    //控制数量
-    private Integer newPosi;
-    private Integer oldPosi;
+
+    private TabLayout tab;
+    private DynamicChildPresenter iDynamicChildPresenter;
+    private ViewPager mViewPager;
+
+    List<Fragment> mFragments = new ArrayList<>();
+    List<String>  title     = new ArrayList<>();
 
     @SuppressLint("ValidFragment")
     public DynamicChildFragment(int i, String session) {
@@ -60,91 +55,106 @@ public class DynamicChildFragment extends Fragment implements IDynaicFragment, S
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_dynamic_lostorfind, container, false);
-        newPosi = 15;
-        oldPosi = 15;
-        mRecyclerView = view.findViewById(R.id.dynamic_list);
-        refreshLayout = view.findViewById(R.id.dynamic_list_swipe);
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        manager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);//不设置的话，图片闪烁错位，有可能有整列错位的情况。
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_dynamic_child, container, false);
+        mViewPager = (ViewPager)view.findViewById(R.id.dynamic_child_viewpager);
+        tab = (TabLayout)view.findViewById(R.id.dynamic_child_fragment_tablayout);
         ActivityManager.getActivityManager().addF(this);
-        mRecyclerView.setLayoutManager(manager);
-        mDynamicItemAdapter = new DynamicItemAdapter(lists, getActivity());
-        mRecyclerView.setAdapter(mDynamicItemAdapter);
-        refreshLayout.setOnRefreshListener(this);
-        iDynamicPresenter = new DynamicPresenter();
-        iDynamicPresenter.attachActivity(this);
-        initLists();
+        if (savedInstanceState==null){
+            initLists();
+        }
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 
     public void initLists() {
         switch (pos) {
             case 0: {
-                iDynamicPresenter.getDynamicLostData(new DynamicsRequestBean(0, 15), session);
+                mFragments.add(new DynamicChildFragment(2, session));
+                mFragments.add(new DynamicChildFragment(3, session));
+                mFragments.add(new DynamicChildFragment(4, session));
+                title.add("今天");
+                title.add("昨天");
+                title.add("更早");
+                FragmentManager man = getChildFragmentManager();
+                TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man, mFragments, title);
+                mViewPager.setAdapter(adapter);
+                tab.setupWithViewPager(mViewPager);
+                tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                    }
+                });
+                mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                    }
+                });
                 break;
             }
             case 1: {
-                iDynamicPresenter.getDynamicFindData(new DynamicsRequestBean(0, 15), session);
-                break;
-            }
-            default: {
-                break;
-            }
-        }
-    }
+                mFragments.add(new DynamicChildFragment(5, session));
+                mFragments.add(new DynamicChildFragment(6, session));
+                mFragments.add(new DynamicChildFragment(7, session));
+                title.add("今天");
+                title.add("昨天");
+                title.add("更早");
+                FragmentManager man = getChildFragmentManager();
+                TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man, mFragments, title);
+                mViewPager.setAdapter(adapter);
+                tab.setupWithViewPager(mViewPager);
+                tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
 
-    @Override
-    public void onDestroyView() {
-        iDynamicPresenter.dettachActivity();
-        super.onDestroyView();
-    }
+                    }
 
-    @Override
-    public void onDestroy() {
-        iDynamicPresenter.dettachActivity();
-        super.onDestroy();
-    }
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
 
-    @Override
-    public void showData(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
-        refreshLayout.setRefreshing(false);
-        lists.clear();
-        lists.addAll(searchItemBeanArrayList);
-//            mDynamicItemAdapter.notifyDataSetChanged();
-        mDynamicItemAdapter.notifyItemChanged(this.lists.size() - 1);
-        if (status) {
-            if (!newPosi.equals(oldPosi)) {
-                FancyToast.makeText(getContext(), "刷新成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
-                //轮动到刷新的位置
-//                mRecyclerView.scrollToPosition(oldPosi - 1);
-            }
+                    }
 
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
 
-        } else {
-            if (!newPosi.equals(oldPosi)) {
-                FancyToast.makeText(getContext(), "刷新失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
-            } else {
-                FancyToast.makeText(getContext(), "出现了问题", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
-            }
-        }
-    }
+                    }
+                });
 
+                mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    /**
-     * 设置上拉刷新
-     */
-    @Override
-    public void onRefresh() {
-        oldPosi = newPosi;
-        newPosi = newPosi + 1;
-        switch (pos) {
-            case 0: {
-                iDynamicPresenter.getDynamicLostData(new DynamicsRequestBean(0, 100), session);
-                break;
-            }
-            case 1: {
-                iDynamicPresenter.getDynamicFindData(new DynamicsRequestBean(0, 100), session);
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
                 break;
             }
             default: {
