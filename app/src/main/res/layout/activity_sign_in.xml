@@ -64,21 +64,18 @@
             android:layout_marginTop="23dp"
             android:layout_marginRight="18dp"
             android:drawablePadding="10dp"
+            android:drawableStart="@drawable/kongbai"
             android:background="@drawable/shape"
-            android:hint="   输入学号"
+            android:hint="输入学号"
             android:textColorHint="@color/white"
             android:inputType="text"
             android:singleLine="true"
             android:textColor="@color/white"
+            android:textCursorDrawable="@null"
             android:textSize="17sp" />
 <!--            android:drawableStart="@drawable/ic_people"/>-->
 
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/kongbai"/>
         <EditText
             android:id="@+id/signin_pwd"
             android:layout_width="match_parent"
@@ -88,13 +85,14 @@
             android:layout_marginRight="18dp"
             android:background="@drawable/shape"
             android:drawablePadding="10dp"
-            android:hint="   输入密码"
+            android:hint="输入密码"
+            android:drawableStart="@drawable/kongbai"
+            android:textCursorDrawable="@null"
             android:textColorHint="@color/white"
             android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="@color/white"
-            android:textSize="17sp"
-            android:padding="10dp"/>
+            android:textSize="17sp" />
 
 
         <TextView

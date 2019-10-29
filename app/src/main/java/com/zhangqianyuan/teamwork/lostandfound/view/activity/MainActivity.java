@@ -76,6 +76,10 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
+
+/**
+ * ui还没确定所以底部导航的图标是乱改的！！！
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String TO_SIGN_IN="to sign in";
@@ -109,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView mBottomNav;
 
-    @BindView(R.id.fabu)
-    FloatingActionButton floatingActionButton;
 
     private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
     private String session = "";

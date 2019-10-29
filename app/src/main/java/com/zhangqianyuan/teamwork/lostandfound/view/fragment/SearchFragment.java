@@ -9,11 +9,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.Selection;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -41,6 +46,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.R.layout.simple_dropdown_item_1line;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
@@ -54,7 +60,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  */
 public class SearchFragment extends Fragment implements ISearchFragment {
 
-    private SearchView searchInput;
+    private AutoCompleteTextView searchInput;
     private Button sure;
     private DropDownMenu dropDownMenu;
     private List<View> popupViews = new ArrayList<>();
@@ -107,6 +113,11 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         initView();
         setOnClick();
         search("");
+
+        initAutoComplete("history", searchInput);
+        Editable etext = searchInput.getText();
+        Selection.setSelection(etext, etext.length());
+
         return view;
     }
 
@@ -133,9 +144,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         
         unbinder=ButterKnife.bind(view);
         searchInput = view.findViewById(R.id.search_input);
-        searchInput.setSubmitButtonEnabled(false);
-        searchInput.findViewById(android.support.v7.appcompat.R.id.search_plate).setBackground(null);
-        searchInput.findViewById(android.support.v7.appcompat.R.id.submit_area).setBackground(null);
+       // searchInput.setSubmitButtonEnabled(false);
+//        searchInput.findViewById(android.support.v7.appcompat.R.id.search_plate).setBackground(null);
+//        searchInput.findViewById(android.support.v7.appcompat.R.id.submit_area).setBackground(null);
         sure = view.findViewById(R.id.search_sure);
         dropDownMenu = view.findViewById(R.id.search_dropDownMenu);
 
@@ -210,32 +221,32 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                 thingsPosition = position;
             });
 
-        searchInput.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        searchInput.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-//                Logger.e(query);
-//                Toast.makeText(getActivity(),query,Toast.LENGTH_SHORT).show();
-//                search(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+//        searchInput.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        searchInput.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+////                Logger.e(query);
+////                Toast.makeText(getActivity(),query,Toast.LENGTH_SHORT).show();
+////                search(query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
 
 
         //点击搜索按键后
         sure.setOnClickListener(v->{
-                String keyword = searchInput.getQuery().toString();
+                String keyword = searchInput.getText().toString();
                 search(keyword);
             });
     }
@@ -269,6 +280,133 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             thingsPosition=-1;
         }
         iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
+
+    }
+
+
+
+    private final class MyOnClickListener implements View.OnClickListener {
+
+        @Override
+
+        public void onClick(View v) {
+
+            saveHistory("history", searchInput);
+
+        }
+
+    }
+
+
+
+    /**
+
+     * 把指定AutoCompleteTextView中内容保存到sharedPreference中指定的字符段
+
+     *
+
+     * @param field
+
+     *            保存在sharedPreference中的字段名
+
+     * @param autoCompleteTextView
+
+     *            要操作的AutoCompleteTextView
+
+     */
+
+    private void saveHistory(String field, AutoCompleteTextView autoCompleteTextView) {
+
+        String text = autoCompleteTextView.getText().toString();
+
+        SharedPreferences sp = getActivity().getSharedPreferences("network_url", 0);
+
+        String longhistory = sp.getString(field, "nothing");
+
+        if (!longhistory.contains(text + ",")) {
+
+            StringBuilder sb = new StringBuilder(longhistory);
+
+            sb.insert(0, text + ",");
+
+            sp.edit().putString("history", sb.toString()).commit();
+
+        }
+
+    }
+
+
+
+    /**
+
+     * 初始化AutoCompleteTextView，最多显示5项提示，使 AutoCompleteTextView在一开始获得焦点时自动提示
+
+     *
+
+     * @param field
+
+     *            保存在sharedPreference中的字段名
+
+     * @param autoCompleteTextView
+
+     *            要操作的AutoCompleteTextView
+
+     */
+
+    private void initAutoComplete(String field, final AutoCompleteTextView autoCompleteTextView) {
+
+        SharedPreferences sp =getActivity(). getSharedPreferences("network_url", 0);
+
+        String longhistory = sp.getString("history", "nothing");
+
+        String[] histories = longhistory.split(",");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, histories);
+
+        // 只保留最近的50条的记录
+
+        if (histories.length > 50) {
+
+            String[] newHistories = new String[50];
+
+            System.arraycopy(histories, 0, newHistories, 0, 50);
+
+            adapter = new ArrayAdapter<String>(getContext(),
+
+                    android.R.layout.simple_dropdown_item_1line, newHistories);
+
+        }
+
+        autoCompleteTextView.setAdapter(adapter);
+
+        autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                AutoCompleteTextView view = (AutoCompleteTextView) v;
+
+                if (hasFocus) {
+
+                    view.showDropDown();
+
+                }
+
+            }
+
+        });
+
+        autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AutoCompleteTextView view = (AutoCompleteTextView) v;
+                view.showDropDown();
+
+            }
+        });
+
 
     }
 }

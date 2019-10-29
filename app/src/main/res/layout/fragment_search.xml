@@ -32,8 +32,27 @@
 <!--            app:submitBackground="@null" />-->
 
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            app:iconifiedByDefault="false"
+            android:background="@drawable/searchview_bg"
+            android:id="@+id/search_input"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:drawableStart="@drawable/kongbai"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.015"
+            app:showDividers="none"
+            app:submitBackground="@null"/>
+
 
         <Button
             android:id="@+id/search_sure"
@@ -46,8 +65,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/search_input"
-            android:background="@drawable/searchview_button"
-            android:text="搜 索"
+            android:background="@drawable/search_icc"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
