@@ -36,7 +36,7 @@ import java.util.List;
  */
 
 @SuppressLint("ValidFragment")
-public class DynamicChildChildFragement extends Fragment implements IDynaicChildFragment, SwipeRefreshLayout.OnRefreshListener {
+public class DynamicChildChildFragment extends Fragment implements IDynaicChildFragment, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout refreshLayout;
     private DynamicItemAdapter mDynamicItemAdapter;
@@ -51,7 +51,7 @@ public class DynamicChildChildFragement extends Fragment implements IDynaicChild
     private Integer oldPosi;
 
     @SuppressLint("ValidFragment")
-    public DynamicChildChildFragement(int i, String session) {
+    public DynamicChildChildFragment(int i, String session) {
         pos = i;
         this.session = session;
     }

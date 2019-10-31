@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllURI {
-    public static final String BaseUrl = "http://47.106.232.219/";
+    public static final String BaseUrl = "http://49.4.82.207";
 
     //我们的官网
     public static final String OurWebsite = BaseUrl+"passlove/index.html";

@@ -73,9 +73,9 @@ public class DynamicChildFragment extends Fragment {
     public void initLists() {
         switch (pos) {
             case 0: {
-                mFragments.add(new DynamicChildFragment(2, session));
-                mFragments.add(new DynamicChildFragment(3, session));
-                mFragments.add(new DynamicChildFragment(4, session));
+                mFragments.add(new DynamicChildChildFragment(2, session));
+                mFragments.add(new DynamicChildChildFragment(3, session));
+                mFragments.add(new DynamicChildChildFragment(4, session));
                 title.add("今天");
                 title.add("昨天");
                 title.add("更早");
@@ -112,9 +112,9 @@ public class DynamicChildFragment extends Fragment {
                 break;
             }
             case 1: {
-                mFragments.add(new DynamicChildFragment(5, session));
-                mFragments.add(new DynamicChildFragment(6, session));
-                mFragments.add(new DynamicChildFragment(7, session));
+                mFragments.add(new DynamicChildChildFragment(5, session));
+                mFragments.add(new DynamicChildChildFragment(6, session));
+                mFragments.add(new DynamicChildChildFragment(7, session));
                 title.add("今天");
                 title.add("昨天");
                 title.add("更早");

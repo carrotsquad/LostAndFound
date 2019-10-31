@@ -24,9 +24,6 @@ import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 /**
  * Description 动态界面
