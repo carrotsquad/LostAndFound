@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
     private void showPopUpWindow() {
         View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.choose, null);
         final PopupWindow mPopWindow = new PopupWindow(contentView,
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         mPopWindow.setContentView(contentView);
         //popupWindow出场动画
 //        mPopWindow.setAnimationStyle(R.style.xinjian_popUp_style);
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
         View rootView = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_main, null);
         mPopWindow.setTouchable(true);
         mPopWindow.setOutsideTouchable(true);
-        mPopWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
+        mPopWindow.showAtLocation(rootView, Gravity.BOTTOM, 0, 0);
 
         //❌号旋转动画
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(cancel, "rotation", 0f, 180f);

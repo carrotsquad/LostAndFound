@@ -12,11 +12,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userinfo_head_img"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="70dp"
             android:src="@mipmap/user" />
 
         <TextView
@@ -43,14 +43,15 @@
         <RelativeLayout
             android:id="@+id/userinfo_myupload_layout"
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="70dp"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/userinfo_myupload_layout_img"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="50dp"
                 android:background="@drawable/myupload" />
 
             <TextView
@@ -63,15 +64,14 @@
                 android:text="   我的发布"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:background="@color/babyblue"/>
+                android:background="@color/white"/>
 
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/arrows"/>
+                android:layout_marginRight="50dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -79,14 +79,15 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@id/userinfo_myupload_layout"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/userinfo_myhistory_layout_img"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="50dp"
                 android:background="@drawable/myhistory" />
 
             <TextView
@@ -99,15 +100,14 @@
                 android:text="   我的历史"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:background="@color/babyblue"/>
+                android:background="@color/white"/>
 
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/arrows"/>
+                android:layout_marginRight="50dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -115,14 +115,15 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@id/userinfo_myhistory_layout"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/userinfo_feedback_layout_img"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="50dp"
                 android:background="@drawable/feedback" />
 
             <TextView
@@ -135,15 +136,14 @@
                 android:text="   反馈"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:background="@color/babyblue"/>
+                android:background="@color/white"/>
 
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/arrows"/>
+                android:layout_marginRight="50dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -151,14 +151,15 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/userinfo_feedback_layout">
+            android:layout_below="@id/userinfo_feedback_layout"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/userinfo_aboutus_layout_img"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="50dp"
                 android:background="@drawable/aboutus" />
 
             <TextView
@@ -171,15 +172,14 @@
                 android:text="   关于我们"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:background="@color/babyblue"/>
+                android:background="@color/white"/>
 
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/arrows"/>
+                android:layout_marginRight="50dp" />
 
         </RelativeLayout>
 
@@ -188,14 +188,15 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/userinfo_aboutus_layout">
+            android:layout_below="@id/userinfo_aboutus_layout"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/userinfo_setting_layout_img"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="50dp"
                 android:background="@drawable/setting" />
 
             <TextView
@@ -208,15 +209,14 @@
                 android:text="   设置"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:background="@color/babyblue" />
+                android:background="@color/white" />
 
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/arrows"/>
+                android:layout_marginRight="50dp"/>
 
         </RelativeLayout>
 

@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item  android:state_checked="true"
 
-        android:drawable="@drawable/arrow_bg"/>
+        android:drawable="@drawable/message_do"/>
 
 
-    <item android:drawable="@drawable/barback"/>
+    <item android:drawable="@drawable/message_not"/>
 
 
 </selector>
