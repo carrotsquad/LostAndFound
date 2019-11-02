@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
-import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.List;
@@ -27,7 +24,6 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
-import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeImgsList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getLostThingsPhoto;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.getTypeLittlePhoto;
@@ -53,7 +49,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
  * @updateAuthor $Author$
  * @updateDes ${}
  */
-public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.ViewHolder> {
+public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildItemAdapter.ViewHolder> {
     private Context mContext;
     private List<DynamicItemBean> lists;
     private Activity activity;
@@ -85,7 +81,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         }
     }
 
-    public DynamicItemAdapter(List<DynamicItemBean> list, Activity activity) {
+    public DynamicChildItemAdapter(List<DynamicItemBean> list, Activity activity) {
         this.activity = activity;
         this.lists = list;
     }
@@ -97,7 +93,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_dynamic_item, parent, false);
-        final DynamicItemAdapter.ViewHolder holder = new DynamicItemAdapter.ViewHolder(view);
+        final DynamicChildItemAdapter.ViewHolder holder = new DynamicChildItemAdapter.ViewHolder(view);
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +175,7 @@ public class DynamicItemAdapter extends RecyclerView.Adapter<DynamicItemAdapter.
         String place = allPlaceBeanList.get(lostplace - 1);
 //        String thingsType = allTypeBeanList.get(thingstype);
 
-        holder.timeandplace.setText(place + "  " + date_orig.substring(8, 10) + ":" + date_orig.substring(10, 12));
+        holder.timeandplace.setText(place + "  " + date_orig.substring(8,10) + ":" + date_orig.substring(10,12));
 
         int lostType = 0;
         switch (losttype) {

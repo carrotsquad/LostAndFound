@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
-import com.zhangqianyuan.teamwork.lostandfound.adapter.DynamicItemAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.DynamicChildItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.DynamicChildPresenter;
@@ -39,7 +39,7 @@ import java.util.List;
 public class DynamicChildChildFragment extends Fragment implements IDynaicChildFragment, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout refreshLayout;
-    private DynamicItemAdapter mDynamicItemAdapter;
+    private DynamicChildItemAdapter mDynamicItemAdapter;
     private List<DynamicItemBean> lists = new ArrayList<>();
     private DynamicChildPresenter iDynamicChildPresenter;
     private int pos;
@@ -68,7 +68,7 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
         manager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);//不设置的话，图片闪烁错位，有可能有整列错位的情况。
         ActivityManager.getActivityManager().addF(this);
         mRecyclerView.setLayoutManager(manager);
-        mDynamicItemAdapter = new DynamicItemAdapter(lists, getActivity());
+        mDynamicItemAdapter = new DynamicChildItemAdapter(lists, getActivity());
         mRecyclerView.setAdapter(mDynamicItemAdapter);
         refreshLayout.setOnRefreshListener(this);
         iDynamicChildPresenter = new DynamicChildPresenter();

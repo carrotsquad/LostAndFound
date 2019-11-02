@@ -12,12 +12,7 @@ public class DynamicItemBean {
 
     public static final int  TYPE_LOST=0; //丢失
     public static final int  TYPE_FIND=1;//招领
-    public static final int  LOST_TODAY = 2;//今天丢失
-    public static final int  LOST_YESTERDAY = 3;//昨天丢失
-    public static final int  LOST_AGO = 4;  //更早丢失
-    public static final int  FIND_TODAY = 5;//今天捡到
-    public static final int  FIND_YESTERDAY = 6;//昨天捡到
-    public static final int  FIND_AGO = 7;//更早捡到
+
     /**
      * username : 706519033@qq.com
      * nickname : 王昊鑫

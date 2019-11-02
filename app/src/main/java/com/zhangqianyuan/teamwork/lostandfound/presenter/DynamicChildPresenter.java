@@ -48,6 +48,8 @@ public class DynamicChildPresenter extends BasePresenter<IDynaicChildFragment> i
                     getV().showData(false,null);
                 }
 
+
+
                 @Override
                 public void onComplete() {
 
@@ -74,10 +76,13 @@ public class DynamicChildPresenter extends BasePresenter<IDynaicChildFragment> i
                     }
                 }
 
+
                 @Override
                 public void onError(Throwable e) {
                     getV().showData(false,null);
                 }
+
+
 
                 @Override
                 public void onComplete() {
@@ -105,10 +110,13 @@ public class DynamicChildPresenter extends BasePresenter<IDynaicChildFragment> i
                     }
                 }
 
+
                 @Override
                 public void onError(Throwable e) {
                     getV().showData(false,null);
                 }
+
+
 
                 @Override
                 public void onComplete() {
@@ -136,10 +144,13 @@ public class DynamicChildPresenter extends BasePresenter<IDynaicChildFragment> i
                     }
                 }
 
+
                 @Override
                 public void onError(Throwable e) {
                     getV().showData(false,null);
                 }
+
+
 
                 @Override
                 public void onComplete() {
@@ -167,10 +178,13 @@ public class DynamicChildPresenter extends BasePresenter<IDynaicChildFragment> i
                     }
                 }
 
+
                 @Override
                 public void onError(Throwable e) {
                     getV().showData(false,null);
                 }
+
+
 
                 @Override
                 public void onComplete() {
@@ -198,10 +212,13 @@ public class DynamicChildPresenter extends BasePresenter<IDynaicChildFragment> i
                     }
                 }
 
+
                 @Override
                 public void onError(Throwable e) {
                     getV().showData(false,null);
                 }
+
+
 
                 @Override
                 public void onComplete() {
