@@ -84,6 +84,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         CircleImageView userphoto;
         TextView newMsg;
         Button btnDlt;
+        Button btnEdit;
+        Button btnFinish;
 
         public ViewHolder(View view) {
             super(view);
@@ -100,6 +102,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             thingType = view.findViewById(R.id.search_item_thingstype);
             newMsg = view.findViewById(R.id.search_item_newmessage);
             btnDlt=view.findViewById(R.id.search_item_delete);
+            btnEdit = view.findViewById(R.id.search_item_edit);
+            btnFinish = view.findViewById(R.id.search_item_finish);
         }
     }
 
@@ -286,6 +290,23 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
             });
+
+            holder.btnFinish.setOnClickListener(v->{
+                holder.swipeMenuLayout.quickClose();
+                searchItemBeanArrayList.remove(position);
+                FancyToast.makeText(mContext,"递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+
+            holder.btnEdit.setOnClickListener(v->{
+                holder.swipeMenuLayout.quickClose();
+                searchItemBeanArrayList.remove(position);
+                FancyToast.makeText(mContext,"编辑", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+
 
             //popupwindow弹出删除
             holder.arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {

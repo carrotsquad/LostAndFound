@@ -38,7 +38,7 @@ import java.util.List;
      上拉 或者 下拉时  count数目清零 再次向服务器请求16条数据.......
      */
 @SuppressLint("ValidFragment")
-public class DynamicFragment extends Fragment {
+public class  DynamicFragment extends Fragment {
 
     private TabLayout  tab;
 
