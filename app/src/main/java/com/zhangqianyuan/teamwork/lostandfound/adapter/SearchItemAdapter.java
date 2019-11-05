@@ -280,29 +280,29 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
 
         //是否是消息
-        if(isMessage){
+        if(isMessage) {
 
             //侧滑删除
-            holder.btnDlt.setOnClickListener(v->{
+            holder.btnDlt.setOnClickListener(v -> {
                 holder.swipeMenuLayout.quickClose();
                 searchItemBeanArrayList.remove(position);
-                FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
             });
 
-            holder.btnFinish.setOnClickListener(v->{
+            holder.btnFinish.setOnClickListener(v -> {
                 holder.swipeMenuLayout.quickClose();
                 searchItemBeanArrayList.remove(position);
-                FancyToast.makeText(mContext,"递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                FancyToast.makeText(mContext, "递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
             });
 
-            holder.btnEdit.setOnClickListener(v->{
+            holder.btnEdit.setOnClickListener(v -> {
                 holder.swipeMenuLayout.quickClose();
                 searchItemBeanArrayList.remove(position);
-                FancyToast.makeText(mContext,"编辑", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                FancyToast.makeText(mContext, "编辑", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
             });
@@ -317,7 +317,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                         public void onClick(View v) {
                             holder.arrowPopWindows.dismiss();
                             searchItemBeanArrayList.remove(position);
-                            FancyToast.makeText(mContext,"成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT,false).show();
+                            FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
                             notifyItemRemoved(position);
                             notifyDataSetChanged();
 //

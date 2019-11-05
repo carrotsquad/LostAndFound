@@ -40,7 +40,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     private MyLoadPresenter presenter = new MyLoadPresenter(new MyLoadModel());
     private MyLoadItemAdapter mAdapter;
     private SharedPreferences sharedPreferences;
-    @BindView(R.id.myhistory_myload_list)
+    @BindView(R.id.myload_list)
     RecyclerView list;
 
     @BindView(R.id.myupload_back)

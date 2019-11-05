@@ -8,15 +8,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
+import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.List;
@@ -26,6 +32,7 @@ import butterknife.ButterKnife;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
+import static com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows.SHOW_TOP;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHILEIXING;
@@ -51,36 +58,35 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
     private String userphoto;
     private String username;
     private String nickname;
-
+    private Boolean isMessage;
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
-        @BindView(R.id.myhistory_thingtype)
-        ImageView  thingtype;
-
-        @BindView(R.id.myhistory_thingtype_txt)
+        ImageView thingtype;
         ImageView  thingtypetxt;
-
-        @BindView(R.id.myhistory_eventtype)
         ImageView  eventtype;
-
-        @BindView(R.id.myhistory_time)
         TextView  time  ;                     //月 日
-
-        @BindView(R.id.myhistory_time2)
         TextView  time2;                     //19:00
-
-        @BindView(R.id.myhistory_where)
         TextView  where;
-
-        @BindView(R.id.isdone_description)
-        TextView   isdong;
-
-        @BindView(R.id.relatelayout)
         RelativeLayout relativeLayout;
+        SwipeMenuLayout swipeMenuLayout;
+        ArrowPopWindows arrowPopWindows;
+        Button btnDlt;
+        Button btnEdit;
+        Button btnFinish;
 
         public ViewHolder(View view){
             super(view);
-            ButterKnife.bind(this,view);
+            swipeMenuLayout = (SwipeMenuLayout) view;
+            thingtype = view.findViewById(R.id.myupload_thingtype);
+            thingtypetxt = view.findViewById(R.id.myupload_thingtype_txt);
+            eventtype = view.findViewById(R.id.myupload_eventtype);
+            time = view.findViewById(R.id.myupload_time);
+            time2 = view.findViewById(R.id.myupload_time2);
+            where= view.findViewById(R.id.myupload_where);
+            relativeLayout= view.findViewById(R.id.upload_item_relativeview);
+            btnDlt=view.findViewById(R.id.search_item_delete);
+            btnEdit = view.findViewById(R.id.search_item_edit);
+            btnFinish = view.findViewById(R.id.search_item_finish);
         }
     }
 
@@ -89,14 +95,24 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         this.username = username;
         this.userphoto = userphoto;
         this.nickname = nickname;
+        this.isMessage = isMessage;
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("oncreateviewholder","seccess");
         mContext=parent.getContext();
-        View view = LayoutInflater.from(mContext).inflate(R.layout.userinfo_myhistory_item,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.userinfo_myupload_item,parent,false);
         final MyLoadItemAdapter.ViewHolder holder = new MyLoadItemAdapter.ViewHolder(view);
+        if(isMessage) {
+            holder.relativeLayout.setOnLongClickListener(v->{
+                        holder.arrowPopWindows.show(view, SHOW_TOP);
+                        return true;
+                    }
+            );
+        }else {
+            holder.swipeMenuLayout.setSwipeEnable(false);
+        }
         return holder;
     }
 
@@ -112,8 +128,6 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 .load(x)
                 .asBitmap()
                 .into(holder.thingtypetxt);
-        holder.isdong.setTextSize(12);
-        holder.isdong.setText(lists.get(position).getDescription());
         if (lists.get(position).getLosttype()==0){
             holder.eventtype.setImageResource(R.drawable.littleicon_type_lost);
         }else if (lists.get(position).getLosttype()==1){
@@ -130,6 +144,34 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             String time2=  hours+"点";
             holder.time.setText(time1);
             holder.time2.setText(time2);
+        }
+        if (isMessage) {
+
+            //侧滑删除
+            holder.btnDlt.setOnClickListener(v -> {
+                holder.swipeMenuLayout.quickClose();
+                lists.remove(position);
+                FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+
+            holder.btnFinish.setOnClickListener(v -> {
+                holder.swipeMenuLayout.quickClose();
+                lists.remove(position);
+                FancyToast.makeText(mContext, "递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+
+            holder.btnEdit.setOnClickListener(v -> {
+                holder.swipeMenuLayout.quickClose();
+                lists.remove(position);
+                FancyToast.makeText(mContext, "编辑", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+
         }
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -153,17 +195,17 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
 
                 String date_orig = dynamicItemBean.getThelost().getPublishtime();
                 String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
-                if(!"0".equals(date_orig.substring(6, 7))) {
-                    fabaiodate = fabaiodate+date_orig.substring(6, 7);
+                if (!"0".equals(date_orig.substring(6, 7))) {
+                    fabaiodate = fabaiodate + date_orig.substring(6, 7);
                 }
-                fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
+                fabaiodate = fabaiodate + date_orig.substring(7, 8) + "日" + date_orig.substring(8, 10) + ":" + date_orig.substring(10, 12);
 
                 String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
                 String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
-                if(!"0".equals(lostdate_orig.substring(6, 7))){
+                if (!"0".equals(lostdate_orig.substring(6, 7))) {
                     lostdate = lostdate + lostdate_orig.substring(6, 7);
                 }
-                lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
+                lostdate = lostdate + lostdate_orig.substring(7, 8) + "日";
 
                 int lostplace = dynamicItemBean.getThelost().getPlaceid();
                 int losttype = dynamicItemBean.getThelost().getLosttype();
@@ -173,16 +215,16 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 String thingsType = allTypeBeanList.get(thingstype);
 
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
-                intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getNickname());
-                intent.putExtra(OTHERSPHOTO,dynamicItemBean.getUserphoto());
-                intent.putExtra(OTHERSFABIAODATE,fabaiodate);
+                intent.putExtra(OTHERSNICKNAME, dynamicItemBean.getNickname());
+                intent.putExtra(OTHERSPHOTO, dynamicItemBean.getUserphoto());
+                intent.putExtra(OTHERSFABIAODATE, fabaiodate);
                 intent.putExtra(OTHERSDIUSHILEIXING, losttype);
                 intent.putExtra(OTHERSDIUSHIDATE, lostdate);
-                intent.putExtra(OTHERSPLACE,place);
+                intent.putExtra(OTHERSPLACE, place);
                 intent.putExtra(OTHERSIMGS, dynamicItemBean.getThelost().getPhoto());
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
-                intent.putExtra(OTHERSDESC,dynamicItemBean.getThelost().getDescription());
+                intent.putExtra(OTHERSDESC, dynamicItemBean.getThelost().getDescription());
                 mContext.startActivity(intent);
             }
         });

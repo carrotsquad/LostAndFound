@@ -29,7 +29,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_below="@id/setting_bar"
-        android:id="@+id/myhistory_myload_list"
+        android:id="@+id/myload_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
