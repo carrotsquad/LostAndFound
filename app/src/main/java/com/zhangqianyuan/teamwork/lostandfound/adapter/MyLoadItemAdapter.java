@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -84,13 +85,13 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             time2 = view.findViewById(R.id.myupload_time2);
             where= view.findViewById(R.id.myupload_where);
             relativeLayout= view.findViewById(R.id.upload_item_relativeview);
-            btnDlt=view.findViewById(R.id.search_item_delete);
-            btnEdit = view.findViewById(R.id.search_item_edit);
-            btnFinish = view.findViewById(R.id.search_item_finish);
+            btnDlt=view.findViewById(R.id.upload_item_delete);
+            btnEdit = view.findViewById(R.id.upload_item_edit);
+            btnFinish = view.findViewById(R.id.upload_item_finish);
         }
     }
 
-    public MyLoadItemAdapter (List<TheLostBean> list,String userphoto, String username, String nickname){
+    public MyLoadItemAdapter (List<TheLostBean> list, String userphoto, String username, String nickname , Boolean isMessage){
         this.lists=list;
         this.username = username;
         this.userphoto = userphoto;
@@ -112,66 +113,6 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             );
         }else {
             holder.swipeMenuLayout.setSwipeEnable(false);
-        }
-        return holder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
-        Glide.with(mContext)
-                .load(s)
-                .asBitmap()
-                .into(holder.thingtype);
-        String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
-        Glide.with(mContext)
-                .load(x)
-                .asBitmap()
-                .into(holder.thingtypetxt);
-        if (lists.get(position).getLosttype()==0){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost);
-        }else if (lists.get(position).getLosttype()==1){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
-        }
-        String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
-        holder.where.setText(lostPlace);
-        String publishTime= lists.get(position).getPublishtime();
-        if (!publishTime.equals("")){
-            String   mouth = publishTime.substring(4,6);
-            String    day = publishTime.substring(6,8);
-            String    hours=publishTime.substring(8,10);
-            String time1 = mouth+"月"+day+"日";
-            String time2=  hours+"点";
-            holder.time.setText(time1);
-            holder.time2.setText(time2);
-        }
-        if (isMessage) {
-
-            //侧滑删除
-            holder.btnDlt.setOnClickListener(v -> {
-                holder.swipeMenuLayout.quickClose();
-                lists.remove(position);
-                FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
-                notifyItemRemoved(position);
-                notifyDataSetChanged();
-            });
-
-            holder.btnFinish.setOnClickListener(v -> {
-                holder.swipeMenuLayout.quickClose();
-                lists.remove(position);
-                FancyToast.makeText(mContext, "递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
-                notifyItemRemoved(position);
-                notifyDataSetChanged();
-            });
-
-            holder.btnEdit.setOnClickListener(v -> {
-                holder.swipeMenuLayout.quickClose();
-                lists.remove(position);
-                FancyToast.makeText(mContext, "编辑", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
-                notifyItemRemoved(position);
-                notifyDataSetChanged();
-            });
-
         }
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -228,6 +169,67 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 mContext.startActivity(intent);
             }
         });
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
+        Glide.with(mContext)
+                .load(s)
+                .asBitmap()
+                .into(holder.thingtype);
+        String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
+        Glide.with(mContext)
+                .load(x)
+                .asBitmap()
+                .into(holder.thingtypetxt);
+        if (lists.get(position).getLosttype()==0){
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost);
+        }else if (lists.get(position).getLosttype()==1){
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
+        }
+        String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
+        holder.where.setText(lostPlace);
+        String publishTime= lists.get(position).getPublishtime();
+        if (!publishTime.equals("")){
+            String   mouth = publishTime.substring(4,6);
+            String    day = publishTime.substring(6,8);
+            String    hours=publishTime.substring(8,10);
+            String time1 = mouth+"月"+day+"日";
+            String time2=  hours+"点";
+            holder.time.setText(time1);
+            holder.time2.setText(time2);
+        }
+
+
+
+        if (isMessage) {
+            //侧滑删除
+            holder.btnDlt.setOnClickListener(v -> {
+                holder.swipeMenuLayout.quickClose();
+                lists.remove(position);
+                FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+
+            holder.btnFinish.setOnClickListener(view -> {
+                holder.swipeMenuLayout.quickClose();
+                lists.remove(position);
+                FancyToast.makeText(mContext, "递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+
+            holder.btnEdit.setOnClickListener(view -> {
+                holder.swipeMenuLayout.quickClose();
+                lists.remove(position);
+                FancyToast.makeText(mContext, "编辑", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            });
+        }
 
     }
 

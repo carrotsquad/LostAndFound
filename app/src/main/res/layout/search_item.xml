@@ -130,7 +130,6 @@
                 android:text="2018年10月5日发布"
                 android:textSize="7sp" />
 
-
         </RelativeLayout>
 
         <LinearLayout
@@ -142,8 +141,6 @@
             android:orientation="horizontal">
 
         </LinearLayout>
-
-
     </RelativeLayout>
     <Button
         android:id="@+id/search_item_delete"
