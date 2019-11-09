@@ -40,7 +40,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     private MyLoadPresenter presenter = new MyLoadPresenter(new MyLoadModel());
     private MyLoadItemAdapter mAdapter;
     private SharedPreferences sharedPreferences;
-    @BindView(R.id.myhistory_myload_list)
+    @BindView(R.id.myload_list)
     RecyclerView list;
 
     @BindView(R.id.myupload_back)
@@ -64,7 +64,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
         Log.d("123456", "success");
         list.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new MyLoadItemAdapter(lists, sharedPreferences.getString(USERPHOTO, "null"), sharedPreferences.getString(EMAIL, "null")
-                , sharedPreferences.getString(STU, "null"));
+                , sharedPreferences.getString(STU, "null"), true);
         list.setAdapter(mAdapter);
         back.setOnClickListener(view->finish());
     }

@@ -31,7 +31,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity
  */
 public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAdapter.ViewHolder> {
     private List<UploadItemBean> lists;
-
+    private Boolean isMessage;
     private Context mContext;
     private Integer qishileixing;
 
@@ -46,6 +46,7 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
 
         @BindView(R.id.upload_type_text)
         TextView  text;
+
 
         public ViewHolder(View view){
             super(view);
