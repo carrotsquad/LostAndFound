@@ -17,7 +17,8 @@
 
     <item
         android:id="@+id/fabu"
-        android:title="" />
+        android:title=""
+        android:icon="@drawable/kongbai"/>
 
     <item
         android:id="@+id/message_ui"
