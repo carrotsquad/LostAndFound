@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
@@ -49,12 +50,11 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
     public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
 
         if(dependency != null && dependency.getId() == R.id.dynamic_toolbar){
-
             depencyView = new WeakReference<>(dependency);
             tabLayout = new WeakReference<>((TabLayout)((LinearLayout)child).getChildAt(0));
             return true;
         }
-        return false;
+            return false;
     }
     //颜色分配
     @Override
@@ -99,7 +99,7 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         super.onNestedScrollAccepted(coordinatorLayout, child, directTargetChild, target, axes);
     }
 
-    //处理向上滑动
+   //处理向上滑动
     @Override
     public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout,
                                   @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed) {
@@ -116,6 +116,8 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
 
         }
     }
+
+
 
     //处理向下滑动
     @Override
