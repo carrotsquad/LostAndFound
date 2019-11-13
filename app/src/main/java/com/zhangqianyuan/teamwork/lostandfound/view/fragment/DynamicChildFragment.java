@@ -34,13 +34,11 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class DynamicChildFragment extends Fragment {
 
-    private List<DynamicItemBean> lists = new ArrayList<>();
     private int pos;
 
     private String session = "";
 
     private TabLayout tab;
-    private DynamicChildPresenter iDynamicChildPresenter;
     private ViewPager mViewPager;
 
     List<Fragment> mFragments = new ArrayList<>();
