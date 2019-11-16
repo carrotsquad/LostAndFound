@@ -80,4 +80,9 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
         lists.addAll(beans);
         mAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void delete(String session) {
+
+    }
 }

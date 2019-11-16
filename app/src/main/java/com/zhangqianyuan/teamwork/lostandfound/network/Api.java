@@ -84,6 +84,10 @@ public interface Api {
     @FormUrlEncoded
     Observable<StatusBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
+    @POST("/passlove/updateishandle")
+    @FormUrlEncoded
+    Observable<StatusBean> postDelete(@Field("JSESSIONID") String session);
+
 
     //获取动态 失物今天 信息
     @POST("/passlove/dynamics/0/0")

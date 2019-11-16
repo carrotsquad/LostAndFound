@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface IMyLoadActivity extends BaseView {
     void showData(List<TheLostBean> bean);
+    void delete(String session);
 }

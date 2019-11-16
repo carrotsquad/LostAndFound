@@ -43,4 +43,10 @@ public class MyLoadPresenter extends BasePresenter<IMyLoadActivity> implements I
                 }
             });
         }
-}}
+}
+
+    @Override
+    public void postDelete(String session) {
+
+    }
+}

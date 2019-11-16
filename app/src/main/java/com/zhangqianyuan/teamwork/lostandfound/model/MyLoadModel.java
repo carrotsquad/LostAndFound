@@ -28,4 +28,9 @@ public class MyLoadModel extends  BaseModel implements IMyUploadModel {
         bean.setEnd(end);
         api.getMyLoadData(jsessionid,new Gson().toJson(bean)).enqueue(callback);
     }
+
+    @Override
+    public void postDelete(String session) {
+        api.postDelete(session);
+    }
 }
