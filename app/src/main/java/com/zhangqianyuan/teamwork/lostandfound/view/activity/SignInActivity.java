@@ -179,6 +179,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             case R.id.all_clear:{
                 pwd.setText("");
                 pwd.requestFocusFromTouch();
+                break;
             }
             //重置密码
 
