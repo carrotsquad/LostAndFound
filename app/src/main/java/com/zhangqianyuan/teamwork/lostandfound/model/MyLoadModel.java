@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendMyHistoryBean;
@@ -32,5 +34,6 @@ public class MyLoadModel extends  BaseModel implements IMyUploadModel {
     @Override
     public void postDelete(String session) {
         api.postDelete(session);
+        Log.e("Tag","Model完好");
     }
 }

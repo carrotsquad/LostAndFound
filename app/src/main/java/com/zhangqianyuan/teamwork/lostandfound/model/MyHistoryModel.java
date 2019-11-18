@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendMyHistoryBean;

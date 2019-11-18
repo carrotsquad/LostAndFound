@@ -3,6 +3,7 @@ package com.zhangqianyuan.teamwork.lostandfound.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.List;
@@ -34,6 +36,7 @@ import butterknife.ButterKnife;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows.SHOW_TOP;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHILEIXING;
@@ -60,6 +63,9 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
     private String username;
     private String nickname;
     private Boolean isMessage;
+    private String jsession;
+    private SharedPreferences sharedPreferences;
+    private MyLoadPresenter myLoadPresenter;
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
         ImageView thingtype;
@@ -91,7 +97,8 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         }
     }
 
-    public MyLoadItemAdapter (List<TheLostBean> list, String userphoto, String username, String nickname , Boolean isMessage){
+    public MyLoadItemAdapter (Context context, List<TheLostBean> list, String userphoto, String username, String nickname , Boolean isMessage){
+        this.mContext = context;
         this.lists=list;
         this.username = username;
         this.userphoto = userphoto;
@@ -103,6 +110,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("oncreateviewholder","seccess");
         mContext=parent.getContext();
+        sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         View view = LayoutInflater.from(mContext).inflate(R.layout.userinfo_myupload_item,parent,false);
         final MyLoadItemAdapter.ViewHolder holder = new MyLoadItemAdapter.ViewHolder(view);
         if(isMessage) {
@@ -118,7 +126,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                for (TheLostBean bean:
+////                for (TheLostBean bean:
 //                        list) {
 //                    DynamicItemBean dynamicItemBean = new DynamicItemBean();
 //                    dynamicItemBean.setThelost(bean);
@@ -207,6 +215,9 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         if (isMessage) {
             //侧滑删除
             holder.btnDlt.setOnClickListener(v -> {
+                jsession = sharedPreferences.getString(SESSION, "null");
+                myLoadPresenter.postDelete(jsession);
+                Log.e("Tag","错误"+jsession);
                 holder.swipeMenuLayout.quickClose();
                 lists.remove(position);
                 FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();

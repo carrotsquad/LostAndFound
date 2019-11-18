@@ -3,13 +3,18 @@ package com.zhangqianyuan.teamwork.lostandfound.presenter;
 import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
+import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IMyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.FINE_INTERNET_STATUS;
 
 /**
  * @author zhoudada
@@ -47,6 +52,7 @@ public class MyLoadPresenter extends BasePresenter<IMyLoadActivity> implements I
 
     @Override
     public void postDelete(String session) {
-
+        Log.e("Tag","完好");
+        mMyLoadModel.postDelete(session);
     }
 }
