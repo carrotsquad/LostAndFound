@@ -81,6 +81,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
                     Toast.makeText(this, "修改密码成功", Toast.LENGTH_SHORT);
                     Intent intent = new Intent(ForgetPasswordActivity.this, SignInActivity.class);
                     intent.putExtra(PWD, new_password.getText().toString());
+                    intent.putExtra("ForgetorLogin","Foeget");
                     startActivity(intent);
                     finish();
                 }else{

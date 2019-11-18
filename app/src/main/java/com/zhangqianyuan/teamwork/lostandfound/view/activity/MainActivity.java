@@ -33,6 +33,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -268,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
     private void showPopUpWindow() {
         View contentView = LayoutInflater.from(MainActivity.this).inflate(R.layout.choose, null);
         final PopupWindow mPopWindow = new PopupWindow(contentView,
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
         mPopWindow.setContentView(contentView);
         //popupWindow出场动画
 //        mPopWindow.setAnimationStyle(R.style.xinjian_popUp_style);
@@ -317,6 +318,21 @@ public class MainActivity extends AppCompatActivity {
             closeTranslationAnimation(textView,300,bottom);
             closeTranslationAnimation(textView1,300,bottom);
             contentView.postDelayed(()-> mPopWindow.dismiss(),300);
+        });
+
+        /**
+         * 点击外部退出
+         */
+        mPopWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                closeTranslationAnimation(newShiWu,300,bottom);
+                closeTranslationAnimation(newZhaoLing,300,bottom);
+                closeTranslationAnimation(textView,300,bottom);
+                closeTranslationAnimation(textView1,300,bottom);
+                contentView.postDelayed(()-> mPopWindow.dismiss(),300);
+                return true;
+            }
         });
     }
 

@@ -6,8 +6,7 @@
     <item
         android:id="@+id/dongtai_ui"
         android:icon="@drawable/select1"
-        android:title="动态"
-        app:showAsAction="collapseActionView" />
+        android:title="动态" />
 
 
     <item
