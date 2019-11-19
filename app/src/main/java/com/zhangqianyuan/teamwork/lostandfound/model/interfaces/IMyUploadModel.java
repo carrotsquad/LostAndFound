@@ -1,7 +1,10 @@
 package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
+import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 
+import io.reactivex.Observer;
 import retrofit2.Callback;
 /**
  * Description
@@ -23,5 +26,5 @@ public interface IMyUploadModel {
      * 物品具体图片
      */
     void getMyLoadData(String jsessionid,int start,int end,Callback<MyHistoryItem> callback);
-    void postDelete(String session);
+    void postDelete(String jsessionid,int id, Observer<StatusBean> observer);
 }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IMyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
@@ -50,9 +51,36 @@ public class MyLoadPresenter extends BasePresenter<IMyLoadActivity> implements I
         }
 }
 
+
     @Override
-    public void postDelete(String session) {
-        Log.e("Tag","完好");
-        mMyLoadModel.postDelete(session);
+    public void postDelete(String jsessionid,int id) {
+            Log.e("Tag","Presenter完好");
+            if (isAttachActivity()) {
+                mMyLoadModel.postDelete(jsessionid,id, new Observer<StatusBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(StatusBean statusBean) {
+                        if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
+                            getV().showStatus(false);
+                        } else {
+                            getV().showStatus(true);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getV().showStatus(false);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+            }
     }
 }

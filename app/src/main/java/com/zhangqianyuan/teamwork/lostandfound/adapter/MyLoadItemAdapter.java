@@ -63,9 +63,10 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
     private String username;
     private String nickname;
     private Boolean isMessage;
-    private String jsession;
-    private SharedPreferences sharedPreferences;
+    private int id;
     private MyLoadPresenter myLoadPresenter;
+    private SharedPreferences sharedPreferences;
+    private String jsession;
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
         ImageView thingtype;
@@ -94,23 +95,32 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             btnDlt=view.findViewById(R.id.upload_item_delete);
             btnEdit = view.findViewById(R.id.upload_item_edit);
             btnFinish = view.findViewById(R.id.upload_item_finish);
+
         }
+
     }
 
-    public MyLoadItemAdapter (Context context, List<TheLostBean> list, String userphoto, String username, String nickname , Boolean isMessage){
-        this.mContext = context;
+    public MyLoadItemAdapter (List<TheLostBean> list, String userphoto, String username, String nickname , Boolean isMessage){
         this.lists=list;
         this.username = username;
         this.userphoto = userphoto;
         this.nickname = nickname;
         this.isMessage = isMessage;
     }
+
+    /**
+     * 注入myLoadPresenter
+     * @param myLoadPresenter
+     */
+    public void attachPresenter(MyLoadPresenter myLoadPresenter){
+        this.myLoadPresenter=myLoadPresenter;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("oncreateviewholder","seccess");
         mContext=parent.getContext();
-        sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         View view = LayoutInflater.from(mContext).inflate(R.layout.userinfo_myupload_item,parent,false);
         final MyLoadItemAdapter.ViewHolder holder = new MyLoadItemAdapter.ViewHolder(view);
         if(isMessage) {
@@ -182,6 +192,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
         Glide.with(mContext)
                 .load(s)
@@ -216,7 +227,9 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             //侧滑删除
             holder.btnDlt.setOnClickListener(v -> {
                 jsession = sharedPreferences.getString(SESSION, "null");
-                myLoadPresenter.postDelete(jsession);
+                id = lists.get(position).getId();
+                myLoadPresenter.postDelete(jsession,id);
+                Log.e("Tag","错误"+id);
                 Log.e("Tag","错误"+jsession);
                 holder.swipeMenuLayout.quickClose();
                 lists.remove(position);

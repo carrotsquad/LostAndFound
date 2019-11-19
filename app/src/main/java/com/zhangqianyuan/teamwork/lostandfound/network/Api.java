@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.network;
 
+import android.util.Log;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllPlacesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
@@ -22,6 +24,9 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+
 /**
  * Description: Api
  * Created at: 2018/11/3 11:07
@@ -84,10 +89,12 @@ public interface Api {
     @FormUrlEncoded
     Observable<StatusBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
-    @POST("/passlove/updateishandle")
+    /*
+    删除
+     */
+    @POST("/passlove/updateishandle/{id}")
     @FormUrlEncoded
-    Observable<StatusBean> postDelete(@Field("JSESSIONID") String session);
-
+    Observable<StatusBean> postDelete(@Field("JSESSIONID")String jsessionid,@Path("id") int id);
 
     //获取动态 失物今天 信息
     @POST("/passlove/dynamics/0/0")
@@ -166,7 +173,5 @@ public interface Api {
     @FormUrlEncoded
     @POST("passlove/comment/get")
     Call<CommentFeedBack>  getComment(@Field("JSESSIONID") String jsessionid,@Field("lostid") int bean);
-
-
 
 }
