@@ -64,7 +64,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-
         app:menu="@menu/navigation" />
 
     <android.support.v4.view.ViewPager
@@ -88,6 +87,7 @@
 <!--        android:src="@drawable/fabu"/>-->
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/fabu11"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/fabu"
