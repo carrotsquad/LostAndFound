@@ -40,7 +40,7 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class  DynamicFragment extends Fragment {
 
-    private TabLayout  tab;
+    private TabLayout tab;
 
     private ViewPager mViewPager;
 

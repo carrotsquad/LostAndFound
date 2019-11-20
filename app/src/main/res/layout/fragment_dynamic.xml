@@ -24,7 +24,7 @@
             android:id="@+id/dynamic_fragment_tablayout"
             android:background="#ffff"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/secondary_text"
+            app:tabIndicatorColor="@color/green2"
             app:tabTextColor="#808080"
             app:tabSelectedTextColor="@color/black"
             app:tabMode="fixed"

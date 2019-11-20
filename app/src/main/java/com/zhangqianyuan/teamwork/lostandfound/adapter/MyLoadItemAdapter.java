@@ -27,6 +27,7 @@ import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.UploadFormActivity;
 
 import java.util.List;
 
@@ -246,11 +247,10 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             });
 
             holder.btnEdit.setOnClickListener(view -> {
-                holder.swipeMenuLayout.quickClose();
-                lists.remove(position);
-                FancyToast.makeText(mContext, "编辑", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
+                Intent intent = new Intent(mContext, UploadFormActivity.class);
+                mContext.startActivity(intent);
             });
         }
 

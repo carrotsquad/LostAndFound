@@ -90,7 +90,7 @@ public interface Api {
     Observable<StatusBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
     /*
-    删除
+    递爱成功
      */
     @POST("/passlove/updateishandle/{id}")
     @FormUrlEncoded

@@ -83,7 +83,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
         pnb = intent.getStringExtra(PNB);
         stu = intent.getStringExtra(STU);
         session = intent.getStringExtra(SESSION);
-        email.setText("验证码已发送到关联邮箱 " + eemail);
+        email.setText("验证码已发送到关联邮箱 " + email);
     }
 
     @OnClick({R.id.verify_sure, R.id.verify_back})

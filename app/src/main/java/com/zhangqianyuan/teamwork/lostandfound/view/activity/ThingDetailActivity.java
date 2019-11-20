@@ -133,6 +133,11 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.clicktocomment)
     TextView clicktocomment;
 
+    //确认栏
+    @BindView(R.id.clickreturn)
+    TextView clickreturn;
+
+
     @BindView(R.id.thing_detail_thingsdetail_name)
     TextView name;
 
@@ -319,7 +324,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         return  strThingsImgs;
     }
 
-    @OnClick({R.id.thing_detail_back,R.id.thing_detail_usercard})
+    @OnClick({R.id.thing_detail_back,R.id.thing_detail_usercard,R.id.clickreturn})
     void onClick(View view){
         switch (view.getId()){
             case R.id.thing_detail_back:{
@@ -328,6 +333,11 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
             }
             case R.id.thing_detail_usercard:{
                 popup();
+                break;
+            }
+            case R.id.clickreturn:{
+                Intent intent = new Intent(ThingDetailActivity.this,ReturnActivity.class);
+                startActivity(intent);
                 break;
             }
             default:{
