@@ -338,6 +338,9 @@ public class MainActivity extends AppCompatActivity {
         TextView textView=contentView.findViewById(R.id.textView);
         TextView textView1=contentView.findViewById(R.id.textView2);
 
+        float newshiwu =  newShiWu.getY();
+
+
         View rootView = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_main, null);
         mPopWindow.setTouchable(true);
         mPopWindow.setOutsideTouchable(true);
@@ -385,12 +388,15 @@ public class MainActivity extends AppCompatActivity {
         mPopWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                closeTranslationAnimation(newShiWu,300,bottom);
-                closeTranslationAnimation(newZhaoLing,300,bottom);
-                closeTranslationAnimation(textView,300,bottom);
-                closeTranslationAnimation(textView1,300,bottom);
-                contentView.postDelayed(()-> mPopWindow.dismiss(),300);
-                return true;
+                if (motionEvent.getY() < newshiwu) {
+                    closeTranslationAnimation(newShiWu, 300, bottom);
+                    closeTranslationAnimation(newZhaoLing, 300, bottom);
+                    closeTranslationAnimation(textView, 300, bottom);
+                    closeTranslationAnimation(textView1, 300, bottom);
+                    contentView.postDelayed(() -> mPopWindow.dismiss(), 300);
+                    return true;
+                }
+                return false;
             }
         });
     }
