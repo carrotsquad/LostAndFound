@@ -15,8 +15,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.os.Message;
 import android.os.MessageQueue;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -36,6 +38,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -43,6 +46,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.squareup.haha.perflib.Main;
 import com.squareup.leakcanary.LeakCanary;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MainViewAdapter;
@@ -65,6 +69,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.finalteam.toolsfinal.Logger;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
@@ -114,7 +120,36 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView mBottomNav;
 
+    @BindView(R.id.fabu11)
+    Button fabu11;
 
+    BottomNavigationItemView itemView;
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    badge.hide(true);
+                case 1: {
+                    badge = new QBadgeView(MainActivity.this)
+                            .bindTarget(itemView)
+                            .setShowShadow(true)
+                            .setBadgeGravity(Gravity.END | Gravity.TOP)
+                            .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                                @Override
+                                public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+
+                                }
+                            }).setBadgeText("");
+                }
+            }
+        }
+    };
+
+
+    public static Badge badge;
     private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
     private String session = "";
     private View statusBarView;
@@ -150,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //实现渐变式状态栏
         setGradientStatusBarColor(this, statusBarView);
+        mBottomNav.setItemIconTintList(null);
         ActivityManager.getActivityManager().add(this);
         ButterKnife.bind(this);
         try {
@@ -163,6 +199,12 @@ public class MainActivity extends AppCompatActivity {
         session = intent.getStringExtra(SESSION);
         initPermission();
         initService();
+        fabu11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopUpWindow();
+            }
+        });
     }
 
     /**
@@ -196,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(SearchFragment.newInstance());
         fragments.add(MessageFragment.newInstance());
         fragments.add(new UserInfoFragment());
+         itemView =  mBottomNav.findViewById(R.id.message_ui);
 
         MainViewAdapter mainViewAdapter = new MainViewAdapter(getSupportFragmentManager());
 
@@ -203,6 +246,19 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.setAdapter(mainViewAdapter);
         mViewPager.setOffscreenPageLimit(3);
+
+        //设置小红点
+        Intent intent = getIntent();
+        boolean a = false;
+        intent.getBooleanExtra("OR",a);
+
+        if(a){
+
+            Message message = new Message();
+            message.arg1 = 1;
+            handler.sendMessage(message);
+            a = false;
+        }
 
         //划页监听器
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -250,6 +306,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case R.id.message_ui: {
                     mViewPager.setCurrentItem(MESSAGE_FRAGMENT);
+                    Message message = new Message();
+                    message.arg1 = 0;
+                    handler.sendMessage(message);
                     return true;
                 }
                 case R.id.mine_ui: {
