@@ -94,7 +94,7 @@ public interface Api {
      */
     @POST("/passlove/updateishandle/{id}")
     @FormUrlEncoded
-    Observable<StatusBean> postDelete(@Field("JSESSIONID")String jsessionid,@Path("id") int id);
+    Observable<StatusBean> postSuccess(@Field("JSESSIONID")String jsessionid,@Path("id") int id);
 
     //获取动态 失物今天 信息
     @POST("/passlove/dynamics/0/0")

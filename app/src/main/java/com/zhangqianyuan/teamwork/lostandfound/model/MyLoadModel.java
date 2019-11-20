@@ -36,16 +36,14 @@ public class MyLoadModel extends  BaseModel implements IMyUploadModel {
         api.getMyLoadData(jsessionid,new Gson().toJson(bean)).enqueue(callback);
     }
 
-
     @Override
-    public void postDelete(String jsessionid,int id, Observer<StatusBean> observer) {
-        Log.e("Tag","Model完好");
-        api.postDelete(jsessionid,id)
+    public void postsuccess(String jsessionid, int id, Observer<StatusBean> observer) {
+        api.postSuccess(jsessionid,id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        Log.e("Tag","正确"+id);
-        Log.e("Tag","正确"+jsessionid);
     }
 }
+
+

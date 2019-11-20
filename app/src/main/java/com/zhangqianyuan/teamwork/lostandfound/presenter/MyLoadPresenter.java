@@ -53,10 +53,9 @@ public class MyLoadPresenter extends BasePresenter<IMyLoadActivity> implements I
 
 
     @Override
-    public void postDelete(String jsessionid,int id) {
-            Log.e("Tag","Presenter完好");
+    public void postSuccess(String jsessionid,int id) {
             if (isAttachActivity()) {
-                mMyLoadModel.postDelete(jsessionid,id, new Observer<StatusBean>() {
+                mMyLoadModel.postsuccess(jsessionid,id, new Observer<StatusBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 

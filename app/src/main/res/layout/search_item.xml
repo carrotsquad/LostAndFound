@@ -152,24 +152,4 @@
         android:background="@color/pink_400"
         android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/search_item_finish"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:text="递爱成功"
-        android:layout_marginBottom="2dp"
-        android:textSize="18sp"
-        android:background="@color/babyblue"
-        android:textColor="@color/white" />
-
-    <Button
-        android:id="@+id/search_item_edit"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:text="编辑"
-        android:layout_marginBottom="2dp"
-        android:textSize="18sp"
-        android:background="@color/black"
-        android:textColor="@color/white" />
-
 </com.mcxtzhang.swipemenulib.SwipeMenuLayout>

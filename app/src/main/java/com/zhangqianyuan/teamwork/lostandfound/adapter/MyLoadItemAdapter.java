@@ -226,11 +226,6 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         if (isMessage) {
             //侧滑删除
             holder.btnDlt.setOnClickListener(v -> {
-                jsession = sharedPreferences.getString(SESSION, "null");
-                id = lists.get(position).getId();
-                myLoadPresenter.postDelete(jsession,id);
-                Log.e("Tag","错误"+id);
-                Log.e("Tag","错误"+jsession);
                 holder.swipeMenuLayout.quickClose();
                 lists.remove(position);
                 FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
@@ -239,6 +234,10 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             });
 
             holder.btnFinish.setOnClickListener(view -> {
+                jsession = sharedPreferences.getString(SESSION, "null");
+                id = lists.get(position).getId();
+                myLoadPresenter.postSuccess(jsession,id);
+                Log.d("Tag","success"+"id");
                 holder.swipeMenuLayout.quickClose();
                 lists.remove(position);
                 FancyToast.makeText(mContext, "递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();

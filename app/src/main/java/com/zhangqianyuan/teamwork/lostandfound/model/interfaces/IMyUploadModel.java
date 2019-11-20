@@ -26,5 +26,5 @@ public interface IMyUploadModel {
      * 物品具体图片
      */
     void getMyLoadData(String jsessionid,int start,int end,Callback<MyHistoryItem> callback);
-    void postDelete(String jsessionid,int id, Observer<StatusBean> observer);
+    void postsuccess(String jsessionid,int id, Observer<StatusBean> observer);
 }
