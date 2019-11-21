@@ -97,12 +97,12 @@ public interface Api {
     Observable<StatusBean> postSuccess(@Field("JSESSIONID")String jsessionid,@Path("id") int id);
 
     //获取动态 失物今天 信息
-    @POST("/passlove/dynamics/0/0")
+    @POST("/passlove/dynamics/0/1")
     @FormUrlEncoded
     Observable<SearchBean> getDynamicLostTodayData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //获取动态 失物昨天 信息
-    @POST("/passlove/dynamics/0/1")
+    @POST("/passlove/dynamics/0/0")
     @FormUrlEncoded
     Observable<SearchBean> getDynamicLostYesterdayData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
@@ -112,12 +112,12 @@ public interface Api {
     Observable<SearchBean> getDynamicLostAgoData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //获取动态 招领今天 信息
-    @POST("/passlove/dynamics/1/0")
+    @POST("/passlove/dynamics/1/1")
     @FormUrlEncoded
     Observable<SearchBean> getDynamicFindTodayData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //获取动态 招领昨天 信息
-    @POST("/passlove/dynamics/1/1")
+    @POST("/passlove/dynamics/1/0")
     @FormUrlEncoded
     Observable<SearchBean> getDynamicFindYesterdayData(@Field("requestData") String info, @Field("JSESSIONID") String session);
 

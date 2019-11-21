@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView mBottomNav;
 
-    @BindView(R.id.fabu11)
-    Button fabu11;
+   // @BindView(R.id.fabu11)
+   // Button fabu11;
 
     BottomNavigationItemView itemView;
 
@@ -185,9 +185,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //实现渐变式状态栏
         setGradientStatusBarColor(this, statusBarView);
-        mBottomNav.setItemIconTintList(null);
+      //  mBottomNav.setItemIconTintList(null);
         ActivityManager.getActivityManager().add(this);
-        ButterKnife.bind(this);
+       ButterKnife.bind(this);
         try {
             initView();
         } catch (NoSuchFieldException e) {
@@ -199,12 +199,12 @@ public class MainActivity extends AppCompatActivity {
         session = intent.getStringExtra(SESSION);
         initPermission();
         initService();
-        fabu11.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopUpWindow();
-            }
-        });
+//        fabu11.setOnClickListener(new View.OnClickListener() {
+  //          @Override
+ //           public void onClick(View view) {
+  //              showPopUpWindow();
+  //          }
+  //      });
     }
 
     /**
