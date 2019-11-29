@@ -247,18 +247,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mainViewAdapter);
         mViewPager.setOffscreenPageLimit(3);
 
-        //设置小红点
-        Intent intent = getIntent();
-        boolean a = false;
-        intent.getBooleanExtra("OR",a);
-
-        if(a){
-
-            Message message = new Message();
-            message.arg1 = 1;
-            handler.sendMessage(message);
-            a = false;
-        }
 
         //划页监听器
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

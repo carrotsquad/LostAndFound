@@ -63,7 +63,8 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     private SharedPreferences sharedPreferences;
     private Boolean isFresh = false;
     private List<Integer> changelist = new ArrayList<>();
-    boolean a = false;
+
+    public static int time = 0;
 
     public static Fragment newInstance(){
         MessageFragment messageFragment = new MessageFragment();
@@ -142,25 +143,13 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
                 isFresh = false;
                 FancyToast.makeText(mContext,"刷新成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             }
-            /**
-             * 是否出现小红点，不晓得逻辑写对没
-             */
-            int l = list.size();
-            list.clear();
-            list.addAll(dynamicItemBeanList);
-            int s = list.size();
-            if(l != s){
-                a = true;
-            }else {
-                a = false;
-            }
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.putExtra("OR",a);
-            startActivity(intent);
+
+
             for (int i =0 ; i<list.size(); i++) {
                 changelist.add(0);
             }
             searchItemAdapter.notifyDataSetChanged();
+
         }
     }
 

@@ -200,9 +200,9 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     public void showSignInStatus(Boolean status, SignInBean signInBean) {
         if (status) {
             editor = sharedPreferences.edit();
-            Intent intent = getIntent();
-            String s = intent.getStringExtra(PWD);
-            signInBean.getUser().setPassword(s);
+//            Intent intent = getIntent();
+//            String s = intent.getStringExtra(PWD);
+//            signInBean.getUser().setPassword(s);
             int[] arrayint = new int[10000];
             editor.putString(EMAIL, signInBean.getUser().getUsername());
             editor.putString(PWD, signInBean.getUser().getPassword());
