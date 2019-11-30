@@ -176,10 +176,11 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
         Integer changenum = 0;
         if(isMessage) {
-             changenum = changeNumList.get(position);
+            changenum = changeNumList.get(position);
         }
         /**
          * "publishtime": "20181105173056",
@@ -203,7 +204,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             lostdate = lostdate + lostdate_orig.substring(6, 7);
         }
         lostdate = lostdate + lostdate_orig.substring(7,8)+"";
-
         int lostplace = dynamicItemBean.getThelost().getPlaceid();
         int losttype = dynamicItemBean.getThelost().getLosttype();
         int thingstype = dynamicItemBean.getThelost().getTypeid();

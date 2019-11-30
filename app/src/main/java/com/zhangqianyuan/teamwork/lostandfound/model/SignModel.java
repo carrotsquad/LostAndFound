@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.LoginBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
@@ -27,6 +29,7 @@ public class SignModel extends BaseModel implements ISignModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("SignModel",""+email+password);
     }
 
 

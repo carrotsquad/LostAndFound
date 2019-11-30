@@ -210,6 +210,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
+        Log.e("MyLoadItemAdapter",""+lists.get(position).getPlaceid()+lostPlace);
         holder.where.setText(lostPlace);
         String publishTime= lists.get(position).getPublishtime();
         if (!publishTime.equals("")){

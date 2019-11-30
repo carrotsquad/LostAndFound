@@ -65,13 +65,13 @@ public interface Api {
     @POST("/passlove/user/loginIn")
     Observable<ThingDetailBean> getThingDetail(@Field("ID") String ID, @Field("JSESSIONID") String session);
 
-
     //获得所有类型
     @FormUrlEncoded
     @POST("/passlove/info/types")
     Observable<AllTypesBean> getAllTypes(@Field("JSESSIONID") String session);
 
-    //获得所有丢失地点
+
+    //获得所有地点
     @FormUrlEncoded
     @POST("/passlove/info/places")
     Observable<AllPlacesBean> getAllPlaces(@Field("JSESSIONID") String session);
@@ -120,7 +120,6 @@ public interface Api {
     @POST("/passlove/dynamics/1/0")
     @FormUrlEncoded
     Observable<SearchBean> getDynamicFindYesterdayData(@Field("requestData") String info, @Field("JSESSIONID") String session);
-
 
     //获取动态 招领更早 信息
     @POST("/passlove/dynamics/1/2")

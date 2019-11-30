@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationItemView itemView;
 
-    Handler handler = new Handler(){
+    /*Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -147,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+     */
 
 
     public static Badge badge;
@@ -185,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //实现渐变式状态栏
         setGradientStatusBarColor(this, statusBarView);
-      //  mBottomNav.setItemIconTintList(null);
         ActivityManager.getActivityManager().add(this);
+  //      mBottomNav.setItemIconTintList(null);
        ButterKnife.bind(this);
         try {
             initView();
@@ -255,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                 if (position <= 1) {
                     mBottomNav.getMenu().getItem(position).setChecked(true);
                 } else if (position >= 2 && position <= 3) {
-                    mBottomNav.getMenu().getItem(position + 1).setChecked(true);
+                    mBottomNav.getMenu().getItem(position+1 ).setChecked(true);
                 }
             }
 
@@ -264,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                 if (position <= 1) {
                     mBottomNav.getMenu().getItem(position).setChecked(true);
                 } else if (position >= 2 && position <= 3) {
-                    mBottomNav.getMenu().getItem(position + 1).setChecked(true);
+                    mBottomNav.getMenu().getItem(position+1 ).setChecked(true);
                 }
 
             }
@@ -296,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
                     mViewPager.setCurrentItem(MESSAGE_FRAGMENT);
                     Message message = new Message();
                     message.arg1 = 0;
-                    handler.sendMessage(message);
+           //         handler.sendMessage(message);
                     return true;
                 }
                 case R.id.mine_ui: {
