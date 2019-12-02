@@ -87,6 +87,8 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
                 }else{
                     mailbox_wrong.setText("验证码错误");
                 }
+
+                break;
             }
 
             case R.id.reset_all_clear1: {
