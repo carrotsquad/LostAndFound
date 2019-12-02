@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
@@ -48,6 +50,7 @@ public class DynamicChildModel extends BaseModel implements IDynamicChildModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("DynamiclostPresenter","Model完好"+dynamicsRequestBean+session);
     }
 
     @Override
@@ -75,5 +78,6 @@ public class DynamicChildModel extends BaseModel implements IDynamicChildModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("DynamicfindPresenter","Model完好"+dynamicsRequestBean+session);
     }
 }

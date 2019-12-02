@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import android.util.Log;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.DynamicChildModel;
@@ -71,6 +73,7 @@ public class DynamicChildPresenter extends BasePresenter<IDynaicChildFragment> i
                 public void onNext(SearchBean searchBean) {
                     if(searchBean!=null&& !searchBean.getStatus().equals(BAD_INTERNET_STATUS)) {
                         getV().showData(true,searchBean.getDynamics());
+                        Log.e("DynamicPresenter","Presenter完好");
                     }else {
                         getV().showData(false,searchBean.getDynamics());
                     }
