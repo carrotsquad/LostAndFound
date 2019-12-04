@@ -67,6 +67,7 @@
         <activity android:name=".view.activity.GuideActivity" />
         <activity android:name=".view.activity.ReturnActivity" />
         <activity android:name=".view.activity.FoundActivity" />
+        <activity android:name=".view.activity.ReturnFormActivity"/>
     </application>
 
 </manifest>

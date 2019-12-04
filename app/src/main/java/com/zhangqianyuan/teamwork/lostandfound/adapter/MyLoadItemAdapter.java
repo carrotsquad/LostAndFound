@@ -26,6 +26,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.ReturnFormActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.UploadFormActivity;
 
@@ -65,6 +66,13 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
     private String nickname;
     private Boolean isMessage;
     private int id;
+    private int typeid;
+    private int losttype;
+    private String title;
+    private String description;
+    private int placeid;
+    private String losttime;
+    private String photo;
     private MyLoadPresenter myLoadPresenter;
     private SharedPreferences sharedPreferences;
     private String jsession;
@@ -253,10 +261,26 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             });
 
             holder.btnEdit.setOnClickListener(view -> {
+                id = lists.get(position).getId();
+                typeid = lists.get(position).getTypeid();
+                losttype = lists.get(position).getLosttype();
+                title = lists.get(position).getTitle();
+                description = lists.get(position).getDescription();
+                placeid = lists.get(position).getPlaceid();
+                losttime = lists.get(position).getLosttime();
+                photo = lists.get(position).getPhoto();
+                Intent intent = new Intent(mContext, UploadFormActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("typeid",typeid);
+                intent.putExtra("losttype",losttype);
+                intent.putExtra("title",title);
+                intent.putExtra("description",description);
+                intent.putExtra("placeid",placeid);
+                intent.putExtra("losttime",losttime);
+                intent.putExtra("photo",photo);
+                mContext.startActivity(intent);
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
-                Intent intent = new Intent(mContext, UploadFormActivity.class);
-                mContext.startActivity(intent);
             });
         }
 

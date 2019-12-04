@@ -17,6 +17,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.MyLoadModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
+import com.zhangqianyuan.teamwork.lostandfound.view.fragment.UserInfoFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
 
 import java.util.ArrayList;
@@ -79,8 +80,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
 
     @Override
     public void onBackPressed() {
-        Log.e("backpressed","backpressed");
-        Intent intent = new Intent(UserInfoMyUpload.this,MainActivity.class);
+        Intent intent = new Intent(UserInfoMyUpload.this, MainActivity.class);
         startActivity(intent);
     }
 

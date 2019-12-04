@@ -150,7 +150,9 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         qishileixing =intent.getIntExtra(QISHILEIXING,0);
         typeid =intent.getIntExtra(TYPEID,1);
         strtitle = titleEdit.getText().toString();
+
         strdescri = descEdit.getText().toString();
+
 
         initView();
         uploadPresenter = new UploadPresenter();
