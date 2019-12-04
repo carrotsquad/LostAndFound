@@ -269,7 +269,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 placeid = lists.get(position).getPlaceid();
                 losttime = lists.get(position).getLosttime();
                 photo = lists.get(position).getPhoto();
-                Intent intent = new Intent(mContext, UploadFormActivity.class);
+                Intent intent = new Intent(mContext, ReturnFormActivity.class);
                 intent.putExtra("id",id);
                 intent.putExtra("typeid",typeid);
                 intent.putExtra("losttype",losttype);
