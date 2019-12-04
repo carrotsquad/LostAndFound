@@ -185,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //实现渐变式状态栏
         setGradientStatusBarColor(this, statusBarView);
-     //  mBottomNav.setItemIconTintList(null);
         ActivityManager.getActivityManager().add(this);
        ButterKnife.bind(this);
         try {
@@ -308,6 +307,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mBottomNav.setItemIconTintList(null);
+
     }
 
     /**

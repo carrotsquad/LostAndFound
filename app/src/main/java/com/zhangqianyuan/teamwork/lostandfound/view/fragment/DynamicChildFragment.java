@@ -12,8 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapterNew;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.DynamicChildPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
@@ -81,8 +84,12 @@ public class DynamicChildFragment extends Fragment {
                 title.add("更早");
                 FragmentManager man = getChildFragmentManager();
                 TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man, mFragments, title);
-                mViewPager.setAdapter(adapter);
+                TabLayoutViewPagerAdapterNew adapterNew = new TabLayoutViewPagerAdapterNew(man,mFragments);
+                mViewPager.setAdapter(adapterNew);
                 tab.setupWithViewPager(mViewPager);
+                tab.getTabAt(0).setCustomView(getTabView());
+                tab.getTabAt(1).setCustomView(getTabView1());
+                tab.getTabAt(2).setCustomView(getTabView2());
                 tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
@@ -123,9 +130,13 @@ public class DynamicChildFragment extends Fragment {
                 title.add("昨天");
                 title.add("更早");
                 FragmentManager man = getChildFragmentManager();
-                TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man, mFragments, title);
-                mViewPager.setAdapter(adapter);
+                TabLayoutViewPagerAdapterNew adapterNew = new TabLayoutViewPagerAdapterNew(man,mFragments);
+                mViewPager.setAdapter(adapterNew);
                 tab.setupWithViewPager(mViewPager);
+                tab.setupWithViewPager(mViewPager);
+                tab.getTabAt(0).setCustomView(getTabView());
+                tab.getTabAt(1).setCustomView(getTabView1());
+                tab.getTabAt(2).setCustomView(getTabView2());
                 tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
@@ -164,7 +175,32 @@ public class DynamicChildFragment extends Fragment {
             default: {
                 break;
             }
+
         }
+    }
+
+    public View getTabView(){
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.tabiconstart,null);
+
+        ImageView imageView = view.findViewById(R.id.image);
+        imageView.setImageResource(R.drawable.tabselect1);
+        return view;
+    }
+
+    public View getTabView1(){
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.tabicon,null);
+
+        ImageView imageView = view.findViewById(R.id.image);
+        imageView.setImageResource(R.drawable.tabselect2);
+        return view;
+    }
+
+    public View getTabView2(){
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.tabiconsend,null);
+
+        ImageView imageView = view.findViewById(R.id.image);
+        imageView.setImageResource(R.drawable.tabselect3);
+        return view;
     }
 }
 

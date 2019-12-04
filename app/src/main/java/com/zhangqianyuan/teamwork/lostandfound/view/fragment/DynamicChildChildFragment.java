@@ -131,7 +131,7 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
     @Override
     public void showData(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
         refreshLayout.setRefreshing(false);
-        lists.clear();
+      //  lists.clear();
         lists.addAll(searchItemBeanArrayList);
 //            mDynamicItemAdapter.notifyDataSetChanged();
         mDynamicItemAdapter.notifyItemChanged(this.lists.size() - 1);
