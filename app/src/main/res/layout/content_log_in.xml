@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,14 +12,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
         android:text="注册"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
+        app:layout_constraintVertical_bias="0.1" />
 
     <ImageView
         android:id="@+id/imageview"
@@ -73,9 +72,9 @@
         android:id="@+id/login_password"
         android:layout_width="300dp"
         android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="输入密码"
         android:inputType="textPassword"
@@ -87,9 +86,9 @@
         android:id="@+id/login_repassword"
         android:layout_width="300dp"
         android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="再次输入密码"
         android:inputType="textPassword"
@@ -114,9 +113,9 @@
         android:id="@+id/login_email"
         android:layout_width="300dp"
         android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="输入邮箱"
         android:inputType="text"
@@ -129,9 +128,9 @@
         android:id="@+id/login_phonenumber"
         android:layout_width="300dp"
         android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="输入手机号码"
         android:inputType="phone"
@@ -146,9 +145,9 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/login_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -158,37 +157,34 @@
 
     <TextView
         android:id="@+id/tv_usdetail"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_weight = "5"
-        android:layout_marginTop="100dp"
         android:text="---------------------注册即代表阅读并同意"
         android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_sure" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Button
         android:id="@+id/btn_usdetail"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="84dp"
-        android:layout_weight="1"
         android:background="@null"
         android:text="免责声明"
         android:textSize="15sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_usdetail"
         app:layout_constraintLeft_toRightOf="@+id/tv_usdetail"
         app:layout_constraintStart_toEndOf="@+id/tv_usdetail"
-        app:layout_constraintTop_toBottomOf="@+id/login_sure" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_usdetail" />
 
     <TextView
         android:id="@+id/tv_usdetail2"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_weight = "3"
-        android:layout_marginTop="100dp"
-        android:text=" -----------------------------"
+        android:text=" -------------------------"
         android:textSize="13sp"
-        app:layout_constraintLeft_toRightOf="@+id/btn_usdetail"
-        app:layout_constraintTop_toBottomOf="@+id/login_sure" />
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_usdetail"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_usdetail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btn_usdetail" />
 
 </android.support.constraint.ConstraintLayout>

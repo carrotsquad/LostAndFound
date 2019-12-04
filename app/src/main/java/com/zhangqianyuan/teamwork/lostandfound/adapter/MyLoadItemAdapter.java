@@ -197,7 +197,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
         Glide.with(mContext)
                 .load(s)
-                .asBitmap()
+                    .asBitmap()
                 .into(holder.thingtype);
         String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
         Glide.with(mContext)
@@ -212,6 +212,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         Log.e("MyLoadItemAdapter",""+lists.get(position).getPlaceid()+lostPlace);
         holder.where.setText(lostPlace);
+        Log.e("1","1");
         String publishTime= lists.get(position).getPublishtime();
         if (!publishTime.equals("")){
             String   mouth = publishTime.substring(4,6);
@@ -228,6 +229,10 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         if (isMessage) {
             //侧滑删除
             holder.btnDlt.setOnClickListener(v -> {
+                jsession = sharedPreferences.getString(SESSION, "null");
+                id = lists.get(position).getId();
+                myLoadPresenter.postDelete(jsession,id);
+                Log.d("Tag","delete"+id);
                 holder.swipeMenuLayout.quickClose();
                 lists.remove(position);
                 FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
@@ -239,7 +244,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 jsession = sharedPreferences.getString(SESSION, "null");
                 id = lists.get(position).getId();
                 myLoadPresenter.postSuccess(jsession,id);
-                Log.d("Tag","success"+"id");
+                Log.d("Tag","success"+id);
                 holder.swipeMenuLayout.quickClose();
                 lists.remove(position);
                 FancyToast.makeText(mContext, "递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();

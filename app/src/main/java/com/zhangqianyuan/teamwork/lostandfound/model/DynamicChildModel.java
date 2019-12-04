@@ -32,6 +32,7 @@ public class DynamicChildModel extends BaseModel implements IDynamicChildModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("LostTodayModel","LostTodayModel");
     }
 
     @Override
@@ -41,6 +42,7 @@ public class DynamicChildModel extends BaseModel implements IDynamicChildModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("LostYesterdayModel","LostYesterdayModel");
     }
 
     @Override
@@ -50,7 +52,7 @@ public class DynamicChildModel extends BaseModel implements IDynamicChildModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        Log.e("DynamiclostPresenter","Model完好"+dynamicsRequestBean+session);
+        Log.e("LostAgoModel","LostAgoModel");
     }
 
     @Override
@@ -60,6 +62,7 @@ public class DynamicChildModel extends BaseModel implements IDynamicChildModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("FindTodayModel","FindTodayModel");
     }
 
     @Override
@@ -69,6 +72,7 @@ public class DynamicChildModel extends BaseModel implements IDynamicChildModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("FindYesterdayModel","FindYesterdayModel");
     }
 
     @Override
@@ -78,6 +82,6 @@ public class DynamicChildModel extends BaseModel implements IDynamicChildModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        Log.e("DynamicfindPresenter","Model完好"+dynamicsRequestBean+session);
+        Log.e("FindAgoModel","FindAgoModel");
     }
 }

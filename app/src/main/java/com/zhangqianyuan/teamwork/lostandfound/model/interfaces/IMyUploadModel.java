@@ -27,4 +27,5 @@ public interface IMyUploadModel {
      */
     void getMyLoadData(String jsessionid,int start,int end,Callback<MyHistoryItem> callback);
     void postsuccess(String jsessionid,int id, Observer<StatusBean> observer);
+    void postdelete(String jsessionid,int id, Observer<StatusBean> observer);
 }

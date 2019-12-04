@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class DynamicChildFragment extends Fragment {
     private int pos;
 
     private String session = "";
-
+    private DynamicChildPresenter iDynamicChildPresenter;
     private TabLayout tab;
     private ViewPager mViewPager;
 
@@ -71,6 +72,7 @@ public class DynamicChildFragment extends Fragment {
     public void initLists() {
         switch (pos) {
             case 0: {
+                Log.e("Lost","Lost");
                 mFragments.add(new DynamicChildChildFragment(2, session));
                 mFragments.add(new DynamicChildChildFragment(3, session));
                 mFragments.add(new DynamicChildChildFragment(4, session));
@@ -84,14 +86,17 @@ public class DynamicChildFragment extends Fragment {
                 tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
+
                     }
 
                     @Override
                     public void onTabUnselected(TabLayout.Tab tab) {
+
                     }
 
                     @Override
                     public void onTabReselected(TabLayout.Tab tab) {
+
                     }
                 });
                 mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -110,6 +115,7 @@ public class DynamicChildFragment extends Fragment {
                 break;
             }
             case 1: {
+                Log.e("Find","Find");
                 mFragments.add(new DynamicChildChildFragment(5, session));
                 mFragments.add(new DynamicChildChildFragment(6, session));
                 mFragments.add(new DynamicChildChildFragment(7, session));

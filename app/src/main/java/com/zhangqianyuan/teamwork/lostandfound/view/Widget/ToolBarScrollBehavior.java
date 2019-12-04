@@ -46,7 +46,7 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         evaluator = new ArgbEvaluator();
     }
 
-    @Override
+ /*  @Override
     public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
 
         if(dependency != null && dependency.getId() == R.id.dynamic_toolbar){
@@ -56,9 +56,11 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         }
         return false;
     }
+
+  */
     //颜色分配
-    @Override
-    public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
+    //@Override
+  /*  public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
         final float progress = Math.abs(dependency.getTranslationY() / (dependency.getHeight()));
 
         child.setTranslationY(dependency.getHeight() + dependency.getTranslationY());
@@ -74,7 +76,9 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         return true;
     }
 
-    @Override
+   */
+
+  /*@Override
     public boolean onLayoutChild(@NonNull CoordinatorLayout parent, @NonNull View child, int layoutDirection) {
 
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
@@ -84,6 +88,8 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         }
         return super.onLayoutChild(parent, child, layoutDirection);
     }
+
+
 
     @Override
     public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout,
@@ -98,6 +104,8 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         overScroller.abortAnimation();
         super.onNestedScrollAccepted(coordinatorLayout, child, directTargetChild, target, axes);
     }
+
+   */
 
    /*//处理向上滑动
     @Override

@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendMyHistoryBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IMyUploadModel;
 
 import io.reactivex.Observer;
@@ -43,7 +42,19 @@ public class MyLoadModel extends  BaseModel implements IMyUploadModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("postsuccess",""+id+"+"+jsessionid);
     }
+
+    @Override
+    public void postdelete(String jsessionid, int id, Observer<StatusBean> observer) {
+        api.postDelete(jsessionid,id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        Log.e("postdelete",""+id+"+"+jsessionid);
+    }
+
 }
 
 

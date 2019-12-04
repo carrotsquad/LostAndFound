@@ -84,8 +84,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         CircleImageView userphoto;
         TextView newMsg;
         Button btnDlt;
-        Button btnEdit;
-        Button btnFinish;
 
         public ViewHolder(View view) {
             super(view);
@@ -203,7 +201,9 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         if(!"0".equals(lostdate_orig.substring(6, 7))){
             lostdate = lostdate + lostdate_orig.substring(6, 7);
         }
+        Log.e("Search1",""+lostdate+ "+"+lostdate_orig);
         lostdate = lostdate + lostdate_orig.substring(7,8)+"";
+        Log.e("Search2",""+lostdate);
         int lostplace = dynamicItemBean.getThelost().getPlaceid();
         int losttype = dynamicItemBean.getThelost().getLosttype();
         int thingstype = dynamicItemBean.getThelost().getTypeid();

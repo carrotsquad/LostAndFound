@@ -54,6 +54,7 @@ public class MyLoadPresenter extends BasePresenter<IMyLoadActivity> implements I
 
     @Override
     public void postSuccess(String jsessionid,int id) {
+        Log.e("successPresenter",""+id+"+"+jsessionid);
             if (isAttachActivity()) {
                 mMyLoadModel.postsuccess(jsessionid,id, new Observer<StatusBean>() {
                     @Override
@@ -81,5 +82,37 @@ public class MyLoadPresenter extends BasePresenter<IMyLoadActivity> implements I
                     }
                 });
             }
+    }
+
+    @Override
+    public void postDelete(String jsessionid,int id) {
+        Log.e("deletePresenter",""+id+"+"+jsessionid);
+        if (isAttachActivity()) {
+            mMyLoadModel.postdelete(jsessionid,id, new Observer<StatusBean>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(StatusBean statusBean) {
+                    if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
+                        getV().showStatus(false);
+                    } else {
+                        getV().showStatus(true);
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    getV().showStatus(false);
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
+        }
     }
 }

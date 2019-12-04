@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -67,7 +68,20 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
                 , sharedPreferences.getString(STU, "null"), true);
         mAdapter.attachPresenter(presenter);
         list.setAdapter(mAdapter);
-        back.setOnClickListener(view->finish());
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserInfoMyUpload.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.e("backpressed","backpressed");
+        Intent intent = new Intent(UserInfoMyUpload.this,MainActivity.class);
+        startActivity(intent);
     }
 
     public void initMvp() {

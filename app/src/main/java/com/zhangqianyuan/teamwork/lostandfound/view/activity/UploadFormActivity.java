@@ -205,6 +205,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 } else {
                     jsession = sharedPreferences.getString(SESSION, "null");
                     if("".equals(strphoto)){
+                        Log.e("UploadFromActivity","strLostDate="+strLostDate);
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
                         Log.e("THELOSTBEAN",bean.toString());
                         uploadPresenter.postUpload(jsession,bean);
@@ -292,9 +293,11 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 }else {
                     month = String.valueOf(getMonth(date));
                 }
-                if(getMonth(date)<=9){
+                if(getDay(date)<=9){
+                    Log.e("add0","");
                     day = "0" + String.valueOf(getDay(date));
                 }else {
+                    Log.e("no0","");
                     day = String.valueOf(getDay(date));
                 }
                 strLostDate = String.valueOf(getYear(date))+month+day;

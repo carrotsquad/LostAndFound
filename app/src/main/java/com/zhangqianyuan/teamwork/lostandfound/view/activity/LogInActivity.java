@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,6 +115,7 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
                 repwd = loginRepassword.getText().toString();
                 pnb = loginPhone.getText().toString();
                 email = loginEmail.getText().toString();
+                Log.e("LoginActivity",""+stu+pwd+repwd+pnb+email);
                 if ("".equals(pwd) || "".equals(repwd) || "".equals(pnb) || "".equals(email) || "".equals(stu)) {
                     FancyToast.makeText(this, "请填写完整", Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 }else if (!pwd.equals(repwd)) {
