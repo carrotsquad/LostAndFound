@@ -16,9 +16,12 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapterNew;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 
 
@@ -82,9 +85,12 @@ public class  DynamicFragment extends Fragment {
         title.add("失物");
         title.add("招领");
         FragmentManager man = getChildFragmentManager();
-        TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man,mFragments,title);
-        mViewPager.setAdapter(adapter);
+        //TabLayoutViewPagerAdapter adapter = new TabLayoutViewPagerAdapter(man,mFragments,title);
+        TabLayoutViewPagerAdapterNew tabLayoutViewPagerAdapterNew = new TabLayoutViewPagerAdapterNew(man,mFragments);
+        mViewPager.setAdapter(tabLayoutViewPagerAdapterNew);
         tab.setupWithViewPager(mViewPager);
+        tab.getTabAt(0).setCustomView(getTabViewLost());
+        tab.getTabAt(1).setCustomView(getTabViewFind());
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -118,6 +124,34 @@ public class  DynamicFragment extends Fragment {
 
             }
         });
+    }
+
+    public View getTabViewLost(){
+
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.tab_main,null);
+
+        ImageView imageView = view.findViewById(R.id.immm);
+
+        imageView.setImageResource(R.drawable.lost);
+
+        TextView textView = view.findViewById(R.id.tvv);
+        textView.setText("失物");
+
+        return view;
+    }
+
+    public View getTabViewFind(){
+
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.tab_main,null);
+
+        ImageView imageView = view.findViewById(R.id.immm);
+
+        imageView.setImageResource(R.drawable.find);
+
+        TextView textView = view.findViewById(R.id.tvv);
+        textView.setText("招领");
+
+        return view;
     }
 
 }
