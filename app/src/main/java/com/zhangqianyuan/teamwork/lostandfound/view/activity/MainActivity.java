@@ -370,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
         mPopWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getY() > newshiwu) {
+                if (motionEvent.getY() < newshiwu) {
                     closeTranslationAnimation(newShiWu, 300, bottom);
                     closeTranslationAnimation(newZhaoLing, 300, bottom);
                     closeTranslationAnimation(textView, 300, bottom);

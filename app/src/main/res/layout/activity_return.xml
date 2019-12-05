@@ -61,7 +61,7 @@
         <EditText
             android:gravity="center"
             android:layout_marginLeft="5dp"
-            android:hint="单行输入"
+            android:hint="可填"
             android:layout_width="200dp"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -82,17 +82,11 @@
         <EditText
             android:gravity="center"
             android:layout_marginLeft="5dp"
-            android:hint="单行输入"
+            android:hint="可填"
             android:layout_width="200dp"
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <TextView
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="( 请您提供至少一种联系方式 )"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/thing_type"
         android:background="@android:color/white"

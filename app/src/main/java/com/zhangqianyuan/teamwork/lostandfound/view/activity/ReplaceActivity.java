@@ -25,8 +25,10 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.FormFile;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.ReplacePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.UploadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IReplceActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUploadFormActivity;
 
 import java.io.File;
@@ -50,8 +52,6 @@ import static cn.finalteam.toolsfinal.DateUtils.getYear;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.QISHILEIXING;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TYPEID;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 /**
@@ -59,7 +59,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
  * 点击上传界面后用户填写表单的界面
  * @author  zhou
  */
-public class ReturnFormActivity extends AppCompatActivity implements IUploadFormActivity{
+public class ReplaceActivity extends AppCompatActivity implements IReplceActivity {
 
     //返回按键
     @BindView(R.id.upload_lostorfind_back)
@@ -113,7 +113,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
 
     private SharedPreferences sharedPreferences;
 
-    private UploadPresenter uploadPresenter;
+    private ReplacePresenter replacePresenter;
 
     private String jsession;
 
@@ -141,7 +141,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_form);
+        setContentView(R.layout.activity_replace);
         ButterKnife.bind(this);
         //实现渐变式状态栏
         setGradientStatusBarColor(this,statusBarView);
@@ -149,6 +149,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
+        Log.e("ReplaceActivity",""+id);
         typeid = intent.getIntExtra("typeid", 0);
         qishileixing =intent.getIntExtra("losttype",0);
         strtitle = intent.getStringExtra("title");
@@ -159,14 +160,14 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
         initView();
         strtitle = titleEdit.getText().toString();
         strdescri = descEdit.getText().toString();
-        uploadPresenter = new UploadPresenter();
-        uploadPresenter.attachActivity(this);
+        replacePresenter = new ReplacePresenter();
+        replacePresenter.attachActivity(this);
 
     }
 
     @Override
     protected void onDestroy() {
-        uploadPresenter.dettachActivity();
+        replacePresenter.dettachActivity();
         super.onDestroy();
     }
 
@@ -207,18 +208,20 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
                 strdescri = descEdit.getText().toString();
                 strtitle = titleEdit.getText().toString();
                 if ("".equals(strdescri) || "".equals(strtitle) || "".equals(strLostDate) || -1 == placeid) {
-                    FancyToast.makeText(ReturnFormActivity.this, "填写不规范", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                    FancyToast.makeText(ReplaceActivity.this, "填写不规范", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 } else {
                     jsession = sharedPreferences.getString(SESSION, "null");
                     if("".equals(strphoto)){
                         Log.e("UploadFromActivity","strLostDate="+strLostDate);
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
                         Log.e("THELOSTBEAN",bean.toString());
-                        uploadPresenter.postUpload(jsession,bean);
+                        Log.e("ReplaceActivity",""+id);
+                        replacePresenter.postReplace(jsession,bean,id);
                     }else {
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
                         Log.e("THELOSTBEAN",bean.toString());
-                        uploadPresenter.postUpload(jsession, bean, fileList);
+                        Log.e("ReplaceActivity",""+id);
+                        replacePresenter.postReplace(jsession, bean, fileList,id);
                     }
 
                 }
@@ -250,7 +253,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
         isNeedBountyArray.add("否");
 
         //赏金选择
-        pvOptionsBounty = new OptionsPickerBuilder(ReturnFormActivity.this,(int options1, int options2, int options3, View v)->{
+        pvOptionsBounty = new OptionsPickerBuilder(ReplaceActivity.this,(int options1, int options2, int options3, View v)->{
                 runOnUiThread(()->{
                         needBounty = options1;
                         textBounty.setText(isNeedBountyArray.get(options1));
@@ -269,7 +272,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
         pvOptionsBounty.setPicker(isNeedBountyArray);
 
         //地点选择
-        pvOptionsPlace= new OptionsPickerBuilder(ReturnFormActivity.this, new OnOptionsSelectListener() {
+        pvOptionsPlace= new OptionsPickerBuilder(ReplaceActivity.this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 runOnUiThread(new Runnable() {
@@ -293,7 +296,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
         pvOptionsPlace.setPicker(allPlaceBeanList);
 
         //时间选择器
-        pvTime = new TimePickerBuilder(ReturnFormActivity.this, new OnTimeSelectListener() {
+        pvTime = new TimePickerBuilder(ReplaceActivity.this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
                 strLostDate = "";
@@ -356,7 +359,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
 
         //配置imageloader
         GlideImageLoader imageloader = new GlideImageLoader();
-        CoreConfig coreConfig = new CoreConfig.Builder(ReturnFormActivity.this, imageloader, theme)
+        CoreConfig coreConfig = new CoreConfig.Builder(ReplaceActivity.this, imageloader, theme)
                 .setDebug(BuildConfig.DEBUG)
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
@@ -372,7 +375,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
             //置换
             String photoPath = resultList.get(0).getPhotoPath();
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
-            FancyToast.makeText(ReturnFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            FancyToast.makeText(ReplaceActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传
             for(int i =0 ; i<resultList.size();i++){
                 if(i>0){
@@ -387,7 +390,7 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
         @Override
         public void onHanlderFailure(int requestCode, String errorMsg) {
             Log.e("editinfo",errorMsg);
-            FancyToast.makeText(ReturnFormActivity.this,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+            FancyToast.makeText(ReplaceActivity.this,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
         }
     };
 
@@ -395,11 +398,11 @@ public class ReturnFormActivity extends AppCompatActivity implements IUploadForm
     @Override
     public void showStatus(Boolean status) {
         if(status){
-            startActivity(new Intent(ReturnFormActivity.this,UploadSuccessActivity.class));
+            startActivity(new Intent(ReplaceActivity.this,UploadSuccessActivity.class));
             finish();
-            FancyToast.makeText(ReturnFormActivity.this,"发布成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+            FancyToast.makeText(ReplaceActivity.this,"发布成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
         }else {
-            FancyToast.makeText(ReturnFormActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            FancyToast.makeText(ReplaceActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
         }
     }
 }
