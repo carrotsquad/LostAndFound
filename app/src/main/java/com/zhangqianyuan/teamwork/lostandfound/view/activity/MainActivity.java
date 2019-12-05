@@ -363,14 +363,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //取消
-        cancel.setOnClickListener(view -> {
-            closeTranslationAnimation(newShiWu,300,bottom);
-            closeTranslationAnimation(newZhaoLing,300,bottom);
-            closeTranslationAnimation(textView,300,bottom);
-            closeTranslationAnimation(textView1,300,bottom);
-            contentView.postDelayed(()-> mPopWindow.dismiss(),300);
-        });
 
         /**
          * 点击外部退出
@@ -378,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
         mPopWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getY() < newshiwu) {
+                if (motionEvent.getY() > newshiwu) {
                     closeTranslationAnimation(newShiWu, 300, bottom);
                     closeTranslationAnimation(newZhaoLing, 300, bottom);
                     closeTranslationAnimation(textView, 300, bottom);
@@ -389,6 +381,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        //取消
+        cancel.setOnClickListener(view -> {
+            closeTranslationAnimation(newShiWu,300,bottom);
+            closeTranslationAnimation(newZhaoLing,300,bottom);
+            closeTranslationAnimation(textView,300,bottom);
+            closeTranslationAnimation(textView1,300,bottom);
+            contentView.postDelayed(()-> mPopWindow.dismiss(),300);
+        });
+
+
     }
 
 
