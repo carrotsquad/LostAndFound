@@ -161,6 +161,12 @@ public interface Api {
     @FormUrlEncoded
     Observable<SearchBean> getMyCommentedData(@Field("JSESSIONID")String jsessionid);
 
+    /*
+    发消息给失/得主
+     */
+    @POST("/passlove/sendmessage")
+    @FormUrlEncoded
+    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("message") String ReturnBean);
 
     //退出登录
     @FormUrlEncoded

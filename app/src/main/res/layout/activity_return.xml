@@ -59,6 +59,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent" />
         <EditText
+            android:id="@+id/qq_edit"
             android:gravity="center"
             android:layout_marginLeft="5dp"
             android:hint="可填"
@@ -80,6 +81,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent" />
         <EditText
+            android:id="@+id/phone_edit"
             android:gravity="center"
             android:layout_marginLeft="5dp"
             android:hint="可填"

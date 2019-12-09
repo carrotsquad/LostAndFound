@@ -2,13 +2,15 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
 
 public class ReturnBean{
 
-    public ReturnBean(int id,String phone){
+    public ReturnBean(int id,String qq,String phone){
         this.id=id;
+        this.qq = qq;
         this.phone=phone;
 
     }
 
     private int id;
+    private String qq;
     private String phone;
 
     public int getId() {
@@ -19,6 +21,13 @@ public class ReturnBean{
         this.id = id;
     }
 
+    public String getQq(){
+        return qq;
+    }
+
+    public void setQq(String qq){
+        this.qq = qq;
+    }
     public String getPhone() {
         return phone;
     }

@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import android.util.Log;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.UploadModel;
@@ -35,11 +37,11 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
             mUploadModel.postUpload(session, bean, new Observer<StatusBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
-
                 }
 
                 @Override
                 public void onNext(StatusBean statusBean) {
+                    Log.e("UploadPresenter1","statusBean.getStatus()"+statusBean.getStatus());
                     if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
                         getV().showStatus(false);
                     } else {
@@ -49,6 +51,7 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
 
                 @Override
                 public void onError(Throwable e) {
+                    Log.e("UploadPresenter1","wrong");
                     getV().showStatus(false);
                 }
 
@@ -71,6 +74,7 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
 
                 @Override
                 public void onNext(StatusBean statusBean) {
+                    Log.e("UploadPresenter2","statusBean.getStatus()"+statusBean.getStatus());
                     if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
                         getV().showStatus(false);
                     } else {
@@ -80,6 +84,7 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
 
                 @Override
                 public void onError(Throwable e) {
+                    Log.e("UploadPresenter2","wrong");
                     getV().showStatus(false);
                 }
 

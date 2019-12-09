@@ -40,6 +40,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
+            Log.e("UploadModel1","createRequestbody(session)"+createRequestbody(session)+"gson.toJson(bean)"+gson.toJson(bean)+"createMultipartBody(fileList.get(0))"+createMultipartBody(fileList.get(0)));
         }else {
             RequestBody body = RequestBody.create(MediaType.parse("image/"+" "),"");
             //image为name参数的值，file.getname为filename参数的名字，body为请求体
@@ -49,6 +50,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
+            Log.e("UploadModel2","createRequestbody(session)"+createRequestbody(session)+"gson.toJson(bean)"+gson.toJson(bean)+"part"+part);
         }
 
     }
@@ -60,6 +62,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("UploadModel3","session"+session+"new Gson().toJson(bean)"+new Gson().toJson(bean));
     }
 
 

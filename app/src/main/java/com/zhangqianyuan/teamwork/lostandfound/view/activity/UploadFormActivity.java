@@ -205,7 +205,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         uploadPresenter.postUpload(jsession,bean);
                     }else {
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
-                        Log.e("THELOSTBEAN",bean.toString());
+                        Log.e("THELOSTBEAN","strphoto"+strphoto);
                         uploadPresenter.postUpload(jsession, bean, fileList);
                     }
 
