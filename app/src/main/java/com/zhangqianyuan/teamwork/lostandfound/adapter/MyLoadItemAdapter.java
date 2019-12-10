@@ -1,6 +1,5 @@
 package com.zhangqianyuan.teamwork.lostandfound.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,14 +24,10 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
 import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
-import com.zhangqianyuan.teamwork.lostandfound.view.activity.ReturnFormActivity;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.ReplaceActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
-import com.zhangqianyuan.teamwork.lostandfound.view.activity.UploadFormActivity;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allPlaceBeanList;
 import static com.zhangqianyuan.teamwork.lostandfound.network.AllURI.allTypeBeanList;
@@ -269,7 +263,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 placeid = lists.get(position).getPlaceid();
                 losttime = lists.get(position).getLosttime();
                 photo = lists.get(position).getPhoto();
-                Intent intent = new Intent(mContext, ReturnFormActivity.class);
+                Intent intent = new Intent(mContext, ReplaceActivity.class);
                 intent.putExtra("id",id);
                 intent.putExtra("typeid",typeid);
                 intent.putExtra("losttype",losttype);

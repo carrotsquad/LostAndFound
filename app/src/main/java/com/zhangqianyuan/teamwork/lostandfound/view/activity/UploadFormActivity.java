@@ -77,9 +77,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     @BindView(R.id.upload_lostorfind_place)
     Button textPlace;
 
-    //选择赏金
-    @BindView(R.id.upload_lostorfind_bounty)
-    Button textBounty;
 
     //编辑标题
     @BindView(R.id.upload_lostorfind_description_title)
@@ -167,9 +164,9 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     }
 
     @OnClick({R.id.upload_lostorfind_back,R.id.upload_lostorfind_time
-                ,R.id.upload_lostorfind_place,R.id.upload_lostorfind_bounty
-                ,R.id.upload_lostorfind_description_img,R.id.upload_lostorfind_description_upload
-                ,R.id.upload_lostorfind_sure})
+            ,R.id.upload_lostorfind_place,R.id.upload_lostorfind_description_img
+            ,R.id.upload_lostorfind_description_upload
+            ,R.id.upload_lostorfind_sure})
     void onClicked(View view) {
         switch (view.getId()){
             //返回
@@ -185,11 +182,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //选择地点
             case R.id.upload_lostorfind_place:{
                 pvOptionsPlace.show();
-                break;
-            }
-            //选择赏金
-            case R.id.upload_lostorfind_bounty:{
-                pvOptionsBounty.show();
                 break;
             }
             //选择图片
@@ -213,7 +205,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         uploadPresenter.postUpload(jsession,bean);
                     }else {
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
-                        Log.e("THELOSTBEAN",bean.toString());
+                        Log.e("THELOSTBEAN","strphoto"+strphoto);
                         uploadPresenter.postUpload(jsession, bean, fileList);
                     }
 
@@ -235,29 +227,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         }else {
             qishiType.setText("发布招领—"+strthingtype);
         }
-
-        List<String> isNeedBountyArray = new ArrayList<>();
-        isNeedBountyArray.add("是");
-        isNeedBountyArray.add("否");
-
-        //赏金选择
-        pvOptionsBounty = new OptionsPickerBuilder(UploadFormActivity.this,(int options1, int options2, int options3, View v)->{
-                runOnUiThread(()->{
-                        needBounty = options1;
-                        textBounty.setText(isNeedBountyArray.get(options1));
-                    });
-            })
-                //取消按钮文字
-                .setCancelText("取消")
-                //确认按钮文字
-                .setSubmitText("确定")
-                //是否显示为对话框样式
-                .isDialog(true)
-                //切换时是否还原，设置默认选中第一项。
-                .isRestoreItem(false)
-                .build();
-
-        pvOptionsBounty.setPicker(isNeedBountyArray);
 
         //地点选择
         pvOptionsPlace= new OptionsPickerBuilder(UploadFormActivity.this, new OnOptionsSelectListener() {

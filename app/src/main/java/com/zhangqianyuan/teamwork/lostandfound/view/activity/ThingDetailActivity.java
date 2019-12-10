@@ -148,6 +148,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private SharedPreferences sharedPreferences;
     private ThingDetailPresenter thingDetailPresenter;
     private PopupWindow mPopupWindow;
+    private Integer qishileixing;
 
     private ViewPager activity_main_viewpager;
     private LinearLayout activity_main_llpoints;
@@ -302,7 +303,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         intthingstype = intent.getIntExtra(OTHERSTHINGSTYPE,1);
         String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         lostid = intent.getIntExtra(OTHERSID,-1);
-        int qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
+        qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
 
         if(qishileixing==0){
             type.setText("失物详情");
@@ -337,6 +338,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
             }
             case R.id.clickreturn:{
                 Intent intent = new Intent(ThingDetailActivity.this,ReturnActivity.class);
+                intent.putExtra("QISHILEIXING",qishileixing);
+                Log.e("ThingDetailActivity","qishileixing="+qishileixing);
                 startActivity(intent);
                 break;
             }

@@ -1,11 +1,12 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
-import android.util.Log;
-
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
+import com.zhangqianyuan.teamwork.lostandfound.model.ReplaceModel;
 import com.zhangqianyuan.teamwork.lostandfound.model.UploadModel;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IReplacePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IUploadPresenter;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IReplceActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IUploadFormActivity;
 
 import java.io.File;
@@ -16,32 +17,25 @@ import io.reactivex.disposables.Disposable;
 
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.FINE_INTERNET_STATUS;
 
-/**
- * @author zhoudada
- * @version $Rev$
- * @des
- * @updateAuthor $Author$
- * @updateDes
- */
-public class UploadPresenter extends BasePresenter<IUploadFormActivity> implements IUploadPresenter {
-    private UploadModel mUploadModel;
+public class ReplacePresenter extends BasePresenter<IReplceActivity> implements IReplacePresenter {
+    private ReplaceModel mReplaceModel;
 
-    public UploadPresenter(){
-        this.mUploadModel =new UploadModel();
+    public ReplacePresenter(){
+        this.mReplaceModel =new ReplaceModel();
     }
 
 
     @Override
-    public void postUpload(String session, TheLostBean bean) {
+    public void postReplace(String session, TheLostBean bean,int id) {
         if (isAttachActivity()) {
-            mUploadModel.postUpload(session, bean, new Observer<StatusBean>() {
+            mReplaceModel.postReplace(session, bean,id ,new Observer<StatusBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
+
                 }
 
                 @Override
                 public void onNext(StatusBean statusBean) {
-                    Log.e("UploadPresenter1","statusBean.getStatus()"+statusBean.getStatus());
                     if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
                         getV().showStatus(false);
                     } else {
@@ -51,7 +45,6 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
 
                 @Override
                 public void onError(Throwable e) {
-                    Log.e("UploadPresenter1","wrong");
                     getV().showStatus(false);
                 }
 
@@ -64,9 +57,9 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
     }
 
     @Override
-    public void postUpload(String session, TheLostBean bean, List<File> fileList) {
+    public void postReplace(String session, TheLostBean bean, List<File> fileList,int id) {
         if (isAttachActivity()) {
-            mUploadModel.postUpload(session, bean, fileList, new Observer<StatusBean>() {
+            mReplaceModel.postReplace(session, bean, fileList,id, new Observer<StatusBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 
@@ -74,7 +67,6 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
 
                 @Override
                 public void onNext(StatusBean statusBean) {
-                    Log.e("UploadPresenter2","statusBean.getStatus()"+statusBean.getStatus());
                     if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
                         getV().showStatus(false);
                     } else {
@@ -84,7 +76,6 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
 
                 @Override
                 public void onError(Throwable e) {
-                    Log.e("UploadPresenter2","wrong");
                     getV().showStatus(false);
                 }
 
@@ -96,3 +87,4 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
         }
     }
 }
+

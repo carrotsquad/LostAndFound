@@ -5,11 +5,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.TheLostBean;
-import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IUploadModel;
-
+import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IReplaceModel;
 import java.io.File;
 import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -17,52 +15,45 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-/**
- * @author zhoudada
- * @version $Rev$
- * @des
- * @updateAuthor $zhangqianyuan$
- * @updateDes
- */
-public class UploadModel extends BaseModel implements IUploadModel {
+public class ReplaceModel extends BaseModel implements IReplaceModel {
 
-    public UploadModel(){
+    public ReplaceModel(){
         super();
     }
 
     @Override
-    public void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer) {
+    public void postReplace(String session, TheLostBean bean, List<File> fileList,int id, Observer<StatusBean> observer) {
         Gson gson = new Gson();
         //传图片时
         if(fileList.size()!=0){
-            api.postUpload(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)))
+            api.postReplace(createRequestbody(session), RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)),id)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
-            Log.e("UploadModel1","createRequestbody(session)"+createRequestbody(session)+"gson.toJson(bean)"+gson.toJson(bean)+"createMultipartBody(fileList.get(0))"+createMultipartBody(fileList.get(0)));
+            Log.e("ReplaceModel",""+session+"+"+bean+"+"+id);
         }else {
             RequestBody body = RequestBody.create(MediaType.parse("image/"+" "),"");
             //image为name参数的值，file.getname为filename参数的名字，body为请求体
             MultipartBody.Part part = MultipartBody.Part.createFormData("photos","",body);
-            api.postUpload(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),part)
+            api.postReplace(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),part,id)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
-            Log.e("UploadModel2","createRequestbody(session)"+createRequestbody(session)+"gson.toJson(bean)"+gson.toJson(bean)+"part"+part);
+            Log.e("ReplaceModel",""+session+"+"+bean+"+"+id);
         }
 
     }
 
     @Override
-    public void postUpload(String session, TheLostBean bean, Observer<StatusBean> observer) {
-        api.postUpload(session,new Gson().toJson(bean))
+    public void postReplace(String session, TheLostBean bean,int id, Observer<StatusBean> observer) {
+        api.postReplace(session,new Gson().toJson(bean),id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        Log.e("UploadModel3","session"+session+"new Gson().toJson(bean)"+new Gson().toJson(bean));
+        Log.e("ReplaceModel",""+session+"+"+bean+"+"+id);
     }
 
 
@@ -83,7 +74,5 @@ public class UploadModel extends BaseModel implements IUploadModel {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"),jsessionId);
         return body;
     }
-
-
-
 }
+

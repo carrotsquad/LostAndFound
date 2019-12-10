@@ -104,6 +104,18 @@ public interface Api {
     @FormUrlEncoded
     Observable<StatusBean> postDelete(@Field("JSESSIONID")String jsessionid,@Path("id") int id);
 
+    /*
+    编辑更新
+     */
+    @POST("/passlove/UpdateLostById")
+    @Multipart
+    Observable<StatusBean> postReplace(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos,@Field("lostid") int id);
+
+
+    @POST("/passlove/UpdateLostById")
+    @FormUrlEncoded
+    Observable<StatusBean> postReplace(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean,@Field("lostid") int id);
+
 
     //获取动态 失物昨天 信息
     @POST("/passlove/dynamics/0/1")
@@ -150,6 +162,12 @@ public interface Api {
     @FormUrlEncoded
     Observable<SearchBean> getMyCommentedData(@Field("JSESSIONID")String jsessionid);
 
+    /*
+    发消息给失/得主
+     */
+    @POST("/passlove/sendmessage")
+    @FormUrlEncoded
+    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("message") String ReturnBean);
 
     //退出登录
     @FormUrlEncoded
