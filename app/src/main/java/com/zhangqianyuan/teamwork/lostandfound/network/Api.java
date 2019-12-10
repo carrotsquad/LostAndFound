@@ -167,7 +167,7 @@ public interface Api {
      */
     @POST("/passlove/sendmessage")
     @FormUrlEncoded
-    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("message") String ReturnBean);
+    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("lostid") int id,@Field("qq") String qq,@Field("phone") String phone);
 
     //退出登录
     @FormUrlEncoded

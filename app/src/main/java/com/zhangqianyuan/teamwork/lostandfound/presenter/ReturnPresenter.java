@@ -1,6 +1,8 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
-import com.zhangqianyuan.teamwork.lostandfound.bean.ReturnBean;
+import android.util.Log;
+import android.widget.LinearLayout;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ReturnModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IReturnPresenter;
@@ -20,9 +22,10 @@ public class ReturnPresenter extends BasePresenter<IReturnActivity> implements I
     }
 
     @Override
-    public void sendMessage(String session, ReturnBean bean) {
+    public void sendMessage(String session,int id ,String qq, String phone) {
+        Log.e("ReturnPresenter","完好"+id+qq+phone);
         if (isAttachActivity()) {
-            mReturnModel.sendMessage(session, bean, new Observer<StatusBean>() {
+            mReturnModel.sendMessage(session,id,qq,phone, new Observer<StatusBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 

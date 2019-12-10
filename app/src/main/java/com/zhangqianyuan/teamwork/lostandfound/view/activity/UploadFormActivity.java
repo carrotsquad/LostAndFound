@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
@@ -76,6 +77,13 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     //选择地点
     @BindView(R.id.upload_lostorfind_place)
     Button textPlace;
+
+    @BindView(R.id.linearlayout)
+    LinearLayout linearLayout;
+
+    //选择学生卡
+    @BindView(R.id.upload_lostorfind_stu)
+    EditText stu;
 
 
     //编辑标题
@@ -146,11 +154,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         Intent intent = getIntent();
         qishileixing =intent.getIntExtra(QISHILEIXING,0);
         typeid =intent.getIntExtra(TYPEID,1);
-        strtitle = titleEdit.getText().toString();
-
-        strdescri = descEdit.getText().toString();
-
-
         initView();
         uploadPresenter = new UploadPresenter();
         uploadPresenter.attachActivity(this);
@@ -228,6 +231,10 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             qishiType.setText("发布招领—"+strthingtype);
         }
 
+        if (typeid == 13){
+            linearLayout.setVisibility(View.VISIBLE);
+        }
+
         //地点选择
         pvOptionsPlace= new OptionsPickerBuilder(UploadFormActivity.this, new OnOptionsSelectListener() {
             @Override
@@ -288,6 +295,10 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 //是否显示为对话框样式
                 .isDialog(true)
                 .build();
+
+        if (typeid == 13){
+
+        }
 
     }
 

@@ -1,7 +1,5 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces;
 
-import com.zhangqianyuan.teamwork.lostandfound.bean.ReturnBean;
-
 public interface IReturnPresenter {
-    void sendMessage(String session, ReturnBean bean);
+    void sendMessage(String session,int id ,String qq,String phone);
 }

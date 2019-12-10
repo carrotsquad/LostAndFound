@@ -149,6 +149,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private ThingDetailPresenter thingDetailPresenter;
     private PopupWindow mPopupWindow;
     private Integer qishileixing;
+    private String strThingsImgs;
 
     private ViewPager activity_main_viewpager;
     private LinearLayout activity_main_llpoints;
@@ -301,7 +302,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String strdesc = intent.getStringExtra(OTHERSDESC);
         String title = intent.getStringExtra(OTHERSTITLE);
         intthingstype = intent.getIntExtra(OTHERSTHINGSTYPE,1);
-        String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
+        strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         lostid = intent.getIntExtra(OTHERSID,-1);
         qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
 
@@ -339,7 +340,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
             case R.id.clickreturn:{
                 Intent intent = new Intent(ThingDetailActivity.this,ReturnActivity.class);
                 intent.putExtra("QISHILEIXING",qishileixing);
-                Log.e("ThingDetailActivity","qishileixing="+qishileixing);
+                intent.putExtra("OTHERSIMGS",strThingsImgs);
+                intent.putExtra("OTHERSID",lostid);
+                Log.e("ThingDetailActivity","others="+lostid);
                 startActivity(intent);
                 break;
             }
