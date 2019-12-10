@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    public static Badge badge;
+    public static Badge badge = null;
     private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
     private String session = "";
     private View statusBarView;
@@ -328,7 +328,6 @@ public class MainActivity extends AppCompatActivity {
         TextView textView=contentView.findViewById(R.id.textView);
         TextView textView1=contentView.findViewById(R.id.textView2);
 
-        float newshiwu =  newShiWu.getY();
 
 
         View rootView = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_main, null);
@@ -363,6 +362,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        float newshiwu =  newShiWu.getY();
+        float newzhaoling = newZhaoLing.getY();
 
         /**
          * 点击外部退出
@@ -370,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
         mPopWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getY() > newshiwu) {
+                if (motionEvent.getRawY() < newshiwu || motionEvent.getRawY() < newzhaoling) {
                     closeTranslationAnimation(newShiWu, 300, bottom);
                     closeTranslationAnimation(newZhaoLing, 300, bottom);
                     closeTranslationAnimation(textView, 300, bottom);

@@ -80,6 +80,11 @@ public class UpdateMessageService extends Service implements IMessageFragment {
         }
     }
 
+    @Override
+    public void isRead(Boolean status, int isread) {
+
+    }
+
     public void setUpdateMessageListenser(UpdateMessageListenser listenser){
         this.updateMessageListenser=listenser;
     }

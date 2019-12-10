@@ -6,6 +6,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.AllPlacesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
+import com.zhangqianyuan.teamwork.lostandfound.bean.IsRead;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
@@ -181,4 +182,13 @@ public interface Api {
     @POST("passlove/comment/get")
     Call<CommentFeedBack>  getComment(@Field("JSESSIONID") String jsessionid,@Field("lostid") int bean);
 
+    //更新评论状态
+    @FormUrlEncoded
+    @POST("/passlove/updatemessageisread")
+    Observable<IsRead> updateMessageIsRead(@Field("commentid") int commentid,@Field("JSESSIONID") String jsessionid,@Field("isread") int isread);
+
+    //修改密码
+    @FormUrlEncoded
+    @POST("/passlove/updatepassword")
+    Observable<CheckCodeBean> updatepassword(@Field("password") String password,@Field("email") String email);
 }

@@ -185,6 +185,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
 
             case R.id.reset_password:{
                 Intent intent = new Intent(SignInActivity.this,ForgetPasswordActivity.class);
+                intent.putExtra("session",SESSION);
                 startActivity(intent);
 
                 break;

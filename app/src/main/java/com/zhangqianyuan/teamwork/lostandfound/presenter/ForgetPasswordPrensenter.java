@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ForgetPasswordModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IForgetPasswordPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IForgetPasswordActivity;
@@ -19,11 +20,10 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
         super(iForgetPasswordActivity);
     }
 
-    @SuppressLint("NewApi")
     @Override
-    public void getCodeStatus(String email) {
+    public void getCode(String email) {
         forgetPasswordModel = new ForgetPasswordModel();
-        forgetPasswordModel.getInfo(email,new Observer<SendCheckCodeBean>() {
+        forgetPasswordModel.sendCode(email, new Observer<SendCheckCodeBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -32,8 +32,11 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
             @Override
             public void onNext(SendCheckCodeBean sendCheckCodeBean) {
 
-                v.showEmailStatus(sendCheckCodeBean.getStatus(),sendCheckCodeBean.getJSESSIONID());
-                Log.d("TAG","邮箱获取验证码成功了的");
+                if(sendCheckCodeBean.getStatus() == 200 && sendCheckCodeBean != null){
+                    v.showcheckcodestatus(true,sendCheckCodeBean.getJSESSIONID());
+                }else{
+                    v.showcheckcodestatus(false,sendCheckCodeBean.getJSESSIONID());
+                }
             }
 
             @Override
@@ -46,11 +49,11 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
 
             }
         });
-
     }
 
     @Override
-    public void checkCode(String session, String checkcode) {
+    public void IsRight(String session, String checkcode,String password,String email) {
+
         forgetPasswordModel = new ForgetPasswordModel();
         forgetPasswordModel.checkEmail(session, checkcode, new Observer<CheckCodeBean>() {
             @Override
@@ -60,12 +63,32 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
 
             @Override
             public void onNext(CheckCodeBean checkCodeBean) {
-                Boolean t  = true;
-                if(checkCodeBean==null||checkCodeBean.getStatus()==400){
-                    t = false;
-                }
 
-                v.showcheckcodestatus(t,session,checkcode);
+                if(checkCodeBean.getStatus() == 200){
+                    forgetPasswordModel.getNewPassword(password, email, new Observer<CheckCodeBean>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(CheckCodeBean checkCodeBean) {
+
+                            v.checkCodeIsRight(checkCodeBean.getStatus());
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -79,4 +102,6 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
             }
         });
     }
+
+
 }

@@ -133,6 +133,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 int position = holder.getAdapterPosition();
                 DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
 
+
                 String date_orig = dynamicItemBean.getThelost().getPublishtime();
                 String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
                 if(!"0".equals(date_orig.substring(6, 7))) {

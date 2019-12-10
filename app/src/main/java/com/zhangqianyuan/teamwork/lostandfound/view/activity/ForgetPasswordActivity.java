@@ -19,6 +19,8 @@ import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IForgetPassw
 import com.zhangqianyuan.teamwork.lostandfound.utils.EditUtil;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IForgetPasswordActivity;
 
+import java.time.LocalDate;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -26,9 +28,7 @@ import butterknife.OnClick;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.PWD;
 
 public class ForgetPasswordActivity extends AppCompatActivity implements IForgetPasswordActivity {
-    private String SESSION = new String();
-    private String email = new String();
-    private String checkcode = new String();
+    String email = new String();
 
     @BindView(R.id.reset_new_password)
     EditText new_password;
@@ -61,32 +61,34 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
     String mailbox111;
 
+    String session;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
         EditUtil.EditAllClear(all_clear, new_password_confirm);
+        new_password_wrong.setVisibility(View.INVISIBLE);
+        if(new_password.getText().toString() == new_password_confirm.getText().toString()) {
+            new_password_wrong.setVisibility(View.VISIBLE);
+        }
         forgetPasswordPrensenter = new ForgetPasswordPrensenter(this);
     }
 
 
-    @OnClick({R.id.reset_getmailbox, R.id.reset_submit, R.id.reset_all_clear1})
+    @OnClick({R.id.reset_getmailbox, R.id.reset_submit, R.id.reset_all_clear1,R.id.test})
     void onClicked(View view) {
         switch (view.getId()) {
             case R.id.reset_submit: {
-                if(!new_password.getText().equals(new_password_confirm.getText()))  new_password_wrong.setText("两次密码不一致！");
-                forgetPasswordPrensenter.checkCode(SESSION,checkcode);
-                if(checkcode.equals(confirm.getText())) {
-                    Toast.makeText(this, "修改密码成功", Toast.LENGTH_SHORT);
+
+                    forgetPasswordPrensenter.IsRight(session,confirm.getText().toString(),new_password.getText().toString(),email);
                     Intent intent = new Intent(ForgetPasswordActivity.this, SignInActivity.class);
                     intent.putExtra(PWD, new_password.getText().toString());
                     intent.putExtra("ForgetorLogin","Foeget");
                     startActivity(intent);
                     finish();
-                }else{
-                    mailbox_wrong.setText("验证码错误");
-                }
 
                 break;
             }
@@ -99,10 +101,11 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
             case R.id.reset_getmailbox: {
                 email = mailbox.getText().toString();
-                forgetPasswordPrensenter.getCodeStatus(email);
+                forgetPasswordPrensenter.getCode(email);
                 break;
 
             }
+
             default: {
                 break;
             }
@@ -112,38 +115,23 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
 
     @Override
-    public void showEmailStatus(Integer status, String session) {
-        switch (status) {
-            case 200: {
-                Toast.makeText(this, "发送邮箱成功", Toast.LENGTH_SHORT);
-                Log.e("TAG","SESSSSSS");
-                break;
-            }
-            case 201: {
-                Toast.makeText(this, "已有", Toast.LENGTH_SHORT);
-                Log.d("TAG","有邮箱了");
-                break;
-            }
-            case 400: {
-                FancyToast.makeText(this, "发送验证码失败或邮箱不存在", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
-                Log.d("TAG","不存在");
-            break;
-            }
-        }
+    public void showcheckcodestatus(Boolean status, String session) {
 
+        if (status) {
+            this.session = session;
+            Log.d("session",session);
+            Toast.makeText(this,"发送成功",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
-    public void showcheckcodestatus(Boolean status, String session, String checkcode) {
-        if(status){
-            Toast.makeText(this,"获取验证码成功",Toast.LENGTH_SHORT);
-            Log.d("TAG","获取验证码成功了的");
-            this.checkcode = checkcode;
-            SESSION = session;
-        }
-        else{
-            Log.d("TAG","获取验证码没成功");
+    public void checkCodeIsRight(int isright) {
+        if(isright == 200){
+            Toast.makeText(this,"修改密码成功",Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this,"修改密码失败",Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }

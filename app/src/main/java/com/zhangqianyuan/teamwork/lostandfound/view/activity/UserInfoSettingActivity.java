@@ -196,6 +196,8 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 break;
             case R.id.setting_passwordlayout:
                 // TODO: 2019/2/12 待添加
+                Intent intent1 = new Intent(this,ForgetPasswordActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.exit_account:
                 Log.d("1549", "click this");

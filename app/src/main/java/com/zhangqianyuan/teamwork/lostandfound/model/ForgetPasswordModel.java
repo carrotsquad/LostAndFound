@@ -2,18 +2,22 @@ package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.IForgetPasswordModel;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class ForgetPasswordModel extends BaseModel implements IForgetPasswordModel {
 
+    public ForgetPasswordModel(){
+        super();
+    }
+
+
     @Override
-    public void getInfo(String email, Observer<SendCheckCodeBean> observer) {
+    public void sendCode(String email, Observer<SendCheckCodeBean> observer) {
         api.getSendCheckCode(email)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -23,6 +27,7 @@ public class ForgetPasswordModel extends BaseModel implements IForgetPasswordMod
 
     @Override
     public void checkEmail(String session, String checkcode, Observer<CheckCodeBean> observer) {
+
         api.getCheckCode(checkcode,session)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -30,4 +35,13 @@ public class ForgetPasswordModel extends BaseModel implements IForgetPasswordMod
                 .subscribe(observer);
     }
 
+    @Override
+    public void getNewPassword(String password, String email, Observer<CheckCodeBean> observer) {
+
+        api.updatepassword(password,email)
+                .subscribeOn(Schedulers.io())
+                 .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+    }
 }

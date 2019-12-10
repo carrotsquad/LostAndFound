@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.v4.app.Fragment;
@@ -32,12 +33,14 @@ import org.greenrobot.eventbus.Logger;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.badge;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
@@ -154,8 +157,20 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     }
 
     @Override
+    public void isRead(Boolean status, int isread) {
+        if(status){
+            if(isread == 0){
+                Message message = new Message();
+                message.arg1 = 1;
+                
+            }
+        }
+    }
+
+    @Override
     public void onRefresh() {
         isFresh = true;
         initList();
+
     }
 }
