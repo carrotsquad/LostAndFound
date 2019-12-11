@@ -23,8 +23,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
+
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -52,21 +51,13 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailA
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPE;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTITLE;
 
-/**
- * Description: 搜索fragment的recyclerview适配器
- * Created at: 2018/11/10 20:05
- * @author: zhangqianyuan
- * Email: zhang.qianyuan@foxmail.com
- */
-public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
+public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
 
     private ArrayList<DynamicItemBean> searchItemBeanArrayList;
     private Context mContext;
-    private Boolean isMessage;
+    private int isMessage;
     private List<Integer> changeNumList;
     private Activity activity;
-    private MessagePresenter messagePresenter;
-    int isread;
 
     public void setActivity(Activity activity) {
         this.activity = activity;
@@ -107,95 +98,84 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
     }
 
-    public void attachPresenter(MessagePresenter messagePresenter){
-        this.messagePresenter = messagePresenter;
-    }
-
-    public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList, List<Integer> changeNumList, Activity activity,Boolean isMessage){
+    public MyMessageAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList, List<Integer> changeNumList, Activity activity){
         this.searchItemBeanArrayList = searchItemBeanArrayList;
-        this.isMessage = isMessage;
         this.activity = activity;
         this.changeNumList = changeNumList;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(mContext==null){
             mContext=parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.search_item,parent,false);
-        final ViewHolder holder = new ViewHolder(view);
+        final SearchItemAdapter.ViewHolder holder = new SearchItemAdapter.ViewHolder(view);
 
-        if(isMessage) {
+        if(isMessage == 0) {
             holder.relativeLayout.setOnLongClickListener(v->{
-                    holder.arrowPopWindows.show(view, SHOW_TOP);
-                    return true;
-                }
+                        holder.arrowPopWindows.show(view, SHOW_TOP);
+                        return true;
+                    }
             );
         }else {
             holder.swipeMenuLayout.setSwipeEnable(false);
         }
 
         holder.relativeLayout.setOnClickListener(v->{
-                int position = holder.getAdapterPosition();
-                DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
+            int position = holder.getAdapterPosition();
+            DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
 
 
-            SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
-                String date_orig = dynamicItemBean.getThelost().getPublishtime();
-                String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
-                if(!"0".equals(date_orig.substring(6, 7))) {
-                    fabaiodate = fabaiodate+date_orig.substring(6, 7);
-                }
-                fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
+            String date_orig = dynamicItemBean.getThelost().getPublishtime();
+            String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
+            if(!"0".equals(date_orig.substring(6, 7))) {
+                fabaiodate = fabaiodate+date_orig.substring(6, 7);
+            }
+            fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
 
-                String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
-                String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
-                if(!"0".equals(lostdate_orig.substring(6, 7))){
-                    lostdate = lostdate + lostdate_orig.substring(6, 7);
-                }
-                lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
+            String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
+            String lostdate = lostdate_orig.substring(0, 4) + "年" + lostdate_orig.substring(4, 6) + "月";
+            if(!"0".equals(lostdate_orig.substring(6, 7))){
+                lostdate = lostdate + lostdate_orig.substring(6, 7);
+            }
+            lostdate = lostdate + lostdate_orig.substring(7,8)+"日";
 
-                int lostplace = dynamicItemBean.getThelost().getPlaceid();
-                int losttype = dynamicItemBean.getThelost().getLosttype();
-                int thingstype = dynamicItemBean.getThelost().getTypeid();
+            int lostplace = dynamicItemBean.getThelost().getPlaceid();
+            int losttype = dynamicItemBean.getThelost().getLosttype();
+            int thingstype = dynamicItemBean.getThelost().getTypeid();
 
-                String place = allPlaceBeanList.get(lostplace-1);
+            String place = allPlaceBeanList.get(lostplace-1);
 //                String thingsType = allTypeBeanList.get(thingstype);
 
-                Intent intent = new Intent(mContext, ThingDetailActivity.class);
-                intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getNickname());
-                intent.putExtra(OTHERSPHOTO,dynamicItemBean.getUserphoto());
-                intent.putExtra(OTHERSFABIAODATE,fabaiodate);
-                intent.putExtra(OTHERSDIUSHILEIXING, losttype);
-                intent.putExtra(OTHERSDIUSHIDATE, lostdate);
-                intent.putExtra(OTHERSPLACE,place);
-                intent.putExtra(OTHERSIMGS, dynamicItemBean.getThelost().getPhoto());
-                intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
-                intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
-                intent.putExtra(OTHERSDESC,dynamicItemBean.getThelost().getDescription());
-                intent.putExtra(OTHERSTITLE,dynamicItemBean.getThelost().getTitle());
-                messagePresenter.updateIsRead(sharedPreferences.getString("SESSION",null),dynamicItemBean.getThelost().getId());
-                Log.d("isread", String.valueOf(isread));
-                mContext.startActivity(intent);
-            });
+            Intent intent = new Intent(mContext, ThingDetailActivity.class);
+            intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getNickname());
+            intent.putExtra(OTHERSPHOTO,dynamicItemBean.getUserphoto());
+            intent.putExtra(OTHERSFABIAODATE,fabaiodate);
+            intent.putExtra(OTHERSDIUSHILEIXING, losttype);
+            intent.putExtra(OTHERSDIUSHIDATE, lostdate);
+            intent.putExtra(OTHERSPLACE,place);
+            intent.putExtra(OTHERSIMGS, dynamicItemBean.getThelost().getPhoto());
+            intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
+            intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
+            intent.putExtra(OTHERSDESC,dynamicItemBean.getThelost().getDescription());
+            intent.putExtra(OTHERSTITLE,dynamicItemBean.getThelost().getTitle());
+            mContext.startActivity(intent);
+        });
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchItemAdapter.ViewHolder holder, int position) {
 
         DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
 
 
         Integer changenum = 0;
-        isread = dynamicItemBean.getread();
-
-        Log.d("isread",String.valueOf(isread));
-        if(isread == 0) {
-         //   changenum = changeNumList.get(position);
+        if(isMessage == 0) {
+            changenum = changeNumList.get(position);
         }
         /**
          * "publishtime": "20181105173056",
@@ -231,11 +211,11 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         int lostType = 0;
         switch (losttype){
             case 0:{
-                lostType = R.drawable.littleicon_type_lost1;
+                lostType = R.drawable.littleicon_type_lost;
                 break;
             }
             case 1:{
-                lostType = R.drawable.littleicon_type_find1;
+                lostType = R.drawable.littleicon_type_find;
             }
             default:{
                 break;
@@ -288,22 +268,23 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         holder.isNeedBounty.setVisibility(View.INVISIBLE);
 
         //新消息气泡
-        if(isread == 0) {
+        if(isMessage == 0) {
 //            if(changenum!=0) {
-               holder.newMsg.setVisibility(View.VISIBLE);
+            holder.newMsg.setVisibility(View.VISIBLE);
 //            }else {
 //                holder.newMsg.setVisibility(View.INVISIBLE);
 //            }
+        }else if(isMessage == 1){
+            holder.newMsg.setVisibility(View.INVISIBLE);
         }
 
         //是否是消息
-        if(isread == 0) {
+        if(isMessage == 0) {
 
             //侧滑删除
             holder.btnDlt.setOnClickListener(v -> {
                 holder.swipeMenuLayout.quickClose();
                 searchItemBeanArrayList.remove(position);
-                messagePresenter.postdelet(dynamicItemBean.getThelost().getId(),sharedPreferences.getString("SESSION",null));
                 FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
@@ -337,6 +318,5 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
     public int getItemCount() {
         return searchItemBeanArrayList.size();
     }
-
 
 }

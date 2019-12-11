@@ -1,12 +1,9 @@
 package com.zhangqianyuan.teamwork.lostandfound.network;
 
-import android.util.Log;
-
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllPlacesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
-import com.zhangqianyuan.teamwork.lostandfound.bean.IsRead;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
@@ -26,7 +23,6 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Description: Api
@@ -203,7 +199,13 @@ public interface Api {
     //更新评论状态
     @FormUrlEncoded
     @POST("/passlove/updatemessageisread")
-    Observable<IsRead> updateMessageIsRead(@Field("commentid") int commentid,@Field("JSESSIONID") String jsessionid,@Field("isread") int isread);
+    Observable<StatusBean> updateMessageIsRead(@Field("JSESSIONID") String JSESSIONID,@Field("lostid") int lostid);
+//
+//    //获取评论状态
+//    @FormUrlEncoded
+//    @POST("/passlove/getmessageisread")
+//    Observable<IsRead> getMessageIsRead(@Field("commentid") int commentid,@Field("JSESSIONID") String jsessionid,@Field("isread") int isread);
+
 
     //修改密码
     @FormUrlEncoded

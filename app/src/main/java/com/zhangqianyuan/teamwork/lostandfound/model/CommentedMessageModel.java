@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ICommentedMessageModel;
 
 import io.reactivex.Observer;
@@ -29,6 +30,24 @@ public class CommentedMessageModel extends BaseModel implements ICommentedMessag
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
 
+    }
+
+    @Override
+    public void postdelete(String jsessionid, int id, Observer<StatusBean> observer) {
+        api.postDelete(jsessionid,id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    @Override
+    public void getupdateIsRead(String session, int lostid, Observer<StatusBean> observer) {
+        api.updateMessageIsRead(session,lostid)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
     }
 
 }

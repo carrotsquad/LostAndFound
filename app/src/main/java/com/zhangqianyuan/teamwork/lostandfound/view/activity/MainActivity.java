@@ -20,6 +20,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.MessageQueue;
+import android.support.annotation.LongDef;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -59,6 +60,7 @@ import com.zhangqianyuan.teamwork.lostandfound.view.fragment.DynamicFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.MessageFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.SearchFragment;
 import com.zhangqianyuan.teamwork.lostandfound.view.fragment.UserInfoFragment;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.BaseView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -74,6 +76,7 @@ import q.rorbin.badgeview.QBadgeView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.fragment.MessageFragment.isread;
 
 
 /**
@@ -87,7 +90,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
 /**
  * ui还没确定所以底部导航的图标是乱改的！！！
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BaseView {
 
     public static final String TO_SIGN_IN="to sign in";
     public static final Integer FINE_INTERNET_STATUS = 200;
@@ -123,15 +126,14 @@ public class MainActivity extends AppCompatActivity {
    // @BindView(R.id.fabu11)
    // Button fabu11;
 
-    BottomNavigationItemView itemView;
+    public static BottomNavigationItemView itemView;
+    public static Badge badge;
 
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-                case 0:
-                    badge.hide(true);
                 case 1: {
                     badge = new QBadgeView(MainActivity.this)
                             .bindTarget(itemView)
@@ -149,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    public static Badge badge;
     private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
     private String session = "";
     private View statusBarView;
@@ -245,6 +246,8 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.setAdapter(mainViewAdapter);
         mViewPager.setOffscreenPageLimit(3);
+      //  Log.d("为什么没有","无语");
+
 
 
         //划页监听器
@@ -295,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
                     mViewPager.setCurrentItem(MESSAGE_FRAGMENT);
                     Message message = new Message();
                     message.arg1 = 0;
-                    handler.sendMessage(message);
+                 //   handler.sendMessage(message);
                     return true;
                 }
                 case R.id.mine_ui: {

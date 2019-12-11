@@ -34,9 +34,9 @@ public class GetImageFromWeb {
         Glide.with(activity)
                 .load(path)
                 //设置加载时的图
-                .placeholder(R.mipmap.diai)
+                .placeholder(R.mipmap.diai1)
                 //设置失败图
-                .error(R.mipmap.diai)
+                .error(R.mipmap.diai1)
                 .into(imageView);
     }
 

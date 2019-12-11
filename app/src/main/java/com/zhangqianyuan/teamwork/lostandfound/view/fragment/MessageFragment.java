@@ -2,16 +2,15 @@ package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,20 +19,20 @@ import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.MyMessageAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.event.MessageEvent;
+import com.zhangqianyuan.teamwork.lostandfound.model.CommentedMessageModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Logger;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +40,7 @@ import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.badge;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.itemView;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
@@ -57,6 +57,8 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     private View view;
     private Context mContext;
 
+    public static boolean isread;
+
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private List<DynamicItemBean> list = new ArrayList<>();
@@ -68,6 +70,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     private List<Integer> changelist = new ArrayList<>();
 
     public static int time = 0;
+    private Object MainActivity = com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.class;
 
     public static Fragment newInstance(){
         MessageFragment messageFragment = new MessageFragment();
@@ -114,6 +117,8 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         refreshLayout.setOnRefreshListener(this);
         gridLayoutManager = new GridLayoutManager(mContext,1);
         searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),true);
+      //  MyMessageAdapter myMessageAdapter = new MyMessageAdapter((ArrayList<DynamicItemBean>) list,getActivity());
+        searchItemAdapter.attachPresenter(messagePresenter);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(searchItemAdapter);
     }
@@ -123,7 +128,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         String userphoto = sharedPreferences.getString(USERPHOTO,"null");
         String usernickname = sharedPreferences.getString(STU,"null");
         String jsessionid = sharedPreferences.getString(SESSION,"null");
-        messagePresenter.getMessageData(usernickname,userphoto,username,jsessionid,0,500);
+        messagePresenter.getMessageData(usernickname, userphoto, username, jsessionid, 0, 500);
     }
 
 
@@ -146,25 +151,39 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
                 isFresh = false;
                 FancyToast.makeText(mContext,"刷新成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             }
+            list.clear();
+            list.addAll(dynamicItemBeanList);
 
 
             for (int i =0 ; i<list.size(); i++) {
                 changelist.add(0);
+                if(list.get(i).getread() == 0){
+                    isread = true;
+                    Log.d("isread是",String.valueOf(isread));
+                    break;
+
+                }else {
+                    isread = false;
+                }
             }
             searchItemAdapter.notifyDataSetChanged();
+
 
         }
     }
 
     @Override
-    public void isRead(Boolean status, int isread) {
+    public void isRead(boolean status) {
+
         if(status){
-            if(isread == 0){
-                Message message = new Message();
-                message.arg1 = 1;
-                
-            }
+            Toast.makeText(getContext(),"修改状态成功",Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    @Override
+    public void showStatus(Boolean seesion) {
+
     }
 
     @Override

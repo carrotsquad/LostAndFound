@@ -10,6 +10,7 @@ import android.os.Message;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.event.MessageEvent;
+import com.zhangqianyuan.teamwork.lostandfound.model.CommentedMessageModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
 
@@ -81,7 +82,12 @@ public class UpdateMessageService extends Service implements IMessageFragment {
     }
 
     @Override
-    public void isRead(Boolean status, int isread) {
+    public void isRead(boolean status) {
+
+    }
+
+    @Override
+    public void showStatus(Boolean seesion) {
 
     }
 

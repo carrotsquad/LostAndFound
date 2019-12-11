@@ -78,16 +78,16 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/search_item_newmessage"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/shape_red"
-                android:gravity="center"
-                android:text="+1"
-                android:textColor="@color/white" />
+<!--            <TextView-->
+<!--                android:id="@+id/search_item_newmessage"-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:background="@drawable/shape_red"-->
+<!--                android:gravity="center"-->
+<!--                android:text="+1"-->
+<!--                android:textColor="@color/white" />-->
 
 
             <LinearLayout
@@ -129,6 +129,14 @@
                 android:layout_marginBottom="1dp"
                 android:text="2018年10月5日发布"
                 android:textSize="7sp" />
+
+            <ImageView
+                android:id="@+id/search_item_newmessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/message"
+                android:layout_alignParentRight="true"
+                />
 
         </RelativeLayout>
 

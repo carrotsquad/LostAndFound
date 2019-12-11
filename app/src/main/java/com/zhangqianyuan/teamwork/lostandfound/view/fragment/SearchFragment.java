@@ -3,6 +3,8 @@ package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -67,6 +69,8 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     private View view;
     private Context context;
 
+    ArrayAdapter<String> adapter;
+
     private String[] headers = {"启事类型", "丢失地点", "物品类型"};
     private String[] diushitypes = {"不限", "失物", "招领"};
     private List<String> places = new ArrayList<>();
@@ -102,6 +106,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     }
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -117,6 +122,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         initAutoComplete("history", searchInput);
         Editable etext = searchInput.getText();
         Selection.setSelection(etext, etext.length());
+
 
         return view;
     }
@@ -144,9 +150,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         
         unbinder=ButterKnife.bind(view);
         searchInput = view.findViewById(R.id.search_input);
-       // searchInput.setSubmitButtonEnabled(false);
-//        searchInput.findViewById(android.support.v7.appcompat.R.id.search_plate).setBackground(null);
-//        searchInput.findViewById(android.support.v7.appcompat.R.id.submit_area).setBackground(null);
+        //searchInput.setSubmitButtonEnabled(false);
+      // searchInput.findViewById(android.support.v7.appcompat.R.id.search_plate).setBackground(null);
+       // searchInput.findViewById(android.support.v7.appcompat.R.id.submit_area).setBackground(null);
         sure = view.findViewById(R.id.search_sure);
         dropDownMenu = view.findViewById(R.id.search_dropDownMenu);
 
@@ -246,6 +252,8 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
         //点击搜索按键后
         sure.setOnClickListener(v->{
+
+                 saveHistory("history", searchInput);
                 String keyword = searchInput.getText().toString();
                 search(keyword);
             });
@@ -291,7 +299,11 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
         public void onClick(View v) {
 
+
             saveHistory("history", searchInput);
+            adapter.notifyDataSetChanged();
+
+
 
         }
 
@@ -361,7 +373,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
         String[] histories = longhistory.split(",");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, histories);
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, histories);
 
         // 只保留最近的50条的记录
 

@@ -1,7 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces;
 
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
-
 public interface IMessagePresenter{
-    void getMessageData(String nickname, String userphoto,String username,String jsessionid,int start,int end);
+    void getMessageData(String usernickname, String userphoto, String username, String jsessionid, int i1, int i);
+    void postdelet(int id,String jsessionid);
+    void updateIsRead(String session,int lostid);
 }
