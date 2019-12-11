@@ -26,9 +26,9 @@ public class SignPresenter extends AbstractBasePresenter<ISignInActivity> implem
     }
 
     @Override
-    public void getSignIn(String email, String password) {
+    public void getSignIn(String stu, String password) {
         signModel = new SignModel();
-        signModel.signIn(email, password, new Observer<SignInBean>() {
+        signModel.signIn(stu, password, new Observer<SignInBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 

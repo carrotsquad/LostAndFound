@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhangqianyuan.teamwork.lostandfound.R;
@@ -39,6 +40,7 @@ import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.image.WebImageLoader;
 import com.zhangqianyuan.teamwork.lostandfound.model.ThingDetailModel;
 import com.zhangqianyuan.teamwork.lostandfound.network.AllURI;
+import com.zhangqianyuan.teamwork.lostandfound.presenter.ReturnPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.ThingDetailPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
@@ -147,10 +149,11 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private int intthingstype;
     private SharedPreferences sharedPreferences;
     private ThingDetailPresenter thingDetailPresenter;
+    private ReturnPresenter returnPresenter;
     private PopupWindow mPopupWindow;
     private Integer qishileixing;
     private String strThingsImgs;
-
+    private String jsession;
     private ViewPager activity_main_viewpager;
     private LinearLayout activity_main_llpoints;
     private List<ImageView> imageViewList;;
@@ -169,7 +172,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this,new ThingDetailModel());
-
         imgs=initDataFromLocal();
         Log.e("IMGS",imgs);
         String[] a = imgs.split(",");
@@ -179,8 +181,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         adapter = new ThingDetailAdapter(mCommentList,this);
         recyclerView.setAdapter(adapter);
         thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
-
         clicktocomment.setOnClickListener(v-> popup());
+        returnPresenter = new ReturnPresenter();
+        returnPresenter.attachActivity(this);
     }
 
     @Override
@@ -191,6 +194,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @Override
     protected void onDestroy() {
         thingDetailPresenter.dettachActivity();
+        returnPresenter.dettachActivity();
         super.onDestroy();
     }
 
@@ -338,12 +342,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 break;
             }
             case R.id.clickreturn:{
-                Intent intent = new Intent(ThingDetailActivity.this,ReturnActivity.class);
-                intent.putExtra("QISHILEIXING",qishileixing);
-                intent.putExtra("OTHERSIMGS",strThingsImgs);
-                intent.putExtra("OTHERSID",lostid);
-                Log.e("ThingDetailActivity","others="+lostid);
-                startActivity(intent);
+                jsession = sharedPreferences.getString(SESSION, "null");
+                returnPresenter.sendMessage(jsession,lostid);
+                Log.e("ReturnActivity","完好"+jsession+"+"+lostid);
                 break;
             }
             default:{
@@ -413,6 +414,16 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
             Log.d("commentfuck",""+list.toString());
         }
 
+    }
+
+    @Override
+    public void showStatus(Boolean status) {
+        if (status) {
+            finish();
+            FancyToast.makeText(ThingDetailActivity.this, "成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+        } else {
+            FancyToast.makeText(ThingDetailActivity.this, "出现了错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+        }
     }
 
 }

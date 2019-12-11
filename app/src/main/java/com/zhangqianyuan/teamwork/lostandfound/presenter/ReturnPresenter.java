@@ -1,19 +1,18 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
 import android.util.Log;
-import android.widget.LinearLayout;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.ReturnModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IReturnPresenter;
-import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IReturnActivity;
+import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.FINE_INTERNET_STATUS;
 
-public class ReturnPresenter extends BasePresenter<IReturnActivity> implements IReturnPresenter {
+public class ReturnPresenter extends BasePresenter<IThingDetailActivity> implements IReturnPresenter {
 
     private ReturnModel mReturnModel;
 
@@ -22,10 +21,10 @@ public class ReturnPresenter extends BasePresenter<IReturnActivity> implements I
     }
 
     @Override
-    public void sendMessage(String session,int id ,String qq, String phone) {
-        Log.e("ReturnPresenter","完好"+id+qq+phone);
+    public void sendMessage(String session,int id) {
+        Log.e("ReturnPresenter","完好"+id);
         if (isAttachActivity()) {
-            mReturnModel.sendMessage(session,id,qq,phone, new Observer<StatusBean>() {
+            mReturnModel.sendMessage(session,id, new Observer<StatusBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 

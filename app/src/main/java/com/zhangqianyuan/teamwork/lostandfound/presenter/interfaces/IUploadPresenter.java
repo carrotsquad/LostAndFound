@@ -15,4 +15,6 @@ import java.util.List;
 public interface IUploadPresenter {
     void postUpload(String session, TheLostBean bean);
     void postUpload(String session, TheLostBean bean, List<File> fileList);
+    void cardUpload(String stu,String session, TheLostBean bean);
+    void cardUpload(String stu,String session, TheLostBean bean, List<File> fileList);
 }

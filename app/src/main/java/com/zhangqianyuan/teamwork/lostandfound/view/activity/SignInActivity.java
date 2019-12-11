@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -53,6 +54,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     public static final String PNB = "PNB";
     public static final String EMAIL = "EMAIL";
     public static final String STU = "STU";
+    public static final String NICKNAME = "NICKNAME";
     public static final String SESSION = "SESSION";
     public static final String USERPHOTO = "USERPHOTO";
     public static final String ALLTYPES = "ALLTYPES";
@@ -69,8 +71,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     EditText pwd;
 
     @BindView(R.id.signin_username)
-    EditText email;
-
+    EditText stu;
     @BindView(R.id.signin_tologin)
     TextView register;
 
@@ -118,7 +119,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             Log.d("Boomerr日志打印","更新isEixt" + sharedPreferences.getString(ISEXIT,"true"));
         }
         //如果已经登录过，再次登陆，直接进入缓冲页
-        if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && !isExit && !isExit1) {
+        if (!"".equals(sharedPreferences.getString(STU, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && !isExit && !isExit1) {
             Intent intent = new Intent(SignInActivity.this, BufferPageActivity.class);
             startActivity(intent);
             finish();
@@ -126,7 +127,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
 //            pwd.setText(sharedPreferences.getString(PWD, "null"));
 //            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "null"), sharedPreferences.getString(PWD, "null"));
         } else if (isExit) {
-            email.setText("");
+            stu.setText("");
             pwd.setText("");
             isExit = false;
         }
@@ -158,12 +159,12 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         switch (view.getId()) {
             //点击登陆
             case R.id.signin_signin: {
-                if ("".equals(pwd.getText().toString()) || "".equals(email.getText().toString())) {
+                if ("".equals(pwd.getText().toString()) || "".equals(stu.getText().toString())) {
                     FancyToast.makeText(SignInActivity.this, "输入有问题", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
                 } else {
-                    String eemail = email.getText().toString();
+                    String student = stu.getText().toString();
                     String password = pwd.getText().toString();
-                    signPresenter.getSignIn(eemail, password);
+                    signPresenter.getSignIn(student, password);
                 }
                 break;
             }
@@ -207,7 +208,8 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             int[] arrayint = new int[10000];
             editor.putString(EMAIL, signInBean.getUser().getUsername());
             editor.putString(PWD, signInBean.getUser().getPassword());
-            editor.putString(STU, signInBean.getUser().getNickname());
+            editor.putString(STU, signInBean.getUser().getStu());
+            editor.putString(NICKNAME, signInBean.getUser().getNickname());
             editor.putString(PNB, signInBean.getUser().getPhonenumber());
             editor.putString(USERPHOTO, signInBean.getUser().getPhoto());
             editor.putString(SESSION, signInBean.getJSESSIONID());

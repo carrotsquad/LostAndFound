@@ -72,6 +72,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
 
     @Override
     protected void onDestroy() {
+        Log.e("ff","onDestroy");
         verifyPresenter.dettachActivity();
         super.onDestroy();
     }
@@ -132,4 +133,6 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
             FancyToast.makeText(VerifyActivity.this, "验证码不一致", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
+
+
 }

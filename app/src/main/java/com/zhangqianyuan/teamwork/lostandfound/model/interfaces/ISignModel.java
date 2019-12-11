@@ -6,5 +6,5 @@ import io.reactivex.Observer;
 
 
 public interface ISignModel {
-    void signIn(String email, String password, Observer<SignInBean> observer);
+    void signIn(String stu, String password, Observer<SignInBean> observer);
 }

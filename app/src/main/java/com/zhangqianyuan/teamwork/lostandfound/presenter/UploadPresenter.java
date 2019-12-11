@@ -95,4 +95,69 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
             });
         }
     }
+
+    @Override
+    public void cardUpload(String stu, String session, TheLostBean bean) {
+        if (isAttachActivity()) {
+            mUploadModel.cardUpload(stu,session, bean, new Observer<StatusBean>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+                }
+
+                @Override
+                public void onNext(StatusBean statusBean) {
+                    Log.e("UploadPresenter3","statusBean.getStatus()"+statusBean.getStatus());
+                    if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
+                        getV().showStatus(false);
+                    } else {
+                        getV().showStatus(true);
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Log.e("UploadPresenter1","wrong");
+                    getV().showStatus(false);
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
+        }
+    }
+
+    @Override
+    public void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList) {
+        if (isAttachActivity()) {
+            mUploadModel.cardUpload(stu,session, bean, fileList, new Observer<StatusBean>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(StatusBean statusBean) {
+                    Log.e("UploadPresenter4","statusBean.getStatus()"+statusBean.getStatus());
+                    if (statusBean == null || !statusBean.getStatus().equals(FINE_INTERNET_STATUS)) {
+                        getV().showStatus(false);
+                    } else {
+                        getV().showStatus(true);
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Log.e("UploadPresenter2","wrong");
+                    getV().showStatus(false);
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
+        }
+    }
 }

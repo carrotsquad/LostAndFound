@@ -32,7 +32,7 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".view.activity.VerifyActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".view.activity.SignInActivity"
             android:launchMode="singleTop" />
@@ -65,7 +65,6 @@
         <activity android:name=".view.activity.AboutDiAi" />
         <activity android:name=".view.activity.OurWebActivity" />
         <activity android:name=".view.activity.GuideActivity" />
-        <activity android:name=".view.activity.ReturnActivity" />
         <activity android:name=".view.activity.FoundActivity" />
         <activity android:name=".view.activity.ReplaceActivity"/>
     </application>

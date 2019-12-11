@@ -195,7 +195,6 @@
             android:visibility="invisible">
             <TextView
                 android:layout_gravity="center_vertical"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/upload_lostorfind_time"
@@ -203,7 +202,7 @@
                 android:layout_marginStart="0dp"
                 android:text="请输入学号（必选）："
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/upload_lostorfind_stu"

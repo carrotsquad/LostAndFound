@@ -17,4 +17,6 @@ import io.reactivex.Observer;
 public interface IUploadModel {
     void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer);
     void postUpload(String session, TheLostBean bean, Observer<StatusBean> observer);
+    void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer);
+    void cardUpload(String stu, String session, TheLostBean bean, Observer<StatusBean> observer);
 }

@@ -13,12 +13,12 @@ import io.reactivex.schedulers.Schedulers;
 public class ReturnModel extends BaseModel implements IReturnModel {
 
     @Override
-    public void sendMessage(String session,int id ,String qq,String phone, Observer<StatusBean> observer) {
-        api.sendMessage(session,id,qq,phone)
+    public void sendMessage(String session,int id , Observer<StatusBean> observer) {
+        api.sendMessage(session,id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        Log.e("ReturnModel","完好"+id+qq+phone);
+        Log.e("ReturnModel","完好"+session+"+"+id);
     }
 }

@@ -83,8 +83,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     //选择学生卡
     @BindView(R.id.upload_lostorfind_stu)
-    EditText stu;
-
+    EditText stuEdit;
 
     //编辑标题
     @BindView(R.id.upload_lostorfind_description_title)
@@ -139,6 +138,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     private Integer typeid;
     private String strtitle;
     private String strdescri;
+    private String stu;
     private View statusBarView;
 
 
@@ -197,6 +197,9 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             case R.id.upload_lostorfind_sure: {
                 strdescri = descEdit.getText().toString();
                 strtitle = titleEdit.getText().toString();
+                if (typeid == 13){
+                    stu = stuEdit.getText().toString();
+                }
                 if ("".equals(strdescri) || "".equals(strtitle) || "".equals(strLostDate) || -1 == placeid) {
                     FancyToast.makeText(UploadFormActivity.this, "填写不规范", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 } else {
@@ -205,11 +208,19 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         Log.e("UploadFromActivity","strLostDate="+strLostDate);
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
                         Log.e("THELOSTBEAN",bean.toString());
-                        uploadPresenter.postUpload(jsession,bean);
+                        if (typeid == 13){
+                            uploadPresenter.cardUpload(stu,jsession,bean);
+                        }else {
+                            uploadPresenter.postUpload(jsession, bean);
+                        }
                     }else {
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
-                        uploadPresenter.postUpload(jsession, bean, fileList);
+                        if (typeid == 13) {
+                            uploadPresenter.postUpload(jsession, bean, fileList);
+                        }else{
+                            uploadPresenter.cardUpload(stu,jsession,bean,fileList);
+                        }
                     }
 
                 }
@@ -233,6 +244,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
         if (typeid == 13){
             linearLayout.setVisibility(View.VISIBLE);
+
         }
 
         //地点选择
@@ -295,11 +307,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 //是否显示为对话框样式
                 .isDialog(true)
                 .build();
-
-        if (typeid == 13){
-
-        }
-
     }
 
 

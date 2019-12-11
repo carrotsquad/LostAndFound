@@ -86,6 +86,16 @@ public interface Api {
     @FormUrlEncoded
     Observable<StatusBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
+
+    @POST("/passlove/user/publishlost/card")
+    @Multipart
+    Observable<StatusBean> cardUpload(@Field("cardid") String stu,@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
+
+
+    @POST("/passlove/user/publishlost/card")
+    @FormUrlEncoded
+    Observable<StatusBean> cardUpload(@Field("cardid") String stu,@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
+
     /*
     递爱成功
      */
@@ -161,9 +171,9 @@ public interface Api {
     /*
     发消息给失/得主
      */
-    @POST("/passlove/sendmessage")
+    @POST("/passlove/sendmail")
     @FormUrlEncoded
-    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("lostid") int id,@Field("qq") String qq,@Field("phone") String phone);
+    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("lostid") int id);
 
     //退出登录
     @FormUrlEncoded

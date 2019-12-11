@@ -470,7 +470,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
 
     /**
-     * 重写返回键响应函数，按两次才退出
+            * 重写返回键响应函数，按两次才退出
      */
     @Override
     public void onBackPressed() {
