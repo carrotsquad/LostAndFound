@@ -36,15 +36,14 @@
                 />
 
             <ImageView
-                android:layout_below="@id/dynamic_card_thingsphoto"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/dynamic_card_thingtype"
-                android:layout_marginLeft="5dp"
                 android:id="@+id/dynamic_card_qishileixin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/littleicon_type_lost"
-                />
+                android:layout_below="@id/dynamic_card_thingsphoto"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/dynamic_card_thingtype"
+                android:src="@drawable/littleicon_type_lost" />
 
             <TextView
                 android:id="@+id/dynamic_card_dateandplace"

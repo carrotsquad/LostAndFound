@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.List;
@@ -180,11 +181,11 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
         int lostType = 0;
         switch (losttype) {
             case 0: {
-                lostType = R.drawable.littleicon_type_lost;
+                lostType = R.drawable.littleicon_type_lost1;
                 break;
             }
             case 1: {
-                lostType = R.drawable.littleicon_type_find;
+                lostType = R.drawable.littleicon_type_find1;
             }
             default: {
                 break;
@@ -199,8 +200,10 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
         //类型图片
         if (dynamicItemBean.getThelost().getTypeid() == 1) {
             holder.thingType.setImageResource(R.drawable.littleicon_keys);
+         //   holder.thingType.setImageResource(R.drawable.littleicon_type_find1);
         } else {
             Glide.with(mContext)
+                 // .load(R.drawable.littleicon_type_lost1)
                     .load(getTypeLittlePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1)))
                     .asBitmap()
                     .into(holder.thingType);
@@ -220,6 +223,7 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
         if ("".equals(dynamicItemBean.getThelost().getPhoto())) {
             Glide.with(mContext)
                 .load(getTypePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
+               //.load(R.mipmap.diai1)
                 .asBitmap()
                 .into(holder.thingphoto);
 //            GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
@@ -231,6 +235,7 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
             String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
             String c = getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), a[0]);
             Glide.with(mContext)
+                 //   .load(R.mipmap.diai1)
                     .load(c)
                     .asBitmap()
                     .into(holder.thingphoto);
@@ -239,7 +244,8 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 
         //用户头像
         Glide.with(mContext)
-                .load(getUserPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getUserphoto()))
+            //    .load(getUserPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getUserphoto()))
+                .load(R.mipmap.user)
                 .asBitmap()
                 .into(holder.headimg);
     }

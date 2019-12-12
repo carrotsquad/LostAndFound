@@ -36,12 +36,12 @@ public class ForgetPasswordModel extends BaseModel implements IForgetPasswordMod
     }
 
     @Override
-    public void getNewPassword(String password, String email, Observer<CheckCodeBean> observer) {
-
-        api.updatepassword(password,email)
+    public void getNewPassword(String password, String email, String session, Observer<CheckCodeBean> observer) {
+        api.updatepassword(password,session,email)
                 .subscribeOn(Schedulers.io())
-                 .unsubscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+                .subscribe(observer);
     }
+
 }

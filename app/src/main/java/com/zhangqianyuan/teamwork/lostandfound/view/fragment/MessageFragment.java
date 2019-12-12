@@ -4,14 +4,11 @@ package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +18,11 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.MyMessageAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.SearchItemAdapter;
-import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.zhangqianyuan.teamwork.lostandfound.event.MessageEvent;
-import com.zhangqianyuan.teamwork.lostandfound.model.CommentedMessageModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
-import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,11 +32,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import q.rorbin.badgeview.Badge;
-import q.rorbin.badgeview.QBadgeView;
-
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.badge;
-import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.itemView;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
@@ -61,12 +52,13 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
 
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
-    private List<DynamicItemBean> list = new ArrayList<>();
+    private List<UpDateMessageBean.DynamicsBeanX> list = new ArrayList<UpDateMessageBean.DynamicsBeanX>();
     private MessagePresenter messagePresenter;
     private GridLayoutManager gridLayoutManager;
     private SearchItemAdapter searchItemAdapter;
     private SharedPreferences sharedPreferences;
     private Boolean isFresh = false;
+    MyMessageAdapter myMessageAdapter;
     private List<Integer> changelist = new ArrayList<>();
 
     public static int time = 0;
@@ -116,11 +108,11 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         recyclerView = view.findViewById(R.id.message_recyclerview);
         refreshLayout.setOnRefreshListener(this);
         gridLayoutManager = new GridLayoutManager(mContext,1);
-        searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),true);
-      //  MyMessageAdapter myMessageAdapter = new MyMessageAdapter((ArrayList<DynamicItemBean>) list,getActivity());
-        searchItemAdapter.attachPresenter(messagePresenter);
+       // searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),true);
+        myMessageAdapter = new MyMessageAdapter((ArrayList<UpDateMessageBean.DynamicsBeanX>) list,changelist,getActivity(),true);
+        myMessageAdapter.attachPresenter(messagePresenter);
         recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(searchItemAdapter);
+        recyclerView.setAdapter(myMessageAdapter);
     }
 
     private void initList(){
@@ -142,7 +134,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     }
 
     @Override
-    public void onDataBack(Boolean status, List<DynamicItemBean> dynamicItemBeanList) {
+    public void onDataBack(Boolean status, List<UpDateMessageBean.DynamicsBeanX> dynamicItemBeanList) {
         refreshLayout.setRefreshing(false);
         if(!status){
             FancyToast.makeText(mContext,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
@@ -157,16 +149,9 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
 
             for (int i =0 ; i<list.size(); i++) {
                 changelist.add(0);
-                if(list.get(i).getread() == 0){
-                    isread = true;
-                    Log.d("isread是",String.valueOf(isread));
-                    break;
 
-                }else {
-                    isread = false;
-                }
             }
-            searchItemAdapter.notifyDataSetChanged();
+            myMessageAdapter.notifyDataSetChanged();
 
 
         }
@@ -176,7 +161,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     public void isRead(boolean status) {
 
         if(status){
-            Toast.makeText(getContext(),"修改状态成功",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getContext(),"修改状态成功",Toast.LENGTH_SHORT).show();
         }
     }
 

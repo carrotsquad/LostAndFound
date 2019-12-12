@@ -1,7 +1,9 @@
 package com.zhangqianyuan.teamwork.lostandfound.model;
 
+import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.interfaces.ICommentedMessageModel;
 
 import io.reactivex.Observer;
@@ -23,7 +25,7 @@ public class CommentedMessageModel extends BaseModel implements ICommentedMessag
 
 
     @Override
-    public void getMyCommentedData(String jsessionid, Observer<SearchBean> observer) {
+    public void getMyCommentedData(String jsessionid, Observer<UpDateMessageBean> observer) {
         api.getMyCommentedData(jsessionid)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
