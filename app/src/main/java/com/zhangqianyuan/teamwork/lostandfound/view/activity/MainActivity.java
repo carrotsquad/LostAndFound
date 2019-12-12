@@ -129,26 +129,26 @@ public class MainActivity extends AppCompatActivity implements BaseView {
     public static BottomNavigationItemView itemView;
     public static Badge badge;
 
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 1: {
-                    badge = new QBadgeView(MainActivity.this)
-                            .bindTarget(itemView)
-                            .setShowShadow(true)
-                            .setBadgeGravity(Gravity.END | Gravity.TOP)
-                            .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
-                                @Override
-                                public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-
-                                }
-                            }).setBadgeText("");
-                }
-            }
-        }
-    };
+//    Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what){
+//                case 1: {
+//                    badge = new QBadgeView(MainActivity.this)
+//                            .bindTarget(itemView)
+//                            .setShowShadow(true)
+//                            .setBadgeGravity(Gravity.END | Gravity.TOP)
+//                            .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+//                                @Override
+//                                public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+//
+//                                }
+//                            }).setBadgeText("");
+//                }
+//            }
+//        }
+//    };
 
 
     private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
@@ -239,6 +239,8 @@ public class MainActivity extends AppCompatActivity implements BaseView {
         fragments.add(MessageFragment.newInstance());
         fragments.add(new UserInfoFragment());
          itemView =  mBottomNav.findViewById(R.id.message_ui);
+
+
 
         MainViewAdapter mainViewAdapter = new MainViewAdapter(getSupportFragmentManager());
 

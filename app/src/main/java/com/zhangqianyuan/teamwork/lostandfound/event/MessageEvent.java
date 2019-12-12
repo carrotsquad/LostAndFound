@@ -1,6 +1,8 @@
 package com.zhangqianyuan.teamwork.lostandfound.event;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UpDateMessageBean;
 
 import java.util.List;
 
@@ -16,14 +18,14 @@ import java.util.List;
 public class MessageEvent {
 
     private Boolean status;
-    private List<DynamicItemBean> dynamicItemBeanList;
+    private List<UpDateMessageBean.DynamicsBeanX> dynamicItemBeanList;
 
-    public MessageEvent(Boolean status,List<DynamicItemBean> dynamicItemBeanList){
+    public MessageEvent(Boolean status,List<UpDateMessageBean.DynamicsBeanX> dynamicItemBeanList){
         this.status=status;
         this.dynamicItemBeanList=dynamicItemBeanList;
     }
 
-    public void setDynamicItemBeanList(List<DynamicItemBean> dynamicItemBeanList) {
+    public void setDynamicItemBeanList(List<UpDateMessageBean.DynamicsBeanX> dynamicItemBeanList) {
         this.dynamicItemBeanList = dynamicItemBeanList;
     }
 
@@ -35,7 +37,7 @@ public class MessageEvent {
         return status;
     }
 
-    public List<DynamicItemBean> getDynamicItemBeanList() {
+    public List<UpDateMessageBean.DynamicsBeanX> getDynamicItemBeanList() {
         return dynamicItemBeanList;
     }
 }

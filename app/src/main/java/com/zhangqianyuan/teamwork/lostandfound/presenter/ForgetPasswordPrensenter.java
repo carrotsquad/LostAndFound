@@ -32,10 +32,10 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
             @Override
             public void onNext(SendCheckCodeBean sendCheckCodeBean) {
 
-                if(sendCheckCodeBean.getStatus() == 200 && sendCheckCodeBean != null){
-                    v.showcheckcodestatus(true,sendCheckCodeBean.getJSESSIONID());
-                }else{
-                    v.showcheckcodestatus(false,sendCheckCodeBean.getJSESSIONID());
+                if (sendCheckCodeBean.getStatus() == 200 && sendCheckCodeBean != null) {
+                    v.showcheckcodestatus(true, sendCheckCodeBean.getJSESSIONID());
+                } else {
+                    v.showcheckcodestatus(false, sendCheckCodeBean.getJSESSIONID());
                 }
             }
 
@@ -52,7 +52,7 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
     }
 
     @Override
-    public void IsRight(String session, String checkcode,String password,String email) {
+    public void IsRight(String session, String checkcode, String password, String email) {
 
         forgetPasswordModel = new ForgetPasswordModel();
         forgetPasswordModel.checkEmail(session, checkcode, new Observer<CheckCodeBean>() {
@@ -64,8 +64,8 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
             @Override
             public void onNext(CheckCodeBean checkCodeBean) {
 
-                if(checkCodeBean.getStatus() == 200){
-                    forgetPasswordModel.getNewPassword(password, email, new Observer<CheckCodeBean>() {
+                if (checkCodeBean.getStatus() == 200) {
+                    forgetPasswordModel.getNewPassword(password, email, session, new Observer<CheckCodeBean>() {
                         @Override
                         public void onSubscribe(Disposable d) {
 
@@ -74,8 +74,9 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
                         @Override
                         public void onNext(CheckCodeBean checkCodeBean) {
 
-                            v.checkCodeIsRight(checkCodeBean.getStatus());
-
+                            if (checkCodeBean.getStatus() == 200) {
+                                v.checkCodeIsRight(true);
+                            }
                         }
 
                         @Override
@@ -101,7 +102,6 @@ public class ForgetPasswordPrensenter extends AbstractBasePresenter<IForgetPassw
 
             }
         });
+
     }
-
-
 }

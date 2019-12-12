@@ -5,12 +5,14 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.AllTypesBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.MyHistoryItem;
+import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SendCheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SignInBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.ThingDetailBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.UserImgBean;
 
 import io.reactivex.Observable;
@@ -166,7 +168,7 @@ public interface Api {
     //获取评论过的消息
     @POST("/passlove/dynamics/commented")
     @FormUrlEncoded
-    Observable<SearchBean> getMyCommentedData(@Field("JSESSIONID")String jsessionid);
+    Observable<UpDateMessageBean> getMyCommentedData(@Field("JSESSIONID")String jsessionid);
 
     /*
     发消息给失/得主
@@ -220,5 +222,5 @@ public interface Api {
     //修改密码
     @FormUrlEncoded
     @POST("/passlove/updatepassword")
-    Observable<CheckCodeBean> updatepassword(@Field("password") String password,@Field("email") String email);
+    Observable<CheckCodeBean> updatepassword(@Field("password") String password,@Field("JSESSIONID") String session,@Field("username") String email);
 }

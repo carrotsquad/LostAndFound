@@ -19,6 +19,7 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.DynamicChildItemAdapter;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.DynamicChildPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IDynaicChildFragment;

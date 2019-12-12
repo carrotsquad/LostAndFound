@@ -9,6 +9,8 @@ import android.os.IBinder;
 import android.os.Message;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.zhangqianyuan.teamwork.lostandfound.event.MessageEvent;
 import com.zhangqianyuan.teamwork.lostandfound.model.CommentedMessageModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
@@ -75,7 +77,7 @@ public class UpdateMessageService extends Service implements IMessageFragment {
 
     //messagePresenter的数据回调
     @Override
-    public void onDataBack(Boolean status, List<DynamicItemBean> dynamicItemBeanList) {
+    public void onDataBack(Boolean status, List<UpDateMessageBean.DynamicsBeanX> dynamicItemBeanList) {
         if(updateMessageListenser!=null){
             updateMessageListenser.UpdateMessage(new MessageEvent(status,dynamicItemBeanList));
         }

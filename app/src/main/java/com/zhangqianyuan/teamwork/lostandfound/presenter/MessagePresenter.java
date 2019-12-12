@@ -1,8 +1,10 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
 import com.zhangqianyuan.teamwork.lostandfound.bean.SearchBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
+import com.zhangqianyuan.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.CommentedMessageModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.interfaces.IMessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
@@ -33,18 +35,18 @@ public class MessagePresenter extends AbstractBasePresenter<IMessageFragment> im
     public void getMessageData(String usernickname, String userphoto, String username, String jsessionid, int i1, int i) {
         if(isAttachActivity()) {
             commentedMessageModel = new CommentedMessageModel();
-            commentedMessageModel.getMyCommentedData(jsessionid, new Observer<SearchBean>() {
+            commentedMessageModel.getMyCommentedData(jsessionid, new Observer<UpDateMessageBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 
                 }
 
                 @Override
-                public void onNext(SearchBean searchBean) {
+                public void onNext(UpDateMessageBean upDateMessageBean) {
 
-                    if (searchBean.getStatus() == 200 && searchBean != null) {
-                        List<DynamicItemBean> dynamicItemBeanList = new ArrayList<>();
-                        dynamicItemBeanList.addAll(searchBean.getDynamics());
+                    if (upDateMessageBean.getStatus() == 200 && upDateMessageBean != null) {
+                        List<UpDateMessageBean.DynamicsBeanX> dynamicItemBeanList = new ArrayList<>();
+                        dynamicItemBeanList.addAll(upDateMessageBean.getDynamics());
                         v.onDataBack(true, dynamicItemBeanList);
                     }
                 }

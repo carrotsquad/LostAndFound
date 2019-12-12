@@ -23,8 +23,8 @@ public class DynamicItemBean {
     private String username;
     private String nickname;
     private String userphoto;
-    private int read;
     private TheLostBean thelost;
+
 
     public String getUsername() {
         return username;
@@ -58,13 +58,6 @@ public class DynamicItemBean {
         this.thelost = thelost;
     }
 
-    public int getread() {
-        return read;
-    }
-
-    public void setread(int isread) {
-        this.read = isread;
-    }
     //    private int eventType;
 //    private int headImg;  //用户头像
 //    private String neckName;  //用户呢称

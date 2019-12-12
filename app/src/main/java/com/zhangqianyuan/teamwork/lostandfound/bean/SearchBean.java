@@ -8,6 +8,7 @@ public class SearchBean {
 
     private List<DynamicItemBean> dynamics;
 
+
     public Integer getStatus() {
         return status;
     }
@@ -23,4 +24,5 @@ public class SearchBean {
     public void setDynamics(List<DynamicItemBean> dynamics) {
         this.dynamics = dynamics;
     }
+
 }

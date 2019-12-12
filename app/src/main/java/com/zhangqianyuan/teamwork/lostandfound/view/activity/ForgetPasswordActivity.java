@@ -78,7 +78,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     }
 
 
-    @OnClick({R.id.reset_getmailbox, R.id.reset_submit, R.id.reset_all_clear1,R.id.test})
+    @OnClick({R.id.reset_getmailbox, R.id.reset_submit, R.id.reset_all_clear1})
     void onClicked(View view) {
         switch (view.getId()) {
             case R.id.reset_submit: {
@@ -125,13 +125,11 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     }
 
     @Override
-    public void checkCodeIsRight(int isright) {
-        if(isright == 200){
-            Toast.makeText(this,"修改密码成功",Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(this,"修改密码失败",Toast.LENGTH_SHORT).show();
-        }
+    public void checkCodeIsRight(Boolean status) {
+
+        Toast.makeText(this,"修改密码成功",Toast.LENGTH_SHORT).show();
     }
+
 
 
 }

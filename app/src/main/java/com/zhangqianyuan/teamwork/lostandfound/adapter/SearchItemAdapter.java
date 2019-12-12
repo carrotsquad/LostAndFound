@@ -23,8 +23,6 @@ import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.image.GetImageFromWeb;
 import com.zhangqianyuan.teamwork.lostandfound.popupwindow.ArrowPopWindows;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
-import com.zhangqianyuan.teamwork.lostandfound.presenter.MyLoadPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -65,8 +63,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
     private Boolean isMessage;
     private List<Integer> changeNumList;
     private Activity activity;
-    private MessagePresenter messagePresenter;
-    int isread;
 
     public void setActivity(Activity activity) {
         this.activity = activity;
@@ -107,10 +103,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
     }
 
-    public void attachPresenter(MessagePresenter messagePresenter){
-        this.messagePresenter = messagePresenter;
-    }
-
     public SearchItemAdapter(ArrayList<DynamicItemBean> searchItemBeanArrayList, List<Integer> changeNumList, Activity activity,Boolean isMessage){
         this.searchItemBeanArrayList = searchItemBeanArrayList;
         this.isMessage = isMessage;
@@ -142,7 +134,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
 
 
-            SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
                 String date_orig = dynamicItemBean.getThelost().getPublishtime();
                 String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
                 if(!"0".equals(date_orig.substring(6, 7))) {
@@ -176,8 +167,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
                 intent.putExtra(OTHERSDESC,dynamicItemBean.getThelost().getDescription());
                 intent.putExtra(OTHERSTITLE,dynamicItemBean.getThelost().getTitle());
-                messagePresenter.updateIsRead(sharedPreferences.getString("SESSION",null),dynamicItemBean.getThelost().getId());
-                Log.d("isread", String.valueOf(isread));
                 mContext.startActivity(intent);
             });
 
@@ -191,11 +180,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
 
         Integer changenum = 0;
-        isread = dynamicItemBean.getread();
-
-        Log.d("isread",String.valueOf(isread));
-        if(isread == 0) {
-         //   changenum = changeNumList.get(position);
+        if(isMessage) {
+            changenum = changeNumList.get(position);
         }
         /**
          * "publishtime": "20181105173056",
@@ -273,14 +259,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }else {
             //事件图片
             Glide.with(mContext)
-                    .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getThelost().getPhoto()))
+                    .load(R.mipmap.diai1)
+                //    .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getThelost().getPhoto()))
                     .asBitmap()
                     .into(holder.headimg);
         }
 
         //用户头像
         Glide.with(mContext)
-                .load(getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getUserphoto()))
+               .load(R.mipmap.user)
+           //     .load(getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getUserphoto()))
                 .asBitmap()
                 .into(holder.userphoto);
 
@@ -288,22 +276,21 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         holder.isNeedBounty.setVisibility(View.INVISIBLE);
 
         //新消息气泡
-        if(isread == 0) {
-//            if(changenum!=0) {
+        if(isMessage) {
+            if(changenum!=0) {
                holder.newMsg.setVisibility(View.VISIBLE);
-//            }else {
-//                holder.newMsg.setVisibility(View.INVISIBLE);
-//            }
+            }else {
+                holder.newMsg.setVisibility(View.INVISIBLE);
+            }
         }
 
         //是否是消息
-        if(isread == 0) {
+        if(isMessage) {
 
             //侧滑删除
             holder.btnDlt.setOnClickListener(v -> {
                 holder.swipeMenuLayout.quickClose();
                 searchItemBeanArrayList.remove(position);
-                messagePresenter.postdelet(dynamicItemBean.getThelost().getId(),sharedPreferences.getString("SESSION",null));
                 FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
                 notifyItemRemoved(position);
                 notifyDataSetChanged();

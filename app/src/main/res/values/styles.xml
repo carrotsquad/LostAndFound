@@ -128,7 +128,6 @@
     </style>
 
     <style name="MyEditText">
-        <item   name="colorControlNormal">@color/them</item>
-        <item name="colorControlActivated">@color/them</item></style>
+        <item name="colorControlActivated">#7879ff</item></style>
 
 </resources>
