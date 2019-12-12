@@ -204,28 +204,27 @@
                     android:layout_height="wrap_content">
                 </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
-        <TextView
-            android:layout_margin="5dp"
-            android:background="@drawable/barbackgroud"
-            android:padding="10dp"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:text="我要归还"
-            android:id="@+id/clickreturn"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
-        <TextView
-            android:layout_margin="5dp"
-            android:background="@drawable/barbackgroud"
-            android:padding="10dp"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:text="点击评论"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:background="@drawable/barbackgroud">
+            <TextView
+                android:layout_marginLeft="50dp"
+            android:background="@drawable/commit"
+            android:layout_gravity="center|left"
             android:id="@+id/clicktocomment"
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_width="100dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_marginLeft="60dp"
+            android:background="@drawable/tv_return"
+            android:layout_gravity="center|right"
+            android:id="@+id/clickreturn"
+            android:layout_width="100dp"
+            android:layout_height="30dp" />
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

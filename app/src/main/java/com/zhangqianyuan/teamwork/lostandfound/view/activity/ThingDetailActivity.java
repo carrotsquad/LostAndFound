@@ -405,9 +405,11 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @Override
     public void getDataFromWeb(List<CommentFeedBack.Comments> list) {
         if(list!=null){
-            if(list.size()!=0){
+      /*      if(list.size()!=0){
                 clicktocomment.setVisibility(View.GONE);
             }
+
+       */
             mCommentList.clear();
             this.mCommentList.addAll(list);
             adapter.notifyDataSetChanged();

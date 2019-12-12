@@ -103,7 +103,7 @@
         android:layout_height="15dp"
         android:text="        两次密码输入不一致"
         android:textColor="#e53935"
-        android:textSize="10dp"
+        android:textSize="10sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/login_repassword"
         app:layout_constraintStart_toStartOf="@+id/login_repassword"
