@@ -16,6 +16,7 @@ import com.zhangqianyuan.teamwork.lostandfound.model.CommentedMessageModel;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -41,6 +42,7 @@ public class UpdateMessageService extends Service implements IMessageFragment {
 
     private UpdateMessageListenser updateMessageListenser;
     private MsgBinder msgBinder=new MsgBinder();
+    private ArrayList<Integer> arrayList = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -80,6 +82,9 @@ public class UpdateMessageService extends Service implements IMessageFragment {
     public void onDataBack(Boolean status, List<UpDateMessageBean.DynamicsBeanX> dynamicItemBeanList) {
         if(updateMessageListenser!=null){
             updateMessageListenser.UpdateMessage(new MessageEvent(status,dynamicItemBeanList));
+            for(int i = 0;i<dynamicItemBeanList.size();i++){
+                arrayList.add(dynamicItemBeanList.get(i).getRead());
+            }
         }
     }
 
@@ -110,5 +115,16 @@ public class UpdateMessageService extends Service implements IMessageFragment {
 
     public interface UpdateMessageListenser{
         void UpdateMessage(MessageEvent messageEvent);
+    }
+
+    public void getstatus(Boolean b){
+        for(int i = 0;i<arrayList.size();i++){
+            if(arrayList.get(i) == 0){
+                b = true;
+                break;
+            }else{
+                b = false;
+            }
+        }
     }
 }

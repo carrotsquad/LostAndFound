@@ -1,14 +1,19 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +28,7 @@ import com.zhangqianyuan.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.zhangqianyuan.teamwork.lostandfound.event.MessageEvent;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.MessagePresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
+import com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IMessageFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -32,6 +38,10 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
+
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.itemView;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
@@ -48,7 +58,6 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     private View view;
     private Context mContext;
 
-    public static boolean isread;
 
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
@@ -59,6 +68,11 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     private SharedPreferences sharedPreferences;
     private Boolean isFresh = false;
     MyMessageAdapter myMessageAdapter;
+    Activity activity = getActivity();
+    Badge badge;
+    Boolean aBoolean;
+    Message message;
+    Message message1;
     private List<Integer> changelist = new ArrayList<>();
 
     public static int time = 0;
@@ -68,6 +82,9 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         MessageFragment messageFragment = new MessageFragment();
         return messageFragment;
     }
+    Handler handler;
+    Handler handler1;
+
 
     @Nullable
     @Override
@@ -80,6 +97,39 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         initView();
         initList();
         EventBus.getDefault().register(this);
+        activity = getActivity();
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what){
+                    case 0: {
+                        Log.d("进入了吗", "进入了");
+
+                        if (badge != null) {
+                            badge.hide(false);
+                        }
+                        badge = new QBadgeView(activity)
+                                .bindTarget(itemView)
+                                .setShowShadow(true)
+                                .setBadgeGravity(Gravity.END | Gravity.TOP)
+                                .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                                    @Override
+                                    public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+
+                                    }
+                                }).setBadgeText("");
+                        break;
+                    }
+                    case 1:{
+                        Log.d("进入了吗1","进入了");
+                        if(badge != null){
+                            badge.hide(false);
+                        }
+                    }
+                }
+            }
+        };
         return view;
     }
 
@@ -131,6 +181,8 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateMessage(MessageEvent messageEvent) {
 //        Toast.makeText(getContext(),messageEvent.toString(),Toast.LENGTH_SHORT).show();
+
+
     }
 
     @Override
@@ -152,7 +204,29 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
 
             }
             myMessageAdapter.notifyDataSetChanged();
+            message = new Message();
+            if(dynamicItemBeanList.size() != 0) {
+                for (int i = 0; i < dynamicItemBeanList.size(); i++) {
+                    if (dynamicItemBeanList.get(i).getRead() == 0) {
+                        aBoolean = true;
+                        break;
+                    } else {
+                        aBoolean = false;
+                    }
+                }
+            }else {
+                aBoolean = false;
+            }
 
+            if(aBoolean){
+                message.what = 0;
+            }else {
+                message.what = 1;
+
+            }
+            Log.d("我康康message的只", String.valueOf(message.arg1));
+
+            handler.sendMessage(message);
 
         }
     }

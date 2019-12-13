@@ -76,7 +76,7 @@ import q.rorbin.badgeview.QBadgeView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
-import static com.zhangqianyuan.teamwork.lostandfound.view.fragment.MessageFragment.isread;
+
 
 
 /**
@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
      */
     private long lastBackPressed;
 
+    private Boolean aBoolean;
     /**
      * 两次点击的间隔时间
      */
@@ -127,28 +128,8 @@ public class MainActivity extends AppCompatActivity implements BaseView {
    // Button fabu11;
 
     public static BottomNavigationItemView itemView;
-    public static Badge badge;
 
-//    Handler handler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            switch (msg.what){
-//                case 1: {
-//                    badge = new QBadgeView(MainActivity.this)
-//                            .bindTarget(itemView)
-//                            .setShowShadow(true)
-//                            .setBadgeGravity(Gravity.END | Gravity.TOP)
-//                            .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
-//                                @Override
-//                                public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-//
-//                                }
-//                            }).setBadgeText("");
-//                }
-//            }
-//        }
-//    };
+
 
 
     private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
@@ -171,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements BaseView {
             });
             updateMessageService.startService();
             //先设置listener
+            updateMessageService.getstatus(aBoolean);
+
         }
 
         @Override
@@ -298,9 +281,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
                 }
                 case R.id.message_ui: {
                     mViewPager.setCurrentItem(MESSAGE_FRAGMENT);
-                    Message message = new Message();
-                    message.arg1 = 0;
-                 //   handler.sendMessage(message);
+
                     return true;
                 }
                 case R.id.mine_ui: {
@@ -333,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
         TextView textView=contentView.findViewById(R.id.textView);
         TextView textView1=contentView.findViewById(R.id.textView2);
 
-        float newshiwu =  newShiWu.getY();
+        float newshiwu =  newShiWu.getTop();
 
 
         View rootView = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_main, null);
@@ -375,7 +356,8 @@ public class MainActivity extends AppCompatActivity implements BaseView {
         mPopWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getY() < newshiwu) {
+                Log.d("到底据顶部多少嘛", String.valueOf(motionEvent.getY()));
+                if (motionEvent.getRawY() < 1500) {
                     closeTranslationAnimation(newShiWu, 300, bottom);
                     closeTranslationAnimation(newZhaoLing, 300, bottom);
                     closeTranslationAnimation(textView, 300, bottom);
