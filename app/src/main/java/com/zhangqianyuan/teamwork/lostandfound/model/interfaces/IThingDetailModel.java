@@ -3,6 +3,7 @@ package com.zhangqianyuan.teamwork.lostandfound.model.interfaces;
 import com.zhangqianyuan.teamwork.lostandfound.bean.CommentFeedBack;
 import com.zhangqianyuan.teamwork.lostandfound.bean.StatusBean;
 
+import io.reactivex.Observer;
 import retrofit2.Callback;
 
 public interface IThingDetailModel {
@@ -11,4 +12,5 @@ public interface IThingDetailModel {
 
     //展示评论
     void getInternetData(String session, int lostid,  Callback<CommentFeedBack> callback);
+    void sendMessage(String session,int id , Observer<StatusBean> observer);
 }

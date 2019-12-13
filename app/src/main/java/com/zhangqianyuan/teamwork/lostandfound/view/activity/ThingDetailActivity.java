@@ -132,16 +132,18 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     CardView usercard;
 
     //点击评论按键
-    @BindView(R.id.clicktocomment)
+    @BindView(R.id.comment)
     TextView clicktocomment;
 
     //确认栏
-    @BindView(R.id.clickreturn)
+    @BindView(R.id.tv_return)
     TextView clickreturn;
-
 
     @BindView(R.id.thing_detail_thingsdetail_name)
     TextView name;
+
+    @BindView(R.id.linearlayout)
+    LinearLayout linearLayout;
 
 
     private String imgs = "";
@@ -151,19 +153,19 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private ThingDetailPresenter thingDetailPresenter;
     private ReturnPresenter returnPresenter;
     private PopupWindow mPopupWindow;
-    private Integer qishileixing;
-    private String strThingsImgs;
-    private String jsession;
+
     private ViewPager activity_main_viewpager;
     private LinearLayout activity_main_llpoints;
     private List<ImageView> imageViewList;;
     private int viewPagerLastIndex;
     private List<CommentFeedBack.Comments> mCommentList  =new ArrayList<>();
     private ThingDetailAdapter adapter;
+    private int id;
+    private String jsession;
     private View statusBarView;
 
     @Override
-     protected  void onCreate(Bundle savedInstanceState) {
+    protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thing_detail);
         ButterKnife.bind(this);
@@ -172,6 +174,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this,new ThingDetailModel());
+
         imgs=initDataFromLocal();
         Log.e("IMGS",imgs);
         String[] a = imgs.split(",");
@@ -183,7 +186,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
         clicktocomment.setOnClickListener(v-> popup());
         returnPresenter = new ReturnPresenter();
-        returnPresenter.attachActivity(this);
+        returnPresenter.attachActivity((IThingDetailActivity) this);
+
     }
 
     @Override
@@ -306,9 +310,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String strdesc = intent.getStringExtra(OTHERSDESC);
         String title = intent.getStringExtra(OTHERSTITLE);
         intthingstype = intent.getIntExtra(OTHERSTHINGSTYPE,1);
-        strThingsImgs = intent.getStringExtra(OTHERSIMGS);
+        String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         lostid = intent.getIntExtra(OTHERSID,-1);
-        qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
+        int qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
 
         if(qishileixing==0){
             type.setText("失物详情");
@@ -330,7 +334,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         return  strThingsImgs;
     }
 
-    @OnClick({R.id.thing_detail_back,R.id.thing_detail_usercard,R.id.clickreturn})
+    @OnClick({R.id.thing_detail_back,R.id.thing_detail_usercard,R.id.tv_return})
     void onClick(View view){
         switch (view.getId()){
             case R.id.thing_detail_back:{
@@ -341,11 +345,11 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 popup();
                 break;
             }
-            case R.id.clickreturn:{
+            case R.id.tv_return:{
+                Intent intent = getIntent();
+                id= intent.getIntExtra(OTHERSID,0);
                 jsession = sharedPreferences.getString(SESSION, "null");
-                returnPresenter.sendMessage(jsession,lostid);
-                Log.e("ReturnActivity","完好"+jsession+"+"+lostid);
-                break;
+                returnPresenter.sendMessage(jsession,id);
             }
             default:{
                 break;
@@ -367,21 +371,21 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         mPopupWindow.setFocusable(true);
         mPopupWindow.setOutsideTouchable(true);
         ok.setOnClickListener(v->{
-                if (!commentInput.getText().toString().equals("")){
-                    String s = commentInput.getText().toString();
-                    Log.d("10086",s);
-                    Log.d("10086","lostid="+lostid);
-                    ThingDetailBean.Comment newComment = new ThingDetailBean.Comment();
-                    newComment.setId(null);
-                    newComment.setTime(null);
-                    newComment.setContent(s);
-                    thingDetailPresenter.sendDataToWeb(sharedPreferences.getString("SESSION",null),null,lostid,null,s);
-                    thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
-                    commentInput.setText("");
-                }else{
-                    Toast.makeText(ThingDetailActivity.this,"没有输入内容哦",Toast.LENGTH_SHORT).show();
-                }
-            });
+            if (!commentInput.getText().toString().equals("")){
+                String s = commentInput.getText().toString();
+                Log.d("10086",s);
+                Log.d("10086","lostid="+lostid);
+                ThingDetailBean.Comment newComment = new ThingDetailBean.Comment();
+                newComment.setId(null);
+                newComment.setTime(null);
+                newComment.setContent(s);
+                thingDetailPresenter.sendDataToWeb(sharedPreferences.getString("SESSION",null),null,lostid,null,s);
+                thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
+                commentInput.setText("");
+            }else{
+                Toast.makeText(ThingDetailActivity.this,"没有输入内容哦",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void popup(){
@@ -405,11 +409,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @Override
     public void getDataFromWeb(List<CommentFeedBack.Comments> list) {
         if(list!=null){
-      /*      if(list.size()!=0){
-                clicktocomment.setVisibility(View.GONE);
-            }
-
-       */
+      //      if(list.size()!=0){
+     //           clicktocomment.setVisibility(View.GONE);
+      //      }
             mCommentList.clear();
             this.mCommentList.addAll(list);
             adapter.notifyDataSetChanged();
@@ -417,7 +419,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         }
 
     }
-
     @Override
     public void showStatus(Boolean status) {
         if (status) {

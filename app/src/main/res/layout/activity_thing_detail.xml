@@ -205,25 +205,38 @@
                 </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
         <LinearLayout
+            android:id="@+id/linearlayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_gravity="bottom"
             android:orientation="horizontal"
+            android:layout_gravity="bottom"
             android:background="@drawable/barbackgroud">
-            <TextView
-                android:layout_marginLeft="50dp"
-            android:background="@drawable/commit"
-            android:layout_gravity="center|left"
-            android:id="@+id/clicktocomment"
-            android:layout_width="100dp"
-            android:layout_height="30dp" />
-        <TextView
-            android:layout_marginLeft="60dp"
-            android:background="@drawable/tv_return"
-            android:layout_gravity="center|right"
-            android:id="@+id/clickreturn"
-            android:layout_width="100dp"
-            android:layout_height="30dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:paddingRight="30dp">
+                <TextView
+                    android:id="@+id/comment"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/commit"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="30dp">
+                <TextView
+                    android:id="@+id/tv_return"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/tv_return"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
