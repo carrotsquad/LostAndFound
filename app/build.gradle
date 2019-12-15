@@ -114,4 +114,5 @@ dependencies {
 
     //小红点
     implementation 'q.rorbin:badgeview:1.1.3'
+
 }

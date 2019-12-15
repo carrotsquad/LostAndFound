@@ -47,11 +47,11 @@ public interface Api {
     //注册
     @FormUrlEncoded
     @POST("passlove/register")
-    Observable<RegisterBean> getRegister(@Field("username") String username,@Field("password") String password,@Field("nickname") String nickname,@Field("phonenumber") String phonenumber,@Field("JSESSIONID") String sessionID);
+    Observable<RegisterBean> getRegister(@Field("snumber")String stu,@Field("password") String password,@Field("nickname") String nickname,@Field("phonenumber") String phonenumber,@Field("JSESSIONID") String sessionID);
 
     //登录
     @FormUrlEncoded
-    @POST("/passlove/loginIn")
+    @POST("/passlove/loginIn2")
     Observable<SignInBean> getSignIn(@Field("requestData") String info);
 
     //搜索
