@@ -67,7 +67,7 @@ public class SignInBean {
             this.nickname = nickname;
         }
 
-        public void setStu(String sunmber) {
+        public void setStu(String snumber) {
             this.snumber = snumber;
         }
 
