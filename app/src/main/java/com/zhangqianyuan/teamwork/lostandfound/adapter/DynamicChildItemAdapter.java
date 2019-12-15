@@ -255,4 +255,12 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
         return lists.size();
     }
 
+
+
+    public void refresh(List<DynamicItemBean> addlist){
+        int position = lists.size();
+        lists.addAll(position,addlist);
+        notifyDataSetChanged();
+    }
+
 }

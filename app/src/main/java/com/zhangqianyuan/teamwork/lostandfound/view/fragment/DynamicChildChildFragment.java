@@ -3,6 +3,7 @@ package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,13 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.DynamicChildItemAdapter;
-import com.zhangqianyuan.teamwork.lostandfound.adapter.test;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
-import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
 import com.zhangqianyuan.teamwork.lostandfound.presenter.DynamicChildPresenter;
 import com.zhangqianyuan.teamwork.lostandfound.services.ActivityManager;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IDynaicChildFragment;
@@ -69,15 +69,70 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
         oldPosi = 15;
         mRecyclerView = view.findViewById(R.id.dynamic_list);
         refreshLayout = view.findViewById(R.id.dynamic_list_swipe);
+//        smartRefreshLayout = view.findViewById(R.id.dynamic_list_swipe);
+//        Handler handler = new Handler();
+
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         manager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);//不设置的话，图片闪烁错位，有可能有整列错位的情况。
         ActivityManager.getActivityManager().addF(this);
         mRecyclerView.setLayoutManager(manager);
         mDynamicItemAdapter = new DynamicChildItemAdapter(lists, getActivity());
         mRecyclerView.setAdapter(mDynamicItemAdapter);
-        refreshLayout.setOnRefreshListener(this);
+      // refreshLayout.setOnRefreshListener(this);
 
-
+//        smartRefreshLayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+//
+//        smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore(RefreshLayout refreshLayout) {
+//
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        oldPosi = newPosi;
+//                        newPosi = newPosi + 15;
+//                        switch (pos) {
+//                            case 2: {
+//                                Log.e("LostToday","LostToday刷新");
+//                                iDynamicChildPresenter.getDynamicLostTodayData(new DynamicsRequestBean(0, newPosi), session);
+//                                break;
+//                            }
+//                            case 3: {
+//                                Log.e("LostYesterday","LostYesterday刷新");
+//                                iDynamicChildPresenter.getDynamicLostYesterdayData(new DynamicsRequestBean(0, newPosi), session);
+//                                break;
+//                            }
+//                            case 4: {
+//                                Log.e("LostAgo","LostAgo刷新");
+//                                iDynamicChildPresenter.getDynamicLostAgoData(new DynamicsRequestBean(0, newPosi), session);
+//                                break;
+//                            }
+//                            case 5: {
+//                                Log.e("FindToday","FindToday刷新");
+//                                iDynamicChildPresenter.getDynamicFindTodayData(new DynamicsRequestBean(0, newPosi), session);
+//                                break;
+//                            }
+//                            case 6: {
+//                                Log.e("FindYesterday","FindYesterday刷新");
+//                                iDynamicChildPresenter.getDynamicFindYesterdayData(new DynamicsRequestBean(0, newPosi), session);
+//                                break;
+//                            }
+//                            case 7: {
+//                                Log.e("FindAgo","FindAgo刷新");
+//                                iDynamicChildPresenter.getDynamicFindAgoData(new DynamicsRequestBean(0, newPosi ), session);
+//                                break;
+//                            }
+//                            default: {
+//                                break;
+//                            }
+//                        }
+//                    }
+//                },2000);
+//            }
+//        });
+//
+//        smartRefreshLayout.setEnableLoadMore(true);
+//        smartRefreshLayout.autoRefresh();
         iDynamicChildPresenter = new DynamicChildPresenter();
         iDynamicChildPresenter.attachActivity(this);
         initLists();

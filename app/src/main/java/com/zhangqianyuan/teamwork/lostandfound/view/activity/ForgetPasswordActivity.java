@@ -1,6 +1,8 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,8 @@ import com.zhangqianyuan.teamwork.lostandfound.utils.EditUtil;
 import com.zhangqianyuan.teamwork.lostandfound.view.interfaces.IForgetPasswordActivity;
 
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,11 +61,20 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     @BindView(R.id.reset_mailbox_wrong)
     TextView mailbox_wrong;
 
+    @BindView(R.id.status_wrong)
+    TextView statu_wrong;
+
+
     private ForgetPasswordPrensenter forgetPasswordPrensenter;
 
     String mailbox111;
 
     String session;
+    Boolean isright;
+
+    String s;
+
+
 
 
     @Override
@@ -71,9 +84,8 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
         ButterKnife.bind(this);
         EditUtil.EditAllClear(all_clear, new_password_confirm);
         new_password_wrong.setVisibility(View.INVISIBLE);
-        if(new_password.getText().toString() == new_password_confirm.getText().toString()) {
-            new_password_wrong.setVisibility(View.VISIBLE);
-        }
+        statu_wrong.setVisibility(View.INVISIBLE);
+        mailbox_wrong.setVisibility(View.INVISIBLE);
         forgetPasswordPrensenter = new ForgetPasswordPrensenter(this);
     }
 
@@ -83,12 +95,17 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
         switch (view.getId()) {
             case R.id.reset_submit: {
 
-                    forgetPasswordPrensenter.IsRight(session,confirm.getText().toString(),new_password.getText().toString(),email);
+                if(isright) {
+                    forgetPasswordPrensenter.IsRight(session, confirm.getText().toString(), new_password.getText().toString(), email);
                     Intent intent = new Intent(ForgetPasswordActivity.this, SignInActivity.class);
                     intent.putExtra(PWD, new_password.getText().toString());
-                    intent.putExtra("ForgetorLogin","Foeget");
+                    intent.putExtra("ForgetorLogin", "Foeget");
                     startActivity(intent);
                     finish();
+                }else{
+                    statu_wrong.setVisibility(View.VISIBLE);
+                }
+
 
                 break;
             }
@@ -100,15 +117,19 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
             }
 
             case R.id.reset_getmailbox: {
+
+                if(new_password != new_password_confirm){
+                    new_password_wrong.setVisibility(View.VISIBLE);
+                }
+                if(!isEmail(email)){
+                    mailbox_wrong.setVisibility(View.VISIBLE);
+                }
+
                 email = mailbox.getText().toString();
                 forgetPasswordPrensenter.getCode(email);
+            }
                 break;
 
-            }
-
-            default: {
-                break;
-            }
         }
 
     }
@@ -117,6 +138,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     @Override
     public void showcheckcodestatus(Boolean status, String session) {
 
+        isright = status;
         if (status) {
             this.session = session;
             Log.d("session",session);
@@ -128,6 +150,18 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     public void checkCodeIsRight(Boolean status) {
 
         Toast.makeText(this,"修改密码成功",Toast.LENGTH_SHORT).show();
+        if(!status){
+          //  statu_wrong.setText("验证码错误！");
+        }
+
+    }
+
+    //验证邮箱格式
+    public static boolean isEmail(String strEmail) {
+        String strPattern = "^[a-zA-Z]*[\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9]*[\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        Pattern p = Pattern.compile(strPattern);
+        Matcher m = p.matcher(strEmail);
+        return m.matches();
     }
 
 
