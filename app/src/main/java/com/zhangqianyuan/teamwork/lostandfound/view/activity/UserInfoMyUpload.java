@@ -42,6 +42,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     private MyLoadPresenter presenter = new MyLoadPresenter(new MyLoadModel());
     private MyLoadItemAdapter mAdapter;
     private SharedPreferences sharedPreferences;
+    public static int lostidddd;
     @BindView(R.id.myload_list)
     RecyclerView list;
 
@@ -93,6 +94,11 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     public void showData(List<TheLostBean> beans) {
         lists.clear();
         lists.addAll(beans);
+        if(lists.size() == 0){
+            lostidddd = -1;
+        }else{
+            lostidddd = beans.get(lists.size() - 1).getId();
+        }
         mAdapter.notifyDataSetChanged();
     }
 

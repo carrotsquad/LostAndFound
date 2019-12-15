@@ -106,7 +106,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
             qishileixing = view.findViewById(R.id.search_item_qishileixing);
             thingType = view.findViewById(R.id.search_item_thingstype);
             newMsg = view.findViewById(R.id.search_item_newmessage);
-            btnDlt=view.findViewById(R.id.search_item_delete);
+          //  btnDlt=view.findViewById(R.id.search_item_delete);
         }
     }
 
@@ -162,7 +162,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
             String place = allPlaceBeanList.get(lostplace-1);
 //                String thingsType = allTypeBeanList.get(thingstype);
 
-            holder.newMsg.setVisibility(View.INVISIBLE);
+            holder.newMsg.setVisibility(View.GONE);
             Intent intent = new Intent(mContext, ThingDetailActivity.class);
             intent.putExtra(OTHERSNICKNAME,dynamicItemBean.getDynamics().getNickname());
             intent.putExtra(OTHERSPHOTO,dynamicItemBean.getDynamics().getUserphoto());
@@ -288,41 +288,41 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
             }
         }
 
-        //是否是消息
-        if(isMessage) {
-
-            //侧滑删除
-            holder.btnDlt.setOnClickListener(v -> {
-                holder.swipeMenuLayout.quickClose();
-                messagePresenter.postdelet(dynamicItemBean.getDynamics().getThelost().getId(),sharedPreferences.getString("SESSION",null));
-                searchItemBeanArrayList.remove(position);
-                FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
-                notifyItemRemoved(position);
-                notifyDataSetChanged();
-            });
-
-            //popupwindow弹出删除
-            holder.arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {
-                @Override
-                public void onViewCreate(ViewGroup viewGroup) {
-                    viewGroup.getChildAt(0).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            holder.arrowPopWindows.dismiss();
-                            messagePresenter.postdelet(dynamicItemBean.getDynamics().getThelost().getId(),sharedPreferences.getString("SESSION",null));
-                            searchItemBeanArrayList.remove(position);
-                            FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
-                            notifyItemRemoved(position);
-                            notifyDataSetChanged();
+//        //是否是消息
+//        if(isMessage) {
 //
-                        }
-                    });
-                }
-            });
-
-        }else {
-            holder.newMsg.setVisibility(View.INVISIBLE);
-        }
+//            //侧滑删除
+//            holder.btnDlt.setOnClickListener(v -> {
+//                holder.swipeMenuLayout.quickClose();
+//                messagePresenter.postdelet(dynamicItemBean.getDynamics().getThelost().getId(),sharedPreferences.getString("SESSION",null));
+//                searchItemBeanArrayList.remove(position);
+//                FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+//                notifyItemRemoved(position);
+//                notifyDataSetChanged();
+//            });
+//
+//            //popupwindow弹出删除
+//            holder.arrowPopWindows = new ArrowPopWindows(activity, R.layout.message_popwindow, new ArrowPopWindows.OnViewCreateListener() {
+//                @Override
+//                public void onViewCreate(ViewGroup viewGroup) {
+//                    viewGroup.getChildAt(0).setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            holder.arrowPopWindows.dismiss();
+//                            messagePresenter.postdelet(dynamicItemBean.getDynamics().getThelost().getId(),sharedPreferences.getString("SESSION",null));
+//                            searchItemBeanArrayList.remove(position);
+//                            FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+//                            notifyItemRemoved(position);
+//                            notifyDataSetChanged();
+////
+//                        }
+//                    });
+//                }
+//            });
+//
+//        }else {
+//            holder.newMsg.setVisibility(View.INVISIBLE);
+//        }
 
         }
 

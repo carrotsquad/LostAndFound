@@ -1,12 +1,17 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.fragment;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -53,9 +58,12 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.name111;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.UserInfoSettingActivity.changename1111;
 
 /**
  * Description
@@ -74,13 +82,13 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     CircleImageView headImg;
 
     @BindView(R.id.userinfo_head_nick)
-    TextView  headTxt;
+    TextView headTxt;
 
     @BindView(R.id.userinfo_myupload_layout)
-    RelativeLayout  myupload;
+    RelativeLayout myupload;
 
     @BindView(R.id.userinfo_myhistory_layout)
-    RelativeLayout  myhistory;
+    RelativeLayout myhistory;
 
     @BindView(R.id.userinfo_feedback_layout)
     RelativeLayout feedback;
@@ -92,28 +100,31 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     RelativeLayout setting;
 
 
-    private  Context mContext;
+    private Context mContext;
     private boolean success;            //用于判断是否上传头像成功
-    private String  photoPath;          //头像文件路径
-    private String  nick;               //昵称
-    private String  jsession;
+    private String photoPath;          //头像文件路径
+    private String nick;               //昵称
+    private String jsession;
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private UserInfoPresenter mPresenter;
     private Unbinder unbinder;
+    TimeThread timeThread = new TimeThread();
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_userinfo,container,false);
-        unbinder=ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_userinfo, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        headTxt = view.findViewById(R.id.userinfo_head_nick);
         mContext = getContext();
         ActivityManager.getActivityManager().addF(this);
         getSharePrefrence();
         initView();
         initMVP();
-
+        timeThread.start();
         return view;
     }
 
@@ -131,20 +142,20 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         super.onDestroy();
     }
 
-    public void initMVP(){
+    public void initMVP() {
         mPresenter = new UserInfoPresenter(new UserInfoModel());
         mPresenter.attachActivity(this);
     }
 
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         UserInfoFragment fragment = new UserInfoFragment();
         return fragment;
     }
 
 
     //选择图片
-    private void initGallery(){
+    private void initGallery() {
         //设置主题
         //ThemeConfig.CYAN
         ThemeConfig theme = new ThemeConfig.Builder()
@@ -179,63 +190,64 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             //进行图片上传与置换
             //置换
             photoPath = resultList.get(0).getPhotoPath();
-            Log.e("ImgTest",photoPath);
-            FancyToast.makeText(mContext,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-            jsession = getActivity().getSharedPreferences("users",Context.MODE_PRIVATE).getString(SESSION,"null");
-            mPresenter.uploadHeadImg(jsession,new File(photoPath));
+            Log.e("ImgTest", photoPath);
+            FancyToast.makeText(mContext, "取得照片", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+            jsession = getActivity().getSharedPreferences("users", Context.MODE_PRIVATE).getString(SESSION, "null");
+            mPresenter.uploadHeadImg(jsession, new File(photoPath));
         }
 
         @Override
         public void onHanlderFailure(int requestCode, String errorMsg) {
-            Log.e("editinfo",errorMsg);
-            FancyToast.makeText(mContext,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            Log.e("editinfo", errorMsg);
+            FancyToast.makeText(mContext, errorMsg, FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     };
 
 
-    public void getSharePrefrence(){
-        preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
-        jsession=preferences.getString("SESSION",null);
-        nick=preferences.getString("NICKNAME",null);
+    public void getSharePrefrence() {
+        preferences = getActivity().getSharedPreferences("users", Context.MODE_PRIVATE);
+        jsession = preferences.getString("SESSION", null);
+        nick = preferences.getString("NICKNAME", null);
         editor = preferences.edit();
+        Log.d("nicknameaaaaaa", nick);
     }
 
-    public void initView(){
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users",MODE_PRIVATE);
-        SharedPreferences preferences =getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
-        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
-                headImg,getActivity());
+    public void initView() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users", MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences("users", Context.MODE_PRIVATE);
+        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)),
+                headImg, getActivity());
 //        Glide.with(mContext)
 //                .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
 //                .asBitmap()
 //                .into(headImg);
-        headTxt.setText(nick);
+
     }
 
 
-    @OnClick({R.id.userinfo_head_img,R.id.userinfo_head_nick,R.id.userinfo_myupload_layout,
-            R.id.userinfo_myhistory_layout,R.id.userinfo_aboutus_layout,R.id.userinfo_setting_layout,
-    R.id.userinfo_feedback_layout})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.userinfo_head_img, R.id.userinfo_head_nick, R.id.userinfo_myupload_layout,
+            R.id.userinfo_myhistory_layout, R.id.userinfo_aboutus_layout, R.id.userinfo_setting_layout,
+            R.id.userinfo_feedback_layout})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.userinfo_head_img:
             case R.id.userinfo_head_nick:
                 initGallery();
                 break;
             case R.id.userinfo_myupload_layout:
-                startActivity(new Intent(mContext,UserInfoMyUpload.class));
+                startActivity(new Intent(mContext, UserInfoMyUpload.class));
                 break;
             case R.id.userinfo_myhistory_layout:
-                startActivity(new Intent(mContext,UserInfoMyHistory.class));
+                startActivity(new Intent(mContext, UserInfoMyHistory.class));
                 break;
             case R.id.userinfo_feedback_layout:
                 feedBack();
                 break;
-            case  R.id.userinfo_aboutus_layout:
-                startActivity(new Intent(mContext,UserInfoAboutUsActivity.class));
+            case R.id.userinfo_aboutus_layout:
+                startActivity(new Intent(mContext, UserInfoAboutUsActivity.class));
                 break;
             case R.id.userinfo_setting_layout:
-                startActivity(new Intent(mContext,UserInfoSettingActivity.class));
+                startActivity(new Intent(mContext, UserInfoSettingActivity.class));
                 break;
             default:
                 break;
@@ -243,26 +255,26 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     }
 
     @Override
-    public  void onResume() {
-        Log.d("15486622","heihiehie");
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users",MODE_PRIVATE);
-        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
-                headImg,getActivity());
+    public void onResume() {
+        Log.d("15486622", "heihiehie");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users", MODE_PRIVATE);
+        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)),
+                headImg, getActivity());
 //        Glide.with(mContext)
 //                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
 //                .asBitmap()
 //                .into(headImg);
-        Log.d("15486622",""+AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)));
-        headTxt.setText(mContext.getSharedPreferences("users",MODE_PRIVATE).getString(STU,null));
+        Log.d("15486622", "" + AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)));
+        headTxt.setText(mContext.getSharedPreferences("users", MODE_PRIVATE).getString(NICKNAME, null));
         super.onResume();
     }
 
     @Override
     public void onSuccess(int status, String userphoto) {
-        success = (status==200);
-        if (success){
+        success = (status == 200);
+        if (success) {
             //更新头像
-            editor.putString(USERPHOTO,userphoto);
+            editor.putString(USERPHOTO, userphoto);
             editor.commit();
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -275,20 +287,19 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 //                    .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
 //                    .asBitmap()
 //                    .into(headImg);
-            Toast.makeText(mContext,"头像上传成功",Toast.LENGTH_SHORT).show();
-        }else {
+            Toast.makeText(mContext, "头像上传成功", Toast.LENGTH_SHORT).show();
+        } else {
             Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
         }
     }
 
     /**
-     *
      * 反馈信息
      * 2019/4/18
      * Boomerr
      */
     private void feedBack() {
-        View view = View.inflate(getContext(),R.layout.feedback_popupwindow,null);
+        View view = View.inflate(getContext(), R.layout.feedback_popupwindow, null);
         PopupWindow mFeedBack = new PopupWindow(view);
         mFeedBack.setWidth(WindowManager.LayoutParams.FILL_PARENT);
         mFeedBack.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
@@ -306,31 +317,33 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         });
         EditText feedback_edt = (EditText) view.findViewById(R.id.feedback_edt);
         Button feedback_btn = (Button) view.findViewById(R.id.feedback_btn);
-        View.OnClickListener listener = new View.OnClickListener(){
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch(view.getId()){
+                switch (view.getId()) {
                     case R.id.feedback_btn:
                         String msg = feedback_edt.getText().toString();
-                        if(msg.equals("")){
-                            FancyToast.makeText(getContext(),"填写为空",
-                                    Toast.LENGTH_SHORT,FancyToast.ERROR,false).show();
-                        }else{
+                        if (msg.equals("")) {
+                            FancyToast.makeText(getContext(), "填写为空",
+                                    Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                        } else {
                             FancyToast.makeText(getContext(),
-                                    "感谢您衷心的意见，我们会尽快更改",Toast.LENGTH_SHORT,FancyToast.SUCCESS
-                                    ,false).show();
+                                    "感谢您衷心的意见，我们会尽快更改", Toast.LENGTH_SHORT, FancyToast.SUCCESS
+                                    , false).show();
                         }
                         mFeedBack.dismiss();
                         break;
                     default:
                         break;
                 }
-            }};
+            }
+        };
         feedback_btn.setOnClickListener(listener);
         mFeedBack.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
 
     }
+
     //设置屏幕的透明度
     public void setBackgroundAlpha(float bgAlpha) {
         WindowManager.LayoutParams lp = (getActivity()).getWindow()
@@ -339,4 +352,43 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         (getActivity()).getWindow().setAttributes(lp);
     }
 
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    if (changename1111 == " ") break;
+                    else {
+                        headTxt.setText(changename1111);
+                    }
+            }
+        }
+    };
+
+    public class TimeThread extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            do {
+                try {
+                    Thread.sleep(1000);
+                    Message message = new Message();
+                    message.what = 0;
+                    handler.sendMessage(message);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+
+
+        }
+    }
+
+    @Override
+    public void onDestroyOptionsMenu() {
+        super.onDestroyOptionsMenu();
+        timeThread.interrupt();
+    }
 }

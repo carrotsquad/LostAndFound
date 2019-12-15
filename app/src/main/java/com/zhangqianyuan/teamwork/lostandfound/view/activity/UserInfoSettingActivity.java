@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +53,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGradientStatusBarColor;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.message111;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 
@@ -66,6 +68,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivi
 // TODO: 2019/2/12     把修改昵称和密码换成poupwindow
 public class UserInfoSettingActivity extends AppCompatActivity implements IUserInfoFragment, IUserSettingActivity,IEditInfoActivity {
     private static final int REQUEST_CODE_GALLERY = 1;
+    public static String action = "jason.broadcast.action";
 
     @BindView(R.id.setting_headlayout)
     RelativeLayout headlayout;
@@ -113,6 +116,8 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
 
     private String change_nick = null;
     private String change_phone = null;
+    public static String changename1111 = " ";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,7 +242,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
 
     @Override
     protected void onResume() {//2019.10.19由NICKNAME改成STU，否则点击设置时闪退
-        Log.d("onResume", sharedPreferences.getString("STU", null));
+//        Log.d("onResume", sharedPreferences.getString("STU", null));
         nickname.setText(sharedPreferences.getString("NICKNAME", null));
         phone.setText(sharedPreferences.getString("PNB", null));
         GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)),
@@ -321,6 +326,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 switch(view.getId()){
                     case R.id.change_btn:
                         change_nick = change_edt_nick.getText().toString();
+                        changename1111 = change_nick;
                         if (!change_edt_nick.getText().toString().equals("")){
                             mEditInfoPresenter.uploadNeckName(sharedPreferences.getString("SESSION",null),change_edt_nick
                                     .getText().toString());

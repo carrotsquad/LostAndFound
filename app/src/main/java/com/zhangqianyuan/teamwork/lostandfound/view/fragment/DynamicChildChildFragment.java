@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.lostandfound.R;
 import com.zhangqianyuan.teamwork.lostandfound.adapter.DynamicChildItemAdapter;
+import com.zhangqianyuan.teamwork.lostandfound.adapter.test;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicItemBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.DynamicsRequestBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.NewDynamicsBeam;
@@ -42,6 +43,8 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout refreshLayout;
     private DynamicChildItemAdapter mDynamicItemAdapter;
+
+
     private List<DynamicItemBean> lists = new ArrayList<>();
     private DynamicChildPresenter iDynamicChildPresenter;
     private int pos;
@@ -73,6 +76,8 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
         mDynamicItemAdapter = new DynamicChildItemAdapter(lists, getActivity());
         mRecyclerView.setAdapter(mDynamicItemAdapter);
         refreshLayout.setOnRefreshListener(this);
+
+
         iDynamicChildPresenter = new DynamicChildPresenter();
         iDynamicChildPresenter.attachActivity(this);
         initLists();

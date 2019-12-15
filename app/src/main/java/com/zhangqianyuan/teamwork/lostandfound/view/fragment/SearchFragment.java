@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -122,7 +123,6 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         initAutoComplete("history", searchInput);
         Editable etext = searchInput.getText();
         Selection.setSelection(etext, etext.length());
-
 
         return view;
     }
@@ -290,7 +290,6 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
 
     }
-
 
 
     private final class MyOnClickListener implements View.OnClickListener {

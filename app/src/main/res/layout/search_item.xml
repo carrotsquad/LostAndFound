@@ -59,9 +59,9 @@
                 android:id="@+id/search_item_placeanddate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_alignTop="@+id/search_item_thingstype"
-                android:layout_marginRight="-10dp"
-                android:layout_toStartOf="@+id/search_item_newmessage"
+                android:layout_toRightOf="@+id/search_item_isNeedBounty"
                 android:text="四教   今天10:10"
                 android:textColor="@color/black" />
 
@@ -150,14 +150,14 @@
 
         </LinearLayout>
     </RelativeLayout>
-    <Button
-        android:id="@+id/search_item_delete"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:text="删除"
-        android:layout_marginBottom="2dp"
-        android:textSize="18sp"
-        android:background="@color/pink_400"
-        android:textColor="@color/white" />
+<!--    <Button-->
+<!--        android:id="@+id/search_item_delete"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:text="删除"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:textSize="18sp"-->
+<!--        android:background="@color/pink_400"-->
+<!--        android:textColor="@color/white" />-->
 
 </com.mcxtzhang.swipemenulib.SwipeMenuLayout>

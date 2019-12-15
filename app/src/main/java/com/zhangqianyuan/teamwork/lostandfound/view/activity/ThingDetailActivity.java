@@ -438,5 +438,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ThingDetailActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 }
 

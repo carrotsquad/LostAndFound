@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +90,8 @@ public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.
             String   mouth = publishTime.substring(4,6);
             String    day = publishTime.substring(6,8);
             String    hours=publishTime.substring(8,10);
-            String time1 = mouth+"月"+""+day+"日"+" "+hours+":00";
+            String fen = publishTime.substring(10,12);
+            String time1 = mouth+"月"+""+day+"日"+" "+hours+":"+fen;
             holder.date.setText(time1);
         }
         holder.content.setText(bean.get(position).getComment().getContent());

@@ -3,9 +3,11 @@ package com.zhangqianyuan.teamwork.lostandfound.view.activity;
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -78,7 +80,6 @@ import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGra
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 
-
 /**
  * Description: 主页面
  * Created at: 2018/10/30 0:08
@@ -131,7 +132,8 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
 
 
-
+  public static String name111;
+  public static Message message111;
     private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
     private String session = "";
     private View statusBarView;
@@ -188,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
   //              showPopUpWindow();
   //          }
   //      });
+
     }
 
     /**
@@ -239,19 +242,19 @@ public class MainActivity extends AppCompatActivity implements BaseView {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position <= 1) {
-                    mBottomNav.getMenu().getItem(position).setChecked(true);
-                } else if (position >= 2 && position <= 3) {
-                    mBottomNav.getMenu().getItem(position + 1).setChecked(true);
-                }
+//                if (position <= 1) {
+//                    mBottomNav.getMenu().getItem(position).setChecked(true);
+//                } else if (position >= 2 && position <= 3) {
+//                    mBottomNav.getMenu().getItem(position + 1).setChecked(true);
+//                }
             }
 
             @Override
             public void onPageSelected(int position) {
                 if (position <= 1) {
-                    mBottomNav.getMenu().getItem(position).setChecked(true);
+                    mBottomNav.getMenu().getItem(position).setChecked(false);
                 } else if (position >= 2 && position <= 3) {
-                    mBottomNav.getMenu().getItem(position + 1).setChecked(true);
+                    mBottomNav.getMenu().getItem(position + 1).setChecked(false);
                 }
 
             }
@@ -269,11 +272,12 @@ public class MainActivity extends AppCompatActivity implements BaseView {
             switch (item.getItemId()) {
                 case R.id.dongtai_ui: {
                     mViewPager.setCurrentItem(DONGTAI_FRAGMENT);
-                    return true;
+                    break;
                 }
                 case R.id.search_ui: {
                     mViewPager.setCurrentItem(SEARCH_FRAGMENT);
-                    return true;
+                    break;
+
                 }
                 case R.id.fabu: {
                     showPopUpWindow();
@@ -281,18 +285,21 @@ public class MainActivity extends AppCompatActivity implements BaseView {
                 }
                 case R.id.message_ui: {
                     mViewPager.setCurrentItem(MESSAGE_FRAGMENT);
+                    break;
 
-                    return true;
                 }
                 case R.id.mine_ui: {
                     mViewPager.setCurrentItem(MINE_FRAGMENT);
-                    return true;
+                    break;
                 }
                 default: {
-                    return true;
+                    return false;
                 }
+
             }
+            return false;
         });
+
 
         mBottomNav.setItemIconTintList(null);
 
@@ -494,5 +501,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
             Log.e("BNVHelper", "Unable to change value of shift mode", e);
         }
     }
+
+
 
 }

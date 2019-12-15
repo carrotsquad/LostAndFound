@@ -38,7 +38,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="128dp"
-        android:src="@drawable/publishsuccess"
+        android:src="@drawable/gouhao"
         tools:layout_editor_absoluteX="149dp"
         tools:layout_editor_absoluteY="244dp" />
 
@@ -73,7 +73,8 @@
             android:layout_marginTop="10dp"
             android:text="继续发布失物启事"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:drawableEnd="@drawable/youjiantou"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,7 +91,8 @@
             android:layout_marginTop="10dp"
             android:text="继续发布招领启事"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:drawableEnd="@drawable/youjiantou"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,7 +109,8 @@
             android:layout_marginTop="10dp"
             android:text="返回主页"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:drawableEnd="@drawable/youjiantou"/>
 
     </LinearLayout>
 

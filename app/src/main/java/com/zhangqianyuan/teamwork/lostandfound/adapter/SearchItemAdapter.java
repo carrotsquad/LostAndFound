@@ -99,7 +99,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             qishileixing = view.findViewById(R.id.search_item_qishileixing);
             thingType = view.findViewById(R.id.search_item_thingstype);
             newMsg = view.findViewById(R.id.search_item_newmessage);
-            btnDlt=view.findViewById(R.id.search_item_delete);
+         //   btnDlt=view.findViewById(R.id.search_item_delete);
         }
     }
 
