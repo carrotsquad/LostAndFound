@@ -222,32 +222,32 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
         switch (pos) {
             case 2: {
                 Log.e("LostToday","LostToday刷新");
-                iDynamicChildPresenter.getDynamicLostTodayData(new DynamicsRequestBean(0, newPosi), session);
+                iDynamicChildPresenter.getDynamicLostTodayData(new DynamicsRequestBean(0, 100), session);
                 break;
             }
             case 3: {
                 Log.e("LostYesterday","LostYesterday刷新");
-                iDynamicChildPresenter.getDynamicLostYesterdayData(new DynamicsRequestBean(0, newPosi), session);
+                iDynamicChildPresenter.getDynamicLostYesterdayData(new DynamicsRequestBean(0, 100), session);
                 break;
             }
             case 4: {
                 Log.e("LostAgo","LostAgo刷新");
-                iDynamicChildPresenter.getDynamicLostAgoData(new DynamicsRequestBean(0, newPosi), session);
+                iDynamicChildPresenter.getDynamicLostAgoData(new DynamicsRequestBean(0, 100), session);
                 break;
             }
             case 5: {
                 Log.e("FindToday","FindToday刷新");
-                iDynamicChildPresenter.getDynamicFindTodayData(new DynamicsRequestBean(0, newPosi), session);
+                iDynamicChildPresenter.getDynamicFindTodayData(new DynamicsRequestBean(0, 100), session);
                 break;
             }
             case 6: {
                 Log.e("FindYesterday","FindYesterday刷新");
-                iDynamicChildPresenter.getDynamicFindYesterdayData(new DynamicsRequestBean(0, newPosi), session);
+                iDynamicChildPresenter.getDynamicFindYesterdayData(new DynamicsRequestBean(0, 100), session);
                 break;
             }
             case 7: {
                 Log.e("FindAgo","FindAgo刷新");
-                iDynamicChildPresenter.getDynamicFindAgoData(new DynamicsRequestBean(0, newPosi ), session);
+                iDynamicChildPresenter.getDynamicFindAgoData(new DynamicsRequestBean(0, 100), session);
                 break;
             }
             default: {

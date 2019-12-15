@@ -10,15 +10,15 @@ package com.zhangqianyuan.teamwork.lostandfound.bean;
  * @updateDes
  */
 public class LoginBean {
-        private String username;
+        private String snumber;
         private String password;
 
-        public String getUsername() {
-            return username;
+        public String getStu() {
+            return snumber;
         }
 
-        public void setUsername(String username) {
-            this.username = username;
+        public void setStu(String snumber) {
+            this.snumber = snumber;
         }
 
         public String getPassword() {

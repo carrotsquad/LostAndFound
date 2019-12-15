@@ -19,17 +19,17 @@ public class SignModel extends BaseModel implements ISignModel {
 
 
     @Override
-    public void signIn(String stu, String password, Observer<SignInBean> observer) {
+    public void signIn(String snumber, String password, Observer<SignInBean> observer) {
         LoginBean bean = new LoginBean();
         bean.setPassword(password);
-        bean.setUsername(stu);
+        bean.setStu(snumber);
         Gson gson = new Gson();
         api.getSignIn(gson.toJson(bean))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        Log.e("SignModel",""+stu+password);
+        Log.e("SignModel",""+snumber+password);
     }
 
 

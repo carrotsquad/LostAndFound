@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.presenter;
 
+import android.util.Log;
+
 import com.zhangqianyuan.teamwork.lostandfound.bean.CheckCodeBean;
 import com.zhangqianyuan.teamwork.lostandfound.bean.RegisterBean;
 import com.zhangqianyuan.teamwork.lostandfound.model.VerifyModel;
@@ -25,7 +27,7 @@ public class VerifyPresenter extends AbstractBasePresenter<IVerifyActivity> impl
 
 
     @Override
-    public void getRegister(String checkcode, String email, String nickname, String password, String phonenumber, String sessionID) {
+    public void getRegister(String checkcode,String stu, String nickname, String password, String phonenumber, String sessionID) {
         verifyModel = new VerifyModel();
 
         verifyModel.checkCheckCode(checkcode, sessionID, new Observer<CheckCodeBean>() {
@@ -40,7 +42,8 @@ public class VerifyPresenter extends AbstractBasePresenter<IVerifyActivity> impl
                     v.showcheckcodestatus(false);
                 }else {
                     v.showcheckcodestatus(true);
-                    verifyModel.register(email, nickname, password, phonenumber, sessionID, new Observer<RegisterBean>() {
+                    Log.e("verifyPresenter",""+stu+password+"+"+nickname+"+"+phonenumber);
+                    verifyModel.register(stu, nickname, password, phonenumber, sessionID, new Observer<RegisterBean>() {
                         @Override
                         public void onSubscribe(Disposable d) {
 

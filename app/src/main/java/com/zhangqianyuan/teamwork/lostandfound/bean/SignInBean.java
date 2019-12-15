@@ -35,7 +35,7 @@ public class SignInBean {
         private String username;
         private String password;
         private String nickname;
-        private String stu;
+        private String snumber;
         private String photo;
         private String phonenumber;
 
@@ -44,7 +44,7 @@ public class SignInBean {
         }
 
         public String getStu() {
-            return stu;
+            return snumber;
         }
 
         public String getPassword() {
@@ -67,8 +67,8 @@ public class SignInBean {
             this.nickname = nickname;
         }
 
-        public void setStu(String stu) {
-            this.stu = stu;
+        public void setStu(String sunmber) {
+            this.snumber = snumber;
         }
 
         public void setPassword(String password) {

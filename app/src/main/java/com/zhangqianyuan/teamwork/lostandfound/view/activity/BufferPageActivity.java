@@ -82,7 +82,7 @@ public class BufferPageActivity extends AppCompatActivity implements ISignInActi
                         }
                     });
         }else {
-            signPresenter.getSignIn(sharedPreferences.getString(EMAIL, "null"), sharedPreferences.getString(PWD, "null"));
+            signPresenter.getSignIn(sharedPreferences.getString(STU, "null"), sharedPreferences.getString(PWD, "null"));
         }
     }
 

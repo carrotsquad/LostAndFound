@@ -94,7 +94,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
                 String checkcode = verificationCodeView.getInputContent();
                 Log.e("Verify", checkcode);
                 Log.e("Verify", eemail + stu + pwd + pnb + session);
-                verifyPresenter.getRegister(checkcode, eemail, stu, pwd, pnb, session);
+                verifyPresenter.getRegister(checkcode,stu,stu, pwd, pnb, session);
                 break;
             }
             case R.id.verify_back: {
@@ -119,7 +119,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
             intent.putExtra(SESSION, session);
             intent.putExtra(SIGNIN, 1);
             startActivity(intent);
-            onDestroy();
+            onPause();
         } else {
             FancyToast.makeText(VerifyActivity.this, "注册失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }

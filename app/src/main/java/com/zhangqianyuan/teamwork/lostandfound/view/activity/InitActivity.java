@@ -8,6 +8,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -22,6 +23,7 @@ import static com.zhangqianyuan.teamwork.lostandfound.utils.StatusBarUtil.setGra
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.MainActivity.TO_SIGN_IN;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.EMAIL;
 import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
+import static com.zhangqianyuan.teamwork.lostandfound.view.activity.SignInActivity.STU;
 
 /**
  * Description: 初始化界面
@@ -58,8 +60,10 @@ public class InitActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, ""))) {
+            Log.e("initActivity",""+sharedPreferences.getString(STU,"")+"+"+sharedPreferences.getString(SESSION, ""));
+            if (!"".equals(sharedPreferences.getString(STU, "")) && !"".equals(sharedPreferences.getString(SESSION, ""))) {
                 Intent intent=new Intent(InitActivity.this, SignInActivity.class);
+                Log.e("initActivity","跳转");
                 startActivity(intent);
                 finish();
             }
