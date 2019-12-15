@@ -185,19 +185,21 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
         /**
          * "publishtime": "20181105173056",
-         * "losttime": "2018110512",
+         * "losttime": "20181105",
          */
         String date_orig = dynamicItemBean.getThelost().getPublishtime();
         String fabaiodate = "";
         if(!"0".equals(date_orig.substring(4, 5))){
-            fabaiodate = fabaiodate+"0";
+            fabaiodate = fabaiodate+date_orig.substring(4, 5);
         }
-        fabaiodate = date_orig.substring(5, 6) + "月";
+        Log.e("SearchItemAdapter","fffffff"+fabaiodate);
+        fabaiodate =fabaiodate + date_orig.substring(5, 6) + "月";
         if(!"0".equals(date_orig.substring(6, 7))) {
             fabaiodate = fabaiodate+date_orig.substring(6, 7);
         }
         fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
         holder.fabiaotime.setText(fabaiodate+"发表");
+        Log.e("SearchItemAdapter","fff"+fabaiodate);
 
         String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
         String lostdate = lostdate_orig.substring(0, 4) + "." + lostdate_orig.substring(4, 6) + ".";

@@ -95,7 +95,7 @@
                 android:layout_margin="5dp"
                 android:text="点击上传图片"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 

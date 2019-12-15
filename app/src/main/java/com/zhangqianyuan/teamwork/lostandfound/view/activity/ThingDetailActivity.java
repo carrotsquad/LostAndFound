@@ -163,6 +163,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private int id;
     private String jsession;
     private View statusBarView;
+    private int change;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
@@ -174,7 +175,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this,new ThingDetailModel());
-
+        ChangeReturn();
         imgs=initDataFromLocal();
         Log.e("IMGS",imgs);
         String[] a = imgs.split(",");
@@ -187,6 +188,12 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         clicktocomment.setOnClickListener(v-> popup());
         returnPresenter = new ReturnPresenter();
         returnPresenter.attachActivity((IThingDetailActivity) this);
+
+    }
+
+    private void ChangeReturn() {
+        if (change == 1)
+            clickreturn.setVisibility(View.GONE);
 
     }
 
@@ -350,6 +357,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 id= intent.getIntExtra(OTHERSID,0);
                 jsession = sharedPreferences.getString(SESSION, "null");
                 returnPresenter.sendMessage(jsession,id);
+                change=1;
+                clickreturn.setVisibility(View.GONE);
             }
             default:{
                 break;

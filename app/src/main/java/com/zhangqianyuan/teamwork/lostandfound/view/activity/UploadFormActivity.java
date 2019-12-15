@@ -217,9 +217,9 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
                         if (typeid == 13) {
-                            uploadPresenter.postUpload(jsession, bean, fileList);
-                        }else{
                             uploadPresenter.cardUpload(stu,jsession,bean,fileList);
+                        }else{
+                            uploadPresenter.postUpload(jsession, bean, fileList);
                         }
                     }
 

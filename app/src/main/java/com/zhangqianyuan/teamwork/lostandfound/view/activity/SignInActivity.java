@@ -119,7 +119,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             Log.d("Boomerr日志打印","更新isEixt" + sharedPreferences.getString(ISEXIT,"true"));
         }
         //如果已经登录过，再次登陆，直接进入缓冲页
-        if (!"".equals(sharedPreferences.getString(EMAIL, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && !isExit && !isExit1) {
+        if (!"".equals(sharedPreferences.getString(STU, "")) && !"".equals(sharedPreferences.getString(SESSION, "")) && !isExit && !isExit1) {
             Intent intent = new Intent(SignInActivity.this, BufferPageActivity.class);
             startActivity(intent);
             finish();

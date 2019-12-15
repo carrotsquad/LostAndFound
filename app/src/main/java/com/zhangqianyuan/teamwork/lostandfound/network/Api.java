@@ -51,7 +51,7 @@ public interface Api {
 
     //登录
     @FormUrlEncoded
-    @POST("/passlove/loginIn")
+    @POST("/passlove/loginIn/2")
     Observable<SignInBean> getSignIn(@Field("requestData") String info);
 
     //搜索
