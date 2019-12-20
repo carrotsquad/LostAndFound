@@ -1,8 +1,7 @@
 package com.zhangqianyuan.teamwork.lostandfound.view.application;
 
 import android.app.Application;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+
 import android.support.v7.app.AppCompatActivity;
 
 import com.orhanobut.logger.AndroidLogAdapter;
