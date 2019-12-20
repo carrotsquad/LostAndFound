@@ -5,7 +5,7 @@
     android:background="@drawable/login_backgrand"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.LogInActivity">
+    tools:context="com.zhangqianyuan.teamwork.lostandfound.com.yf107.teamwork.lostandfound.view.activity.LogInActivity">
 
 
     <include layout="@layout/content_log_in" />

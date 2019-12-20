@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhangqianyuan.teamwork.lostandfound.adapter.NetworkImageIndicatorView
+<com.yf107.teamwork.lostandfound.adapter.NetworkImageIndicatorView
     android:id="@+id/thing_detail_viewpager_indicator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

@@ -9,64 +9,64 @@
 
 
     <application
-        android:name=".view.application.BaseApp"
+        android:name="com.yf107.teamwork.lostandfound.view.application.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/diai"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/diai"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.ForgetPasswordActivity"></activity>
-        <activity android:name=".view.activity.BufferPageActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ForgetPasswordActivity"></activity>
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.BufferPageActivity" />
 
         <service
-            android:name=".services.UpdateMessageService"
+            android:name="com.yf107.teamwork.lostandfound.services.UpdateMessageService"
             android:icon="@mipmap/diai" />
 
         <activity
-            android:name=".view.activity.MainActivity"
+            android:name="com.yf107.teamwork.lostandfound.view.activity.MainActivity"
             android:launchMode="standard" />
         <activity
-            android:name=".view.activity.LogInActivity"
+            android:name="com.yf107.teamwork.lostandfound.view.activity.LogInActivity"
             android:label="@string/title_activity_log_in"
             android:launchMode="singleTop" />
         <activity
-            android:name=".view.activity.VerifyActivity"
+            android:name="com.yf107.teamwork.lostandfound.view.activity.VerifyActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".view.activity.SignInActivity"
+            android:name="com.yf107.teamwork.lostandfound.view.activity.SignInActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".view.activity.ThingDetailActivity"
+            android:name="com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity"
             android:launchMode="singleInstance" />
         <activity
-            android:name=".view.activity.UserInfoSettingActivity"
+            android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoSettingActivity"
             android:label="@string/editInfo" />
-        <activity android:name=".view.activity.UploadActivity" />
-        <activity android:name=".view.activity.UserInfoMyHistory" />
-        <activity android:name=".view.activity.UploadFormActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.UploadActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoMyHistory" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.UploadFormActivity" />
         <activity
-            android:name=".view.activity.UserInfoAboutUsActivity"
+            android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity"
             android:label="" />
         <activity
-            android:name=".view.activity.UserInfoMyUpload"
+            android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoMyUpload"
             android:label="我的发布" /> <!-- <activity android:name=".view.activity.UserSettingEditInfoActivity" /> -->
-        <activity android:name=".view.activity.InitActivity">
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.InitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.UploadSuccessActivity" />
-        <activity android:name=".view.activity.ChangeNickNameActivity" />
-        <activity android:name=".view.activity.ChangePhoneActivty" /> <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
-        <activity android:name=".view.activity.AboutUsDetailActivity" />
-        <activity android:name=".view.activity.AboutDiAi" />
-        <activity android:name=".view.activity.OurWebActivity" />
-        <activity android:name=".view.activity.GuideActivity" />
-        <activity android:name=".view.activity.FoundActivity" />
-        <activity android:name=".view.activity.ReplaceActivity"/>
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.UploadSuccessActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ChangeNickNameActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ChangePhoneActivty" /> <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.AboutUsDetailActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.AboutDiAi" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.OurWebActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.GuideActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.FoundActivity" />
+        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ReplaceActivity"/>
     </application>
 
 </manifest>

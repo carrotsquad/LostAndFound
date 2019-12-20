@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.ThingDetailActivity">
+    tools:context="com.zhangqianyuan.teamwork.lostandfound.com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

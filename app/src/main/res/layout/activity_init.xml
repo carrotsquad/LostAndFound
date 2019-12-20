@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_select"
-    tools:context="com.zhangqianyuan.teamwork.lostandfound.view.activity.InitActivity">
+    tools:context="com.zhangqianyuan.teamwork.lostandfound.com.yf107.teamwork.lostandfound.view.activity.InitActivity">
 
     <Button
         android:text="注   册"
