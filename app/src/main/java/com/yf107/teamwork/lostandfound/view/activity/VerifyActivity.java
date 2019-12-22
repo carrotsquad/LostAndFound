@@ -109,7 +109,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
             intent.putExtra(SignInActivity.SESSION, session);
             intent.putExtra(SIGNIN, 1);
             startActivity(intent);
-            onPause();
+            onDestroy();
         } else {
             FancyToast.makeText(VerifyActivity.this, "注册失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }

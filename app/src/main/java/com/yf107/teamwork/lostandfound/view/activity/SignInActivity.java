@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import com.yf107.teamwork.lostandfound.presenter.AllTypesAndPlacesPresenter;
 import com.yf107.teamwork.lostandfound.presenter.SignPresenter;
 import com.yf107.teamwork.lostandfound.utils.EditUtil;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
+import com.yf107.teamwork.lostandfound.utils.ViewUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.IAllTypesAndPlaces;
 import com.yf107.teamwork.lostandfound.view.interfaces.ISignInActivity;
 import com.yf107.teamwork.lostandfound.R;
@@ -132,10 +135,57 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         //字体
         register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         reset_password.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-
+        stu.addTextChangedListener(new CheckOutTextWatcher(stu,pwd));
         EditUtil.EditAllClear(all_clear,pwd);
     }
 
+    private class CheckOutTextWatcher implements TextWatcher {
+        private EditText mView; // 声明一个编辑框对象
+        private int mMaxLength; // 声明一个最大长度变量
+        private CharSequence mStr; // 声明一个文本串
+        private EditText mNextView;// 声明下一个视图对象
+
+        public CheckOutTextWatcher(EditText vThis, EditText vNext) {
+            super();
+            mView = vThis;
+            if (vNext != null) {
+                mNextView = vNext;
+                mMaxLength = ViewUtil.getMaxLength(vThis);
+            }
+        }
+
+        public CheckOutTextWatcher(EditText v) {
+            super();
+            mView = v;
+            // 通过反射机制获取编辑框的最大长度
+            mMaxLength = ViewUtil.getMaxLength(v);
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+            mStr = s;
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (mStr == null || mStr.length() == 0)
+                return;
+            // 输入文本达到10位跳转到下一个编辑框
+            if (mStr.length() == 10 && mMaxLength == 10) {
+                // 让下一个视图获得焦点，即将光标移到下个视图
+                mNextView.requestFocus();
+                // 让光标自动移到编辑框内部的文本末尾
+                EditText et = (EditText) mNextView;
+                et.setSelection(et.getText().length());
+            }
+
+        }
+    }
 
     @Override
     protected void onDestroy() {

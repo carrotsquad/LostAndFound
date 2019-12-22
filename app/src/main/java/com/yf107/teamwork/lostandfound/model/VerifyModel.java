@@ -37,6 +37,7 @@ public class VerifyModel extends BaseModel implements IVerifyModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+        Log.e("VerifyModel",""+stu+"+"+password+"+"+nickname+"+"+phonenumber);
     }
 
 }
