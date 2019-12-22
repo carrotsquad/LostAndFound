@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

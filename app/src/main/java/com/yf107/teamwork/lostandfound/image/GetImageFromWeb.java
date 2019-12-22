@@ -8,7 +8,7 @@ import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;

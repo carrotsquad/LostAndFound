@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.UploadItemBean;
 import com.yf107.teamwork.lostandfound.view.activity.UploadFormActivity;
 

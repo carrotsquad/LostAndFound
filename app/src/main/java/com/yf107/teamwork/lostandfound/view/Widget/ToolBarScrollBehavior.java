@@ -17,7 +17,7 @@ import android.widget.OverScroller;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 
 import java.lang.ref.WeakReference;
 

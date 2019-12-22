@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/guide_page"
-    tools:context="com.zhangqianyuan.teamwork.lostandfound.com.yf107.teamwork.lostandfound.view.activity.GuideActivity">
+    tools:context="com.yf107.teamwork.lostandfound.view.activity.GuideActivity">
 
     <Button
         android:id="@+id/start_to_diai"

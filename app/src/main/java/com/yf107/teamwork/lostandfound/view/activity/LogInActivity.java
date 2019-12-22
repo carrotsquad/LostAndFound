@@ -17,7 +17,7 @@ import com.yf107.teamwork.lostandfound.utils.EditUtil;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
 import com.yf107.teamwork.lostandfound.utils.ViewUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.ILogInActivity;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.presenter.LogInPresenter;
 
 import java.util.regex.Matcher;

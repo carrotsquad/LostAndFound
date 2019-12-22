@@ -31,7 +31,7 @@ import com.yf107.teamwork.lostandfound.model.UserInfoModel;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.yf107.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity;
 import com.yf107.teamwork.lostandfound.view.activity.UserInfoMyHistory;

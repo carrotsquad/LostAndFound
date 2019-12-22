@@ -16,7 +16,7 @@ import com.yf107.teamwork.lostandfound.model.MyLoadModel;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.TheLostBean;
 import com.yf107.teamwork.lostandfound.presenter.MyLoadPresenter;
 

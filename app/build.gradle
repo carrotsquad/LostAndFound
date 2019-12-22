@@ -14,7 +14,7 @@ allprojects {
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.zhangqianyuan.teamwork.intelligenttcmpharmacy"
+        applicationId "com.yf107.teamwork.intelligenttcmpharmacy"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1

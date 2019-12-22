@@ -15,7 +15,7 @@ import com.yf107.teamwork.lostandfound.presenter.AllTypesAndPlacesPresenter;
 import com.yf107.teamwork.lostandfound.presenter.SignPresenter;
 import com.yf107.teamwork.lostandfound.view.interfaces.IAllTypesAndPlaces;
 import com.yf107.teamwork.lostandfound.view.interfaces.ISignInActivity;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.PlaceBean;
 import com.yf107.teamwork.lostandfound.bean.SignInBean;
 import com.yf107.teamwork.lostandfound.bean.TypeBean;

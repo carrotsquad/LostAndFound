@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zhangqianyuan.teamwork.lostandfound">
+    package="com.yf107.teamwork.lostandfound">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -11,9 +11,9 @@
     <application
         android:name="com.yf107.teamwork.lostandfound.view.application.BaseApp"
         android:allowBackup="true"
-        android:icon="@mipmap/diai"
+        android:icon="@mipmap/diai2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/diai"
+        android:roundIcon="@mipmap/diai2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ForgetPasswordActivity"></activity>
@@ -65,7 +65,6 @@
         <activity android:name="com.yf107.teamwork.lostandfound.view.activity.AboutDiAi" />
         <activity android:name="com.yf107.teamwork.lostandfound.view.activity.OurWebActivity" />
         <activity android:name="com.yf107.teamwork.lostandfound.view.activity.GuideActivity" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.FoundActivity" />
         <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ReplaceActivity"/>
     </application>
 

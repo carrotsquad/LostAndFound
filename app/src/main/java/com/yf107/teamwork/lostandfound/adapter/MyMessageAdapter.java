@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.presenter.MessagePresenter;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
 import com.yf107.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.yf107.teamwork.lostandfound.image.GetImageFromWeb;

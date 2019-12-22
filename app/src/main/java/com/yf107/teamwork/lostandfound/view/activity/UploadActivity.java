@@ -18,7 +18,7 @@ import com.yf107.teamwork.lostandfound.adapter.UploadFragmentAdapter;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.UploadItemBean;
 
 import java.util.ArrayList;

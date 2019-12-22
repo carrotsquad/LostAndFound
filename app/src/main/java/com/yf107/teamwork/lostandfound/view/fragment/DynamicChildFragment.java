@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import com.yf107.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapter;
 import com.yf107.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapterNew;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
 import com.yf107.teamwork.lostandfound.presenter.DynamicChildPresenter;
 

@@ -13,7 +13,7 @@ import com.yf107.teamwork.lostandfound.model.EditInfoModel;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.IEditInfoActivity;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.presenter.EditInfoPresenter;
 
 import butterknife.BindView;

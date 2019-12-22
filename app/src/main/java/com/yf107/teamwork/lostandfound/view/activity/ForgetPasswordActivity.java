@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.yf107.teamwork.lostandfound.utils.EditUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.IForgetPasswordActivity;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.presenter.ForgetPasswordPrensenter;
 
 import java.util.regex.Matcher;

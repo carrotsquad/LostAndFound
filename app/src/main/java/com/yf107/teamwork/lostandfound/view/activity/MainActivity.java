@@ -42,7 +42,7 @@ import com.yf107.teamwork.lostandfound.view.fragment.MessageFragment;
 import com.yf107.teamwork.lostandfound.view.fragment.SearchFragment;
 import com.yf107.teamwork.lostandfound.view.fragment.UserInfoFragment;
 import com.yf107.teamwork.lostandfound.view.interfaces.BaseView;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.adapter.MainViewAdapter;
 
 import org.greenrobot.eventbus.EventBus;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@null"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zhangqianyuan.teamwork.lostandfound.com.yf107.teamwork.lostandfound.view.activity.LogInActivity"
+    tools:context="com.yf107.teamwork.lostandfound.view.activity.LogInActivity"
     tools:showIn="@layout/activity_log_in">
 
     <TextView

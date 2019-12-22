@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.yf107.teamwork.lostandfound.adapter.TabLayoutViewPagerAdapterNew;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import java.util.List;
  * @author zhoudada
  * @version $Rev$
  * @des
- * @updateAuthor $Zhangqianyuan$
+ * @updateAuthor $yf107$
  * @updateDes
  */
     /*

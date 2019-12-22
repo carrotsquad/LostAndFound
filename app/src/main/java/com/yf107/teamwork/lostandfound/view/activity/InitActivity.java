@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,13 +20,8 @@ import butterknife.OnClick;
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.STU;
 
-/**
- * Description: 初始化界面
- * Created at: 2018/11/19 0:10
- *
- * @author: zhangqianyuan
- * Email: zhang.qianyuan@foxmail.com
- */
+
+
 public class InitActivity extends AppCompatActivity {
 
     @BindView(R.id.select_register)

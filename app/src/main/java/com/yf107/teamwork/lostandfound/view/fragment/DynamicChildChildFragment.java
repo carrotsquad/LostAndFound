@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.view.interfaces.IDynaicChildFragment;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.adapter.DynamicChildItemAdapter;
 import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
 import com.yf107.teamwork.lostandfound.bean.DynamicsRequestBean;
@@ -64,16 +64,13 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
         oldPosi = 15;
         mRecyclerView = view.findViewById(R.id.dynamic_list);
         refreshLayout = view.findViewById(R.id.dynamic_list_swipe);
-//        smartRefreshLayout = view.findViewById(R.id.dynamic_list_swipe);
-//        Handler handler = new Handler();
-
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         manager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);//不设置的话，图片闪烁错位，有可能有整列错位的情况。
         ActivityManager.getActivityManager().addF(this);
         mRecyclerView.setLayoutManager(manager);
         mDynamicItemAdapter = new DynamicChildItemAdapter(lists, getActivity());
         mRecyclerView.setAdapter(mDynamicItemAdapter);
-      // refreshLayout.setOnRefreshListener(this);
+       refreshLayout.setOnRefreshListener(this);
 
 //        smartRefreshLayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
 //

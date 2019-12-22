@@ -33,7 +33,7 @@ import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.IEditInfoActivity;
 import com.yf107.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
 import com.yf107.teamwork.lostandfound.view.interfaces.IUserSettingActivity;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.presenter.EditInfoPresenter;
 import com.yf107.teamwork.lostandfound.presenter.UserInfoPresenter;
 import com.yf107.teamwork.lostandfound.presenter.UserSettingPresenter;

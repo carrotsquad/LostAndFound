@@ -25,7 +25,7 @@ import com.yf107.teamwork.lostandfound.event.MessageEvent;
 import com.yf107.teamwork.lostandfound.presenter.MessagePresenter;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.view.interfaces.IMessageFragment;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.UpDateMessageBean;
 
 import org.greenrobot.eventbus.EventBus;

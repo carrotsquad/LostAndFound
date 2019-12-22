@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yf107.teamwork.lostandfound.network.AllURI;
-import com.zhangqianyuan.teamwork.lostandfound.R;
+import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.CommentFeedBack;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
