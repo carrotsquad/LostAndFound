@@ -53,6 +53,7 @@ public class VerifyPresenter extends AbstractBasePresenter<IVerifyActivity> impl
                                 v.getregister(false);
                             }else {
                                 v.getregister(true);
+                                Log.d("verifyPresenter","成功而");
                             }
                         }
 

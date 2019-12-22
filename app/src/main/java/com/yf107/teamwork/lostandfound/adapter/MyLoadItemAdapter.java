@@ -216,6 +216,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             holder.time.setText(time1);
             holder.time2.setText(time2);
         }
+        holder.thingtype.setImageResource(R.mipmap.diai1);
 
 
 

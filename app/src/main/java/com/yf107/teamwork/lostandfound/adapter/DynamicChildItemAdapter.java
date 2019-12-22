@@ -447,8 +447,8 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 
         if ("".equals(dynamicItemBean.getThelost().getPhoto())) {
             Glide.with(mContext)
-                    .load(AllURI.getTypePhoto(sharedPreferences.getString(SESSION,"null"), AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
-                    //.load(R.mipmap.diai1)
+                   // .load(AllURI.getTypePhoto(sharedPreferences.getString(SESSION,"null"), AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
+                    .load(R.mipmap.diai1)
                     .asBitmap()
                     .into(holder.thingphoto);
 //            GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
@@ -460,8 +460,8 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
             String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
             String c = AllURI.getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), a[0]);
             Glide.with(mContext)
-                    //   .load(R.mipmap.diai1)
-                    .load(c)
+                       .load(R.mipmap.diai1)
+                   // .load(c)
                     .asBitmap()
                     .into(holder.thingphoto);
         }

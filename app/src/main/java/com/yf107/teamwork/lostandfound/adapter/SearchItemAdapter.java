@@ -244,18 +244,17 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     .into(holder.thingType);
         }
 
-        if(dynamicItemBean.getThelost().getPhoto().equals("")) {
-            GetImageFromWeb.httpSetImageView(AllURI.getTypePhoto(sharedPreferences.getString(SESSION, "null"), AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
-                    , holder.headimg
-                    , activity);
-        }else {
+//        if(dynamicItemBean.getThelost().getPhoto().equals("")) {
+//            GetImageFromWeb.httpSetImageView(AllURI.getTypePhoto(sharedPreferences.getString(SESSION, "null"), AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
+//                    , holder.headimg
+//                    , activity);
+//        }else {
             //事件图片
             Glide.with(mContext)
                     .load(R.mipmap.diai1)
                 //    .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getThelost().getPhoto()))
                     .asBitmap()
                     .into(holder.headimg);
-        }
 
         //用户头像
         Glide.with(mContext)

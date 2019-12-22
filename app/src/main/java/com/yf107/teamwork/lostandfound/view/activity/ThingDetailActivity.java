@@ -309,8 +309,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         }else {
             type.setText("寻物详情");
         }
-        GetImageFromWeb.glideSetImageView(AllURI.getTypeLittlePhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
-                AllURI.allTypeImgsList.get(intthingstype-1)),thingstype,this);
+//        GetImageFromWeb.glideSetImageView(AllURI.getTypeLittlePhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
+//                AllURI.allTypeImgsList.get(intthingstype-1)),thingstype,this);
         describe.setText(strdesc);
         nickname.setText(strusernickname);
         GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
