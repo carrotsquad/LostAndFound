@@ -182,7 +182,7 @@
         android:layout_height="35dp"
         android:text=" -------------------------"
         android:textSize="13sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/tv_usdetail"
+        app:layout_constraintBaseline_toBaselineOf="@id/btn_usdetail"
         app:layout_constraintBottom_toBottomOf="@+id/btn_usdetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_usdetail" />

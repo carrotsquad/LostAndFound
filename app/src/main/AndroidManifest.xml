@@ -38,7 +38,7 @@
             android:launchMode="singleTop" />
         <activity
             android:name="com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleTop" />
         <activity
             android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoSettingActivity"
             android:label="@string/editInfo" />
