@@ -79,14 +79,85 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UploadItemBean bean = lists.get(position);
-        if(position==0){
+        if(position==0) {
             holder.img.setImageResource(R.drawable.ic_keys);
-        }else {
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 1){
+            holder.img.setImageResource(R.drawable.ic_wallet);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 2){
+            holder.img.setImageResource(R.drawable.ic_zhengjian);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 3){
+            holder.img.setImageResource(R.drawable.ic_upan);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 4){
+            holder.img.setImageResource(R.drawable.ic_book);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 5){
+            holder.img.setImageResource(R.drawable.ic_wenju);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 6){
+            holder.img.setImageResource(R.drawable.ic_yusan);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 7){
+            holder.img.setImageResource(R.drawable.ic_shubao);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 8){
+            holder.img.setImageResource(R.drawable.ic_yifu);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 9){
+            holder.img.setImageResource(R.drawable.ic_shoushi);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 10){
+            holder.img.setImageResource(R.drawable.ic_diannao);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 11){
+            holder.img.setImageResource(R.drawable.ic_phone);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 12){
+            holder.img.setImageResource(R.drawable.ic_chongdian);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 13){
+            holder.img.setImageResource(R.drawable.ic_card);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 14){
+            holder.img.setImageResource(R.drawable.ic_chongdian);
+            holder.text.setText(bean.getTypeText());
+        }
+        if (position == 15){
+            holder.img.setImageResource(R.drawable.ic_others);
+            holder.text.setText(bean.getTypeText());
+        }
+
+
+
+
+
+
+
+     /*   }else {
             Glide.with(mContext)
                     .load(bean.getTypeImgId())
                     .into(holder.img);
         }
-        holder.text.setText(bean.getTypeText());
+
+      */
+
         Log.e("TypesImgUrl",bean.getTypeImgId());
 
     }
