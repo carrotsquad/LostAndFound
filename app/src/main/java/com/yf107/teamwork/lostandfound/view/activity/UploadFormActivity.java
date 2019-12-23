@@ -207,32 +207,18 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
                         Log.e("THELOSTBEAN",bean.toString());
                         if (typeid == 13){
+                            Log.e("UploadFormActivity",""+stu+jsession+bean);
                             uploadPresenter.cardUpload(stu,jsession,bean);
-                            if(lostidddd != -1) {
-                              // uploadPresenter.sendDataToWeb(jsession,null,lostidddd,null,"随便什么都好");
-                            }
-                              //  thingDetailPresenter.sendDataToWeb(sharedPreferences.getString("SESSION", null), null, lostid, null, s);
-
-                            //  thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
                         }else {
                             uploadPresenter.postUpload(jsession, bean);
-                            if(lostidddd != -1) {
-                               // uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
-                            }
                         }
                     }else {
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
                         if (typeid == 13) {
                             uploadPresenter.cardUpload(stu,jsession,bean,fileList);
-                            if(lostidddd != -1) {
-                                //uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
-                            }
                         }else{
                             uploadPresenter.postUpload(jsession, bean, fileList);
-                            if(lostidddd != -1) {
-                               // uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
-                            }
                         }
                     }
 

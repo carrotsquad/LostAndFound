@@ -6,6 +6,7 @@ import com.yf107.teamwork.lostandfound.bean.CommentFeedBack;
 import com.yf107.teamwork.lostandfound.bean.StatusBean;
 import com.yf107.teamwork.lostandfound.model.ThingDetailModel;
 import com.yf107.teamwork.lostandfound.presenter.interfaces.IThingDetailPresenter;
+import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 import com.yf107.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
 import retrofit2.Call;
@@ -54,6 +55,7 @@ public class ThingDetailPresenter extends AbstractBasePresenter<IThingDetailActi
             ThingDetailModel.getInternetData(session, lostid, new Callback<CommentFeedBack>() {
                 @Override
                 public void onResponse(Call<CommentFeedBack> call, Response<CommentFeedBack> response) {
+                    Log.e("ThingDetailActivity",""+lostid+"+"+call+response);
                     if (response.body()==null||response.body().getStatus()==BAD_INTERNET_STATUS){
 
                     }else if(response.body().getStatus()==FINE_INTERNET_STATUS){
