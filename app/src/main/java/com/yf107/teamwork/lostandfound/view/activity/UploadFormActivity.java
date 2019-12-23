@@ -209,7 +209,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         if (typeid == 13){
                             uploadPresenter.cardUpload(stu,jsession,bean);
                             if(lostidddd != -1) {
-                               uploadPresenter.sendDataToWeb(jsession,null,lostidddd,null,"随便什么都好");
+                              // uploadPresenter.sendDataToWeb(jsession,null,lostidddd,null,"随便什么都好");
                             }
                               //  thingDetailPresenter.sendDataToWeb(sharedPreferences.getString("SESSION", null), null, lostid, null, s);
 
@@ -217,7 +217,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         }else {
                             uploadPresenter.postUpload(jsession, bean);
                             if(lostidddd != -1) {
-                                uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
+                               // uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
                             }
                         }
                     }else {
@@ -226,12 +226,12 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         if (typeid == 13) {
                             uploadPresenter.cardUpload(stu,jsession,bean,fileList);
                             if(lostidddd != -1) {
-                                uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
+                                //uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
                             }
                         }else{
                             uploadPresenter.postUpload(jsession, bean, fileList);
                             if(lostidddd != -1) {
-                                uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
+                               // uploadPresenter.sendDataToWeb(jsession, null, bean.getId(), null, "123456789");
                             }
                         }
                     }

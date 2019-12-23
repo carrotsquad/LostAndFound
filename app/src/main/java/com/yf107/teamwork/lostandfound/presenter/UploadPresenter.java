@@ -157,20 +157,4 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
         }
     }
 
-    @Override
-    public void sendDataToWeb(String session, Integer id, int lostid, String time, String content) {
-        if (isAttachActivity()){
-            mUploadModel.publishcomment(session, id, lostid, time, content, new Callback<StatusBean>() {
-                @Override
-                public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
-                    getV().showStatus(true);
-                }
-
-                @Override
-                public void onFailure(Call<StatusBean> call, Throwable t) {
-
-                }
-            });
-        }
-    }
 }

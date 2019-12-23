@@ -94,17 +94,6 @@ public class UploadModel extends BaseModel implements IUploadModel {
         Log.e("UploadModel5","stu"+stu+"session"+session+"new Gson().toJson(bean)"+new Gson().toJson(bean));
     }
 
-    @Override
-    public void publishcomment(String session, Integer id, int lostid, String time, String content, Callback<StatusBean> callback) {
-        ThingDetailBean  bean = new ThingDetailBean();
-        ThingDetailBean.Comment con = new ThingDetailBean.Comment();
-        con.setContent(content);
-        con.setId(id);
-        con.setTime(time);
-        bean.setLostid(lostid);
-        bean.setComment(con);
-        api.uploadComment(session,new Gson().toJson(bean)).enqueue(callback);
-    }
 
 
     /*创建图片 的MultipartBody

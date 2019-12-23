@@ -15,5 +15,5 @@ public interface IUploadModel {
     void postUpload(String session, TheLostBean bean, Observer<StatusBean> observer);
     void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer);
     void cardUpload(String stu, String session, TheLostBean bean, Observer<StatusBean> observer);
-    void publishcomment(String session, Integer id, int lostid, String time, String content, Callback<StatusBean> callback);
+ //   void publishcomment(String session, Integer id, int lostid, String time, String content, Callback<StatusBean> callback);
 }

@@ -313,8 +313,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 //                AllURI.allTypeImgsList.get(intthingstype-1)),thingstype,this);
         describe.setText(strdesc);
         nickname.setText(strusernickname);
-        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
-                struserphoto),userimg,this);
+//        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
+//                struserphoto),userimg,this);
+        userimg.setImageResource(R.mipmap.user);
 //        GetImageFromWeb.glideSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
 //                struserphoto),userimg,this);
         fabiaodate.setText("发表于"+strfabiaodate);
@@ -406,6 +407,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
             this.mCommentList.addAll(list);
             adapter.notifyDataSetChanged();
             Log.d("commentfuck",""+list.toString());
+        }else {
+            Log.d("没有没有没有","123");
         }
 
     }

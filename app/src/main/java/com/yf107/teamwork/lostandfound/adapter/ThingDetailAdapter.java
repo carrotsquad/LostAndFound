@@ -71,7 +71,8 @@ public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.
         mSharedPreferences = mContext.getSharedPreferences("users",Context.MODE_PRIVATE);
         String s = AllURI.getUserPhoto(mSharedPreferences.getString("SESSION",null),bean.get(position).getPhoto());
         Glide.with(mContext)
-                .load(s)
+                .load(R.mipmap.user)
+             //   .load(s)
                 .asBitmap()
                 .into(holder.head);
         holder.nick.setText(bean.get(position).getNickname());
