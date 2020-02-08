@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/lost"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_message"
+        android:shortcutId="staticId_1"
+        android:shortcutLongLabel="@string/shortcut_long_label_1"
+        android:shortcutShortLabel="@string/shortcut_short_label_1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.yf107.teamwork.lostandfound.view.activity.MainActivity"
+            android:targetPackage="com.yf107.teamwork.lostandfound" />
+        <intent
+            android:action="SHORTCUT_2"
+            android:targetClass="com.yf107.teamwork.lostandfound.view.activity.UploadActivity"
+            android:targetPackage="com.yf107.teamwork.lostandfound" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/find"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_message"
+        android:shortcutId="staticId_2"
+        android:shortcutLongLabel="@string/shortcut_long_label_2"
+        android:shortcutShortLabel="@string/shortcut_short_label_2">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.yf107.teamwork.lostandfound.view.activity.MainActivity"
+            android:targetPackage="com.yf107.teamwork.lostandfound" />
+        <intent
+            android:action="SHORTCUT_2"
+            android:targetClass="com.yf107.teamwork.lostandfound.view.activity.UploadActivity"
+            android:targetPackage="com.yf107.teamwork.lostandfound" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_card"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_message"
+        android:shortcutId="staticId_3"
+        android:shortcutLongLabel="@string/shortcut_long_label_3"
+        android:shortcutShortLabel="@string/shortcut_short_label_3">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.yf107.teamwork.lostandfound.view.activity.MainActivity"
+            android:targetPackage="com.yf107.teamwork.lostandfound" />
+        <intent
+            android:action="SHORTCUT_2"
+            android:targetClass="com.yf107.teamwork.lostandfound.view.activity.UploadFormActivity"
+            android:targetPackage="com.yf107.teamwork.lostandfound" />
+    </shortcut>
+</shortcuts>
+
+
+
+
+
+
+
+

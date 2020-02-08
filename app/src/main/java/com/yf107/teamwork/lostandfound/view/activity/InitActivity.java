@@ -50,7 +50,7 @@ public class InitActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            Log.e("initActivity",""+sharedPreferences.getString(STU,"")+"+"+sharedPreferences.getString(SESSION, ""));
+            Log.e("initActivity",""+sharedPreferences.getString(STU ,"")+"+"+sharedPreferences.getString(SESSION, ""));
             if (!"".equals(sharedPreferences.getString(STU, "")) && !"".equals(sharedPreferences.getString(SESSION, ""))) {
                 Intent intent=new Intent(InitActivity.this, SignInActivity.class);
                 Log.e("initActivity","跳转");
@@ -79,3 +79,4 @@ public class InitActivity extends AppCompatActivity {
         }
     }
 }
+

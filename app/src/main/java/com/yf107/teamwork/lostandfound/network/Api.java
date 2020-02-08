@@ -43,7 +43,7 @@ public interface Api {
     //注册
     @FormUrlEncoded
     @POST("passlove/register")
-    Observable<RegisterBean> getRegister(@Field("snumber")String stu,@Field("password") String password,@Field("nickname") String nickname,@Field("phonenumber") String phonenumber,@Field("JSESSIONID") String sessionID);
+    Observable<RegisterBean> getRegister(@Field("snumber")String snumber,@Field("password") String password,@Field("nickname") String nickname,@Field("phonenumber") String phonenumber,@Field("JSESSIONID") String sessionID);
 
     //登录
     @FormUrlEncoded

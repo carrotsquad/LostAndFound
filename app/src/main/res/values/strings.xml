@@ -8,6 +8,14 @@
     <string name="upload">上传</string>
     <string name="editInfo">编辑信息</string>
 
+    <string name="shortcut_long_label_1">丢失</string>
+    <string name="shortcut_long_label_2">捡到</string>
+    <string name="shortcut_long_label_3">学生卡丢失</string>
+    <string name="shortcut_short_label_1">1</string>
+    <string name="shortcut_short_label_2">2</string>
+    <string name="shortcut_short_label_3">3</string>
+    <string name="shortcut_disabled_message">static shortcut disable message</string>
+
     <string name="toolbar_scroll_behavior" translatable="false">
          com.yf107.teamwork.lostandfound.view.Widget.ToolBarScrollBehavior</string>
 </resources>
