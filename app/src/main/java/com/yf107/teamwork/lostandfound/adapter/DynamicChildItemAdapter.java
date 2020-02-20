@@ -437,7 +437,7 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 
 
         Log.e("PHOTO", String.valueOf(position));
-        Log.e("PHOTO", dynamicItemBean.getThelost().getPhoto());
+//        Log.e("PHOTO", dynamicItemBean.getThelost().getPhoto());
 
 
         //默认图片，
@@ -458,8 +458,8 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
         } else {
 
             //事件图片
-            String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
-            String c = AllURI.getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), a[0]);
+//            String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
+     //       String c = AllURI.getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), a[0]);
             Glide.with(mContext)
                        .load(R.mipmap.diai1)
                    // .load(c)

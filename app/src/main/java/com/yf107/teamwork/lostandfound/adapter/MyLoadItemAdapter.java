@@ -189,7 +189,8 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
         Glide.with(mContext)
-                .load(s)
+                .load(R.mipmap.diai1)
+                //.load(s)
                     .asBitmap()
                 .into(holder.thingtype);
         String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
@@ -216,7 +217,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             holder.time.setText(time1);
             holder.time2.setText(time2);
         }
-        holder.thingtype.setImageResource(R.mipmap.diai1);
+
 
 
 

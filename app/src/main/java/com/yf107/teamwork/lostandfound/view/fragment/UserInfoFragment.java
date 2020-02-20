@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.image.GetImageFromWeb;
 import com.yf107.teamwork.lostandfound.image.GlideImageLoader;
@@ -269,6 +270,10 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
                 @Override
                 public void run() {
                     headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+//                    Glide.with(getContext())
+//                    .load(userphoto)
+//                    .asBitmap()
+//                    .into(headImg);
                 }
             });
 
@@ -276,6 +281,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 //                    .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
 //                    .asBitmap()
 //                    .into(headImg);
+
             Toast.makeText(mContext, "头像上传成功", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();

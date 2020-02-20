@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.bumptech.glide.BitmapTypeRequest;
+import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.image.GlideImageLoader;
 import com.yf107.teamwork.lostandfound.network.AllURI;
@@ -51,7 +54,6 @@ import static cn.finalteam.toolsfinal.DateUtils.getDay;
 import static cn.finalteam.toolsfinal.DateUtils.getMonth;
 import static cn.finalteam.toolsfinal.DateUtils.getYear;
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
-import static com.yf107.teamwork.lostandfound.view.activity.UserInfoMyUpload.lostidddd;
 
 /**
  * Description
@@ -101,6 +103,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     //确认发布按键
     @BindView(R.id.upload_lostorfind_sure)
     Button btnSure;
+
 
     private static final int REQUEST_CODE_GALLERY = 1;
     //时间选择器
@@ -338,7 +341,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
 
-        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,1 ,mOnHandlerResultCallback);
+        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,8 ,mOnHandlerResultCallback);
+
     }
 
 

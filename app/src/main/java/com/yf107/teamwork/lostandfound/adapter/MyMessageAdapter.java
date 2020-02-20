@@ -208,7 +208,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         int thingstype = dynamicItemBean.getDynamics().getThelost().getTypeid();
         int isread = dynamicItemBean.getRead();
 
-        String place = AllURI.allPlaceBeanList.get(lostplace-1);
+        String place = AllURI.allPlaceBeanList.get(lostplace - 1);
 //        String thingsType = allTypeBeanList.get(thingstype);
 
         int lostType = 0;

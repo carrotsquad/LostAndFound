@@ -1,7 +1,7 @@
 package com.yf107.teamwork.lostandfound.model;
 
-import com.yf107.teamwork.lostandfound.model.interfaces.IAllTypesModel;
 import com.yf107.teamwork.lostandfound.bean.AllTypesBean;
+import com.yf107.teamwork.lostandfound.model.interfaces.IAllTypesModel;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

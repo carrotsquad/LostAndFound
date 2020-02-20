@@ -75,22 +75,22 @@ public interface Api {
     我的发布 包括丢/失
     向服务器传数据
      */
-    @POST("/passlove/user/publishlost")
+    @POST("/passlove/user/publishlost2")
     @Multipart
     Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
 
-    @POST("/passlove/user/publishlost")
+    @POST("/passlove/user/publishlost2")
     @FormUrlEncoded
     Observable<StatusBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
 
-    @POST("/passlove/user/publishlost/card")
+    @POST("/passlove/user/publishlost2/card")
     @Multipart
     Observable<StatusBean> cardUpload(@Field("cardid") String stu,@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
 
-    @POST("/passlove/user/publishlost/card")
+    @POST("/passlove/user/publishlost2/card")
     @FormUrlEncoded
     Observable<StatusBean> cardUpload(@Field("cardid") String stu,@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
@@ -191,7 +191,7 @@ public interface Api {
     //修改头像
     @Multipart
     @POST("/passlove/user/update/photo")
-    Call<UserImgBean> uploadHeadImg(@Part("JSESSIONID") RequestBody JSESSIONID,
+    Call<UserImgBean> updateUserPhoto(@Part("JSESSIONID") RequestBody JSESSIONID,
                                     @Part MultipartBody.Part photo);
 
     //发表评论

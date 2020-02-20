@@ -17,7 +17,7 @@ public class UserInfoModel extends BaseModel implements IUserInfoModel {
 
     @Override
     public void changeHeadImg(String jsessionId, File imgFile, Callback<UserImgBean> callback) {
-       api.uploadHeadImg(createRequestbody(jsessionId),createMultipartBody(imgFile)).enqueue(callback);
+       api.updateUserPhoto(createRequestbody(jsessionId),createMultipartBody(imgFile)).enqueue(callback);
     }
 
     //创建jsessionId 的 requestbody
