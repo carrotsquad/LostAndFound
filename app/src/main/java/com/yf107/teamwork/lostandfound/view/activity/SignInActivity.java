@@ -268,7 +268,6 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     @Override
     public void getIAllTypesAndPlaces(Boolean status, List<TypeBean> typeBeanList, List<PlaceBean> placeBeanList) {
         if (status) {
-
             int i = typeBeanList.size();
             for (int k = 0; k < i; k++) {
                 AllURI.allTypeBeanList.add(typeBeanList.get(k).getName());

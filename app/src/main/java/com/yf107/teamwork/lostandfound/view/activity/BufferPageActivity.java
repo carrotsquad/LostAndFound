@@ -55,12 +55,12 @@ public class BufferPageActivity extends AppCompatActivity implements ISignInActi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buffer_page);
         Intent intent = getIntent();
-        //String session = intent.getStringExtra(SESSION);
+        String session = intent.getStringExtra(SESSION);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
-        String session = sharedPreferences.getString(SESSION, "");
         signPresenter = new SignPresenter(this);
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
         if(session!=null&&!"".equals(session)) {
+            Log.e("session","!=null");
             Observable.timer(2, TimeUnit.SECONDS)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
@@ -76,6 +76,8 @@ public class BufferPageActivity extends AppCompatActivity implements ISignInActi
                         }
                     });
         }else {
+            Log.e("session","==null");
+            Log.e("stu and pwd", sharedPreferences.getString(STU, "null")+sharedPreferences.getString(PWD, "null"));
             signPresenter.getSignIn(sharedPreferences.getString(STU, "null"), sharedPreferences.getString(PWD, "null"));
         }
     }
@@ -135,7 +137,8 @@ public class BufferPageActivity extends AppCompatActivity implements ISignInActi
             int[] arrayint = new int[10000];
             editor.putString(EMAIL, signInBean.getUser().getUsername());
             editor.putString(PWD, signInBean.getUser().getPassword());
-            editor.putString(STU, signInBean.getUser().getStu());
+            Log.e("Buffere",""+signInBean.getUser().getStu());
+            //editor.putString(STU, signInBean.getUser().getStu());
             editor.putString(NICKNAME,signInBean.getUser().getNickname());
             editor.putString(PNB, signInBean.getUser().getPhonenumber());
             editor.putString(USERPHOTO, signInBean.getUser().getPhoto());

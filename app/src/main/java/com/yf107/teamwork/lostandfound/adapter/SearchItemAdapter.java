@@ -204,7 +204,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         int thingstype = dynamicItemBean.getThelost().getTypeid();
 
         String place = AllURI.allPlaceBeanList.get(lostplace-1);
-//        String thingsType = allTypeBeanList.get(thingstype);
+//         String thingsType = allTypeBeanList.get(thingstype);
 
         int lostType = 0;
         switch (losttype){
