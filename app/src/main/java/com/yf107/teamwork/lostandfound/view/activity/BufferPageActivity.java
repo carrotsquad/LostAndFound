@@ -55,8 +55,9 @@ public class BufferPageActivity extends AppCompatActivity implements ISignInActi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buffer_page);
         Intent intent = getIntent();
-        String session = intent.getStringExtra(SESSION);
+        //String session = intent.getStringExtra(SESSION);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+        String session = sharedPreferences.getString(SESSION, "");
         signPresenter = new SignPresenter(this);
         allTypesAndPlacesPresenter = new AllTypesAndPlacesPresenter(this);
         if(session!=null&&!"".equals(session)) {

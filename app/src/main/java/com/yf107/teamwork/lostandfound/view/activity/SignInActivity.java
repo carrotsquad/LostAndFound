@@ -248,7 +248,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             int[] arrayint = new int[10000];
             editor.putString(EMAIL, signInBean.getUser().getUsername());
             editor.putString(PWD, signInBean.getUser().getPassword());
-            editor.putString(STU, signInBean.getUser().getStu());
+            editor.putString(STU, stu.getText().toString());//signInBean.getUser().getStu()一直是空
             editor.putString(NICKNAME, signInBean.getUser().getNickname());
             editor.putString(PNB, signInBean.getUser().getPhonenumber());
             editor.putString(USERPHOTO, signInBean.getUser().getPhoto());
