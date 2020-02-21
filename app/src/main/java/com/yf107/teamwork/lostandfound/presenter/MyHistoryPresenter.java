@@ -21,12 +21,13 @@ public class MyHistoryPresenter extends BasePresenter<IMyHistoryActivity> implem
     }
 
     @Override
-    public void getMyHistoryData(String jsessionid,int start,int end) {
+    public void getMyHistoryData(String jsessionid, int start, int end) {
         if (isAttachActivity()){
           mMyHistoryModel.getMyHistoryData(jsessionid,start,end,new Callback<MyHistoryItem>() {
               @Override
               public void onResponse(Call<MyHistoryItem> call, Response<MyHistoryItem> response) {
                   getV().showData(response.body().getData());
+
               }
 
               @Override
@@ -36,4 +37,5 @@ public class MyHistoryPresenter extends BasePresenter<IMyHistoryActivity> implem
           });
         }
     }
+
 }

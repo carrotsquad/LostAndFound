@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
  * Description
  * 我的板块 我的历史界面
  */
-public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryActivity {
+public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryActivity{
     private MyHistoryAdapter mAdapter;
     private List<TheLostBean> lists =new ArrayList<>();
     private MyHistoryPresenter presenter;
@@ -37,6 +38,8 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
     @BindView(R.id.myhistory_back)
     ImageView back;
     private View statusBarView;
+
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,9 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
         lists.addAll(beans);
         mAdapter = new MyHistoryAdapter(lists);
         mRecyclerView.setAdapter(mAdapter);
+        Log.d("TAG","qwertyuiosjkdhskd"+beans.get(2).getId());
     }
+
+
 }
 

@@ -25,6 +25,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.yf107.teamwork.lostandfound.network.AllURI.getUserPhoto;
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
@@ -461,7 +462,7 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 //            String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
      //       String c = AllURI.getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), a[0]);
             Glide.with(mContext)
-                       .load(R.mipmap.diai1)
+                       .load(dynamicItemBean.getThelost().getPhoto())
                    // .load(c)
                     .asBitmap()
                     .into(holder.thingphoto);
@@ -470,8 +471,8 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 
         //用户头像
         Glide.with(mContext)
-                //    .load(getUserPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getUserphoto()))
-                .load(R.mipmap.user)
+                    .load(dynamicItemBean.getUserphoto())
+             //   .load(R.mipmap.user)
                 .asBitmap()
                 .into(holder.headimg);
     }

@@ -4,6 +4,7 @@ import com.yf107.teamwork.lostandfound.bean.AllPlacesBean;
 import com.yf107.teamwork.lostandfound.bean.AllTypesBean;
 import com.yf107.teamwork.lostandfound.bean.CheckCodeBean;
 import com.yf107.teamwork.lostandfound.bean.CommentFeedBack;
+import com.yf107.teamwork.lostandfound.bean.ImageBean;
 import com.yf107.teamwork.lostandfound.bean.MyHistoryItem;
 import com.yf107.teamwork.lostandfound.bean.RegisterBean;
 import com.yf107.teamwork.lostandfound.bean.SearchBean;
@@ -24,6 +25,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Description: Api
@@ -219,4 +221,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("/passlove/updatepassword")
     Observable<CheckCodeBean> updatepassword(@Field("password") String password,@Field("JSESSIONID") String session,@Field("username") String email);
+
+    //得到失物招领上传的图片
+    @POST("passlove/img/user")
+    Observable<ImageBean>  getTheLostPhoto(@Query("name") String name);
 }

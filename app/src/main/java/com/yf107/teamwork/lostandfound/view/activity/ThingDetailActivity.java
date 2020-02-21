@@ -201,7 +201,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         }else {
             for (String e :
                     urlList) {
-                s.add(AllURI.getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), e));
+                s.add(imgs);
             }
             banner.setImages(s)
                     .setImageLoader(new WebImageLoader());
@@ -315,7 +315,11 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         nickname.setText(strusernickname);
 //        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
 //                struserphoto),userimg,this);
-        userimg.setImageResource(R.mipmap.user);
+        //userimg.setImageResource(R.mipmap.user);
+        Glide.with(this)
+                .load(struserphoto)
+                .asBitmap()
+                .into(userimg);
 //        GetImageFromWeb.glideSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
 //                struserphoto),userimg,this);
         fabiaodate.setText("发表于"+strfabiaodate);
@@ -421,6 +425,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
             FancyToast.makeText(ThingDetailActivity.this, "出现了错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
+
 
     @Override
     public void onBackPressed() {

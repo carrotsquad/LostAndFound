@@ -251,14 +251,14 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 //        }else {
             //事件图片
             Glide.with(mContext)
-                    .load(R.mipmap.diai1)
+                    .load(dynamicItemBean.getThelost().getPhoto())
                 //    .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getThelost().getPhoto()))
                     .asBitmap()
                     .into(holder.headimg);
 
         //用户头像
         Glide.with(mContext)
-               .load(R.mipmap.user)
+               .load(dynamicItemBean.getUserphoto())
            //     .load(getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getUserphoto()))
                 .asBitmap()
                 .into(holder.userphoto);

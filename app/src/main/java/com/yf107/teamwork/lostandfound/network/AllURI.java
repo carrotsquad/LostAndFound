@@ -17,7 +17,7 @@ public class AllURI {
 
     //得到用户头像图片
     public static String getUserPhoto(String JSESSION, String imgName){
-        return BaseUrl+"passlove/img/user2?" + "JSESSIONID="+JSESSION +"&name="+imgName;
+        return BaseUrl+"passlove/img/user?" + "JSESSIONID="+JSESSION +"&name="+imgName;
     }
 
     //得到类型的图片
@@ -30,8 +30,11 @@ public class AllURI {
         return BaseUrl+"passlove/img/losttype_char?" + "JSESSIONID="+JSESSION +"&name="+imgName;
     }
 
-    //得到失物招领东西的图片
-    public static String getLostThingsPhoto(String JSESSION, String imgName){
-        return BaseUrl+"passlove/img/thelost2?" + "JSESSIONID="+JSESSION +"&name="+imgName;
-    }
+//  //  得到失物招领东西的图片
+//    public static String getLostThingsPhoto(String JSESSION, String imgName){
+//        return BaseUrl+"passlove/img/thelost2?" + "JSESSIONID="+JSESSION +"&name="+imgName;
+//    }
+//    public static String getLostThingsPhoto(int lostid){
+//        return BaseUrl+"passlove/img/thelost?" + "lostid="+lostid;
+//    }
 }

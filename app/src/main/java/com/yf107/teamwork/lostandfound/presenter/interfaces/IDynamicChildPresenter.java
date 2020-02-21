@@ -13,4 +13,5 @@ public interface IDynamicChildPresenter {
     void getDynamicFindTodayData(DynamicsRequestBean dynamicsRequestBean, String session);
     void getDynamicFindYesterdayData(DynamicsRequestBean dynamicsRequestBean, String session);
     void getDynamicFindAgoData(DynamicsRequestBean dynamicsRequestBean, String session);
+    void getphoto(int lostid);
 }

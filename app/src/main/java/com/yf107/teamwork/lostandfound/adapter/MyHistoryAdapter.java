@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
 public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.ViewHolder>  {
     private List<TheLostBean> lists ;
     private Context mContext;
+    private String url;
+
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
         @BindView(R.id.myhistory_thingtype)
@@ -54,6 +56,7 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
     public MyHistoryAdapter (List<TheLostBean> lists){
       this.lists=lists;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -71,9 +74,10 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
+      //  String s = AllURI.getLostThingsPhoto(lists.get(position).getId());
+
         Glide.with(mContext)
-                .load(s)
+                .load(lists.get(position).getPhoto())
                 .asBitmap()
                 .into(holder.thingtype);
 

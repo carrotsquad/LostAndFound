@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.image.GetImageFromWeb;
 import com.yf107.teamwork.lostandfound.image.GlideImageLoader;
@@ -204,13 +206,17 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     public void initView() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users", MODE_PRIVATE);
-        SharedPreferences preferences = getActivity().getSharedPreferences("users", Context.MODE_PRIVATE);
-        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)),
-                headImg, getActivity());
-//        Glide.with(mContext)
-//                .load(AllURI.getUserPhoto(preferences.getString(SESSION,null),preferences.getString(USERPHOTO,null)))
-//                .asBitmap()
-//                .into(headImg);
+        Log.d("Tag",sharedPreferences.getString(USERPHOTO,null));
+
+
+        if(preferences.getString(USERPHOTO,null) == null){
+            headImg.setImageResource(R.mipmap.user);
+        }else {
+            Glide.with(mContext)
+                    .load(preferences.getString(USERPHOTO, null))
+                    .asBitmap()
+                    .into(headImg);
+        }
 
     }
 
@@ -248,8 +254,8 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     public void onResume() {
         Log.d("15486622", "heihiehie");
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users", MODE_PRIVATE);
-        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)),
-                headImg, getActivity());
+//        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)),
+//                headImg, getActivity());
 //        Glide.with(mContext)
 //                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
 //                .asBitmap()

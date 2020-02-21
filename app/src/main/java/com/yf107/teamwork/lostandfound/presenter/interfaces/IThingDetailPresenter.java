@@ -7,4 +7,5 @@ public interface IThingDetailPresenter {
     //得到评论
     void getDataFromWeb(String session,int lostid);
 
+
 }

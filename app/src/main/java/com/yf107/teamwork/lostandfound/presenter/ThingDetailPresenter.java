@@ -3,12 +3,15 @@ package com.yf107.teamwork.lostandfound.presenter;
 import android.util.Log;
 
 import com.yf107.teamwork.lostandfound.bean.CommentFeedBack;
+import com.yf107.teamwork.lostandfound.bean.ImageBean;
 import com.yf107.teamwork.lostandfound.bean.StatusBean;
 import com.yf107.teamwork.lostandfound.model.ThingDetailModel;
 import com.yf107.teamwork.lostandfound.presenter.interfaces.IThingDetailPresenter;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 import com.yf107.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

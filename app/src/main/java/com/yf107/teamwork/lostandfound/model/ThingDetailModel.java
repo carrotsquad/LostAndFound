@@ -3,6 +3,7 @@ package com.yf107.teamwork.lostandfound.model;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.yf107.teamwork.lostandfound.bean.ImageBean;
 import com.yf107.teamwork.lostandfound.model.interfaces.IThingDetailModel;
 import com.yf107.teamwork.lostandfound.bean.CommentFeedBack;
 import com.yf107.teamwork.lostandfound.bean.StatusBean;
@@ -44,5 +45,15 @@ public class ThingDetailModel extends BaseModel implements IThingDetailModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
         Log.e("ReturnModel","完好"+session+"+"+id);
+    }
+
+    @Override
+    public void getphoto(String name, Observer<ImageBean> observer) {
+
+        api.getTheLostPhoto(name)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
     }
 }

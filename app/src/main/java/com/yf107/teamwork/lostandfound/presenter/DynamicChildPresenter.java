@@ -223,4 +223,9 @@ public class DynamicChildPresenter extends BasePresenter<IDynaicChildFragment> i
             });
         }
     }
+
+    @Override
+    public void getphoto(int lostid) {
+
+    }
 }

@@ -2,6 +2,7 @@ package com.yf107.teamwork.lostandfound.view.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,11 +19,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.yf107.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
@@ -51,7 +55,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSI
  */
 public class SearchFragment extends Fragment implements ISearchFragment {
 
-    private AutoCompleteTextView searchInput;
+    private ImageView searchInput;
     private Button sure;
     private DropDownMenu dropDownMenu;
     private List<View> popupViews = new ArrayList<>();
@@ -80,6 +84,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     private RecyclerView recyclerView;
     private TextView ok;
     private GridLayoutManager gridLayoutManager;
+    private com.wyt.searchbox.SearchFragment searchFragment;
 
     private SearchItemAdapter searchItemAdapter;
     private ArrayList<DynamicItemBean> searchItemBeanArrayList = new ArrayList<>();
@@ -108,9 +113,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         setOnClick();
         search("");
 
-        initAutoComplete("history", searchInput);
-        Editable etext = searchInput.getText();
-        Selection.setSelection(etext, etext.length());
+    //    initAutoComplete("history", searchInput);
+    //    Editable etext = searchInput.getText();
+      //  Selection.setSelection(etext, etext.length());
 
         return view;
     }
@@ -143,6 +148,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
        // searchInput.findViewById(android.support.v7.appcompat.R.id.submit_area).setBackground(null);
         sure = view.findViewById(R.id.search_sure);
         dropDownMenu = view.findViewById(R.id.search_dropDownMenu);
+        searchFragment = com.wyt.searchbox.SearchFragment.newInstance();
 
         //初始化启事类型过滤
         diushitypesView = new ListView(context);
@@ -238,13 +244,45 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 //        });
 
 
-        //点击搜索按键后
-        sure.setOnClickListener(v->{
+        searchInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                 saveHistory("history", searchInput);
-                String keyword = searchInput.getText().toString();
-                search(keyword);
-            });
+                Log.d("Tag","ajhksdfhlks");
+                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+                    @Override
+                    public void OnSearchClick(String keyword) {
+                       // String keyword = searchInput.getText().toString();
+                        search(keyword);
+                    }
+                });
+
+                searchFragment.showFragment(getFragmentManager(), com.wyt.searchbox.SearchFragment.TAG);
+            }
+        });
+
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+                    @Override
+                    public void OnSearchClick(String keyword) {
+                        // String keyword = searchInput.getText().toString();
+                        search(keyword);
+                    }
+                });
+
+                searchFragment.showFragment(getFragmentManager(), com.wyt.searchbox.SearchFragment.TAG);
+
+            }
+        });
+//        //点击搜索按键后
+//        sure.setOnClickListener(v->{
+//
+//                // saveHistory("history", searchInput);
+//                String keyword = searchInput.getText().toString();
+//                search(keyword);
+//            });
     }
 
     @Override
@@ -280,21 +318,21 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     }
 
 
-    private final class MyOnClickListener implements View.OnClickListener {
-
-        @Override
-
-        public void onClick(View v) {
-
-
-            saveHistory("history", searchInput);
-            adapter.notifyDataSetChanged();
-
-
-
-        }
-
-    }
+//    private final class MyOnClickListener implements View.OnClickListener {
+//
+//        @Override
+//
+//        public void onClick(View v) {
+//
+//
+//            saveHistory("history", searchInput);
+//            adapter.notifyDataSetChanged();
+//
+//
+//
+//        }
+//
+//    }
 
 
 
@@ -314,25 +352,25 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
      */
 
-    private void saveHistory(String field, AutoCompleteTextView autoCompleteTextView) {
-
-        String text = autoCompleteTextView.getText().toString();
-
-        SharedPreferences sp = getActivity().getSharedPreferences("network_url", 0);
-
-        String longhistory = sp.getString(field, "nothing");
-
-        if (!longhistory.contains(text + ",")) {
-
-            StringBuilder sb = new StringBuilder(longhistory);
-
-            sb.insert(0, text + ",");
-
-            sp.edit().putString("history", sb.toString()).commit();
-
-        }
-
-    }
+//    private void saveHistory(String field, AutoCompleteTextView autoCompleteTextView) {
+//
+//        String text = autoCompleteTextView.getText().toString();
+//
+//        SharedPreferences sp = getActivity().getSharedPreferences("network_url", 0);
+//
+//        String longhistory = sp.getString(field, "nothing");
+//
+//        if (!longhistory.contains(text + ",")) {
+//
+//            StringBuilder sb = new StringBuilder(longhistory);
+//
+//            sb.insert(0, text + ",");
+//
+//            sp.edit().putString("history", sb.toString()).commit();
+//
+//        }
+//
+//    }
 
 
 
@@ -352,60 +390,60 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
      */
 
-    private void initAutoComplete(String field, final AutoCompleteTextView autoCompleteTextView) {
-
-        SharedPreferences sp =getActivity(). getSharedPreferences("network_url", 0);
-
-        String longhistory = sp.getString("history", "nothing");
-
-        String[] histories = longhistory.split(",");
-
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, histories);
-
-        // 只保留最近的50条的记录
-
-        if (histories.length > 50) {
-
-            String[] newHistories = new String[50];
-
-            System.arraycopy(histories, 0, newHistories, 0, 50);
-
-            adapter = new ArrayAdapter<String>(getContext(),
-
-                    android.R.layout.simple_dropdown_item_1line, newHistories);
-
-        }
-
-        autoCompleteTextView.setAdapter(adapter);
-
-        autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-
-            public void onFocusChange(View v, boolean hasFocus) {
-
-                AutoCompleteTextView view = (AutoCompleteTextView) v;
-
-                if (hasFocus) {
-
-                    view.showDropDown();
-
-                }
-
-            }
-
-        });
-
-        autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AutoCompleteTextView view = (AutoCompleteTextView) v;
-                view.showDropDown();
-
-            }
-        });
-
-
-    }
+//    private void initAutoComplete(String field, final AutoCompleteTextView autoCompleteTextView) {
+//
+//        SharedPreferences sp =getActivity(). getSharedPreferences("network_url", 0);
+//
+//        String longhistory = sp.getString("history", "nothing");
+//
+//        String[] histories = longhistory.split(",");
+//
+//        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, histories);
+//
+//        // 只保留最近的50条的记录
+//
+//        if (histories.length > 50) {
+//
+//            String[] newHistories = new String[50];
+//
+//            System.arraycopy(histories, 0, newHistories, 0, 50);
+//
+//            adapter = new ArrayAdapter<String>(getContext(),
+//
+//                    android.R.layout.simple_dropdown_item_1line, newHistories);
+//
+//        }
+//
+//        autoCompleteTextView.setAdapter(adapter);
+//
+//        autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//
+//            @Override
+//
+//            public void onFocusChange(View v, boolean hasFocus) {
+//
+//                AutoCompleteTextView view = (AutoCompleteTextView) v;
+//
+//                if (hasFocus) {
+//
+//                    view.showDropDown();
+//
+//                }
+//
+//            }
+//
+//        });
+//
+//        autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                AutoCompleteTextView view = (AutoCompleteTextView) v;
+//                view.showDropDown();
+//
+//            }
+//        });
+//
+//
+//    }
 }

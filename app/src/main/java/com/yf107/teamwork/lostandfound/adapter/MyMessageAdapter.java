@@ -254,7 +254,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         }else {
             //事件图片
             Glide.with(mContext)
-                    .load(R.mipmap.diai1)
+                    .load(dynamicItemBean.getDynamics().getThelost().getPhoto())
                     //.load(AllURI.getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getDynamics().getThelost().getPhoto()))
                     .asBitmap()
                     .into(holder.headimg);
@@ -262,7 +262,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
 
         //用户头像
         Glide.with(mContext)
-                .load(R.mipmap.user)
+                .load(dynamicItemBean.getDynamics().getUserphoto())
                // .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getDynamics().getUserphoto()))
                 .asBitmap()
                 .into(holder.userphoto);

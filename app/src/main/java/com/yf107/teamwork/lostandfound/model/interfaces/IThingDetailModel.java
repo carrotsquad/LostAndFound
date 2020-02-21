@@ -1,6 +1,7 @@
 package com.yf107.teamwork.lostandfound.model.interfaces;
 
 import com.yf107.teamwork.lostandfound.bean.CommentFeedBack;
+import com.yf107.teamwork.lostandfound.bean.ImageBean;
 import com.yf107.teamwork.lostandfound.bean.StatusBean;
 
 import io.reactivex.Observer;
@@ -13,4 +14,6 @@ public interface IThingDetailModel {
     //展示评论
     void getInternetData(String session, int lostid,  Callback<CommentFeedBack> callback);
     void sendMessage(String session,int id , Observer<StatusBean> observer);
+
+    void getphoto(String name, Observer<ImageBean> observer);
 }

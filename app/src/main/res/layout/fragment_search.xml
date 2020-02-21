@@ -11,34 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-<!--        <android.support.v7.widget.SearchView-->
-<!--            app:iconifiedByDefault="false"-->
-<!--            android:background="@drawable/searchview_bg"-->
-<!--            android:id="@+id/search_input"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginBottom="8dp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:drawableStart="@drawable/search_ic"-->
-<!--            android:ems="10"-->
-<!--            android:maxLines="1"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.015"-->
-<!--            app:showDividers="none"-->
-<!--            app:submitBackground="@null" />-->
-
-        <AutoCompleteTextView
-            app:iconifiedByDefault="false"
-            android:background="@drawable/searchview_bg"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/searchinput2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.015"
             android:id="@+id/search_input"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
             android:drawableStart="@drawable/kongbai"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -47,13 +29,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:ems="10"
-            android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.015"
-            app:showDividers="none"
-            app:submitBackground="@null"/>
+            android:maxLines="1"/>
 
 
         <Button
@@ -75,6 +51,8 @@
             app:layout_constraintStart_toEndOf="@+id/search_input"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.011" />
+
+
     </LinearLayout>
     <include layout="@layout/dropmenu_layout"/>
 

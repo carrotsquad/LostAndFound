@@ -115,4 +115,7 @@ dependencies {
     //小红点
     implementation 'q.rorbin:badgeview:1.1.3'
 
+    //搜索框
+    implementation 'com.wenwenwen888:searchbox:1.0.1'
+
 }

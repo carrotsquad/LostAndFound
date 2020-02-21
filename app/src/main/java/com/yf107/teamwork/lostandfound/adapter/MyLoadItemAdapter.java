@@ -187,10 +187,10 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
-        String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
+       // String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
         Glide.with(mContext)
-                .load(R.mipmap.diai1)
-                //.load(s)
+              //  .load(R.mipmap.diai1)
+                .load(lists.get(position).getPhoto())
                     .asBitmap()
                 .into(holder.thingtype);
         String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
