@@ -208,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
         mViewPager.setAdapter(mainViewAdapter);
         mViewPager.setOffscreenPageLimit(3);
-      //  Log.d("为什么没有","无语");
 
 
 

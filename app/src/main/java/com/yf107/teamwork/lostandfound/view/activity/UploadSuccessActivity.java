@@ -37,6 +37,8 @@ public class UploadSuccessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_success);
+        Intent intent = getIntent();
+        String session = intent.getStringExtra("SESSION");
         ButterKnife.bind(this);
         //实现渐变式状态栏
         StatusBarUtil.setGradientStatusBarColor(this,statusBarView);

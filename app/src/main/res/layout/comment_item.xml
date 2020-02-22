@@ -7,11 +7,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/comment_item_photo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/photo_ic" />
+        android:src="@drawable/photo_ic"
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/comment_item_nickname"
@@ -24,21 +25,11 @@
         android:text="我不是桔猫我是橘猫"
         />
 
-    <TextView
-        android:textSize="11dp"
-        android:layout_marginTop="2dp"
-        android:id="@+id/comment_item_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/comment_item_nickname"
-        android:layout_below="@+id/comment_item_nickname"
-        android:text="2018年10月10日 10:10"
-        tools:ignore="HardcodedText" />
-
     <LinearLayout
-        android:layout_marginLeft="60dp"
+        android:id="@+id/pinglun"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/comment_item_date"
+        android:layout_below="@id/comment_item_photo"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -50,5 +41,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <TextView
+        android:textSize="11dp"
+        android:layout_marginTop="2dp"
+        android:id="@+id/comment_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pinglun"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:text="2018年10月10日 10:10"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>

@@ -376,7 +376,9 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     @Override
     public void showStatus(Boolean status) {
         if(status){
-            startActivity(new Intent(UploadFormActivity.this,UploadSuccessActivity.class));
+            Intent intent = new Intent(UploadFormActivity.this,UploadSuccessActivity.class);
+            intent.putExtra("SESSION",sharedPreferences.getString(SESSION, "null"));
+            startActivity(intent);
             finish();
             FancyToast.makeText(UploadFormActivity.this,"发布成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
         }else {

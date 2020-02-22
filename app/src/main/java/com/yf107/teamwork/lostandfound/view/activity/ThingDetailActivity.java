@@ -322,7 +322,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 .into(userimg);
 //        GetImageFromWeb.glideSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
 //                struserphoto),userimg,this);
-        fabiaodate.setText("发表于"+strfabiaodate);
+        fabiaodate.setText("");
         diushidate.setText(strdiushidate);
         place.setText(strplace);
         name.setText(title);
