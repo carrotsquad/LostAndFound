@@ -199,7 +199,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private void initBanner(List<String> urlList){
         List<String> s = new ArrayList<>();
         List<Integer> s1 = new ArrayList<>();
-        if("".equals(imgs)||imgs.equals("default.jpg") ||imgs == null){
+        if(imgs == null||"".equals(imgs)||imgs.equals("default.jpg")){
             s1.add(R.mipmap.diai1);
             banner.setImages(s1)
                     .setImageLoader(new WebImageLoader());

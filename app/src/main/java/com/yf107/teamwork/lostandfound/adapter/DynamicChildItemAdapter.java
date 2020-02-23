@@ -441,25 +441,21 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 //        Log.e("PHOTO", dynamicItemBean.getThelost().getPhoto());
 
 
-
-        if ("default.jpg".equals(dynamicItemBean.getThelost().getPhoto())) {
-            Glide.with(mContext)
-                    .load(R.mipmap.diai1)
-                    .asBitmap()
-                    .into(holder.thingphoto);
+        holder.thingphoto.setImageResource(R.mipmap.diai1);
+        if ( dynamicItemBean.getThelost().getPhoto() == null||"default.jpg".equals(dynamicItemBean.getThelost().getPhoto()) || dynamicItemBean.getThelost().getPhoto().equals("") ) {
+            holder.thingphoto.setImageResource(R.mipmap.diai1);
         } else {
 
             //事件图片
             Glide.with(mContext)
                        .load(dynamicItemBean.getThelost().getPhoto())
-                   // .load(c)
                     .asBitmap()
                     .into(holder.thingphoto);
         }
 
 
         //用户头像
-        if("default.jpg".equals(dynamicItemBean.getUserphoto())){
+        if(dynamicItemBean.getUserphoto() == null||"default.jpg".equals(dynamicItemBean.getUserphoto()) || dynamicItemBean.getUserphoto().equals("")){
             holder.headimg.setImageResource(R.mipmap.user);
         }else {
             Glide.with(mContext)
