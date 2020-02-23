@@ -192,7 +192,9 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                 break;
             case R.id.setting_phonelayout:
                 //startActivity(new Intent(UserInfoSettingActivity.this, ChangePhoneActivty.class));
-                changePhone();
+                //changePhone();
+                Intent intent2 = new Intent(UserInfoSettingActivity.this,RevisePhoneNumber.class);
+                startActivity(intent2);
                 break;
             case R.id.setting_passwordlayout:
                 // TODO: 2019/2/12 待添加
@@ -252,10 +254,14 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     public void initView() {
 //        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)),
 //                headImg,this);
-        Glide.with(this)
-                .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)))
-                .asBitmap()
-                .into(headImg);
+        if(sharedPreferences.getString(USERPHOTO,null) == null){
+            headImg.setImageResource(R.mipmap.user);
+        }else {
+            Glide.with(this)
+                    .load(sharedPreferences.getString(USERPHOTO, null))
+                    .asBitmap()
+                    .into(headImg);
+        }
     }
 
 
@@ -276,11 +282,10 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(USERPHOTO, userphoto);
             editor.commit();
-            headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
-//            Glide.with(this)
-//                    .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,null),sharedPreferences.getString(USERPHOTO,null)))
-//                    .asBitmap()
-//                    .into(headImg);
+            Glide.with(this)
+                    .load(userphoto)
+                    .asBitmap()
+                    .into(headImg);
             Toast.makeText(UserInfoSettingActivity.this, "头像上传成功", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(UserInfoSettingActivity.this, "头像上传失败", Toast.LENGTH_SHORT).show();
@@ -339,49 +344,49 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         mChange.showAtLocation(view, Gravity.CENTER, 0, 0);
     }
     //修改联系电话
-    private void changePhone() {
-
-        View view = View.inflate(UserInfoSettingActivity.this,R.layout.change_popupwindow,null);
-        PopupWindow mChange = new PopupWindow(view);
-        mChange.setWidth(WindowManager.LayoutParams.FILL_PARENT);
-        mChange.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-        //必须设置以下两项，否则弹出窗口无法取消
-        mChange.setFocusable(true);
-        setBackgroundAlpha(0.5f);
-        mChange.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        mChange.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                // popupWindow隐藏时恢复屏幕正常透明度
-                setBackgroundAlpha(1.0f);
-            }
-        });
-        EditText change_edt_phone = (EditText) view.findViewById(R.id.change_edt);
-        Button change_btn = (Button) view.findViewById(R.id.change_btn);
-        View.OnClickListener listener2 = new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                switch(view.getId()){
-                    case R.id.change_btn:
-                        change_phone = change_edt_phone.getText().toString();
-                        if (!change_edt_phone.getText().toString().equals("")){
-                            mEditInfoPresenter.uoloadPhoneNumber(sharedPreferences.getString("SESSION",null),change_edt_phone
-                                    .getText().toString());
-                        }else{
-                            FancyToast.makeText(UserInfoSettingActivity.this,"请输入",FancyToast.WARNING).show();
-                        }
-                        mChange.dismiss();
-                        break;
-                    default:
-                        break;
-                }
-            }};
-
-        change_btn.setOnClickListener(listener2);
-        mChange.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-    }
+//    private void changePhone() {
+//
+//        View view = View.inflate(UserInfoSettingActivity.this,R.layout.change_popupwindow,null);
+//        PopupWindow mChange = new PopupWindow(view);
+//        mChange.setWidth(WindowManager.LayoutParams.FILL_PARENT);
+//        mChange.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+//        //必须设置以下两项，否则弹出窗口无法取消
+//        mChange.setFocusable(true);
+//        setBackgroundAlpha(0.5f);
+//        mChange.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//
+//        mChange.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                // popupWindow隐藏时恢复屏幕正常透明度
+//                setBackgroundAlpha(1.0f);
+//            }
+//        });
+//        EditText change_edt_phone = (EditText) view.findViewById(R.id.change_edt);
+//        Button change_btn = (Button) view.findViewById(R.id.change_btn);
+//        View.OnClickListener listener2 = new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                switch(view.getId()){
+//                    case R.id.change_btn:
+//                        change_phone = change_edt_phone.getText().toString();
+//                        if (!change_edt_phone.getText().toString().equals("")){
+//                         //   mEditInfoPresenter.uoloadPhoneNumber(sharedPreferences.getString("SESSION",null),change_edt_phone
+//                                //    .getText().toString());
+//                        }else{
+//                            FancyToast.makeText(UserInfoSettingActivity.this,"请输入",FancyToast.WARNING).show();
+//                        }
+//                        mChange.dismiss();
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }};
+//
+//        change_btn.setOnClickListener(listener2);
+//        mChange.showAtLocation(view, Gravity.CENTER, 0, 0);
+//
+//    }
 
     //设置屏幕的透明度
     public void setBackgroundAlpha(float bgAlpha) {

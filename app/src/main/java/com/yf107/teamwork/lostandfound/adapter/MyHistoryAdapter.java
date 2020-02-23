@@ -3,6 +3,7 @@ package com.yf107.teamwork.lostandfound.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,10 +77,16 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
       //  String s = AllURI.getLostThingsPhoto(lists.get(position).getId());
 
-        Glide.with(mContext)
-                .load(lists.get(position).getPhoto())
-                .asBitmap()
-                .into(holder.thingtype);
+        if(lists.get(position).getPhoto().equals("default.jpg")){
+            holder.thingtype.setImageResource(R.mipmap.diai1);
+        }else {
+            Glide.with(mContext)
+                    .load(lists.get(position).getPhoto())
+                    .asBitmap()
+                    .into(holder.thingtype);
+        }
+
+        Log.d("zhaopian",lists.get(position).getPhoto());
 
         if(lists.get(position).getTypeid()==1){
             holder.thingtypetxt.setImageResource(R.drawable.littleicon_keys);
@@ -97,21 +104,22 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
             holder.isdong.setText("递爱失败");
         }
         if (lists.get(position).getLosttype()==0){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost);
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost1);
         }else if (lists.get(position).getLosttype()==1){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_find1);
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         holder.where.setText(lostPlace);
         String publishTime= lists.get(position).getPublishtime();
         if (!publishTime.equals("")){
+            String year = publishTime.substring(0,4);
          String   mouth = publishTime.substring(4,6);
          String    day = publishTime.substring(6,8);
          String    hours=publishTime.substring(8,10);
-            String time1 = mouth+"月"+""+day+"日";
+            String time1 = year+"."+mouth+"."+""+day;
             String time2=  hours+"点";
             holder.time.setText(time1);
-            holder.time2.setText(time2);
+            holder.time2.setText("");
         }
 
     }

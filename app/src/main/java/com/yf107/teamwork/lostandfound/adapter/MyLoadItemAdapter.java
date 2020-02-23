@@ -188,20 +188,27 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
        // String s = AllURI.getLostThingsPhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),lists.get(position).getPhoto());;
-        Glide.with(mContext)
-              //  .load(R.mipmap.diai1)
-                .load(lists.get(position).getPhoto())
-                    .asBitmap()
-                .into(holder.thingtype);
+       if(lists.get(position).getPhoto().equals("default.jpg")) {
+
+           holder.thingtype.setImageResource(R.mipmap.diai1);
+       }else {
+           Glide.with(mContext)
+                   .load(lists.get(position).getPhoto())
+                   .asBitmap()
+                   .into(holder.thingtype);
+       }
+
+
+       Log.d("tupianshi",lists.get(position).getPhoto());
         String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
         Glide.with(mContext)
                 .load(x)
                 .asBitmap()
                 .into(holder.thingtypetxt);
         if (lists.get(position).getLosttype()==0){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost);
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost1);
         }else if (lists.get(position).getLosttype()==1){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_find);
+            holder.eventtype.setImageResource(R.drawable.littleicon_type_find1);
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         Log.e("MyLoadItemAdapter",""+lists.get(position).getPlaceid()+lostPlace);
@@ -209,13 +216,14 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         Log.e("1","1");
         String publishTime= lists.get(position).getPublishtime();
         if (!publishTime.equals("")){
+            String year = publishTime.substring(0,4);
             String   mouth = publishTime.substring(4,6);
             String    day = publishTime.substring(6,8);
             String    hours=publishTime.substring(8,10);
-            String time1 = mouth+"月"+day+"日";
+            String time1 = year + "."+mouth+"."+day;
             String time2=  hours+"点";
             holder.time.setText(time1);
-            holder.time2.setText(time2);
+            holder.time2.setText("");
         }
 
 

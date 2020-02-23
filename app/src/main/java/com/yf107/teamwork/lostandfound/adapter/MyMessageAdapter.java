@@ -184,16 +184,16 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
          * "losttime": "2018110512",
          */
         String date_orig = dynamicItemBean.getDynamics().getThelost().getPublishtime();
-        String fabaiodate = "";
+        String fabaiodate = date_orig.substring(0,4)+".";
         if(!"0".equals(date_orig.substring(4, 5))){
             fabaiodate = fabaiodate+"0";
         }
-        fabaiodate = date_orig.substring(5, 6) + "月";
+        fabaiodate = date_orig.substring(5, 6) + ".";
         if(!"0".equals(date_orig.substring(6, 7))) {
             fabaiodate = fabaiodate+date_orig.substring(6, 7);
         }
-        fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
-        holder.fabiaotime.setText(fabaiodate+"发表");
+        fabaiodate = fabaiodate + date_orig.substring(7,8);
+
 
         String lostdate_orig = dynamicItemBean.getDynamics().getThelost().getLosttime();
         String lostdate = lostdate_orig.substring(0, 4) + "." + lostdate_orig.substring(4, 6) + ".";
@@ -227,9 +227,10 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         //启事类型
         holder.qishileixing.setImageResource(lostType);
         //时间地点
-        holder.placeanddate.setText(place+"   "+lostdate);
+        holder.placeanddate.setText(place);
         //标题
         holder.title.setText(dynamicItemBean.getDynamics().getThelost().getTitle());
+        holder.fabiaotime.setText(lostdate);
         holder.neckname.setText(dynamicItemBean.getDynamics().getNickname());
 
         sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
@@ -247,10 +248,8 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
                     .into(holder.thingType);
         }
 
-        if(dynamicItemBean.getDynamics().getThelost().getPhoto().equals("")) {
-            GetImageFromWeb.httpSetImageView(AllURI.getTypePhoto(sharedPreferences.getString(SESSION, "null"), AllURI.allTypeImgsList.get(dynamicItemBean.getDynamics().getThelost().getTypeid() - 1))
-                    , holder.headimg
-                    , activity);
+        if(dynamicItemBean.getDynamics().getThelost().getPhoto().equals("default.jpg")) {
+            holder.headimg.setImageResource(R.mipmap.diai1);
         }else {
             //事件图片
             Glide.with(mContext)
@@ -260,12 +259,19 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
                     .into(holder.headimg);
         }
 
+
+
         //用户头像
-        Glide.with(mContext)
-                .load(dynamicItemBean.getDynamics().getUserphoto())
-               // .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getDynamics().getUserphoto()))
-                .asBitmap()
-                .into(holder.userphoto);
+        if(dynamicItemBean.getDynamics().getUserphoto().equals("default.jpg")) {
+
+            holder.userphoto.setImageResource(R.mipmap.user);
+        }else {
+            Glide.with(mContext)
+                    .load(dynamicItemBean.getDynamics().getUserphoto())
+                    // .load(AllURI.getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getDynamics().getUserphoto()))
+                    .asBitmap()
+                    .into(holder.userphoto);
+        }
 
         //赏金
         holder.isNeedBounty.setVisibility(View.INVISIBLE);

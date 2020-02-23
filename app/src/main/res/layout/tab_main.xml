@@ -11,7 +11,7 @@
             android:id="@+id/immm"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/lost"
+            android:src="@drawable/tab_lost"
             android:layout_gravity="center"/>
 
         <LinearLayout

@@ -130,7 +130,7 @@ public class  DynamicFragment extends Fragment {
 
         ImageView imageView = view.findViewById(R.id.immm);
 
-        imageView.setImageResource(R.drawable.lost);
+        imageView.setImageResource(R.mipmap.tab_lost);
 
         TextView textView = view.findViewById(R.id.tvv);
         textView.setText("失物");
@@ -144,7 +144,7 @@ public class  DynamicFragment extends Fragment {
 
         ImageView imageView = view.findViewById(R.id.immm);
 
-        imageView.setImageResource(R.drawable.find);
+        imageView.setImageResource(R.mipmap.tab_find);
 
         TextView textView = view.findViewById(R.id.tvv);
         textView.setText("招领");

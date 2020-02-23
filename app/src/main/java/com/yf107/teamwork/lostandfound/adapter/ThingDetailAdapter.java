@@ -48,6 +48,7 @@ public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.
 
     public ThingDetailAdapter(List<CommentFeedBack.Comments> list, ThingDetailActivity activity){
         this.bean = list;
+
         mThingDetailActivity = activity;
     }
 
@@ -71,7 +72,7 @@ public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.
         mSharedPreferences = mContext.getSharedPreferences("users",Context.MODE_PRIVATE);
         String s = AllURI.getUserPhoto(mSharedPreferences.getString("SESSION",null),bean.get(position).getPhoto());
         Glide.with(mContext)
-                .load(mSharedPreferences.getString("USERPHOTO",null))
+                .load(bean.get(position).getPhoto())
              //   .load(s)
                 .asBitmap()
                 .into(holder.head);

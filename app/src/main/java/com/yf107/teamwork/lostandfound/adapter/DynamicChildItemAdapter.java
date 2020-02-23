@@ -441,26 +441,15 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 //        Log.e("PHOTO", dynamicItemBean.getThelost().getPhoto());
 
 
-        //默认图片，
-//        Glide.with(mContext)
-//                .load(getTypePhoto(sharedPreferences.getString(SESSION,"null"),allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
-//                .asBitmap()
-//                .into(holder.thingphoto);
 
-        if ("".equals(dynamicItemBean.getThelost().getPhoto())) {
+        if ("default.jpg".equals(dynamicItemBean.getThelost().getPhoto())) {
             Glide.with(mContext)
-                   // .load(AllURI.getTypePhoto(sharedPreferences.getString(SESSION,"null"), AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid()-1)))
                     .load(R.mipmap.diai1)
                     .asBitmap()
                     .into(holder.thingphoto);
-//            GetImageFromWeb.httpSetImageView(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
-//                    , holder.thingphoto
-//                    , activity);
         } else {
 
             //事件图片
-//            String[] a = dynamicItemBean.getThelost().getPhoto().split(",");
-     //       String c = AllURI.getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), a[0]);
             Glide.with(mContext)
                        .load(dynamicItemBean.getThelost().getPhoto())
                    // .load(c)
@@ -470,11 +459,15 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 
 
         //用户头像
-        Glide.with(mContext)
+        if("default.jpg".equals(dynamicItemBean.getUserphoto())){
+            holder.headimg.setImageResource(R.mipmap.user);
+        }else {
+            Glide.with(mContext)
                     .load(dynamicItemBean.getUserphoto())
-             //   .load(R.mipmap.user)
-                .asBitmap()
-                .into(holder.headimg);
+                    //   .load(R.mipmap.user)
+                    .asBitmap()
+                    .into(holder.headimg);
+        }
     }
 
     @Override

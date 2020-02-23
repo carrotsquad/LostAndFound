@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yf107.teamwork.lostandfound.view.activity.RevisePhoneNumber">
+
+    <TextView
+        android:id="@+id/phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改电话"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+
+  <EditText
+      android:id="@+id/phone_edit"
+      android:layout_width="300dp"
+      android:layout_height="wrap_content"
+      android:hint="输入电话"
+      android:layout_centerHorizontal="true"
+      android:layout_below="@id/phonenumber"
+      android:layout_marginTop="150dp"/>
+
+    <Button
+        android:id="@+id/phone_clear"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_toRightOf="@+id/phone_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/phonenumber"
+        android:background="@drawable/all_clear"
+        android:layout_marginTop="150dp"/>
+
+    <Button
+        android:id="@+id/phone_sure"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/phone_clear"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/login_icon"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+
+</RelativeLayout>

@@ -135,6 +135,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     LinearLayout linearLayout;
 
 
+    @BindView(R.id.thing_detail_thingsdetail_losttype)
+    ImageView losttype;
+
     private String imgs = "";
     private int lostid;
     private int intthingstype;
@@ -152,6 +155,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private int id;
     private String jsession;
     private View statusBarView;
+    private int lostType = 0;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
@@ -194,9 +198,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 
     private void initBanner(List<String> urlList){
         List<String> s = new ArrayList<>();
-        if("".equals(imgs)){
-            s.add(AllURI.getTypePhoto(sharedPreferences.getString(SESSION, "null"), AllURI.allTypeImgsList.get(intthingstype - 1)));
-            banner.setImages(s)
+        List<Integer> s1 = new ArrayList<>();
+        if("".equals(imgs)||imgs.equals("default.jpg") ||imgs == null){
+            s1.add(R.mipmap.diai1);
+            banner.setImages(s1)
                     .setImageLoader(new WebImageLoader());
         }else {
             for (String e :
@@ -304,11 +309,25 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         lostid = intent.getIntExtra(OTHERSID,-1);
         int qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
 
-        if(qishileixing==0){
-            type.setText("失物详情");
-        }else {
-            type.setText("寻物详情");
+        switch (qishileixing){
+            case 0:{
+                lostType = R.drawable.littleicon_type_lost1;
+                break;
+            }
+            case 1:{
+                lostType = R.drawable.littleicon_type_find1;
+            }
+            default:{
+                break;
+            }
         }
+        losttype.setImageResource(lostType);
+
+//        if(qishileixing==0){
+//            type.setText("失物详情");
+//        }else {
+//            type.setText("寻物详情");
+//        }
 //        GetImageFromWeb.glideSetImageView(AllURI.getTypeLittlePhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
 //                AllURI.allTypeImgsList.get(intthingstype-1)),thingstype,this);
         describe.setText(strdesc);
@@ -316,10 +335,14 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 //        GetImageFromWeb.httpSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
 //                struserphoto),userimg,this);
         //userimg.setImageResource(R.mipmap.user);
-        Glide.with(this)
-                .load(struserphoto)
-                .asBitmap()
-                .into(userimg);
+        if(struserphoto.equals("")||struserphoto.equals("default.jpg") || struserphoto == null){
+            userimg.setImageResource(R.mipmap.user);
+        }else {
+            Glide.with(this)
+                    .load(struserphoto)
+                    .asBitmap()
+                    .into(userimg);
+        }
 //        GetImageFromWeb.glideSetImageView(AllURI.getUserPhoto(getSharedPreferences("users",MODE_PRIVATE).getString("SESSION",null),
 //                struserphoto),userimg,this);
         fabiaodate.setText("");
@@ -345,6 +368,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 id= intent.getIntExtra(OTHERSID,0);
                 jsession = sharedPreferences.getString(SESSION, "null");
                 returnPresenter.sendMessage(jsession,id);
+                Intent intent1  = new Intent(ThingDetailActivity.this,GivebackActivity.class);
+                startActivity(intent1);
             }
             default:{
                 break;

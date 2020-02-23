@@ -7,72 +7,74 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
-        android:name="com.yf107.teamwork.lostandfound.view.application.BaseApp"
+        android:name=".view.application.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/diai2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/diai2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ForgetPasswordActivity"></activity>
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.BufferPageActivity" />
+        <activity android:name=".view.activity.RevisePhoneNumber"></activity>
+        <activity android:name="com.yf107.teamwork.intelligenttcmpharmacy.RevisePhoneNumber" />
+        <activity
+            android:name=".ui.login.RevisePhoneNumber"
+            android:label="@string/title_activity_revise_phone_number" />
+        <activity android:name=".view.activity.GivebackActivity" />
+        <activity android:name=".view.activity.ForgetPasswordActivity" />
+        <activity android:name=".view.activity.BufferPageActivity" />
 
         <service
-            android:name="com.yf107.teamwork.lostandfound.services.UpdateMessageService"
+            android:name=".services.UpdateMessageService"
             android:icon="@mipmap/diai" />
 
         <activity
-            android:name="com.yf107.teamwork.lostandfound.view.activity.MainActivity"
+            android:name=".view.activity.MainActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.yf107.teamwork.lostandfound.view.activity.LogInActivity"
+            android:name=".view.activity.LogInActivity"
             android:label="@string/title_activity_log_in"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.yf107.teamwork.lostandfound.view.activity.VerifyActivity"
+            android:name=".view.activity.VerifyActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.yf107.teamwork.lostandfound.view.activity.SignInActivity"
+            android:name=".view.activity.SignInActivity"
             android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
-        </activity>
-
-        <activity
-            android:name="com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity"
-            android:launchMode="singleTop">
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoSettingActivity"
+            android:name=".view.activity.ThingDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.activity.UserInfoSettingActivity"
             android:label="@string/editInfo" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.UploadActivity" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoMyHistory" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.UploadFormActivity" />
+        <activity android:name=".view.activity.UploadActivity" />
+        <activity android:name=".view.activity.UserInfoMyHistory" />
+        <activity android:name=".view.activity.UploadFormActivity" />
         <activity
-            android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity"
+            android:name=".view.activity.UserInfoAboutUsActivity"
             android:label="" />
         <activity
-            android:name="com.yf107.teamwork.lostandfound.view.activity.UserInfoMyUpload"
+            android:name=".view.activity.UserInfoMyUpload"
             android:label="我的发布" /> <!-- <activity android:name=".view.activity.UserSettingEditInfoActivity" /> -->
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.InitActivity">
-            <meta-data android:name="android.app.shortcuts"
+        <activity android:name=".view.activity.InitActivity">
+            <meta-data
+                android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.UploadSuccessActivity" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ChangeNickNameActivity" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ChangePhoneActivty" /> <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.AboutUsDetailActivity" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.AboutDiAi" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.OurWebActivity" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.GuideActivity" />
-        <activity android:name="com.yf107.teamwork.lostandfound.view.activity.ReplaceActivity"/>
+        <activity android:name=".view.activity.UploadSuccessActivity" />
+        <activity android:name=".view.activity.ChangeNickNameActivity" />
+        <activity android:name=".view.activity.ChangePhoneActivty" /> <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
+        <activity android:name=".view.activity.AboutUsDetailActivity" />
+        <activity android:name=".view.activity.AboutDiAi" />
+        <activity android:name=".view.activity.OurWebActivity" />
+        <activity android:name=".view.activity.GuideActivity" />
+        <activity android:name=".view.activity.ReplaceActivity" />
     </application>
 
 </manifest>

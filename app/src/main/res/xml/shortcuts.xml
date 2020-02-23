@@ -2,7 +2,7 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/lost"
+        android:icon="@drawable/tab_lost"
         android:shortcutDisabledMessage="@string/shortcut_disabled_message"
         android:shortcutId="staticId_1"
         android:shortcutLongLabel="@string/shortcut_long_label_1"
@@ -18,7 +18,7 @@
     </shortcut>
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/find"
+        android:icon="@drawable/tab_find"
         android:shortcutDisabledMessage="@string/shortcut_disabled_message"
         android:shortcutId="staticId_2"
         android:shortcutLongLabel="@string/shortcut_long_label_2"

@@ -184,12 +184,16 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }
         Log.e("SearchItemAdapter","fffffff"+fabaiodate);
         fabaiodate =fabaiodate + date_orig.substring(5, 6) + "月";
+
         if(!"0".equals(date_orig.substring(6, 7))) {
             fabaiodate = fabaiodate+date_orig.substring(6, 7);
+
         }
         fabaiodate = fabaiodate + date_orig.substring(7,8)+"日"+date_orig.substring(8,10)+":"+date_orig.substring(10,12);
-        holder.fabiaotime.setText(fabaiodate+"发表");
         Log.e("SearchItemAdapter","fff"+fabaiodate);
+
+
+            holder.fabiaotime.setText(fabaiodate);
 
         String lostdate_orig = dynamicItemBean.getThelost().getLosttime();
         String lostdate = lostdate_orig.substring(0, 4) + "." + lostdate_orig.substring(4, 6) + ".";
@@ -222,7 +226,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         //启事类型
         holder.qishileixing.setImageResource(lostType);
         //时间地点
-        holder.placeanddate.setText(place+"   "+lostdate);
+        holder.placeanddate.setText(place);
         //标题
         holder.title.setText(dynamicItemBean.getThelost().getTitle());
         holder.neckname.setText(dynamicItemBean.getNickname());
@@ -250,19 +254,29 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 //                    , activity);
 //        }else {
             //事件图片
+
+            holder.headimg.setImageResource(R.mipmap.diai1);
+        if(dynamicItemBean.getThelost().getPhoto() == null || dynamicItemBean.getThelost().getPhoto().equals("") || dynamicItemBean.equals("default.jpg")){
+            holder.headimg.setImageResource(R.mipmap.diai1);
+        }else{
             Glide.with(mContext)
                     .load(dynamicItemBean.getThelost().getPhoto())
-                //    .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), dynamicItemBean.getThelost().getPhoto()))
                     .asBitmap()
                     .into(holder.headimg);
+        }
+
+//        Log.d("zhaopianzhaopian ",dynamicItemBean.getThelost().getPhoto());
 
         //用户头像
-        Glide.with(mContext)
-               .load(dynamicItemBean.getUserphoto())
-           //     .load(getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getUserphoto()))
-                .asBitmap()
-                .into(holder.userphoto);
-
+        if(dynamicItemBean.getUserphoto().equals("default.jpg")){
+            holder.userphoto.setImageResource(R.mipmap.user);
+        }else {
+            Glide.with(mContext)
+                    .load(dynamicItemBean.getUserphoto())
+                    //     .load(getUserPhoto(sharedPreferences.getString(SESSION,"null"),dynamicItemBean.getUserphoto()))
+                    .asBitmap()
+                    .into(holder.userphoto);
+        }
         //赏金
         holder.isNeedBounty.setVisibility(View.INVISIBLE);
 
