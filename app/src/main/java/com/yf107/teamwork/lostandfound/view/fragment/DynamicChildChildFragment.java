@@ -186,7 +186,7 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
         refreshLayout.setRefreshing(false);
         lists.clear();
         lists.addAll(searchItemBeanArrayList);
-//            mDynamicItemAdapter.notifyDataSetChanged();
+            mDynamicItemAdapter.notifyDataSetChanged();
         mDynamicItemAdapter.notifyItemChanged(this.lists.size() - 1);
         if (status) {
             if (!newPosi.equals(oldPosi)) {
