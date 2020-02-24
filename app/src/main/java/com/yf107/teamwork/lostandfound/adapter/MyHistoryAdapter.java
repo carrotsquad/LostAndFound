@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.TheLostBean;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
 
 import java.util.List;
 
@@ -88,15 +89,9 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
 
         Log.d("zhaopian",lists.get(position).getPhoto());
 
-        if(lists.get(position).getTypeid()==1){
-            holder.thingtypetxt.setImageResource(R.drawable.littleicon_keys);
-        }else {
-            String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
-            Glide.with(mContext)
-                    .load(x)
-                    .asBitmap()
-                    .into(holder.thingtypetxt);
-        }
+        //类型图片
+        holder.thingtypetxt.setImageResource(SelectTypeUtil.getInstance().getImage(lists.get(position).getTypeid()));
+
 
         if (lists.get(position).getIshandled()==1){
             holder.isdong.setText("递爱成功");
@@ -111,17 +106,16 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         holder.where.setText(lostPlace);
         String publishTime= lists.get(position).getPublishtime();
-        if (!publishTime.equals("")){
-            String year = publishTime.substring(0,4);
-         String   mouth = publishTime.substring(4,6);
-         String    day = publishTime.substring(6,8);
-         String    hours=publishTime.substring(8,10);
-            String time1 = year+"."+mouth+"."+""+day;
-            String time2=  hours+"点";
+        if (!publishTime.equals("")) {
+            String year = publishTime.substring(0, 4);
+            String mouth = publishTime.substring(4, 6);
+            String day = publishTime.substring(6, 8);
+            String hours = publishTime.substring(8, 10);
+            String time1 = year + "." + mouth + "." + "" + day;
+            String time2 = hours + "点";
             holder.time.setText(time1);
             holder.time2.setText("");
         }
-
     }
 
     @Override

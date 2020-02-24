@@ -24,6 +24,7 @@ import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
 import com.yf107.teamwork.lostandfound.image.GetImageFromWeb;
 import com.yf107.teamwork.lostandfound.popupwindow.ArrowPopWindows;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -124,6 +125,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 DynamicItemBean dynamicItemBean = searchItemBeanArrayList.get(position);
 
 
+                Log.d("losttype", String.valueOf(dynamicItemBean.getThelost().getTypeid()));
                 String date_orig = dynamicItemBean.getThelost().getPublishtime();
                 String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
                 if(!"0".equals(date_orig.substring(6, 7))) {
@@ -239,14 +241,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         //类型小标签
 
         //类型图片
-        if(dynamicItemBean.getThelost().getTypeid()==1){
-            holder.thingType.setImageResource(R.drawable.littleicon_keys);
-        }else {
-            Glide.with(mContext)
-                    .load(AllURI.getTypeLittlePhoto(sharedPreferences.getString(SESSION, "null"), AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1)))
-                    .asBitmap()
-                    .into(holder.thingType);
-        }
+        holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getThelost().getTypeid()));
+
 
 //        if(dynamicItemBean.getThelost().getPhoto().equals("")) {
 //            GetImageFromWeb.httpSetImageView(AllURI.getTypePhoto(sharedPreferences.getString(SESSION, "null"), AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1))
@@ -322,6 +318,10 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }else {
             holder.newMsg.setVisibility(View.INVISIBLE);
         }
+
+        holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getThelost().getTypeid()));
+        Log.d("wocaonima", String.valueOf(dynamicItemBean.getThelost().getTypeid()));
+
 
     }
 

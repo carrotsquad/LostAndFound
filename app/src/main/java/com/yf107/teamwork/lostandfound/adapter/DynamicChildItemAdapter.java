@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -328,6 +329,7 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
                 int position = holder.getAdapterPosition();
                 DynamicItemBean dynamicItemBean = lists.get(position);
 
+                Log.d("typeid", String.valueOf(dynamicItemBean.getThelost().getTypeid()));
 
                 String date_orig = dynamicItemBean.getThelost().getPublishtime();
                 String fabaiodate = date_orig.substring(0, 4) + "年" + date_orig.substring(4, 6) + "月";
@@ -403,7 +405,7 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
         String place = AllURI.allPlaceBeanList.get(lostplace - 1);
 //        String thingsType = allTypeBeanList.get(thingstype);
 
-        holder.timeandplace.setText(place + "  " + date_orig.substring(8,10) + ":" + date_orig.substring(10,12));
+        holder.timeandplace.setText(place);
 
         int lostType = 0;
         switch (losttype) {
@@ -425,16 +427,8 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
 
         Log.e("PHOTO", AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1));
         //类型图片
-        if (dynamicItemBean.getThelost().getTypeid() == 1) {
-            holder.thingType.setImageResource(R.drawable.littleicon_keys);
-            //   holder.thingType.setImageResource(R.drawable.littleicon_type_find1);
-        } else {
-            Glide.with(mContext)
-                    // .load(R.drawable.littleicon_type_lost1)
-                    .load(AllURI.getTypeLittlePhoto(sharedPreferences.getString(SESSION, "null"), AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1)))
-                    .asBitmap()
-                    .into(holder.thingType);
-        }
+        holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getThelost().getTypeid()));
+
 
 
         Log.e("PHOTO", String.valueOf(position));

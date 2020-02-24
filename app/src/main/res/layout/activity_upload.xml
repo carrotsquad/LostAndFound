@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#ffffff"
     android:layout_height="match_parent"
     tools:context="com.yf107.teamwork.lostandfound.view.activity.UploadActivity">
     <android.support.design.widget.CoordinatorLayout
@@ -14,12 +15,9 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/upload_toolbar"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/barbackgroud"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
+            android:background="#ffffff"
             />
         </android.support.design.widget.AppBarLayout>
 
@@ -27,6 +25,7 @@
             android:id="@+id/upload_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
     </android.support.design.widget.CoordinatorLayout>

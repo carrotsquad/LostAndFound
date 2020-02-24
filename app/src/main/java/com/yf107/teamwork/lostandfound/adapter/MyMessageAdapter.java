@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +26,7 @@ import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
 import com.yf107.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.yf107.teamwork.lostandfound.image.GetImageFromWeb;
 import com.yf107.teamwork.lostandfound.popupwindow.ArrowPopWindows;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -239,14 +242,8 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         //类型小标签
 
         //类型图片
-        if(dynamicItemBean.getDynamics().getThelost().getTypeid()==1){
-            holder.thingType.setImageResource(R.drawable.littleicon_keys);
-        }else {
-            Glide.with(mContext)
-                    .load(AllURI.getTypeLittlePhoto(sharedPreferences.getString(SESSION, "null"), AllURI.allTypeImgsList.get(dynamicItemBean.getDynamics().getThelost().getTypeid() - 1)))
-                    .asBitmap()
-                    .into(holder.thingType);
-        }
+        holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getDynamics().getThelost().getTypeid()));
+
 
         if(dynamicItemBean.getDynamics().getThelost().getPhoto().equals("default.jpg")) {
             holder.headimg.setImageResource(R.mipmap.diai1);
@@ -276,14 +273,16 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         //赏金
         holder.isNeedBounty.setVisibility(View.INVISIBLE);
 
-        //新消息气泡
-        if(isMessage) {
-            if(isread == 0) {
-                holder.newMsg.setImageResource(R.drawable.message);
-            }else {
-                holder.newMsg.setVisibility(View.INVISIBLE);
-            }
-        }
+
+                    //新消息气泡
+                    if (isMessage) {
+                        if (isread == 0) {
+                            holder.newMsg.setImageResource(R.drawable.message);
+                        } else {
+                            holder.newMsg.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
 
         }
 

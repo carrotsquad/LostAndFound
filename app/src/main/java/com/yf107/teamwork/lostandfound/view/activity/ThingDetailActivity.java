@@ -32,6 +32,7 @@ import com.yf107.teamwork.lostandfound.model.ThingDetailModel;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.presenter.ThingDetailPresenter;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 import com.youth.banner.Banner;
@@ -156,6 +157,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private String jsession;
     private View statusBarView;
     private int lostType = 0;
+    private int qishileixing;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
@@ -235,57 +237,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         });
     }
 
-//    //初始化viewpager
-//    private void initViewPager(List<String> urlList) {
-//        Log.e("ThingsDetail", urlList.toString());
-//        imageViewList = new ArrayList<>();
-//
-//        View point = null;
-//        LinearLayout.LayoutParams params = null;
-//        //如果长度为0，加入默认图片
-//        if (urlList.size() != 0) {
-//            for (String s :
-//                    urlList) {
-//                ImageView imageView = new ImageView(this);
-//                Glide.with(this)
-//                        .load(getLostThingsPhoto(sharedPreferences.getString(SESSION, "null"), s))
-//                        .asBitmap()
-//                        .into(imageView);
-//                imageViewList.add(imageView);
-//            }
-//        } else {
-//            ImageView imageView = new ImageView(this);
-//            Glide.with(this)
-//                    .load(getTypePhoto(sharedPreferences.getString(SESSION, "null"), allTypeImgsList.get(intthingstype - 1)))
-//                    .asBitmap()
-//                    .into(imageView);
-//            imageViewList.add(imageView);
-//        }
-//
-//
-//            viewPager.setAdapter(new MyViewPagerAdapter(imageViewList));
-//            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//                @Override
-//                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                    if (position == imageViewList.size()) {
-//                        viewPager.setCurrentItem(0);
-//                    }
-//                }
-//
-//                @Override
-//                public void onPageSelected(int position) {
-//                    if (position == imageViewList.size()) {
-//                        viewPager.setCurrentItem(0);
-//                    }
-//                }
-//
-//                @Override
-//                public void onPageScrollStateChanged(int state) {
-//
-//                }
-//            });
-//        }
-
     //初始化控件
     private String initDataFromLocal() {
         Intent intent = getIntent();
@@ -307,8 +258,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         intthingstype = intent.getIntExtra(OTHERSTHINGSTYPE,1);
         String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         lostid = intent.getIntExtra(OTHERSID,-1);
-        int qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
+        qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
 
+        thingstype.setImageResource(SelectTypeUtil.getInstance().getImage(intthingstype));
         switch (qishileixing){
             case 0:{
                 lostType = R.drawable.littleicon_type_lost1;
@@ -369,6 +321,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 jsession = sharedPreferences.getString(SESSION, "null");
                 returnPresenter.sendMessage(jsession,id);
                 Intent intent1  = new Intent(ThingDetailActivity.this,GivebackActivity.class);
+                intent1.putExtra("TYPE",String.valueOf(qishileixing));
                 startActivity(intent1);
             }
             default:{

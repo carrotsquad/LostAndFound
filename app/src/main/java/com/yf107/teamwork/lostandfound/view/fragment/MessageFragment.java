@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -92,38 +93,39 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         initList();
         EventBus.getDefault().register(this);
         activity = getActivity();
-        handler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what){
-                    case 0: {
-                        Log.d("进入了吗", "进入了");
+                    handler = new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            super.handleMessage(msg);
+                            switch (msg.what) {
+                                case 0: {
+                                    Log.d("进入了吗", "进入了");
 
-                        if (badge != null) {
-                            badge.hide(false);
-                        }
-                        badge = new QBadgeView(activity)
-                                .bindTarget(itemView)
-                                .setShowShadow(true)
-                                .setBadgeGravity(Gravity.END | Gravity.TOP)
-                                .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
-                                    @Override
-                                    public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-
+                                    if (badge != null) {
+                                        badge.hide(false);
                                     }
-                                }).setBadgeText("");
-                        break;
-                    }
-                    case 1:{
-                        Log.d("进入了吗1","进入了");
-                        if(badge != null){
-                            badge.hide(false);
+                                    badge = new QBadgeView(activity)
+                                            .bindTarget(itemView)
+                                            .setShowShadow(true)
+                                            .setBadgeGravity(Gravity.END | Gravity.TOP)
+                                            .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                                                @Override
+                                                public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+
+                                                }
+                                            }).setBadgeText("");
+                                    break;
+                                }
+                                case 1: {
+                                    Log.d("进入了吗1", "进入了");
+                                    if (badge != null) {
+                                        badge.hide(false);
+                                    }
+                                }
+                            }
                         }
-                    }
-                }
-            }
-        };
+                    };
+
         return view;
     }
 
@@ -220,7 +222,22 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
             }
             Log.d("我康康message的只", String.valueOf(message.arg1));
 
-            handler.sendMessage(message);
+            //循环发送消息
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    handler.sendMessage(message);
+                }
+            };
+
+            new Thread(){
+                @Override
+                public void run() {
+                    Looper.prepare();
+                    new Handler().post(runnable);
+                    Looper.loop();
+                }
+            }.start();
 
         }
     }

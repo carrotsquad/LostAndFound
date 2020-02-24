@@ -136,7 +136,7 @@ public class UploadFragmentAdapter extends RecyclerView.Adapter<UploadFragmentAd
             holder.text.setText(bean.getTypeText());
         }
         if (position == 14){
-            holder.img.setImageResource(R.drawable.ic_chongdian);
+            holder.img.setImageResource(R.drawable.ic_chongdianqi);
             holder.text.setText(bean.getTypeText());
         }
         if (position == 15){

@@ -21,7 +21,8 @@
                 android:id="@+id/rl"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/upload_type_img"
@@ -35,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/upload_type_img"
                     android:gravity="center"
+                    android:textColor="#000000"
                     android:textSize="20sp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>

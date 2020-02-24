@@ -24,6 +24,7 @@ import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
 import com.yf107.teamwork.lostandfound.bean.TheLostBean;
 import com.yf107.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.yf107.teamwork.lostandfound.presenter.MyLoadPresenter;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
 import com.yf107.teamwork.lostandfound.view.activity.ReplaceActivity;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
@@ -200,11 +201,10 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
 
 
        Log.d("tupianshi",lists.get(position).getPhoto());
-        String x = AllURI.getTypeLittlePhoto(mContext.getSharedPreferences("users",Context.MODE_PRIVATE).getString("SESSION",null),AllURI.allTypeImgsList.get(lists.get(position).getTypeid()-1));
-        Glide.with(mContext)
-                .load(x)
-                .asBitmap()
-                .into(holder.thingtypetxt);
+        //l类型图片
+
+        holder.thingtypetxt.setImageResource(SelectTypeUtil.getInstance().getImage(lists.get(position).getTypeid()));
+
         if (lists.get(position).getLosttype()==0){
             holder.eventtype.setImageResource(R.drawable.littleicon_type_lost1);
         }else if (lists.get(position).getLosttype()==1){
@@ -229,7 +229,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
 
 
 
-        if (isMessage) {
+      if (isMessage) {
             //侧滑删除
             holder.btnDlt.setOnClickListener(v -> {
                 jsession = sharedPreferences.getString(SESSION, "null");
