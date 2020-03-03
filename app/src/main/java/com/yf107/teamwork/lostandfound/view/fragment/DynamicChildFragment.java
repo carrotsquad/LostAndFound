@@ -33,6 +33,8 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class DynamicChildFragment extends Fragment {
 
+    public static int position1 = 0;
+
     private int pos;
 
     private String session = "";
@@ -153,11 +155,13 @@ public class DynamicChildFragment extends Fragment {
                     @Override
                     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+                        position1 = position;
                     }
 
                     @Override
                     public void onPageSelected(int position) {
 
+                        position1 = position;
                     }
 
                     @Override

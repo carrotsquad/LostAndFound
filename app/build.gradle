@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.7.0'
-    implementation "com.squareup.okhttp3:okhttp:3.12.0"
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.android.support:design:27.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
@@ -61,15 +61,20 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.android.support:recyclerview-v7:27.1.0'
     implementation 'com.android.support:cardview-v7:27.1.0'
+
     //验证码库
     implementation 'com.jacktuotuo.customview:verificationcodeview:1.0.4'
     implementation 'com.github.liuguangli:VerificationCodeInput:1.3'
+
     //好看的Toast
     implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.3'
+
     //定位
     implementation 'com.amap.api:location:4.3.0'
+
     //二维码
     implementation 'com.google.zxing:core:3.3.3'
+
     //搜索窗库
 
     //轮播库
@@ -78,6 +83,7 @@ dependencies {
 
     //筛选框
     implementation 'com.github.dongjunkun:DropDownMenu:1.0.4'
+
     //图片库
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -85,26 +91,34 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'cn.finalteam:galleryfinal:1.4.3'
     implementation 'com.ufo:DWImageSelector:0.9.5'
+
     //RecyclerView
     implementation 'com.jude:easyrecyclerview:4.4.2'
+
     //Panel库
     implementation 'com.github.florent37:expansionpanel:1.1.1'
+
     //时间选择库
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
+
     //断点下载库
     implementation 'com.mindorks.android:prdownloader:0.4.0'
+
     //popupwindow
     implementation 'com.github.xujiaji:happy-bubble:1.1.6'
 
     //事件总线注解
     implementation 'org.greenrobot:eventbus:3.1.1'
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
+
     //状态栏
-//    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    //    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
     //内存泄漏检查
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+
     // Optional, if you use support library fragments:
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
 
@@ -120,4 +134,5 @@ dependencies {
     //搜索框
     implementation 'com.wenwenwen888:searchbox:1.0.1'
 
+    implementation 'com.android.support:multidex:1.0.3'
 }

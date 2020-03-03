@@ -1,6 +1,8 @@
 package com.yf107.teamwork.lostandfound.view.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,6 +68,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     Boolean isright;
 
     String s;
+    TimeCount timeCount;
 
 
 
@@ -76,6 +79,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
         EditUtil.EditAllClear(all_clear, new_password_confirm);
+        timeCount = new TimeCount(60000,1000);
         new_password_wrong.setVisibility(View.INVISIBLE);
         statu_wrong.setVisibility(View.INVISIBLE);
         mailbox_wrong.setVisibility(View.INVISIBLE);
@@ -120,6 +124,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
                 email = mailbox.getText().toString();
                 forgetPasswordPrensenter.getCode(email);
+                timeCount.start();
             }
                 break;
 
@@ -159,4 +164,26 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
 
 
+    //计时内部类
+    class TimeCount extends CountDownTimer {
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long l) {
+            getmailbox.setBackgroundResource(R.drawable.wait_button_shape);
+            getmailbox.setClickable(false);
+
+            getmailbox.setText("("+l / 1000 +") 秒后可重新发送");
+        }
+
+        @Override
+        public void onFinish() {
+
+            getmailbox.setBackgroundResource(R.drawable.button_shape);
+            getmailbox.setText("获取验证码");
+            getmailbox.setClickable(true);
+        }
+    }
 }

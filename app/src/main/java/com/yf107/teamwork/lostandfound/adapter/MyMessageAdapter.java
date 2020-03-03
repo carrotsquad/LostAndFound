@@ -245,7 +245,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getDynamics().getThelost().getTypeid()));
 
 
-        if(dynamicItemBean.getDynamics().getThelost().getPhoto().equals("default.jpg")) {
+        if(dynamicItemBean.getDynamics().getThelost().getPhoto() == null||dynamicItemBean.getDynamics().getThelost().getPhoto().equals("")||dynamicItemBean.getDynamics().getThelost().getPhoto().equals("default.jpg")) {
             holder.headimg.setImageResource(R.mipmap.diai1);
         }else {
             //事件图片

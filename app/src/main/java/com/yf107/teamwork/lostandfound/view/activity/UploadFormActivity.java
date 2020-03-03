@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,8 +21,6 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.bumptech.glide.BitmapTypeRequest;
-import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.image.GlideImageLoader;
 import com.yf107.teamwork.lostandfound.network.AllURI;
@@ -141,12 +138,14 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     private String stu;
     private View statusBarView;
 
+    private TextView textViewtest;
     public static String changname = " ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
+        textViewtest = findViewById(R.id.test);
         ButterKnife.bind(this);
         //实现渐变式状态栏
         StatusBarUtil.setGradientStatusBarColor(this,statusBarView);
@@ -352,6 +351,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //进行图片上传与置换
             //置换
             String photoPath = resultList.get(0).getPhotoPath();
+
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UploadFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传

@@ -100,6 +100,12 @@
                 android:text="  "
                 android:textColor="@color/black" />
 
+            <TextView
+                android:id="@+id/test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123456789/"/>
+
 
         </RelativeLayout>
 
@@ -198,6 +204,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.3333"
             android:visibility="invisible">
+
             <TextView
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
@@ -227,5 +234,8 @@
 
     </LinearLayout>
 
+
+
 </android.support.constraint.ConstraintLayout>
+
 </android.support.v4.widget.NestedScrollView>
