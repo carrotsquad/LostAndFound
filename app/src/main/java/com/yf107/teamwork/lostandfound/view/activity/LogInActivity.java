@@ -68,6 +68,9 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     @BindView(R.id.btn_usdetail)
     Button btn_usdetail;
 
+    @BindView(R.id.login_back)
+    Button back;
+
     private String stu;
     private String pwd;
     private String repwd;
@@ -143,6 +146,11 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
             }
             case R.id.cl_hide:{
                 ViewUtil.hideOneInputMethod(LogInActivity.this, loginPhone);
+            }
+
+            case R.id.login_back:{
+                finish();
+                break;
             }
             default: {
                 break;

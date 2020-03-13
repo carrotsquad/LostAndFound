@@ -3,6 +3,7 @@ package com.yf107.teamwork.lostandfound.view.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ public class GivebackActivity extends AppCompatActivity {
     Button sure;
     TextView guihuan_zhanling;
     TextView tishi;
+    Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class GivebackActivity extends AppCompatActivity {
         sure = findViewById(R.id.gb_sure);
         guihuan_zhanling = findViewById(R.id.guihuan_zhaoling);
         tishi = findViewById(R.id.tishi);
+        back = findViewById(R.id.giveback_back);
 
         Intent intent = getIntent();
         String type = intent.getStringExtra("TYPE");
@@ -39,5 +42,13 @@ public class GivebackActivity extends AppCompatActivity {
             tishi.setText("    为了方便失主联系您，递爱要对您做信息的录入");
             guihuan_zhanling.setText("我要招领");
         }
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                finish();
+            }
+        });
     }
 }

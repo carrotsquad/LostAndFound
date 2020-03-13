@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context="com.yf107.teamwork.lostandfound.view.activity.AboutDiAi">
 
     <android.support.v7.widget.Toolbar
@@ -38,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="160dp" >
         <ImageView
-            android:src="@mipmap/diai"
+            android:src="@mipmap/diai2"
             android:layout_centerInParent="true"
             android:layout_width="100dp"
             android:layout_height="100dp" />

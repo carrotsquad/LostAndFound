@@ -1,8 +1,11 @@
 package com.yf107.teamwork.lostandfound.view.activity;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,11 +30,21 @@ public class AboutUsDetailActivity extends AppCompatActivity {
     ImageView  back;
     private View statusBarView;
 
+    @BindView(R.id.setting_bar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us_detail);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //设置返回键
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+        }
         one.setText("免责声明");
        info.setText(
                 "  1. “递爱”中的个人信息、照片图片、资料的版权归发表者所有，若发表者有版权声明的或从其它网站转载而附带有原所有站的版权声明者，其版权归属以附带声明为准。\n" +

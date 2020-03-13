@@ -1,7 +1,9 @@
 package com.yf107.teamwork.lostandfound.view.activity;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,11 +23,21 @@ public class AboutDiAi extends AppCompatActivity {
     TextView   info;
     private View statusBarView;
 
+    @BindView(R.id.setting_bar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abou_di_ai);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //设置返回键
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+        }
         back.setOnClickListener(v->finish());
 
         info.setText(" “递爱”是目前暂针对于重庆邮电大学校内人员寻找丢失物品的公益互助平台。\n" +

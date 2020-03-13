@@ -264,10 +264,13 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         switch (qishileixing){
             case 0:{
                 lostType = R.drawable.littleicon_type_lost1;
+                type.setText("失物详情");
                 break;
             }
             case 1:{
                 lostType = R.drawable.littleicon_type_find1;
+                type.setText("招领详情");
+                clickreturn.setBackgroundResource(R.drawable.bt_zhaoling);;
             }
             default:{
                 break;

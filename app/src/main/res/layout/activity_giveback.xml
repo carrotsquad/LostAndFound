@@ -14,7 +14,14 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"/>
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/giveback_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:background="@drawable/zijiantou"/>
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/guihuan_zhaoling"

@@ -59,13 +59,16 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     @BindView(R.id.status_wrong)
     TextView statu_wrong;
 
+    @BindView(R.id.reset_password_back)
+    Button back;
+
 
     private ForgetPasswordPrensenter forgetPasswordPrensenter;
 
     String mailbox111;
 
     String session;
-    Boolean isright;
+    Boolean isright = false;
 
     String s;
     TimeCount timeCount;
@@ -87,7 +90,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     }
 
 
-    @OnClick({R.id.reset_getmailbox, R.id.reset_submit, R.id.reset_all_clear1})
+    @OnClick({R.id.reset_getmailbox, R.id.reset_submit, R.id.reset_all_clear1,R.id.reset_password_back})
     void onClicked(View view) {
         switch (view.getId()) {
             case R.id.reset_submit: {
@@ -113,6 +116,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
                 break;
             }
 
+
             case R.id.reset_getmailbox: {
 
                 if(new_password != new_password_confirm){
@@ -124,9 +128,17 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
                 email = mailbox.getText().toString();
                 forgetPasswordPrensenter.getCode(email);
+                Log.d("wofole","nmsl");
                 timeCount.start();
-            }
+
                 break;
+            }
+
+            case R.id.reset_password_back:{
+                finish();
+                break;
+            }
+
 
         }
 
@@ -136,6 +148,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     @Override
     public void showcheckcodestatus(Boolean status, String session) {
 
+        Log.d("statusssss", String.valueOf(status));
         isright = status;
         if (status) {
             this.session = session;

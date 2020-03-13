@@ -221,28 +221,6 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                 thingsPosition = position;
             });
 
-//        searchInput.setOnSearchClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//        searchInput.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-////                Logger.e(query);
-////                Toast.makeText(getActivity(),query,Toast.LENGTH_SHORT).show();
-////                search(query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
-
 
         searchInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,7 +246,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                     @Override
                     public void OnSearchClick(String keyword) {
                         // String keyword = searchInput.getText().toString();
-                        search(keyword);
+                        search("");
                     }
                 });
 
@@ -276,13 +254,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
             }
         });
-//        //点击搜索按键后
-//        sure.setOnClickListener(v->{
-//
-//                // saveHistory("history", searchInput);
-//                String keyword = searchInput.getText().toString();
-//                search(keyword);
-//            });
+
     }
 
     @Override
@@ -317,133 +289,4 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
     }
 
-
-//    private final class MyOnClickListener implements View.OnClickListener {
-//
-//        @Override
-//
-//        public void onClick(View v) {
-//
-//
-//            saveHistory("history", searchInput);
-//            adapter.notifyDataSetChanged();
-//
-//
-//
-//        }
-//
-//    }
-
-
-
-    /**
-
-     * 把指定AutoCompleteTextView中内容保存到sharedPreference中指定的字符段
-
-     *
-
-     * @param field
-
-     *            保存在sharedPreference中的字段名
-
-     * @param autoCompleteTextView
-
-     *            要操作的AutoCompleteTextView
-
-     */
-
-//    private void saveHistory(String field, AutoCompleteTextView autoCompleteTextView) {
-//
-//        String text = autoCompleteTextView.getText().toString();
-//
-//        SharedPreferences sp = getActivity().getSharedPreferences("network_url", 0);
-//
-//        String longhistory = sp.getString(field, "nothing");
-//
-//        if (!longhistory.contains(text + ",")) {
-//
-//            StringBuilder sb = new StringBuilder(longhistory);
-//
-//            sb.insert(0, text + ",");
-//
-//            sp.edit().putString("history", sb.toString()).commit();
-//
-//        }
-//
-//    }
-
-
-
-    /**
-
-     * 初始化AutoCompleteTextView，最多显示5项提示，使 AutoCompleteTextView在一开始获得焦点时自动提示
-
-     *
-
-     * @param field
-
-     *            保存在sharedPreference中的字段名
-
-     * @param autoCompleteTextView
-
-     *            要操作的AutoCompleteTextView
-
-     */
-
-//    private void initAutoComplete(String field, final AutoCompleteTextView autoCompleteTextView) {
-//
-//        SharedPreferences sp =getActivity(). getSharedPreferences("network_url", 0);
-//
-//        String longhistory = sp.getString("history", "nothing");
-//
-//        String[] histories = longhistory.split(",");
-//
-//        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, histories);
-//
-//        // 只保留最近的50条的记录
-//
-//        if (histories.length > 50) {
-//
-//            String[] newHistories = new String[50];
-//
-//            System.arraycopy(histories, 0, newHistories, 0, 50);
-//
-//            adapter = new ArrayAdapter<String>(getContext(),
-//
-//                    android.R.layout.simple_dropdown_item_1line, newHistories);
-//
-//        }
-//
-//        autoCompleteTextView.setAdapter(adapter);
-//
-//        autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//
-//            @Override
-//
-//            public void onFocusChange(View v, boolean hasFocus) {
-//
-//                AutoCompleteTextView view = (AutoCompleteTextView) v;
-//
-//                if (hasFocus) {
-//
-//                    view.showDropDown();
-//
-//                }
-//
-//            }
-//
-//        });
-//
-//        autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                AutoCompleteTextView view = (AutoCompleteTextView) v;
-//                view.showDropDown();
-//
-//            }
-//        });
-//
-//
-//    }
 }
