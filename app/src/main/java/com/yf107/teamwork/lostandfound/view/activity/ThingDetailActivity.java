@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -70,6 +71,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     public static final String OTHERSID = "OTHERSID";
     public static final String OTHERSDESC = "OTHERSDESC";
     public static final String OTHERSTITLE = "OTHERSTITLE";
+    public static final String OTHERUSERNAME = "OTHERUSERNAME";
 
     //头像
     @BindView(R.id.thing_detail_thingsdetail_circleview)
@@ -159,6 +161,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private int lostType = 0;
     private int qishileixing;
 
+    String strusernickname;
+    String email;
+
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,6 +186,18 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         clicktocomment.setOnClickListener(v-> popup());
         returnPresenter = new ReturnPresenter();
         returnPresenter.attachActivity((IThingDetailActivity) this);
+
+        if(email == sharedPreferences.getString("EMAIL",null)){
+            clicktocomment.setClickable(false);
+            clicktocomment.setVisibility(View.INVISIBLE);
+            clickreturn.setBackgroundResource(R.drawable.commit);
+            clickreturn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    initPop();
+                }
+            });
+        }
 
     }
 
@@ -248,7 +265,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
          intent.putExtra(OTHERSTHINGSTYPES, searchItemBean.getTypes());
          intent.putExtra(OTHERSID, searchItemBean.getID());
          */
-        String strusernickname = intent.getStringExtra(OTHERSNICKNAME);
+        strusernickname = intent.getStringExtra(OTHERSNICKNAME);
         String struserphoto = intent.getStringExtra(OTHERSPHOTO);
         String strfabiaodate = intent.getStringExtra(OTHERSFABIAODATE);
         String strplace = intent.getStringExtra(OTHERSPLACE);
@@ -259,6 +276,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         String strThingsImgs = intent.getStringExtra(OTHERSIMGS);
         lostid = intent.getIntExtra(OTHERSID,-1);
         qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
+        email = intent.getStringExtra(OTHERUSERNAME);
 
         thingstype.setImageResource(SelectTypeUtil.getInstance().getImage(intthingstype));
         switch (qishileixing){

@@ -39,6 +39,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPLACE;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPE;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTITLE;
+import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERUSERNAME;
 
 /**
  * @author zhoudada
@@ -364,6 +365,9 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
                 intent.putExtra(OTHERSDESC, dynamicItemBean.getThelost().getDescription());
                 intent.putExtra(OTHERSTITLE,dynamicItemBean.getThelost().getTitle());
+                intent.putExtra(OTHERUSERNAME,dynamicItemBean.getUsername());
+
+                Log.d("nickname",dynamicItemBean.getNickname());
                 mContext.startActivity(intent);
             }
         });
