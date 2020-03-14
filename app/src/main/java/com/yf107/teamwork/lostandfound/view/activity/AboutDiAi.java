@@ -37,6 +37,7 @@ public class AboutDiAi extends AppCompatActivity {
             //设置返回键
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("");
         }
         back.setOnClickListener(v->finish());
 

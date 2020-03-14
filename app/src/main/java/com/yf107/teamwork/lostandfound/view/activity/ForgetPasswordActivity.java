@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -74,35 +76,42 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     TimeCount timeCount;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
         EditUtil.EditAllClear(all_clear, new_password_confirm);
-        timeCount = new TimeCount(60000,1000);
+        timeCount = new TimeCount(60000, 1000);
         new_password_wrong.setVisibility(View.INVISIBLE);
         statu_wrong.setVisibility(View.INVISIBLE);
         mailbox_wrong.setVisibility(View.INVISIBLE);
         forgetPasswordPrensenter = new ForgetPasswordPrensenter(this);
+
+//        if(new_password.getText().toString().equals(new_password_confirm.getText().toString())){
+//            new_password_wrong.setVisibility(View.INVISIBLE);
+//        }else{
+//            new_password_wrong.setVisibility(View.VISIBLE);
+//        }
+//
+        new_password.addTextChangedListener(new CheckOutText());
+        new_password_confirm.addTextChangedListener(new CheckOutText());
     }
 
 
-    @OnClick({R.id.reset_getmailbox, R.id.reset_submit, R.id.reset_all_clear1,R.id.reset_password_back})
+    @OnClick({R.id.reset_getmailbox, R.id.reset_submit, R.id.reset_all_clear1, R.id.reset_password_back})
     void onClicked(View view) {
         switch (view.getId()) {
             case R.id.reset_submit: {
 
-                if(isright) {
+                if (isright) {
                     forgetPasswordPrensenter.IsRight(session, confirm.getText().toString(), new_password.getText().toString(), email);
                     Intent intent = new Intent(ForgetPasswordActivity.this, SignInActivity.class);
                     intent.putExtra(PWD, new_password.getText().toString());
                     intent.putExtra("ForgetorLogin", "Foeget");
                     startActivity(intent);
                     finish();
-                }else{
+                } else {
                     statu_wrong.setVisibility(View.VISIBLE);
                 }
 
@@ -119,22 +128,22 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
             case R.id.reset_getmailbox: {
 
-                if(new_password != new_password_confirm){
+                if (new_password != new_password_confirm) {
                     new_password_wrong.setVisibility(View.VISIBLE);
                 }
-                if(!isEmail(email)){
+                if (!isEmail(email)) {
                     mailbox_wrong.setVisibility(View.VISIBLE);
                 }
 
                 email = mailbox.getText().toString();
                 forgetPasswordPrensenter.getCode(email);
-                Log.d("wofole","nmsl");
+                Log.d("wofole", "nmsl");
                 timeCount.start();
 
                 break;
             }
 
-            case R.id.reset_password_back:{
+            case R.id.reset_password_back: {
                 finish();
                 break;
             }
@@ -152,17 +161,17 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
         isright = status;
         if (status) {
             this.session = session;
-            Log.d("session",session);
-            Toast.makeText(this,"发送成功",Toast.LENGTH_SHORT).show();
+            Log.d("session", session);
+            Toast.makeText(this, "发送成功", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void checkCodeIsRight(Boolean status) {
 
-        Toast.makeText(this,"修改密码成功",Toast.LENGTH_SHORT).show();
-        if(!status){
-          //  statu_wrong.setText("验证码错误！");
+        Toast.makeText(this, "修改密码成功", Toast.LENGTH_SHORT).show();
+        if (!status) {
+            //  statu_wrong.setText("验证码错误！");
         }
 
     }
@@ -176,7 +185,6 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     }
 
 
-
     //计时内部类
     class TimeCount extends CountDownTimer {
         public TimeCount(long millisInFuture, long countDownInterval) {
@@ -188,7 +196,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
             getmailbox.setBackgroundResource(R.drawable.wait_button_shape);
             getmailbox.setClickable(false);
 
-            getmailbox.setText("("+l / 1000 +") 秒后可重新发送");
+            getmailbox.setText("(" + l / 1000 + ") 秒后可重新发送");
         }
 
         @Override
@@ -197,6 +205,38 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
             getmailbox.setBackgroundResource(R.drawable.button_shape);
             getmailbox.setText("获取验证码");
             getmailbox.setClickable(true);
+        }
+    }
+
+
+    class CheckOutText implements TextWatcher {
+
+
+        public CheckOutText() {
+            super();
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+            //检查两次密码是否一致
+            if (!new_password.getText().toString().equals("") && !new_password_confirm.getText().toString().equals("")){
+                new_password_wrong.setVisibility(View.VISIBLE);
+                if (new_password_confirm.getText().toString().equals(new_password.getText().toString())) {
+                    new_password_wrong.setVisibility(View.INVISIBLE);
+                }
+            }
+
         }
     }
 }

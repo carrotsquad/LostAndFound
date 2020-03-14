@@ -44,6 +44,7 @@ public class AboutUsDetailActivity extends AppCompatActivity {
             //设置返回键
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("");
         }
         one.setText("免责声明");
        info.setText(

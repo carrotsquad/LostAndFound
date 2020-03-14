@@ -139,13 +139,16 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
             case R.id.all_clear:{
                 loginPassword.setText("");
                 loginRepassword.requestFocusFromTouch();
+                break;
             }
             case R.id.all_clear2:{
                 loginRepassword.setText("");
                 loginRepassword.requestFocusFromTouch();
+                break;
             }
             case R.id.cl_hide:{
                 ViewUtil.hideOneInputMethod(LogInActivity.this, loginPhone);
+                break;
             }
 
             case R.id.login_back:{

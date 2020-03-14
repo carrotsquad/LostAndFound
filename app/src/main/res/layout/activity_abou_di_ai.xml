@@ -11,6 +11,7 @@
         android:id="@+id/setting_bar"
         android:background="@drawable/barbackgroud"
         android:layout_width="match_parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_height="?attr/actionBarSize">
 
         <ImageView

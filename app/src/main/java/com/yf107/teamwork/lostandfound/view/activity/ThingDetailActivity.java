@@ -187,18 +187,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         returnPresenter = new ReturnPresenter();
         returnPresenter.attachActivity((IThingDetailActivity) this);
 
-        if(email == sharedPreferences.getString("EMAIL",null)){
-            clicktocomment.setClickable(false);
-            clicktocomment.setVisibility(View.INVISIBLE);
-            clickreturn.setBackgroundResource(R.drawable.commit);
-            clickreturn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    initPop();
-                }
-            });
-        }
-
     }
 
 
@@ -322,6 +310,14 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         diushidate.setText(strdiushidate);
         place.setText(strplace);
         name.setText(title);
+
+        Log.d("email",email+"  " +sharedPreferences.getString("EMAIL",null));
+
+        if(email.equals(sharedPreferences.getString("EMAIL",null))){
+            clicktocomment.setClickable(false);
+            clicktocomment.setVisibility(View.INVISIBLE);
+            clickreturn.setBackgroundResource(R.drawable.commit);
+        }
         return  strThingsImgs;
     }
 
@@ -337,13 +333,18 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                 break;
             }
             case R.id.tv_return:{
-                Intent intent = getIntent();
-                id= intent.getIntExtra(OTHERSID,0);
-                jsession = sharedPreferences.getString(SESSION, "null");
-                returnPresenter.sendMessage(jsession,id);
-                Intent intent1  = new Intent(ThingDetailActivity.this,GivebackActivity.class);
-                intent1.putExtra("TYPE",String.valueOf(qishileixing));
-                startActivity(intent1);
+                if(email.equals(sharedPreferences.getString("EMAIL",null))){
+                    popup();
+
+                }else {
+                    Intent intent = getIntent();
+                    id = intent.getIntExtra(OTHERSID, 0);
+                    jsession = sharedPreferences.getString(SESSION, "null");
+                    returnPresenter.sendMessage(jsession, id);
+                    Intent intent1 = new Intent(ThingDetailActivity.this, GivebackActivity.class);
+                    intent1.putExtra("TYPE", String.valueOf(qishileixing));
+                    startActivity(intent1);
+                }
             }
             default:{
                 break;

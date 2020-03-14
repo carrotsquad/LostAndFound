@@ -145,7 +145,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_form);
-        textViewtest = findViewById(R.id.test);
         ButterKnife.bind(this);
         //实现渐变式状态栏
         StatusBarUtil.setGradientStatusBarColor(this,statusBarView);

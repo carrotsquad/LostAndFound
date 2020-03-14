@@ -242,15 +242,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
-                    @Override
-                    public void OnSearchClick(String keyword) {
-                        // String keyword = searchInput.getText().toString();
-                        search("");
-                    }
-                });
-
-                searchFragment.showFragment(getFragmentManager(), com.wyt.searchbox.SearchFragment.TAG);
+             search("");
 
             }
         });
