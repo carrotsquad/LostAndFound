@@ -52,4 +52,10 @@ public class AboutDiAi extends AppCompatActivity {
         //实现渐变式状态栏
         StatusBarUtil.setGradientStatusBarColor(this,statusBarView);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

@@ -47,6 +47,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPLACE;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPE;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTITLE;
+import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERUSERNAME;
 
 public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
 
@@ -167,6 +168,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
             intent.putExtra(OTHERSID, dynamicItemBean.getDynamics().getThelost().getId());
             intent.putExtra(OTHERSDESC,dynamicItemBean.getDynamics().getThelost().getDescription());
             intent.putExtra(OTHERSTITLE,dynamicItemBean.getDynamics().getThelost().getTitle());
+            intent.putExtra(OTHERUSERNAME,dynamicItemBean.getDynamics().getUsername());
             messagePresenter.updateIsRead(sharedPreferences.getString("SESSION",null),dynamicItemBean.getDynamics().getThelost().getId());
             mContext.startActivity(intent);
         });

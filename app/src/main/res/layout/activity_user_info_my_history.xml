@@ -15,8 +15,9 @@
 
         <ImageView
             android:id="@+id/myhistory_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:src="@drawable/back" />
         <TextView

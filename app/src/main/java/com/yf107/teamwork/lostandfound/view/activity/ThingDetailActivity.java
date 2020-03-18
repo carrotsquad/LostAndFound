@@ -162,7 +162,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     private int qishileixing;
 
     String strusernickname;
-    String email;
+    String email = "";
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
@@ -174,6 +174,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         thingDetailPresenter = new ThingDetailPresenter(this,new ThingDetailModel());
+
         imgs=initDataFromLocal();
         Log.e("IMGS",imgs);
         String[] a = imgs.split(",");
@@ -184,8 +185,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         recyclerView.setAdapter(adapter);
         thingDetailPresenter.getDataFromWeb(sharedPreferences.getString("SESSION",null),lostid);
         clicktocomment.setOnClickListener(v-> popup());
-        returnPresenter = new ReturnPresenter();
-        returnPresenter.attachActivity((IThingDetailActivity) this);
+//        returnPresenter = new ReturnPresenter();
+//        returnPresenter.attachActivity((IThingDetailActivity) this);
 
     }
 
@@ -199,7 +200,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @Override
     protected void onDestroy() {
         thingDetailPresenter.dettachActivity();
-        returnPresenter.dettachActivity();
+//        returnPresenter.dettachActivity();
         super.onDestroy();
     }
 
@@ -265,6 +266,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         lostid = intent.getIntExtra(OTHERSID,-1);
         qishileixing = intent.getIntExtra(OTHERSDIUSHILEIXING,1);
         email = intent.getStringExtra(OTHERUSERNAME);
+        Log.d("EMAIL1",email);
 
         thingstype.setImageResource(SelectTypeUtil.getInstance().getImage(intthingstype));
         switch (qishileixing){
@@ -310,7 +312,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         diushidate.setText(strdiushidate);
         place.setText(strplace);
         name.setText(title);
-
         Log.d("email",email+"  " +sharedPreferences.getString("EMAIL",null));
 
         if(email.equals(sharedPreferences.getString("EMAIL",null))){
@@ -340,9 +341,11 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
                     Intent intent = getIntent();
                     id = intent.getIntExtra(OTHERSID, 0);
                     jsession = sharedPreferences.getString(SESSION, "null");
-                    returnPresenter.sendMessage(jsession, id);
+                //    returnPresenter.sendMessage(jsession, id);
                     Intent intent1 = new Intent(ThingDetailActivity.this, GivebackActivity.class);
                     intent1.putExtra("TYPE", String.valueOf(qishileixing));
+                    intent1.putExtra("SESSION",sharedPreferences.getString(SESSION, "null"));
+                    intent1.putExtra("ID",id);
                     startActivity(intent1);
                 }
             }
@@ -429,8 +432,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ThingDetailActivity.this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(ThingDetailActivity.this, MainActivity.class);
+//        startActivity(intent);
+          finish();
     }
 }
 

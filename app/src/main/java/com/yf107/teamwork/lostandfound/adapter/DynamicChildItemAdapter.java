@@ -353,7 +353,7 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
                 String place = AllURI.allPlaceBeanList.get(lostplace - 1);
 //                String thingsType = allTypeBeanList.get(thingstype);
 
-                Intent intent = new Intent(mContext, ThingDetailActivity.class);
+                Intent intent = new Intent(mContext,ThingDetailActivity.class);
                 intent.putExtra(OTHERSNICKNAME, dynamicItemBean.getNickname());
                 intent.putExtra(OTHERSPHOTO, dynamicItemBean.getUserphoto());
                 intent.putExtra(OTHERSFABIAODATE, fabaiodate);

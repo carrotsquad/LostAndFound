@@ -264,4 +264,10 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         Matcher m = p.matcher(strnumber);
         return m.matches();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

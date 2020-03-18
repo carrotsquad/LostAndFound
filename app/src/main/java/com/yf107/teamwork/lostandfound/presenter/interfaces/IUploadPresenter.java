@@ -11,5 +11,5 @@ public interface IUploadPresenter {
     void cardUpload(String stu,String session, TheLostBean bean);
     void cardUpload(String stu,String session, TheLostBean bean, List<File> fileList);
     //发表评论
-   // void sendDataToWeb(String session, Integer id,int lostid, String time, String content);
+    void sendDataToWeb(String session, Integer id,int lostid, String time, String content);
 }

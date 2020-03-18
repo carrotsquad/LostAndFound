@@ -3,6 +3,7 @@ package com.yf107.teamwork.lostandfound.view.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,17 +33,22 @@ public class UploadSuccessActivity extends AppCompatActivity {
     @BindView(R.id.publishsuccess_continue_returnmainactivity)
     TextView returnmain;
     private View statusBarView;
+    String session;
+    int lostid = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_success);
         Intent intent = getIntent();
-        String session = intent.getStringExtra("SESSION");
+        session = intent.getStringExtra("SESSION");
+        intent.getIntExtra("LOSTID",lostid);
+        Log.d("LOSTID", String.valueOf(lostid));
         ButterKnife.bind(this);
         //实现渐变式状态栏
         StatusBarUtil.setGradientStatusBarColor(this,statusBarView);
         ActivityManager.getActivityManager().add(this);
+     //   commentMyselfPresenter = new CommentMyselfPresenter(this);
     }
 
 
@@ -55,11 +61,13 @@ public class UploadSuccessActivity extends AppCompatActivity {
                 break;
             }
             case R.id.publishsuccess_continue_newfind:{
+
                 Intent intent = new Intent(UploadSuccessActivity.this,UploadActivity.class);
                 startActivity(intent);
                 break;
             }
             case R.id.publishsuccess_continue_newlost:{
+
                 Intent intent = new Intent(UploadSuccessActivity.this,UploadActivity.class);
                 startActivity(intent);
                 break;
@@ -68,5 +76,11 @@ public class UploadSuccessActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

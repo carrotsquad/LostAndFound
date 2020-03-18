@@ -17,12 +17,12 @@
       android:layout_height="?attr/actionBarSize"
       >
 
-    <ImageView
-        android:id="@+id/setting_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_centerVertical="true"
-        android:src="@drawable/back" />
+<!--    <ImageView-->
+<!--        android:id="@+id/setting_back"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:src="@drawable/back" />-->
     <TextView
         android:gravity="center"
         android:layout_gravity="center"

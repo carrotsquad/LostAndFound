@@ -85,6 +85,10 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
         Log.d("TAG","qwertyuiosjkdhskd"+beans.get(2).getId());
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
 

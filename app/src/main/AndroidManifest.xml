@@ -30,7 +30,7 @@
 
         <activity
             android:name=".view.activity.MainActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="standard" />
         <activity
             android:name=".view.activity.LogInActivity"
             android:label="@string/title_activity_log_in"
@@ -49,7 +49,7 @@
         </activity>
         <activity
             android:name=".view.activity.ThingDetailActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleInstance" />
         <activity
             android:name=".view.activity.UserInfoSettingActivity"
             android:label="@string/editInfo" />

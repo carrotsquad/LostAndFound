@@ -175,4 +175,10 @@ public class UserInfoAboutUsActivity extends AppCompatActivity {
         lp.alpha = bgAlpha;
         ((Activity)UserInfoAboutUsActivity.this).getWindow().setAttributes(lp);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

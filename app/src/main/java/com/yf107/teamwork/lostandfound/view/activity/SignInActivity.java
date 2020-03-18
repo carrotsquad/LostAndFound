@@ -289,4 +289,10 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
             FancyToast.makeText(SignInActivity.this, "无法获取丢失物品类型和地点", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

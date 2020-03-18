@@ -64,5 +64,9 @@ public class AboutUsDetailActivity extends AppCompatActivity {
         StatusBarUtil.setGradientStatusBarColor(this,statusBarView);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

@@ -42,6 +42,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPHOTO;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPLACE;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPE;
+import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERUSERNAME;
 
 
 public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.ViewHolder>  {
@@ -179,6 +180,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
                 intent.putExtra(OTHERSDESC, dynamicItemBean.getThelost().getDescription());
+                intent.putExtra(OTHERUSERNAME,dynamicItemBean.getUsername());
                 mContext.startActivity(intent);
             }
         });

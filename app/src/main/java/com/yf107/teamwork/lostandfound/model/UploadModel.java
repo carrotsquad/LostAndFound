@@ -3,10 +3,11 @@ package com.yf107.teamwork.lostandfound.model;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.yf107.teamwork.lostandfound.bean.AddCommitBean;
+import com.yf107.teamwork.lostandfound.bean.ThingDetailBean;
 import com.yf107.teamwork.lostandfound.model.interfaces.IUploadModel;
 import com.yf107.teamwork.lostandfound.bean.StatusBean;
 import com.yf107.teamwork.lostandfound.bean.TheLostBean;
-import com.yf107.teamwork.lostandfound.bean.ThingDetailBean;
 
 import java.io.File;
 import java.util.List;
@@ -26,7 +27,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
     }
 
     @Override
-    public void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer) {
+    public void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<AddCommitBean> observer) {
         Gson gson = new Gson();
         //传图片时
         if(fileList.size()!=0){
@@ -51,7 +52,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
     }
 
     @Override
-    public void postUpload(String session, TheLostBean bean, Observer<StatusBean> observer) {
+    public void postUpload(String session, TheLostBean bean, Observer<AddCommitBean> observer) {
         api.postUpload(session,new Gson().toJson(bean))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -61,7 +62,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
     }
 
     @Override
-    public void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer) {
+    public void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList, Observer<AddCommitBean> observer) {
         Gson gson = new Gson();
         //传图片时
         if(fileList.size()!=0){
@@ -85,7 +86,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
     }
 
     @Override
-    public void cardUpload(String stu, String session, TheLostBean bean, Observer<StatusBean> observer) {
+    public void cardUpload(String stu, String session, TheLostBean bean, Observer<AddCommitBean> observer) {
         api.cardUpload(stu,session,new Gson().toJson(bean))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -94,6 +95,17 @@ public class UploadModel extends BaseModel implements IUploadModel {
         Log.e("UploadModel5","stu"+stu+"session"+session+"new Gson().toJson(bean)"+new Gson().toJson(bean));
     }
 
+    @Override
+    public void publishcomment(String session, Integer id, int lostid, String time, String content, Callback<StatusBean> callback) {
+        ThingDetailBean bean = new ThingDetailBean();
+        ThingDetailBean.Comment con = new ThingDetailBean.Comment();
+        con.setContent(content);
+        con.setId(id);
+        con.setTime(time);
+        bean.setLostid(lostid);
+        bean.setComment(con);
+        api.uploadComment(session,new Gson().toJson(bean)).enqueue(callback);
+    }
 
 
     /*创建图片 的MultipartBody

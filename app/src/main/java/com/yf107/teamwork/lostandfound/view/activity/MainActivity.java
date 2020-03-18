@@ -3,6 +3,7 @@ package com.yf107.teamwork.lostandfound.view.activity;
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -443,7 +444,8 @@ public class MainActivity extends AppCompatActivity implements BaseView {
             lastBackPressed = backPressed;
             Toast.makeText(this, "再按一次退出", Toast.LENGTH_LONG).show();
         } else {
-            finish();
+           // finish();
+           System.exit(0);
             System.exit(0);
         }
     }
@@ -474,7 +476,5 @@ public class MainActivity extends AppCompatActivity implements BaseView {
             Log.e("BNVHelper", "Unable to change value of shift mode", e);
         }
     }
-
-
 
 }

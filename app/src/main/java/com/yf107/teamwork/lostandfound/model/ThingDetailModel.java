@@ -37,15 +37,20 @@ public class ThingDetailModel extends BaseModel implements IThingDetailModel {
     getInternetData(String session, int lostid,  Callback<CommentFeedBack> callback) {
         api.getComment(session,lostid).enqueue(callback);
     }
+
     @Override
-    public void sendMessage(String session,int id , Observer<StatusBean> observer) {
-        api.sendMessage(session,id)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-        Log.e("ReturnModel","完好"+session+"+"+id);
+    public void sendMessage(String session, int id, Observer<StatusBean> observer) {
+
     }
+//    @Override
+//    public void sendMessage(String session,int id , Observer<StatusBean> observer) {
+//        api.sendMessage(session,id)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer);
+//        Log.e("ReturnModel","完好"+session+"+"+id);
+//    }
 
     @Override
     public void getphoto(String name, Observer<ImageBean> observer) {

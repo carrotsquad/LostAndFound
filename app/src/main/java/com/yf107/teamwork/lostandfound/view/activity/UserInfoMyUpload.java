@@ -79,8 +79,9 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(UserInfoMyUpload.this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(UserInfoMyUpload.this, MainActivity.class);
+//        startActivity(intent);
+        finish();
     }
 
     public void initMvp() {
@@ -103,5 +104,6 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     @Override
     public void showStatus(Boolean seesion) {
     }
+
 
 }

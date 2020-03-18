@@ -93,4 +93,9 @@ public class ChangeNickNameActivity extends AppCompatActivity implements IEditIn
     public void onSuccess2(int status) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

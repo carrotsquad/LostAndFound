@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -95,9 +97,11 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     @BindView(R.id.exit_account)
     Button exitaccount;
 
-    @BindView(R.id.setting_back)
-    ImageView back;
+//    @BindView(R.id.setting_back)
+//    ImageView back;
 
+    @BindView(R.id.setting_bar)
+    Toolbar mToolbar;
 
 
     private String photoPath;
@@ -179,7 +183,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
 
 
     @OnClick({R.id.setting_headlayout, R.id.setting_headlayout_img, R.id.setting_nicklayout
-            , R.id.setting_phonelayout, R.id.setting_passwordlayout, R.id.exit_account, R.id.setting_back})
+            , R.id.setting_phonelayout, R.id.setting_passwordlayout, R.id.exit_account})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting_headlayout:
@@ -215,9 +219,9 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
 
                 finish();
                 break;
-            case R.id.setting_back:
-                finish();
-                break;
+//            case R.id.setting_back:
+//                finish();
+//                break;
             default:
                 break;
         }
@@ -261,6 +265,15 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                     .load(sharedPreferences.getString(USERPHOTO, null))
                     .asBitmap()
                     .into(headImg);
+        }
+
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //设置返回键
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("");
         }
     }
 
@@ -427,5 +440,11 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
             FancyToast.makeText(UserInfoSettingActivity.this,"修改失败",FancyToast.ERROR).show();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

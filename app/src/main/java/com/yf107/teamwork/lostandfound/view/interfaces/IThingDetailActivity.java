@@ -11,4 +11,5 @@ public interface IThingDetailActivity extends BaseView{
     //展示消息
     void getDataFromWeb(List<CommentFeedBack.Comments> list);
     void showStatus(Boolean status);
+
 }

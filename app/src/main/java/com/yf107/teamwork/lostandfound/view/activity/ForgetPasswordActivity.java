@@ -239,4 +239,10 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

@@ -56,7 +56,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSI
  * Description
  * 点击上传界面后用户填写表单的界面
  */
-public class UploadFormActivity extends AppCompatActivity implements IUploadFormActivity {
+public class UploadFormActivity extends AppCompatActivity implements IUploadFormActivity  {
 
     //返回按键
     @BindView(R.id.upload_lostorfind_back)
@@ -373,8 +373,10 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
 
     @Override
-    public void showStatus(Boolean status) {
+    public void showStatus(Boolean status,int lostid) {
         if(status){
+
+            uploadPresenter.sendDataToWeb(sharedPreferences.getString("SESSION",null),null,lostid,null,"");
             Intent intent = new Intent(UploadFormActivity.this,UploadSuccessActivity.class);
             intent.putExtra("SESSION",sharedPreferences.getString(SESSION, "null"));
             startActivity(intent);
@@ -382,6 +384,20 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             FancyToast.makeText(UploadFormActivity.this,"发布成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
         }else {
             FancyToast.makeText(UploadFormActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    public void isSuccess(boolean status) {
+
+        if(status){
+            Log.d("成功了成功了","成功了成功了");
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.yf107.teamwork.lostandfound.network;
 
+import com.yf107.teamwork.lostandfound.bean.AddCommitBean;
 import com.yf107.teamwork.lostandfound.bean.AllPlacesBean;
 import com.yf107.teamwork.lostandfound.bean.AllTypesBean;
 import com.yf107.teamwork.lostandfound.bean.CheckCodeBean;
@@ -21,6 +22,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -79,22 +81,22 @@ public interface Api {
      */
     @POST("/passlove/user/publishlost2")
     @Multipart
-    Observable<StatusBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
+    Observable<AddCommitBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
 
     @POST("/passlove/user/publishlost2")
     @FormUrlEncoded
-    Observable<StatusBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
+    Observable<AddCommitBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
 
     @POST("/passlove/user/publishlost2/card")
     @Multipart
-    Observable<StatusBean> cardUpload(@Field("cardid") String stu,@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
+    Observable<AddCommitBean> cardUpload(@Field("cardid") String stu,@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
 
     @POST("/passlove/user/publishlost2/card")
     @FormUrlEncoded
-    Observable<StatusBean> cardUpload(@Field("cardid") String stu,@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
+    Observable<AddCommitBean> cardUpload(@Field("cardid") String stu,@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
     /*
     递爱成功
@@ -171,9 +173,9 @@ public interface Api {
     /*
     发消息给失/得主
      */
-    @POST("/passlove/sendmail")
-    @FormUrlEncoded
-    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("lostid") int id);
+//    @POST("/passlove/sendmail")
+//    @FormUrlEncoded
+//    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("lostid") int id);
 
     //退出登录
     @FormUrlEncoded
@@ -225,4 +227,8 @@ public interface Api {
     //得到失物招领上传的图片
     @POST("passlove/img/user")
     Observable<ImageBean>  getTheLostPhoto(@Query("name") String name);
+
+    @FormUrlEncoded
+    @POST("/passlove/sendmail")
+    Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("lostid") int id,@Field("QQ") String QQ,@Field("phone") String phone);
 }

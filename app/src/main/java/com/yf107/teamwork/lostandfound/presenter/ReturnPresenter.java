@@ -6,12 +6,13 @@ import com.yf107.teamwork.lostandfound.bean.StatusBean;
 import com.yf107.teamwork.lostandfound.model.ReturnModel;
 import com.yf107.teamwork.lostandfound.presenter.interfaces.IReturnPresenter;
 import com.yf107.teamwork.lostandfound.view.activity.MainActivity;
+import com.yf107.teamwork.lostandfound.view.interfaces.IGiveBackView;
 import com.yf107.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class ReturnPresenter extends BasePresenter<IThingDetailActivity> implements IReturnPresenter {
+public class ReturnPresenter extends BasePresenter<IGiveBackView> implements IReturnPresenter {
 
     private ReturnModel mReturnModel;
 
@@ -20,10 +21,10 @@ public class ReturnPresenter extends BasePresenter<IThingDetailActivity> impleme
     }
 
     @Override
-    public void sendMessage(String session,int id) {
+    public void sendMessage(String session,int id,String QQ,String phone) {
         Log.e("ReturnPresenter","完好"+id);
         if (isAttachActivity()) {
-            mReturnModel.sendMessage(session,id, new Observer<StatusBean>() {
+            mReturnModel.sendMessage(session,id,QQ,phone, new Observer<StatusBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 
@@ -31,6 +32,7 @@ public class ReturnPresenter extends BasePresenter<IThingDetailActivity> impleme
 
                 @Override
                 public void onNext(StatusBean statusBean) {
+                    Log.d("状态1", String.valueOf(statusBean.getStatus()));
                     if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
                         getV().showStatus(false);
                     } else {

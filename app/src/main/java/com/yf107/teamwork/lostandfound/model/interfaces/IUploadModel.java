@@ -1,5 +1,6 @@
 package com.yf107.teamwork.lostandfound.model.interfaces;
 
+import com.yf107.teamwork.lostandfound.bean.AddCommitBean;
 import com.yf107.teamwork.lostandfound.bean.StatusBean;
 import com.yf107.teamwork.lostandfound.bean.TheLostBean;
 
@@ -11,9 +12,9 @@ import retrofit2.Callback;
 
 
 public interface IUploadModel {
-    void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer);
-    void postUpload(String session, TheLostBean bean, Observer<StatusBean> observer);
-    void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList, Observer<StatusBean> observer);
-    void cardUpload(String stu, String session, TheLostBean bean, Observer<StatusBean> observer);
- //   void publishcomment(String session, Integer id, int lostid, String time, String content, Callback<StatusBean> callback);
+    void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<AddCommitBean> observer);
+    void postUpload(String session, TheLostBean bean, Observer<AddCommitBean> observer);
+    void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList, Observer<AddCommitBean> observer);
+    void cardUpload(String stu, String session, TheLostBean bean, Observer<AddCommitBean> observer);
+   void publishcomment(String session, Integer id, int lostid, String time, String content, Callback<StatusBean> callback);
 }

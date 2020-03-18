@@ -2,6 +2,7 @@ package com.yf107.teamwork.lostandfound.presenter;
 
 import android.util.Log;
 
+import com.yf107.teamwork.lostandfound.bean.AddCommitBean;
 import com.yf107.teamwork.lostandfound.bean.StatusBean;
 import com.yf107.teamwork.lostandfound.bean.TheLostBean;
 import com.yf107.teamwork.lostandfound.model.UploadModel;
@@ -30,25 +31,54 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
     @Override
     public void postUpload(String session, TheLostBean bean) {
         if (isAttachActivity()) {
-            mUploadModel.postUpload(session, bean, new Observer<StatusBean>() {
+//            mUploadModel.postUpload(session, bean, new Observer<StatusBean>() {
+//                @Override
+//                public void onSubscribe(Disposable d) {
+//                }
+//
+//                @Override
+//                public void onNext(StatusBean statusBean) {
+//                    Log.e("UploadPresenter1","statusBean.getStatus()"+statusBean.getStatus());
+//                    if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
+//                        getV().showStatus(false);
+//                    } else {
+//                        getV().showStatus(true);
+//                    }
+//                }
+//
+//                @Override
+//                public void onError(Throwable e) {
+//                    Log.e("UploadPresenter1","wrong");
+//                    getV().showStatus(false);
+//                }
+//
+//                @Override
+//                public void onComplete() {
+//
+//                }
+//            });
+
+            mUploadModel.postUpload(session, bean, new Observer<AddCommitBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
+
                 }
 
                 @Override
-                public void onNext(StatusBean statusBean) {
-                    Log.e("UploadPresenter1","statusBean.getStatus()"+statusBean.getStatus());
-                    if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
-                        getV().showStatus(false);
+                public void onNext(AddCommitBean addCommitBean) {
+
+                    Log.e("UploadPresenter1","statusBean.getStatus()"+addCommitBean.getStatus());
+                    if (addCommitBean == null || addCommitBean.getStatus() != 200) {
+                        getV().showStatus(false,addCommitBean.getLostid());
                     } else {
-                        getV().showStatus(true);
+                        getV().showStatus(true,addCommitBean.getLostid());
                     }
                 }
 
                 @Override
                 public void onError(Throwable e) {
+
                     Log.e("UploadPresenter1","wrong");
-                    getV().showStatus(false);
                 }
 
                 @Override
@@ -62,26 +92,54 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
     @Override
     public void postUpload(String session, TheLostBean bean, List<File> fileList) {
         if (isAttachActivity()) {
-            mUploadModel.postUpload(session, bean, fileList, new Observer<StatusBean>() {
+//            mUploadModel.postUpload(session, bean, fileList, new Observer<StatusBean>() {
+//                @Override
+//                public void onSubscribe(Disposable d) {
+//
+//                }
+//
+//                @Override
+//                public void onNext(StatusBean statusBean) {
+//                    Log.e("UploadPresenter2","statusBean.getStatus()"+statusBean.getStatus());
+//                    if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
+//                        getV().showStatus(false);
+//                    } else {
+//                        getV().showStatus(true);
+//                    }
+//                }
+//
+//                @Override
+//                public void onError(Throwable e) {
+//                    Log.e("UploadPresenter2","wrong");
+//                 //   getV().showStatus(false);
+//                }
+//
+//                @Override
+//                public void onComplete() {
+//
+//                }
+//            });
+            mUploadModel.postUpload(session, bean, fileList, new Observer<AddCommitBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 
                 }
 
                 @Override
-                public void onNext(StatusBean statusBean) {
-                    Log.e("UploadPresenter2","statusBean.getStatus()"+statusBean.getStatus());
-                    if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
-                        getV().showStatus(false);
+                public void onNext(AddCommitBean addCommitBean) {
+
+                    Log.e("UploadPresenter2","statusBean.getStatus()"+addCommitBean.getStatus());
+                    if (addCommitBean == null || addCommitBean.getStatus() != 200) {
+                        getV().showStatus(false,addCommitBean.getLostid());
                     } else {
-                        getV().showStatus(true);
+                        getV().showStatus(true,addCommitBean.getLostid());
                     }
                 }
 
                 @Override
                 public void onError(Throwable e) {
+
                     Log.e("UploadPresenter2","wrong");
-                    getV().showStatus(false);
                 }
 
                 @Override
@@ -95,25 +153,53 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
     @Override
     public void cardUpload(String stu, String session, TheLostBean bean) {
         if (isAttachActivity()) {
-            mUploadModel.cardUpload(stu,session, bean, new Observer<StatusBean>() {
+//            mUploadModel.cardUpload(stu,session, bean, new Observer<StatusBean>() {
+//                @Override
+//                public void onSubscribe(Disposable d) {
+//                }
+//
+//                @Override
+//                public void onNext(StatusBean statusBean) {
+//                    Log.e("UploadPresenter3","statusBean.getStatus()"+statusBean.getStatus());
+//                    if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
+//                        getV().showStatus(false);
+//                    } else {
+//                        getV().showStatus(true);
+//                    }
+//                }
+//
+//                @Override
+//                public void onError(Throwable e) {
+//                    Log.e("UploadPresenter1","wrong");
+//                    getV().showStatus(false);
+//                }
+//
+//                @Override
+//                public void onComplete() {
+//
+//                }
+//            });
+            mUploadModel.cardUpload(stu, session, bean, new Observer<AddCommitBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
+
                 }
 
                 @Override
-                public void onNext(StatusBean statusBean) {
-                    Log.e("UploadPresenter3","statusBean.getStatus()"+statusBean.getStatus());
-                    if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
-                        getV().showStatus(false);
+                public void onNext(AddCommitBean addCommitBean) {
+
+                    Log.e("UploadPresenter3","statusBean.getStatus()"+addCommitBean.getStatus());
+                    if (addCommitBean == null || addCommitBean.getStatus()!= 200) {
+                        getV().showStatus(false,addCommitBean.getLostid());
                     } else {
-                        getV().showStatus(true);
+                        getV().showStatus(true,addCommitBean.getLostid());
                     }
                 }
 
                 @Override
                 public void onError(Throwable e) {
+
                     Log.e("UploadPresenter1","wrong");
-                    getV().showStatus(false);
                 }
 
                 @Override
@@ -127,30 +213,80 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
     @Override
     public void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList) {
         if (isAttachActivity()) {
-            mUploadModel.cardUpload(stu,session, bean, fileList, new Observer<StatusBean>() {
+//            mUploadModel.cardUpload(stu,session, bean, fileList, new Observer<StatusBean>() {
+//                @Override
+//                public void onSubscribe(Disposable d) {
+//
+//                }
+//
+//                @Override
+//                public void onNext(StatusBean statusBean) {
+//                    Log.e("UploadPresenter4","statusBean.getStatus()"+statusBean.getStatus());
+//                    if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
+//                        getV().showStatus(false);
+//                    } else {
+//                        getV().showStatus(true);
+//                    }
+//                }
+//
+//                @Override
+//                public void onError(Throwable e) {
+//                    Log.e("UploadPresenter2","wrong");
+//                    getV().showStatus(false);
+//                }
+//
+//                @Override
+//                public void onComplete() {
+//
+//                }
+//            });
+
+            mUploadModel.cardUpload(stu, session, bean, fileList, new Observer<AddCommitBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 
                 }
 
                 @Override
-                public void onNext(StatusBean statusBean) {
-                    Log.e("UploadPresenter4","statusBean.getStatus()"+statusBean.getStatus());
-                    if (statusBean == null || !statusBean.getStatus().equals(MainActivity.FINE_INTERNET_STATUS)) {
-                        getV().showStatus(false);
+                public void onNext(AddCommitBean addCommitBean) {
+                    Log.e("UploadPresenter4","statusBean.getStatus()"+addCommitBean.getStatus());
+                    if (addCommitBean == null || addCommitBean.getStatus() != 200) {
+                        getV().showStatus(false,addCommitBean.getLostid());
                     } else {
-                        getV().showStatus(true);
+                        getV().showStatus(true,addCommitBean.getLostid());
                     }
                 }
 
                 @Override
                 public void onError(Throwable e) {
+
                     Log.e("UploadPresenter2","wrong");
-                    getV().showStatus(false);
                 }
 
                 @Override
                 public void onComplete() {
+
+                }
+            });
+        }
+    }
+
+    @Override
+    public void sendDataToWeb(String session, Integer id, int lostid, String time, String content) {
+        if(isAttachActivity()){
+            mUploadModel.publishcomment(session, id, lostid, time, content, new Callback<StatusBean>() {
+                @Override
+                public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
+                    Log.e("UploadPresenter5","statusBean.getStatus()"+response.body().getStatus());
+                    if (response.body().getStatus() == null || response.body().getStatus() != 200) {
+                        getV().isSuccess(false);
+                    } else {
+                        getV().isSuccess(true);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<StatusBean> call, Throwable t) {
 
                 }
             });

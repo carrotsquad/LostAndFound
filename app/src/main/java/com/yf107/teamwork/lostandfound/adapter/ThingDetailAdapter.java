@@ -26,6 +26,8 @@ public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.
     private Context mContext;
     private SharedPreferences mSharedPreferences;
     private ThingDetailActivity mThingDetailActivity;
+    public static int TYPE1 = 0;
+    public static int TYPE2 = 1;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.comment_item_photo)
@@ -69,28 +71,30 @@ public class ThingDetailAdapter extends RecyclerView.Adapter<ThingDetailAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        mSharedPreferences = mContext.getSharedPreferences("users",Context.MODE_PRIVATE);
-        String s = AllURI.getUserPhoto(mSharedPreferences.getString("SESSION",null),bean.get(position).getPhoto());
-        Glide.with(mContext)
-                .load(bean.get(position).getPhoto())
-             //   .load(s)
-                .asBitmap()
-                .into(holder.head);
-        holder.nick.setText(bean.get(position).getNickname());
-        String publishTime= bean.get(position).getComment().getTime();
-        if (!publishTime.equals("")){
-            String   mouth = publishTime.substring(4,6);
-            String    day = publishTime.substring(6,8);
-            String    hours=publishTime.substring(8,10);
-            String fen = publishTime.substring(10,12);
-            String time1 = mouth+"月"+""+day+"日"+" "+hours+":"+fen;
-            holder.date.setText(time1);
-        }
-        holder.content.setText(bean.get(position).getComment().getContent());
+
+            mSharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
+            String s = AllURI.getUserPhoto(mSharedPreferences.getString("SESSION", null), bean.get(position).getPhoto());
+            Glide.with(mContext)
+                    .load(bean.get(position).getPhoto())
+                    //   .load(s)
+                    .asBitmap()
+                    .into(holder.head);
+            holder.nick.setText(bean.get(position).getNickname());
+            String publishTime = bean.get(position).getComment().getTime();
+            if (!publishTime.equals("")) {
+                String mouth = publishTime.substring(4, 6);
+                String day = publishTime.substring(6, 8);
+                String hours = publishTime.substring(8, 10);
+                String fen = publishTime.substring(10, 12);
+                String time1 = mouth + "月" + "" + day + "日" + " " + hours + ":" + fen;
+                holder.date.setText(time1);
+            }
+            holder.content.setText(bean.get(position).getComment().getContent());
     }
 
     @Override
     public int getItemCount() {
         return bean.size();
     }
+
 }

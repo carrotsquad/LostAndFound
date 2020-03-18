@@ -14,6 +14,7 @@ allprojects {
 android {
     compileSdkVersion 27
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.yf107.teamwork.intelligenttcmpharmacy"
         minSdkVersion 19
         targetSdkVersion 27

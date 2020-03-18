@@ -84,6 +84,7 @@
         android:hint="  填写手机"/>
 
         <TextView
+            android:id="@+id/warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="*请您提供至少一种联系方式"
