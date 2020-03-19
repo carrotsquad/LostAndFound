@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.network.AllURI;
@@ -27,6 +28,8 @@ import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.PlaceBean;
 import com.yf107.teamwork.lostandfound.bean.SignInBean;
 import com.yf107.teamwork.lostandfound.bean.TypeBean;
+
+import org.opencv.android.OpenCVLoader;
 
 import java.util.List;
 
@@ -88,6 +91,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        boolean success = OpenCVLoader.initDebug();
         ButterKnife.bind(this);
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         signPresenter = new SignPresenter(this);

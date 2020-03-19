@@ -3,8 +3,11 @@ package com.yf107.teamwork.lostandfound.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +24,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.googlecode.tesseract.android.TessBaseAPI;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.image.GlideImageLoader;
 import com.yf107.teamwork.lostandfound.network.AllURI;
@@ -33,6 +37,9 @@ import com.yf107.teamwork.lostandfound.bean.TheLostBean;
 import com.yf107.teamwork.lostandfound.presenter.UploadPresenter;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -129,6 +136,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     private Integer placeid = -1;
 
     private String strphoto = "";
+    private TessBaseAPI baseApi;
 
     private String strLostDate = "";
     private Integer qishileixing;
@@ -157,6 +165,12 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         uploadPresenter = new UploadPresenter();
         uploadPresenter.attachActivity(this);
 
+        //初始化Tesseract接口
+        try {
+            initTessBaseAPI();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
     @Override
@@ -350,7 +364,10 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //进行图片上传与置换
             //置换
             String photoPath = resultList.get(0).getPhotoPath();
-
+            //学号识别
+            if (typeid == 13){
+                displaySelectedImage(photoPath);
+            }
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UploadFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传
@@ -398,6 +415,87 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
         if(status){
             Log.d("成功了成功了","成功了成功了");
+        }
+    }
+    //加载预训练好的相关语言数据集
+    private void initTessBaseAPI() throws IOException {
+        baseApi = new TessBaseAPI();
+        String datapath = Environment.getExternalStorageDirectory() + "/tesseract/";
+        File dir = new File(datapath + "tessdata/");
+        Log.e("Tess",""+dir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+            Log.e("Tess","加载成功");
+            InputStream input = getResources().openRawResource(R.raw.num);
+            File file = new File(dir, "num.traineddata");
+            Log.e("Tess",""+file);
+            FileOutputStream output = new FileOutputStream(file);
+            byte[] buff = new byte[1024];
+            int len = 0;
+            while((len = input.read(buff)) != -1) {
+                output.write(buff, 0, len);
+            }
+            input.close();
+            output.close();
+        }
+        boolean success = baseApi.init(datapath, "num");
+        if(success){
+            Log.i("UploadFromActivity", "load Tesseract OCR Engine successfully...");
+        } else {
+            Log.i("UploadFromActivity", "WARNING:could not initialize Tesseract data...");
+        }
+    }
+
+    private BitmapFactory.Options options;
+
+    //降采样
+    private void displaySelectedImage(String photoPath) {
+        if(photoPath == null) return;
+        options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(photoPath, options);
+        int w = options.outWidth;
+        int h = options.outHeight;
+        int inSample = 1;
+        if(w > 1000 || h > 1000) {
+            while(Math.max(w, h) > 1000) {
+                w = w/inSample;
+                h = h/inSample;
+                inSample *=2;
+            }
+        }
+        options.inSampleSize = inSample;
+        options.inJustDecodeBounds = false;
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        recognizeCardId(photoPath);
+    }
+    //识别学生号
+    private void recognizeCardId(String photoPath) {
+        Bitmap template = BitmapFactory.decodeResource(this.getResources(), R.drawable.card);
+        Bitmap cardImage = BitmapFactory.decodeFile(photoPath,options);
+        Bitmap temp = CardNumberROIFinder.extractNumberROI(cardImage.copy(Bitmap.Config.ARGB_8888, true), template);
+        if (temp == null){
+            FancyToast.makeText(UploadFormActivity.this,"识别失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+        }else {
+            baseApi.setImage(temp);
+            String myNumber = baseApi.getUTF8Text();
+            Log.e("Tess","myNumber = "+myNumber);
+            //对识别的目标进行优化
+            String num = myNumber.replaceAll("\n","");
+            String nber = num.replaceAll(" ","");
+            if (nber.indexOf("201") == -1){
+                FancyToast.makeText(UploadFormActivity.this,"识别失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            }else{
+                String number = nber + "3";
+                String s[] = number.split("201");
+                if (s[1].length()<6){
+                    FancyToast.makeText(UploadFormActivity.this,"识别失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                }else {
+                    String stunumber = "201" + s[1].substring(0,7);
+                    stuEdit.setText(stunumber);
+                }
+            }
+
         }
     }
 }
