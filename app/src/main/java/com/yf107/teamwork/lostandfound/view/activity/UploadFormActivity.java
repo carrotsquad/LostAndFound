@@ -222,8 +222,12 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
                         Log.e("THELOSTBEAN",bean.toString());
                         if (typeid == 13){
-                            Log.e("UploadFormActivity",""+stu+jsession+bean);
-                            uploadPresenter.cardUpload(stu,jsession,bean);
+                            if (stu.substring(0,3)=="201") {
+                                Log.e("UploadFormActivity", "" + stu + jsession + bean);
+                                uploadPresenter.cardUpload(stu, jsession, bean);
+                            }else {
+                                FancyToast.makeText(UploadFormActivity.this, "学号填写错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                            }
                         }else {
                             uploadPresenter.postUpload(jsession, bean);
                         }
@@ -231,7 +235,11 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
                         if (typeid == 13) {
-                            uploadPresenter.cardUpload(stu,jsession,bean,fileList);
+                            if (stu.substring(0,3)=="201") {
+                                uploadPresenter.cardUpload(stu, jsession, bean, fileList);
+                            }else{
+                                FancyToast.makeText(UploadFormActivity.this, "学号填写错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                            }
                         }else{
                             uploadPresenter.postUpload(jsession, bean, fileList);
                         }
@@ -426,8 +434,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         if (!dir.exists()) {
             dir.mkdirs();
             Log.e("Tess","加载成功");
-            InputStream input = getResources().openRawResource(R.raw.num);
-            File file = new File(dir, "num.traineddata");
+            InputStream input = getResources().openRawResource(R.raw.stu);
+            File file = new File(dir, "stu.traineddata");
             Log.e("Tess",""+file);
             FileOutputStream output = new FileOutputStream(file);
             byte[] buff = new byte[1024];
@@ -438,7 +446,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             input.close();
             output.close();
         }
-        boolean success = baseApi.init(datapath, "num");
+        boolean success = baseApi.init(datapath, "stu");
         if(success){
             Log.i("UploadFromActivity", "load Tesseract OCR Engine successfully...");
         } else {
