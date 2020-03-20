@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -210,7 +211,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             case R.id.upload_lostorfind_sure: {
                 strdescri = descEdit.getText().toString();
                 strtitle = titleEdit.getText().toString();
-                if (typeid == 13){
+                if (typeid == 13&&qishileixing!=0){
                     stu = stuEdit.getText().toString();
                 }
                 if ("".equals(strdescri) || "".equals(strtitle) || "".equals(strLostDate) || -1 == placeid) {
@@ -221,7 +222,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         Log.e("UploadFromActivity","strLostDate="+strLostDate);
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
                         Log.e("THELOSTBEAN",bean.toString());
-                        if (typeid == 13){
+                        if (typeid == 13&&qishileixing!=0){
                             if (stu.substring(0,3)=="201") {
                                 Log.e("UploadFormActivity", "" + stu + jsession + bean);
                                 uploadPresenter.cardUpload(stu, jsession, bean);
@@ -234,7 +235,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                     }else {
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
-                        if (typeid == 13) {
+                        if (typeid == 13&&qishileixing!=0) {
                             if (stu.substring(0,3)=="201") {
                                 uploadPresenter.cardUpload(stu, jsession, bean, fileList);
                             }else{
@@ -264,7 +265,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             qishiType.setText("发布招领—"+strthingtype);
         }
 
-        if (typeid == 13){
+        if (typeid == 13&&qishileixing!=0){
             linearLayout.setVisibility(View.VISIBLE);
 
         }
@@ -373,7 +374,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //置换
             String photoPath = resultList.get(0).getPhotoPath();
             //学号识别
-            if (typeid == 13){
+            if (typeid == 13&&qishileixing!=0){
                 displaySelectedImage(photoPath);
             }
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
@@ -475,15 +476,29 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         options.inSampleSize = inSample;
         options.inJustDecodeBounds = false;
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        recognizeCardId(photoPath);
+        Bitmap cardImage = BitmapFactory.decodeFile(photoPath,options);
+        int r = recognizeCardId(cardImage);
+        if (r==0){
+            //顺时针旋转90°
+            Bitmap resizedBitmap = rotateBitmap(90, BitmapFactory.decodeFile(photoPath,options));
+            int x = recognizeCardId(resizedBitmap);
+            if (x == 0){
+                //逆时针旋转90°
+                Bitmap resizedBitmap2 = rotateBitmap(-90, BitmapFactory.decodeFile(photoPath,options));
+                int y = recognizeCardId(resizedBitmap);
+                if (y == 0){
+                    FancyToast.makeText(UploadFormActivity.this,"识别失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                }
+            }
+        }
     }
     //识别学生号
-    private void recognizeCardId(String photoPath) {
+    private int recognizeCardId(Bitmap card) {
         Bitmap template = BitmapFactory.decodeResource(this.getResources(), R.drawable.card);
-        Bitmap cardImage = BitmapFactory.decodeFile(photoPath,options);
+        Bitmap cardImage = card;
         Bitmap temp = CardNumberROIFinder.extractNumberROI(cardImage.copy(Bitmap.Config.ARGB_8888, true), template);
         if (temp == null){
-            FancyToast.makeText(UploadFormActivity.this,"识别失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            return 0;
         }else {
             baseApi.setImage(temp);
             String myNumber = baseApi.getUTF8Text();
@@ -491,19 +506,28 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //对识别的目标进行优化
             String num = myNumber.replaceAll("\n","");
             String nber = num.replaceAll(" ","");
-            if (nber.indexOf("201") == -1){
-                FancyToast.makeText(UploadFormActivity.this,"识别失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            if (nber.indexOf("20") == -1){
+                return 0;
             }else{
                 String number = nber + "3";
-                String s[] = number.split("201");
-                if (s[1].length()<6){
-                    FancyToast.makeText(UploadFormActivity.this,"识别失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                String s[] = number.split("20");
+                if (s[1].length()<7){
+                    return 0;
                 }else {
-                    String stunumber = "201" + s[1].substring(0,7);
+                    String stunumber = "20" + s[1].substring(0,8);
                     stuEdit.setText(stunumber);
                 }
             }
 
-        }
+        }return 1;//识别成功
+    }
+
+    //旋转图片
+    public static Bitmap rotateBitmap(int degree, Bitmap bitmap) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
+                bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        return resizedBitmap;
     }
 }

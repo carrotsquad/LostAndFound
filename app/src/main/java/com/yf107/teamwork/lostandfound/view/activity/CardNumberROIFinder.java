@@ -32,6 +32,7 @@ public class CardNumberROIFinder {
         Mat fixSrc = new Mat();
         int width = input.getWidth();
         int height = input.getHeight();
+        double ratio = (double) width / height;
         Log.e("Tess", "降采样使用完成");
         Log.e("Tess", "w = " + width + "h = " + height);
         Utils.bitmapToMat(input, src);
@@ -74,37 +75,79 @@ public class CardNumberROIFinder {
         }
         Log.e("Tess", "roiArea = " + roiArea);
 
-        //判断有无获取
-        if (roiArea == null){
+        //可能出现学生卡所占体积过大无法发现框框的情况
+        if (roiArea == null) {
+            Rect aaa = new Rect(0, 0, width, height);
+            Mat result = src.submat(aaa);
+            Log.e("Tess", "result1 = " + result);
+
+            // fix size, in order to match template
+            Size fixSize = new Size(500, 500 * ratio);
+            //547，342
+            //1100,600
+            Imgproc.resize(result, fixSrc, fixSize);
+            result = fixSrc;
+            Log.e("Tess", "result.width = " + result.width() + "result.height = " + result.height());
+            Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
+
+            // find id number ROI
+            Rect idNumberROI = new Rect(0, 0, result.width(), result.height());
+            //Rect idNumberROI = new Rect((int)(maxLoc.x+tpl.cols()), (int)maxLoc.y, (int)(result.cols() - (maxLoc.x+tpl.cols())), tpl.rows());
+            Mat idNumberArea = result.submat(idNumberROI);
+
+            // 返回对象
+            Bitmap bap = Bitmap.createBitmap(idNumberArea.cols(), idNumberArea.rows(), conf);
+            Utils.matToBitmap(idNumberArea, bap);
+
+            // 释放内存
+            idNumberArea.release();
+            result.release();
             hierachy.release();
             fixSrc.release();
             src.release();
             dst.release();
             tpl.release();
             k.release();
-            return null;
-        }
-        Mat result = src.submat(roiArea);
-        // fix size, in order to match template
-        Size fixSize = new Size(1150, 600);
-        Imgproc.resize(result, fixSrc, fixSize);
-        result = fixSrc;
+            return bap;
+        } else {
+            Mat result = src.submat(roiArea);
+            // fix size, in order to match template
+            Size fixSize = new Size(1150, 600);
+            Imgproc.resize(result, fixSrc, fixSize);
+            result = fixSrc;
 
-        // detect location
-        int result_cols = result.cols() - tpl.cols() + 1;
-        int result_rows = result.rows() - tpl.rows() + 1;
-        Mat mr = new Mat(result_rows, result_cols, CvType.CV_32FC1);
+            // detect location
+            int result_cols = result.cols() - tpl.cols() + 1;
+            int result_rows = result.rows() - tpl.rows() + 1;
+            Mat mr = new Mat(result_rows, result_cols, CvType.CV_32FC1);
 
-        // 开始匹配
-        Imgproc.matchTemplate(result, tpl, mr, Imgproc.TM_CCORR_NORMED);
-        Core.normalize(mr, mr, 0, 1, Core.NORM_MINMAX, -1);
-        Core.MinMaxLocResult minMaxLocResult = Core.minMaxLoc(mr);
-        Point maxLoc = minMaxLocResult.maxLoc;
-        Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
-        // find id number ROI
-        Rect idNumberROI = new Rect((int) (maxLoc.x + tpl.cols()) - 90, (int) maxLoc.y, (int) (result.cols() - (maxLoc.x + tpl.cols()) - 100), tpl.rows() - 10);//稍微靠左
-        //没有匹配出来
-        if (idNumberROI.width<100){
+            // 开始匹配
+            Imgproc.matchTemplate(result, tpl, mr, Imgproc.TM_CCORR_NORMED);
+            Core.normalize(mr, mr, 0, 1, Core.NORM_MINMAX, -1);
+            Core.MinMaxLocResult minMaxLocResult = Core.minMaxLoc(mr);
+            Point maxLoc = minMaxLocResult.maxLoc;
+            Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
+            // find id number ROI
+            Rect idNumberROI = new Rect((int) (maxLoc.x + tpl.cols()) - 90, (int) maxLoc.y, (int) (result.cols() - (maxLoc.x + tpl.cols()) - 100), tpl.rows() - 10);//稍微靠左
+            //没有匹配出来
+            if (idNumberROI.width < 100) {
+                mr.release();
+                result.release();
+                hierachy.release();
+                fixSrc.release();
+                src.release();
+                dst.release();
+                tpl.release();
+                k.release();
+                return null;
+            }
+            Mat idNumberArea = result.submat(idNumberROI);
+            // 返回对象
+            Bitmap bmp = Bitmap.createBitmap(idNumberArea.cols(), idNumberArea.rows(), conf);
+            Utils.matToBitmap(idNumberArea, bmp);
+
+            // 释放内存
+            idNumberArea.release();
             mr.release();
             result.release();
             hierachy.release();
@@ -113,23 +156,7 @@ public class CardNumberROIFinder {
             dst.release();
             tpl.release();
             k.release();
-            return null;
+            return bmp;
         }
-        Mat idNumberArea = result.submat(idNumberROI);
-        // 返回对象
-        Bitmap bmp = Bitmap.createBitmap(idNumberArea.cols(), idNumberArea.rows(), conf);
-        Utils.matToBitmap(idNumberArea, bmp);
-
-        // 释放内存
-        idNumberArea.release();
-        mr.release();
-        result.release();
-        hierachy.release();
-        fixSrc.release();
-        src.release();
-        dst.release();
-        tpl.release();
-        k.release();
-        return bmp;
     }
 }
