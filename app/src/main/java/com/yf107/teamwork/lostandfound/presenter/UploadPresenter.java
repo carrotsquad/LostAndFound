@@ -240,7 +240,7 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
 //
 //                }
 //            });
-
+            Log.e("UploadPresenter","stu = "+stu+"session = "+session+"bean = "+bean+"fileList = "+fileList);
             mUploadModel.cardUpload(stu, session, bean, fileList, new Observer<AddCommitBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {

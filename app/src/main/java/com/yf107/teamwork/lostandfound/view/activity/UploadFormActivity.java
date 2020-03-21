@@ -223,8 +223,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
                         Log.e("THELOSTBEAN",bean.toString());
                         if (typeid == 13&&qishileixing!=0){
-                            if (stu.substring(0,3)=="201") {
-                                Log.e("UploadFormActivity", "" + stu + jsession + bean);
+                            Log.e("UploadFormActivity", "" + stu + jsession + bean);
+                            if (stu.substring(0,3).equals("201")) {
                                 uploadPresenter.cardUpload(stu, jsession, bean);
                             }else {
                                 FancyToast.makeText(UploadFormActivity.this, "学号填写错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
@@ -236,12 +236,14 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
                         if (typeid == 13&&qishileixing!=0) {
-                            if (stu.substring(0,3)=="201") {
+                            if (stu.substring(0,3).equals("201")) {
+                                Log.e("UploadFormActivity","stu = "+stu+"jsession = "+jsession+"bean = "+bean+"fileList = "+fileList);
                                 uploadPresenter.cardUpload(stu, jsession, bean, fileList);
                             }else{
                                 FancyToast.makeText(UploadFormActivity.this, "学号填写错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                             }
                         }else{
+                            Log.e("UploadFormActivity","jsession = "+jsession+"bean = "+bean+"fileList = "+fileList);
                             uploadPresenter.postUpload(jsession, bean, fileList);
                         }
                     }
@@ -340,19 +342,19 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         //设置主题
         //ThemeConfig.CYAN
         ThemeConfig theme = new ThemeConfig.Builder()
-                .setTitleBarBgColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setFabNornalColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setFabPressedColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setCropControlColor(Color.rgb(0xFF, 0xFF, 0xFF))
+                .setTitleBarBgColor(Color.rgb(0x78, 0x79, 0xFF))// 设置标题栏背景颜色
+                .setFabNornalColor(Color.rgb(0x78, 0x79, 0xFF))// 设置浮动按钮常规颜色
+                .setFabPressedColor(Color.rgb(0x78, 0x79, 0xFF))// 设置浮动按钮点击颜色
+                .setCropControlColor(Color.rgb(0xFF, 0xFF, 0xFF))//设置裁剪控制点和裁剪框颜色
                 .build();
         //配置功能
         FunctionConfig functionConfig = new FunctionConfig.Builder()
-                .setEnableCamera(false)
-                .setEnableEdit(true)
-                .setEnableCrop(true)
-                .setEnableRotate(true)
-                .setCropSquare(true)
-                .setEnablePreview(false)
+                .setEnableCamera(true)//开启相机功能
+                .setEnableEdit(true)//开启编辑功能
+                .setEnableCrop(true)//开启裁剪功能
+                .setEnableRotate(true)//开启旋转功能
+                .setCropSquare(true)//裁剪正方形
+                .setEnablePreview(true)//是否开启预览功能
                 .build();
 
         //配置imageloader
@@ -374,7 +376,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //置换
             String photoPath = resultList.get(0).getPhotoPath();
             //学号识别
-            if (typeid == 13&&qishileixing!=0){
+            if (typeid == 13&&qishileixing!=0&&stuEdit == null){
                 displaySelectedImage(photoPath);
             }
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));

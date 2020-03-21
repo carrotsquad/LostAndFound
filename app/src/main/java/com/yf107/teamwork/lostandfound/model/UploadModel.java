@@ -31,6 +31,8 @@ public class UploadModel extends BaseModel implements IUploadModel {
         Gson gson = new Gson();
         //传图片时
         if(fileList.size()!=0){
+            Log.e("UploadFormActivity","createRequestbody(session) = "+createRequestbody(session)+"RequestBody.create(MediaType.parse(\"application/json; charset=utf-8\"),gson.toJson(bean) = "+
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean))+"createMultipartBody(fileList.get(0)) = "+createMultipartBody(fileList.get(0)));
             api.postUpload(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)))
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
@@ -66,6 +68,8 @@ public class UploadModel extends BaseModel implements IUploadModel {
         Gson gson = new Gson();
         //传图片时
         if(fileList.size()!=0){
+            Log.e("UploadFormActivity","stu = "+stu+"createRequestbody(session) = "+createRequestbody(session)+"RequestBody.create(MediaType.parse(\"application/json; charset=utf-8\"),gson.toJson(bean) = "+
+                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean))+"createMultipartBody(fileList.get(0)) = "+createMultipartBody(fileList.get(0)));
             api.cardUpload(stu,createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)))
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
