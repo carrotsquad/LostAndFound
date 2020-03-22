@@ -136,4 +136,10 @@ dependencies {
     implementation 'com.wenwenwen888:searchbox:1.0.1'
 
     implementation 'com.android.support:multidex:1.0.3'
+
+    //opencv
+    implementation project(':openCVLibrary330')
+    //集成Tesseract
+    implementation 'com.rmtheis:tess-two:9.1.0'
 }
+
