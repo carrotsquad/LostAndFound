@@ -15,6 +15,10 @@ import retrofit2.Response;
 
 public class EditPhoneNumberPresenter extends BasePresenter<IRevisePhoneNumberActivity> implements IEditPhoneNumberPresenter {
     private EditPhoneNumberModel editPhoneNumberModel;
+
+    public EditPhoneNumberPresenter(EditPhoneNumberModel editPhoneNumberModel){
+        this.editPhoneNumberModel = editPhoneNumberModel;
+    }
     @Override
     public void uoloadPhoneNumber(String jsessionId, String phoneNumber) {
         if(isAttachActivity()){
@@ -23,6 +27,7 @@ public class EditPhoneNumberPresenter extends BasePresenter<IRevisePhoneNumberAc
                 @Override
                 public void onResponse(Call<StatusBean> call, Response<StatusBean> response) {
 
+                    getV().onSuccess(response.body().getStatus());
                     Log.d("?!!!!!","!!!!");
                 }
 

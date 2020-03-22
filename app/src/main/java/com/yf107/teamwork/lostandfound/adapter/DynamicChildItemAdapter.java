@@ -19,6 +19,7 @@ import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
 import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtils;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -290,8 +291,8 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
         TextView neckname;
         TextView timeandplace;
         TextView title;
-        ImageView thingType;
-        ImageView qishileixing;
+        TextView thingType;
+        TextView qishileixing;
         ImageView thingphoto;
         TextView publishdate;
 
@@ -414,25 +415,29 @@ public class DynamicChildItemAdapter extends RecyclerView.Adapter<DynamicChildIt
         int lostType = 0;
         switch (losttype) {
             case 0: {
-                lostType = R.drawable.littleicon_type_lost1;
+           //     lostType = R.drawable.littleicon_type_lost1;
+                holder.qishileixing.setText(" "+"丢"+" ");
+                holder.qishileixing.setBackgroundResource(R.drawable.shape_thingstype_lost);
                 break;
             }
             case 1: {
-                lostType = R.drawable.littleicon_type_find1;
+            //    lostType = R.drawable.littleicon_type_find1;
+                holder.qishileixing.setText(" "+"拾"+" ");
+                holder.qishileixing.setBackgroundResource(R.drawable.shape_thingstype_find);
             }
             default: {
                 break;
             }
         }
         //启事类型
-        holder.qishileixing.setImageResource(lostType);
+      //  holder.qishileixing.setImageResource(lostType);
 
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
 
         Log.e("PHOTO", AllURI.allTypeImgsList.get(dynamicItemBean.getThelost().getTypeid() - 1));
         //类型图片
-        holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getThelost().getTypeid()));
-
+     //   holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getThelost().getTypeid()));
+        holder.thingType.setText(" "+SelectTypeUtils.getInstance().getImage(dynamicItemBean.getThelost().getTypeid())+" ");
 
 
         Log.e("PHOTO", String.valueOf(position));

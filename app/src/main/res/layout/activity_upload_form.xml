@@ -26,10 +26,10 @@
 
         <ImageView
             android:id="@+id/upload_lostorfind_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/back" />
+            android:src="@drawable/zijiantou" />
 
         <TextView
             android:id="@+id/upload_lostorfind_qishitype"
@@ -153,14 +153,23 @@
                 android:textSize="20sp"
                 tools:ignore="MissingConstraints" />
 
-            <Button
-                android:textColor="@android:color/white"
-                android:layout_margin="5dp"
-                android:background="@drawable/barbackgroud"
+<!--            <Button-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:background="@drawable/barbackgroud"-->
+<!--                android:id="@+id/upload_lostorfind_time"-->
+<!--                android:text="(必选)"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
+
+            <EditText
                 android:id="@+id/upload_lostorfind_time"
-                android:text="(必选)"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:hint="（必填）"
+                android:padding="10dp"
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
 
@@ -180,14 +189,23 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <Button
-                android:textColor="@android:color/white"
-                android:layout_margin="5dp"
-                android:background="@drawable/barbackgroud"
-                android:text="(必选)"
+<!--            <Button-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:background="@drawable/barbackgroud"-->
+<!--                android:text="(必选)"-->
+<!--                android:id="@+id/upload_lostorfind_place"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
+
+            <EditText
                 android:id="@+id/upload_lostorfind_place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:hint="（必填）"
+                android:padding="10dp"
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
 

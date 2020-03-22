@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import com.yf107.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.yf107.teamwork.lostandfound.image.GetImageFromWeb;
 import com.yf107.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtils;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -57,6 +60,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
     private List<Integer> changeNumList;
     private Activity activity;
     private MessagePresenter messagePresenter;
+    Handler handler;
 
     SharedPreferences sharedPreferences;
 
@@ -218,19 +222,21 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
 
         int lostType = 0;
         switch (losttype) {
-            case 0: {
-                lostType = R.drawable.littleicon_type_lost1;
+            case 0:{
+                holder.qishileixing.setBackgroundResource(R.drawable.shape_thingstype_lost);
+                holder.qishileixing.setText(" "+"丢"+" ");
                 break;
             }
-            case 1: {
-                lostType = R.drawable.littleicon_type_find1;
+            case 1:{
+                holder.qishileixing.setBackgroundResource(R.drawable.shape_thingstype_find);
+                holder.qishileixing.setText(" "+"拾"+" ");
             }
             default: {
                 break;
             }
         }
         //启事类型
-        holder.qishileixing.setImageResource(lostType);
+       // holder.qishileixing.setImageResource(lostType);
         //时间地点
         holder.placeanddate.setText(place);
         //标题
@@ -244,7 +250,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         //类型小标签
 
         //类型图片
-        holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getDynamics().getThelost().getTypeid()));
+        holder.thingType.setText(" "+ SelectTypeUtils.getInstance().getImage(dynamicItemBean.getDynamics().getThelost().getLosttype())+" ");
 
 
         if(dynamicItemBean.getDynamics().getThelost().getPhoto() == null||dynamicItemBean.getDynamics().getThelost().getPhoto().equals("")||dynamicItemBean.getDynamics().getThelost().getPhoto().equals("default.jpg")) {
@@ -275,16 +281,16 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         //赏金
         holder.isNeedBounty.setVisibility(View.INVISIBLE);
 
-
                     //新消息气泡
                     if (isMessage) {
-                        if (isread == 0) {
+                        if (isread == 0){
                             holder.newMsg.setImageResource(R.drawable.message);
+                            Log.d("显示没", String.valueOf(isread));
                         } else {
-                            holder.newMsg.setVisibility(View.INVISIBLE);
+                            holder.newMsg.setImageResource(R.drawable.kongbai);
                         }
+    }
 
-                    }
 
         }
 

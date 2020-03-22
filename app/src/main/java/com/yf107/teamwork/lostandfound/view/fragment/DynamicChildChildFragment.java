@@ -40,6 +40,7 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
     private DynamicChildItemAdapter mDynamicItemAdapter;
 
 
+
     private List<DynamicItemBean> lists = new ArrayList<>();
     private DynamicChildPresenter iDynamicChildPresenter;
     private int pos;

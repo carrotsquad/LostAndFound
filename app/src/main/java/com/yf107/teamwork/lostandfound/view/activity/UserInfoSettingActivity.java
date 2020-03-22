@@ -129,6 +129,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         initView();
         //实现渐变式状态栏
         StatusBarUtil.setGradientStatusBarColor(this,statusBarView);
+
     }
 
     //选择图片

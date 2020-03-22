@@ -71,8 +71,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UserInfoMyUpload.this,MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

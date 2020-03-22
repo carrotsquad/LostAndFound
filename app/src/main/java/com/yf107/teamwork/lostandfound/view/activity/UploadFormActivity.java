@@ -68,11 +68,11 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     //选择时间
     @BindView(R.id.upload_lostorfind_time)
-    Button timeText;
+    EditText timeText;
 
     //选择地点
     @BindView(R.id.upload_lostorfind_place)
-    Button textPlace;
+    EditText textPlace;
 
     @BindView(R.id.linearlayout)
     LinearLayout linearLayout;
@@ -210,6 +210,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         if (typeid == 13){
                             Log.e("UploadFormActivity",""+stu+jsession+bean);
                             uploadPresenter.cardUpload(stu,jsession,bean);
+                            uploadPresenter.postUpload(jsession,bean);
                         }else {
                             uploadPresenter.postUpload(jsession, bean);
                         }
@@ -218,6 +219,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
                         if (typeid == 13) {
                             uploadPresenter.cardUpload(stu,jsession,bean,fileList);
+                            uploadPresenter.postUpload(jsession,bean,fileList);
                         }else{
                             uploadPresenter.postUpload(jsession, bean, fileList);
                         }

@@ -25,6 +25,7 @@ import com.yf107.teamwork.lostandfound.bean.DynamicItemBean;
 import com.yf107.teamwork.lostandfound.image.GetImageFromWeb;
 import com.yf107.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtils;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
 import java.util.ArrayList;
@@ -69,9 +70,9 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         TextView neckname;
         TextView fabiaotime;
         TextView title;
-        ImageView thingType;
+        TextView thingType;
         TextView placeanddate;
-        ImageView qishileixing;
+        TextView qishileixing;
         ImageView isNeedBounty;
         CircleImageView userphoto;
         ImageView newMsg;
@@ -219,18 +220,20 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         int lostType = 0;
         switch (losttype){
             case 0:{
-                lostType = R.drawable.littleicon_type_lost1;
+                holder.qishileixing.setBackgroundResource(R.drawable.shape_thingstype_lost);
+                holder.qishileixing.setText(" "+"丢"+" ");
                 break;
             }
             case 1:{
-                lostType = R.drawable.littleicon_type_find1;
+                holder.qishileixing.setBackgroundResource(R.drawable.shape_thingstype_find);
+                holder.qishileixing.setText(" "+"拾"+" ");
             }
             default:{
                 break;
             }
         }
         //启事类型
-        holder.qishileixing.setImageResource(lostType);
+     //   holder.qishileixing.setImageResource(lostType);
         //时间地点
         holder.placeanddate.setText(place);
         //标题
@@ -245,7 +248,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         //类型小标签
 
         //类型图片
-        holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getThelost().getTypeid()));
+        holder.thingType.setText(" "+ SelectTypeUtils.getInstance().getImage(dynamicItemBean.getThelost().getLosttype())+" ");
 
 
 //        if(dynamicItemBean.getThelost().getPhoto().equals("")) {
@@ -323,7 +326,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
             holder.newMsg.setVisibility(View.INVISIBLE);
         }
 
-        holder.thingType.setImageResource(SelectTypeUtil.getInstance().getImage(dynamicItemBean.getThelost().getTypeid()));
+        holder.thingType.setText(" "+ SelectTypeUtils.getInstance().getImage(dynamicItemBean.getThelost().getLosttype())+" ");
         Log.d("wocaonima", String.valueOf(dynamicItemBean.getThelost().getTypeid()));
 
 

@@ -69,7 +69,7 @@
         </activity>
         <activity android:name=".view.activity.UploadSuccessActivity" />
         <activity android:name=".view.activity.ChangeNickNameActivity" />
-        <activity android:name=".view.activity.ChangePhoneActivty" /> <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
         <activity android:name=".view.activity.AboutUsDetailActivity" />
         <activity android:name=".view.activity.AboutDiAi" />
         <activity android:name=".view.activity.OurWebActivity" />

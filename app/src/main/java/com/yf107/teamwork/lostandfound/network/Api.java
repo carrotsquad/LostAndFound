@@ -89,12 +89,12 @@ public interface Api {
     Observable<AddCommitBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
 
-    @POST("/passlove/user/publishlost2/card")
+    @POST("/passlove/user/publishlost/card")
     @Multipart
     Observable<AddCommitBean> cardUpload(@Field("cardid") String stu,@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
 
-    @POST("/passlove/user/publishlost2/card")
+    @POST("/passlove/user/publishlost/card")
     @FormUrlEncoded
     Observable<AddCommitBean> cardUpload(@Field("cardid") String stu,@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 

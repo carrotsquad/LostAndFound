@@ -82,7 +82,7 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
         lists.addAll(beans);
         mAdapter = new MyHistoryAdapter(lists);
         mRecyclerView.setAdapter(mAdapter);
-        Log.d("TAG","qwertyuiosjkdhskd"+beans.get(2).getId());
+//        Log.d("TAG","qwertyuiosjkdhskd"+beans.get(2).getId());
     }
 
     @Override

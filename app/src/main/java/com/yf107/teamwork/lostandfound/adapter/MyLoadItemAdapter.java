@@ -25,6 +25,7 @@ import com.yf107.teamwork.lostandfound.bean.TheLostBean;
 import com.yf107.teamwork.lostandfound.popupwindow.ArrowPopWindows;
 import com.yf107.teamwork.lostandfound.presenter.MyLoadPresenter;
 import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtils;
 import com.yf107.teamwork.lostandfound.view.activity.ReplaceActivity;
 import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 
@@ -66,8 +67,8 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
         ImageView thingtype;
-        ImageView  thingtypetxt;
-        ImageView  eventtype;
+        TextView  thingtypetxt;
+        TextView  eventtype;
         TextView  time  ;                     //月 日
         TextView  time2;                     //19:00
         TextView  where;
@@ -205,12 +206,14 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
        Log.d("tupianshi",lists.get(position).getPhoto());
         //l类型图片
 
-        holder.thingtypetxt.setImageResource(SelectTypeUtil.getInstance().getImage(lists.get(position).getTypeid()));
+        holder.thingtypetxt.setText(" "+ SelectTypeUtils.getInstance().getImage(lists.get(position).getLosttype())+" ");
 
         if (lists.get(position).getLosttype()==0){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost1);
+            holder.eventtype.setBackgroundColor(R.drawable.shape_thingstype_lost);
+            holder.eventtype.setText(" "+"丢"+" ");
         }else if (lists.get(position).getLosttype()==1){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_find1);
+            holder.eventtype.setBackgroundColor(R.drawable.shape_thingstype_find);
+            holder.eventtype.setText(" "+"拾"+" ");
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         Log.e("MyLoadItemAdapter",""+lists.get(position).getPlaceid()+lostPlace);

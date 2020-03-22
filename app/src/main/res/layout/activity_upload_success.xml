@@ -17,7 +17,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/back" />
+            android:src="@drawable/zuojiantou"
+            android:layout_marginLeft="20dp"/>
 
         <TextView
             android:id="@+id/publishsuccess_result"
@@ -71,11 +72,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:text="继续发布失物启事"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:padding="10dp"
             android:drawableEnd="@drawable/youjiantou"/>
 
         <LinearLayout
@@ -89,11 +91,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:text="继续发布招领启事"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:padding="10dp"
             android:drawableEnd="@drawable/youjiantou"/>
 
         <LinearLayout
@@ -107,11 +110,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:text="返回主页"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:padding="10dp"
             android:drawableEnd="@drawable/youjiantou"/>
 
     </LinearLayout>

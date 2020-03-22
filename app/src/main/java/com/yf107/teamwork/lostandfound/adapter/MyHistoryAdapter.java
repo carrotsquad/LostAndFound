@@ -15,6 +15,7 @@ import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.bean.TheLostBean;
 import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtils;
 
 import java.util.List;
 
@@ -32,10 +33,10 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
         ImageView  thingtype;
 
         @BindView(R.id.myhistory_thingtype_txt)
-        ImageView  thingtypetxt;
+        TextView  thingtypetxt;
 
         @BindView(R.id.myhistory_eventtype)
-        ImageView  eventtype;
+        TextView  eventtype;
 
         @BindView(R.id.myhistory_time)
         TextView  time  ;                     //月 日
@@ -90,7 +91,7 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
         Log.d("zhaopian",lists.get(position).getPhoto());
 
         //类型图片
-        holder.thingtypetxt.setImageResource(SelectTypeUtil.getInstance().getImage(lists.get(position).getTypeid()));
+        holder.thingtypetxt.setText(" "+ SelectTypeUtils.getInstance().getImage(lists.get(position).getLosttype())+" ");
 
 
         if (lists.get(position).getIshandled()==1){
@@ -99,9 +100,11 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
             holder.isdong.setText("递爱失败");
         }
         if (lists.get(position).getLosttype()==0){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_lost1);
+            holder.eventtype.setBackgroundResource(R.drawable.shape_thingstype_lost);
+            holder.eventtype.setText(" "+"丢"+" ");
         }else if (lists.get(position).getLosttype()==1){
-            holder.eventtype.setImageResource(R.drawable.littleicon_type_find1);
+            holder.eventtype.setBackgroundResource(R.drawable.shape_thingstype_find);
+            holder.eventtype.setText(" "+"拾"+" ");
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         holder.where.setText(lostPlace);

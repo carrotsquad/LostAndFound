@@ -207,19 +207,24 @@ public class SearchFragment extends Fragment implements ISearchFragment {
                 dropDownMenu.closeMenu();
             });
 
-        ok.setOnClickListener(v->{
-                //其内部已经设置了记录当前tab位置的参数，该参数会随tab被点击而改变，所以这里直接设置tab值即可
-                //此处若想获得constellations第一个值“不限”，可修改constellationPosition初始值为-1，且这里代码改为constellationPosition == -1)
-                dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : thingstypes.get(thingsPosition));
-//                thingstype = thingstypes[thingsPosition];
-                dropDownMenu.closeMenu();
-//                changeContentView();   //在这里可以请求获得经筛选后要显示的内容
-            });
+//        ok.setOnClickListener(v->{
+//                //其内部已经设置了记录当前tab位置的参数，该参数会随tab被点击而改变，所以这里直接设置tab值即可
+//                //此处若想获得constellations第一个值“不限”，可修改constellationPosition初始值为-1，且这里代码改为constellationPosition == -1)
+//                dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : thingstypes.get(thingsPosition));
+////                thingstype = thingstypes[thingsPosition];
+//                dropDownMenu.closeMenu();
+////                changeContentView();   //在这里可以请求获得经筛选后要显示的内容
+//            });
 
         thingsConstellationView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id)->{
                 thingsAdapter.setCheckItem(position);
                 thingsPosition = position;
+            dropDownMenu.setTabText((thingsPosition == 0) ? headers[2] : thingstypes.get(thingsPosition));
+//                thingstype = thingstypes[thingsPosition];
+            dropDownMenu.closeMenu();
             });
+
+        ok.setVisibility(View.INVISIBLE);
 
 
         searchInput.setOnClickListener(new View.OnClickListener() {

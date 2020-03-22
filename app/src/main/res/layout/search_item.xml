@@ -33,28 +33,57 @@
                 android:src="@mipmap/diai" />
 
 
-            <ImageView
+<!--            <ImageView-->
+<!--                android:id="@+id/search_item_thingstype"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_marginTop="18dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:layout_toRightOf="@id/search_item_thingsphoto"-->
+<!--                android:src="@drawable/littleicon_uflash" />-->
+
+            <TextView
                 android:id="@+id/search_item_thingstype"
-                android:layout_width="40dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginLeft="15dp"
-                android:scaleType="fitXY"
                 android:layout_toRightOf="@id/search_item_thingsphoto"
-                android:src="@drawable/littleicon_uflash" />
+                android:padding="3dp"
+                android:text=" 电脑 "
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:background="@drawable/shape_type"/>
 
 
-            <ImageView
+<!--            <ImageView-->
+<!--                android:id="@+id/search_item_qishileixing"-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_alignTop="@+id/search_item_thingstype"-->
+<!--                android:layout_marginStart="6dp"-->
+<!--                android:layout_marginLeft="7dp"-->
+<!--                android:layout_marginTop="-2dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:layout_toEndOf="@+id/search_item_userphoto"-->
+<!--                android:src="@drawable/littleicon_type_lost" />-->
+
+            <TextView
                 android:id="@+id/search_item_qishileixing"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
                 android:layout_alignTop="@+id/search_item_thingstype"
                 android:layout_marginStart="6dp"
                 android:layout_marginLeft="7dp"
                 android:layout_marginTop="-2dp"
                 android:scaleType="fitXY"
                 android:layout_toEndOf="@+id/search_item_userphoto"
-                android:src="@drawable/littleicon_type_lost" />
+                android:text=" 丢 "
+                android:padding="3dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:background="@drawable/shape_thingstype_find"/>
 
             <ImageView
                 android:id="@+id/search_item_isNeedBounty"

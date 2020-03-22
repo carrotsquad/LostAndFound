@@ -34,6 +34,7 @@ import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.presenter.ThingDetailPresenter;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.utils.SelectTypeUtil;
+import com.yf107.teamwork.lostandfound.utils.SelectTypeUtils;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.IThingDetailActivity;
 import com.youth.banner.Banner;
@@ -73,6 +74,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     public static final String OTHERSTITLE = "OTHERSTITLE";
     public static final String OTHERUSERNAME = "OTHERUSERNAME";
 
+    private List<CommentFeedBack.Comments> lists = new ArrayList<>();
+
     //头像
     @BindView(R.id.thing_detail_thingsdetail_circleview)
     CircleImageView userimg;
@@ -95,7 +98,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 
     //失物类型
     @BindView(R.id.thing_detail_thingsdetail_thingstype)
-    ImageView thingstype;
+    TextView thingstype;
 
     //描述
     @BindView(R.id.thing_detail_thingsdetail_describe)
@@ -139,8 +142,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
 
 
     @BindView(R.id.thing_detail_thingsdetail_losttype)
-    ImageView losttype;
+    TextView losttype;
 
+    @BindView(R.id.comment_other)
+    TextView comment1;
     private String imgs = "";
     private int lostid;
     private int intthingstype;
@@ -268,23 +273,27 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         email = intent.getStringExtra(OTHERUSERNAME);
         Log.d("EMAIL1",email);
 
-        thingstype.setImageResource(SelectTypeUtil.getInstance().getImage(intthingstype));
+        thingstype.setText(SelectTypeUtils.getInstance().getImage(intthingstype));
         switch (qishileixing){
             case 0:{
-                lostType = R.drawable.littleicon_type_lost1;
+            //    lostType = R.drawable.littleicon_type_lost1;
+                losttype.setText(" "+"丢"+" ");
+                losttype.setBackgroundResource(R.drawable.shape_thingstype_lost);
                 type.setText("失物详情");
                 break;
             }
             case 1:{
-                lostType = R.drawable.littleicon_type_find1;
+              //  lostType = R.drawable.littleicon_type_find1;
+                losttype.setBackgroundResource(R.drawable.shape_thingstype_find);
+                losttype.setText(" "+"拾"+" ");
                 type.setText("招领详情");
-                clickreturn.setBackgroundResource(R.drawable.bt_zhaoling);;
+                clickreturn.setBackgroundResource(R.drawable.bt_zhaoling);
+                break;
             }
             default:{
                 break;
             }
         }
-        losttype.setImageResource(lostType);
 
 //        if(qishileixing==0){
 //            type.setText("失物详情");
@@ -317,7 +326,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         if(email.equals(sharedPreferences.getString("EMAIL",null))){
             clicktocomment.setClickable(false);
             clicktocomment.setVisibility(View.INVISIBLE);
-            clickreturn.setBackgroundResource(R.drawable.commit);
+            comment1.setVisibility(View.INVISIBLE);
+            clickreturn.setText("评论");
         }
         return  strThingsImgs;
     }
@@ -418,6 +428,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
             Log.d("没有没有没有","123");
         }
 
+//        for(int i = 0;i<list.size() - 1;i++){
+//            lists.add(list.get(i+1));
+//        }
+
     }
     @Override
     public void showStatus(Boolean status) {
@@ -434,7 +448,8 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     public void onBackPressed() {
 //        Intent intent = new Intent(ThingDetailActivity.this, MainActivity.class);
 //        startActivity(intent);
-          finish();
+        Intent intent = new Intent(ThingDetailActivity.this,MainActivity.class);
+        startActivity(intent);
     }
 }
 

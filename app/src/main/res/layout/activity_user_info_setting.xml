@@ -241,6 +241,26 @@
           android:textColor="@color/black"
           android:textSize="15sp" />
 
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignParentTop="true"
+          android:layout_marginStart="29dp"
+          android:layout_marginTop="0dp"
+          android:layout_toEndOf="@id/setting_passwordlayout_nick"
+          android:gravity="center_vertical"
+          android:text="******"
+          android:textColor="@color/black"
+          android:textSize="15sp" />
+
+      <ImageView
+          android:src="@drawable/rightpoint"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="10dp"
+          android:layout_alignParentRight="true"
+          android:layout_width="20dp"
+          android:layout_height="30dp" />
+
     </RelativeLayout>
 
     <View
@@ -252,43 +272,43 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
-    <RelativeLayout
-        android:background="@drawable/click_style"
-        android:layout_marginTop="2dp"
-        android:layout_below="@id/setting_passwordlayout"
-        android:id="@+id/setting_clearCache"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+<!--    <RelativeLayout-->
+<!--        android:background="@drawable/click_style"-->
+<!--        android:layout_marginTop="2dp"-->
+<!--        android:layout_below="@id/setting_passwordlayout"-->
+<!--        android:id="@+id/setting_clearCache"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp">-->
 
-      <TextView
-          android:id="@+id/setting_clearCache_text"
-          android:layout_width="80dp"
-          android:layout_height="match_parent"
-          android:layout_alignParentStart="true"
-          android:layout_alignParentTop="true"
-          android:layout_marginStart="35dp"
-          android:layout_marginTop="0dp"
-          android:gravity="center"
-          android:text="清除缓存"
-          android:textColor="@color/black"
-          android:textSize="15sp" />
+<!--      <TextView-->
+<!--          android:id="@+id/setting_clearCache_text"-->
+<!--          android:layout_width="80dp"-->
+<!--          android:layout_height="match_parent"-->
+<!--          android:layout_alignParentStart="true"-->
+<!--          android:layout_alignParentTop="true"-->
+<!--          android:layout_marginStart="35dp"-->
+<!--          android:layout_marginTop="0dp"-->
+<!--          android:gravity="center"-->
+<!--          android:text="清除缓存"-->
+<!--          android:textColor="@color/black"-->
+<!--          android:textSize="15sp" />-->
 
-      <TextView
-          android:gravity="center"
-          android:text="16.44MB"
-          android:layout_margin="5dp"
-          android:layout_alignParentRight="true"
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent" />
+<!--      <TextView-->
+<!--          android:gravity="center"-->
+<!--          android:text="16.44MB"-->
+<!--          android:layout_margin="5dp"-->
+<!--          android:layout_alignParentRight="true"-->
+<!--          android:layout_width="wrap_content"-->
+<!--          android:layout_height="match_parent" />-->
 
-      <View
-          android:layout_marginRight="10dp"
-          android:layout_marginLeft="10dp"
-          android:background="@color/grey_200"
-          android:layout_alignParentBottom="true"
-          android:layout_width="match_parent"
-          android:layout_height="2dp"/>
-    </RelativeLayout>
+<!--      <View-->
+<!--          android:layout_marginRight="10dp"-->
+<!--          android:layout_marginLeft="10dp"-->
+<!--          android:background="@color/grey_200"-->
+<!--          android:layout_alignParentBottom="true"-->
+<!--          android:layout_width="match_parent"-->
+<!--          android:layout_height="2dp"/>-->
+<!--    </RelativeLayout>-->
 
   </RelativeLayout>
 
