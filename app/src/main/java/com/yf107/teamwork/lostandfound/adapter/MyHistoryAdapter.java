@@ -106,7 +106,7 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
             holder.eventtype.setBackgroundResource(R.drawable.shape_thingstype_find);
             holder.eventtype.setText(" "+"拾"+" ");
         }
-        String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
+        String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid()-1);
         holder.where.setText(lostPlace);
         String publishTime= lists.get(position).getPublishtime();
         if (!publishTime.equals("")) {

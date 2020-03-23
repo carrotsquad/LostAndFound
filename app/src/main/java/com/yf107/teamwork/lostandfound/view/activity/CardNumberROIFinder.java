@@ -19,10 +19,6 @@ import org.opencv.imgproc.Imgproc;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by gloomy fish on 2017/12/07.
- */
-
 public class CardNumberROIFinder {
 
     public static Bitmap extractNumberROI(Bitmap input, Bitmap template) {
