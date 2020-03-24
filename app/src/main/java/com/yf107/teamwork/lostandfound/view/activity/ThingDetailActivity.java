@@ -144,8 +144,6 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     @BindView(R.id.thing_detail_thingsdetail_losttype)
     TextView losttype;
 
-    @BindView(R.id.comment_other)
-    TextView comment1;
     private String imgs = "";
     private int lostid;
     private int intthingstype;
@@ -326,8 +324,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
         if(email.equals(sharedPreferences.getString("EMAIL",null))){
             clicktocomment.setClickable(false);
             clicktocomment.setVisibility(View.INVISIBLE);
-            comment1.setVisibility(View.INVISIBLE);
-            clickreturn.setText("评论");
+            clickreturn.setBackgroundResource(R.drawable.commit);
         }
         return  strThingsImgs;
     }

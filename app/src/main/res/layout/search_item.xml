@@ -76,7 +76,6 @@
                 android:layout_alignTop="@+id/search_item_thingstype"
                 android:layout_marginStart="6dp"
                 android:layout_marginLeft="7dp"
-                android:layout_marginTop="-2dp"
                 android:scaleType="fitXY"
                 android:layout_toEndOf="@+id/search_item_userphoto"
                 android:text=" 丢 "

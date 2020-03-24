@@ -227,7 +227,7 @@
                 android:layout_marginStart="0dp"
                 android:text="请输入学号（必填）："
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/upload_lostorfind_stu"

@@ -227,7 +227,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                             Log.e("UploadFormActivity", "" + stu + jsession + bean);
                             if (stu.substring(0,3).equals("201")) {
                                 uploadPresenter.cardUpload(stu, jsession, bean);
-                                uploadPresenter.postUpload(jsession,bean);
+                             //   uploadPresenter.postUpload(jsession,bean);
                             }else {
                                 FancyToast.makeText(UploadFormActivity.this, "学号填写错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                             }
@@ -241,7 +241,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                             if (stu.substring(0,3).equals("201")) {
                                 Log.e("UploadFormActivity","stu = "+stu+"jsession = "+jsession+"bean = "+bean+"fileList = "+fileList);
                                 uploadPresenter.cardUpload(stu, jsession, bean, fileList);
-                                uploadPresenter.postUpload(jsession, bean, fileList);
+                           //     uploadPresenter.postUpload(jsession, bean, fileList);
                             }else{
                                 FancyToast.makeText(UploadFormActivity.this, "学号填写错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                             }
