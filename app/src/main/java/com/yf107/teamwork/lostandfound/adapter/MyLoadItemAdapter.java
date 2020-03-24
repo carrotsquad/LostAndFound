@@ -215,7 +215,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             holder.eventtype.setBackgroundColor(R.drawable.shape_thingstype_find);
             holder.eventtype.setText(" "+"拾"+" ");
         }
-        String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid()-1);
+        String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
         Log.e("MyLoadItemAdapter",""+lists.get(position).getPlaceid()+lostPlace);
         holder.where.setText(lostPlace);
         Log.e("1","1");
@@ -269,6 +269,8 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 placeid = lists.get(position).getPlaceid();
                 losttime = lists.get(position).getLosttime();
                 photo = lists.get(position).getPhoto();
+                Log.e("MyLoadItem",""+photo);
+                Log.e("MyLoadItem","id = "+id);
                 Intent intent = new Intent(mContext, ReplaceActivity.class);
                 intent.putExtra("id",id);
                 intent.putExtra("typeid",typeid);

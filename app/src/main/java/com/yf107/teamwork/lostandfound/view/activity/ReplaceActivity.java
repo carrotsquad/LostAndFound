@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
@@ -20,6 +21,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.image.GlideImageLoader;
 import com.yf107.teamwork.lostandfound.network.AllURI;
@@ -68,11 +70,18 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
 
     //选择时间
     @BindView(R.id.upload_lostorfind_time)
-    Button timeText;
+    EditText timeText;
 
     //选择地点
     @BindView(R.id.upload_lostorfind_place)
-    Button textPlace;
+    EditText textPlace;
+
+    @BindView(R.id.linearlayout)
+    LinearLayout linearLayout;
+
+    //选择学生卡
+    @BindView(R.id.upload_lostorfind_stu)
+    EditText stuEdit;
 
     //编辑标题
     @BindView(R.id.upload_lostorfind_description_title)
@@ -94,6 +103,7 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
     @BindView(R.id.upload_lostorfind_sure)
     Button btnSure;
 
+
     private static final int REQUEST_CODE_GALLERY = 1;
     //时间选择器
     private TimePickerView pvTime;
@@ -103,6 +113,7 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
 
     //地点选择器
     private OptionsPickerView pvOptionsPlace;
+
 
     private SharedPreferences sharedPreferences;
 
@@ -128,6 +139,7 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
     private Integer typeid;
     private String strtitle;
     private String strdescri;
+    private String stu;
     private View statusBarView;
 
 
@@ -143,7 +155,7 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
         Log.e("ReplaceActivity",""+id);
-        typeid = intent.getIntExtra("typeid", 0);
+        typeid = intent.getIntExtra("typeid", 1);
         qishileixing =intent.getIntExtra("losttype",0);
         strtitle = intent.getStringExtra("title");
         strdescri = intent.getStringExtra("description");
@@ -151,8 +163,6 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
         strLostDate = intent.getStringExtra("losttime");
         strphoto = intent.getStringExtra("photo");
         initView();
-        strtitle = titleEdit.getText().toString();
-        strdescri = descEdit.getText().toString();
         replacePresenter = new ReplacePresenter();
         replacePresenter.attachActivity(this);
 
@@ -165,8 +175,7 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
     }
 
     @OnClick({R.id.upload_lostorfind_back,R.id.upload_lostorfind_time
-            ,R.id.upload_lostorfind_place
-            ,R.id.upload_lostorfind_description_img
+            ,R.id.upload_lostorfind_place,R.id.upload_lostorfind_description_img
             ,R.id.upload_lostorfind_description_upload
             ,R.id.upload_lostorfind_sure})
     void onClicked(View view) {
@@ -236,6 +245,9 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
         textPlace.setText(strplacetype);
         titleEdit.setText(strtitle);
         descEdit.setText(strdescri);
+        Log.e("Replace","strphoto = "+strphoto);
+        img.setImageBitmap(BitmapFactory.decodeFile(strphoto));
+
 
         //地点选择
         pvOptionsPlace= new OptionsPickerBuilder(ReplaceActivity.this, new OnOptionsSelectListener() {
@@ -308,9 +320,9 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
         //设置主题
         //ThemeConfig.CYAN
         ThemeConfig theme = new ThemeConfig.Builder()
-                .setTitleBarBgColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setFabNornalColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setFabPressedColor(Color.rgb(0xF4, 0x7C, 0x00))
+                .setTitleBarBgColor(Color.rgb(0x78, 0x79, 0xFF))
+                .setFabNornalColor(Color.rgb(0x78, 0x79, 0xFF))
+                .setFabPressedColor(Color.rgb(0x78, 0x79, 0xFF))
                 .setCropControlColor(Color.rgb(0xFF, 0xFF, 0xFF))
                 .build();
         //配置功能
@@ -330,7 +342,7 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
 
-        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,1 ,mOnHandlerResultCallback);
+        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,8 ,mOnHandlerResultCallback);
     }
 
 
@@ -362,13 +374,29 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
 
 
     @Override
-    public void showStatus(Boolean status) {
-        if(status){
-            startActivity(new Intent(ReplaceActivity.this,UploadSuccessActivity.class));
+    public void showStatus(Boolean status,int lostid) {
+        if (status) {
+            replacePresenter.sendDataToWeb(sharedPreferences.getString("SESSION", null), null, lostid, null, "");
+            Intent intent = new Intent(ReplaceActivity.this, UploadSuccessActivity.class);
+            intent.putExtra("SESSION", sharedPreferences.getString(SESSION, "null"));
+            startActivity(intent);
             finish();
-            FancyToast.makeText(ReplaceActivity.this,"发布成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-        }else {
-            FancyToast.makeText(ReplaceActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            FancyToast.makeText(ReplaceActivity.this, "发布成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+        } else {
+            FancyToast.makeText(ReplaceActivity.this, "出现了错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    public void isSuccess(boolean status) {
+
+        if(status){
+            Log.d("成功了成功了","成功了成功了");
         }
     }
 }

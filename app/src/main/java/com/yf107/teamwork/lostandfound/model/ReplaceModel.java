@@ -3,6 +3,8 @@ package com.yf107.teamwork.lostandfound.model;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.yf107.teamwork.lostandfound.bean.AddCommitBean;
+import com.yf107.teamwork.lostandfound.bean.ThingDetailBean;
 import com.yf107.teamwork.lostandfound.model.interfaces.IReplaceModel;
 import com.yf107.teamwork.lostandfound.bean.StatusBean;
 import com.yf107.teamwork.lostandfound.bean.TheLostBean;
@@ -15,6 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Callback;
 
 public class ReplaceModel extends BaseModel implements IReplaceModel {
 
@@ -23,16 +26,16 @@ public class ReplaceModel extends BaseModel implements IReplaceModel {
     }
 
     @Override
-    public void postReplace(String session, TheLostBean bean, List<File> fileList,int id, Observer<StatusBean> observer) {
+    public void postReplace(String session, TheLostBean bean, List<File> fileList,int id, Observer<AddCommitBean> observer) {
+        Log.e("ReplaceModel","session = "+session+",bean = "+bean+",fileList = "+fileList+"id = "+id);
         Gson gson = new Gson();
         //传图片时
         if(fileList.size()!=0){
-            api.postReplace(createRequestbody(session), RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)),id)
+            api.postReplace(createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)),id)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
-            Log.e("ReplaceModel",""+session+"+"+bean+"+"+id);
         }else {
             RequestBody body = RequestBody.create(MediaType.parse("image/"+" "),"");
             //image为name参数的值，file.getname为filename参数的名字，body为请求体
@@ -42,21 +45,31 @@ public class ReplaceModel extends BaseModel implements IReplaceModel {
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
-            Log.e("ReplaceModel",""+session+"+"+bean+"+"+id);
         }
 
     }
 
     @Override
-    public void postReplace(String session, TheLostBean bean,int id, Observer<StatusBean> observer) {
+    public void postReplace(String session, TheLostBean bean, int id,Observer<AddCommitBean> observer) {
+        Log.e("ReplaceModel","session = "+session+",bean = "+bean+",id = "+id);
         api.postReplace(session,new Gson().toJson(bean),id)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        Log.e("ReplaceModel",""+session+"+"+bean+"+"+id);
     }
 
+    @Override
+    public void publishcomment(String session, Integer id, int lostid, String time, String content, Callback<StatusBean> callback) {
+        ThingDetailBean bean = new ThingDetailBean();
+        ThingDetailBean.Comment con = new ThingDetailBean.Comment();
+        con.setContent(content);
+        con.setId(id);
+        con.setTime(time);
+        bean.setLostid(lostid);
+        bean.setComment(con);
+        api.uploadComment(session,new Gson().toJson(bean)).enqueue(callback);
+    }
 
     /*创建图片 的MultipartBody
       也可以用requestbody 但是这样就需要在参数里加入请求头中的name =  +filename =
