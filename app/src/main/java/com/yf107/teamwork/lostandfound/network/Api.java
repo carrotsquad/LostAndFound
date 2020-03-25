@@ -91,7 +91,7 @@ public interface Api {
 
     @POST("/passlove/user/publishlost/card")
     @Multipart
-    Observable<AddCommitBean> cardUpload(@Field("cardid") String stu,@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
+    Observable<AddCommitBean> cardUpload(@Part("cardid") String stu,@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
 
     @POST("/passlove/user/publishlost/card")

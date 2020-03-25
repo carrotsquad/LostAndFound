@@ -445,8 +445,9 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
     public void onBackPressed() {
 //        Intent intent = new Intent(ThingDetailActivity.this, MainActivity.class);
 //        startActivity(intent);
-        Intent intent = new Intent(ThingDetailActivity.this,MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(ThingDetailActivity.this,MainActivity.class);
+//        startActivity(intent);
+       finish();
     }
 }
 

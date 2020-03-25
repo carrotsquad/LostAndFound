@@ -261,6 +261,7 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
                 public void onError(Throwable e) {
 
                     Log.e("UploadPresenter2","wrong");
+                    Log.d("UploadPresenter2",e.toString());
                 }
 
                 @Override
