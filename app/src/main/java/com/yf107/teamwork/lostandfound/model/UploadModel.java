@@ -28,6 +28,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
 
     @Override
     public void postUpload(String session, TheLostBean bean, List<File> fileList, Observer<AddCommitBean> observer) {
+        Log.e("ReplaceModel","session = "+session+",bean = "+bean+",fileList = "+fileList);
         Gson gson = new Gson();
         //传图片时
         if(fileList.size()!=0){
@@ -79,7 +80,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
         }else {
             RequestBody body = RequestBody.create(MediaType.parse("image/"+" "),"");
             //image为name参数的值，file.getname为filename参数的名字，body为请求体
-            MultipartBody.Part part = MultipartBody.Part.createFormData("photos","",body);
+            MultipartBody.Part part = MultipartBody.Part.createFormData("card","",body);
             api.cardUpload(stu,createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),part)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
@@ -129,7 +130,4 @@ public class UploadModel extends BaseModel implements IUploadModel {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"),jsessionId);
         return body;
     }
-
-
-
 }

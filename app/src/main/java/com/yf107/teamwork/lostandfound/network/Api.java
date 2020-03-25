@@ -79,23 +79,20 @@ public interface Api {
     我的发布 包括丢/失
     向服务器传数据
      */
-    @POST("/passlove/user/publishlost2")
     @Multipart
+    @POST("/passlove/user/publishlost2")
     Observable<AddCommitBean> postUpload(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
-
-    @POST("/passlove/user/publishlost2")
     @FormUrlEncoded
+    @POST("/passlove/user/publishlost2")
     Observable<AddCommitBean> postUpload(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
-
-    @POST("/passlove/user/publishlost/card")
     @Multipart
+    @POST("/passlove/user/publishlost/card")
     Observable<AddCommitBean> cardUpload(@Part("cardid") String stu,@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos);
 
-
-    @POST("/passlove/user/publishlost/card")
     @FormUrlEncoded
+    @POST("/passlove/user/publishlost/card")
     Observable<AddCommitBean> cardUpload(@Field("cardid") String stu,@Field("JSESSIONID") String session, @Field("thelost") String theLostBean);
 
     /*
@@ -117,12 +114,12 @@ public interface Api {
      */
     @POST("/passlove/UpdateLostById")
     @Multipart
-    Observable<StatusBean> postReplace(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos,@Field("lostid") int id);
+    Observable<AddCommitBean> postReplace(@Part("JSESSIONID") RequestBody session, @Part("thelost") RequestBody theLostBean, @Part MultipartBody.Part photos,@Part("lostid") int id);
 
 
     @POST("/passlove/UpdateLostById")
     @FormUrlEncoded
-    Observable<StatusBean> postReplace(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean,@Field("lostid") int id);
+    Observable<AddCommitBean> postReplace(@Field("JSESSIONID") String session, @Field("thelost") String theLostBean,@Field("lostid") int id);
 
 
     //获取动态 失物昨天 信息
