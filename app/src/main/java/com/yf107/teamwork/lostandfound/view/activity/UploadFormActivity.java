@@ -382,6 +382,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             if (typeid == 13&&qishileixing!=0){
                 displaySelectedImage(photoPath);
             }
+
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UploadFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传
