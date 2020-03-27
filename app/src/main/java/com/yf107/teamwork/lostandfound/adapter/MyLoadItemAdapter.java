@@ -206,7 +206,8 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
        Log.d("tupianshi",lists.get(position).getPhoto());
         //l类型图片
 
-        holder.thingtypetxt.setText(" "+ SelectTypeUtils.getInstance().getImage(lists.get(position).getLosttype())+" ");
+        holder.thingtypetxt.setText(" "+ SelectTypeUtils.getInstance().getImage(lists.get(position).getTypeid())+" ");
+        Log.e("MyloadAdapter","lists.get(position).getLosttype()"+ lists.get(position).getLosttype());
 
         if (lists.get(position).getLosttype()==0){
             holder.eventtype.setBackgroundColor(R.drawable.shape_thingstype_lost);
@@ -215,7 +216,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
             holder.eventtype.setBackgroundColor(R.drawable.shape_thingstype_find);
             holder.eventtype.setText(" "+"拾"+" ");
         }
-        String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid());
+        String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid()-1);
         Log.e("MyLoadItemAdapter",""+lists.get(position).getPlaceid()+lostPlace);
         holder.where.setText(lostPlace);
         Log.e("1","1");

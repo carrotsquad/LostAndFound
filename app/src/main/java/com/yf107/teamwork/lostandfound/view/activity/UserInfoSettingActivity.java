@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -137,9 +138,9 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
         //设置主题
         //ThemeConfig.CYAN
         ThemeConfig theme = new ThemeConfig.Builder()
-                .setTitleBarBgColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setFabNornalColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setFabPressedColor(Color.rgb(0xF4, 0x7C, 0x00))
+                .setTitleBarBgColor(Color.rgb(0x78, 0x79, 0xFF))
+                .setFabNornalColor(Color.rgb(0x78, 0x79, 0xFF))
+                .setFabPressedColor(Color.rgb(0x78, 0x79, 0xFF))
                 .setCropControlColor(Color.rgb(0xFF, 0xFF, 0xFF))
                 .build();
         //配置功能
@@ -447,5 +448,13 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

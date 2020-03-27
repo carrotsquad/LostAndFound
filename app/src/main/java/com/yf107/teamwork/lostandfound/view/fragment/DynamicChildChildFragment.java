@@ -1,6 +1,7 @@
 package com.yf107.teamwork.lostandfound.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -183,6 +184,12 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
     }
 
     @Override
+    public void onResume() { // 页面恢复
+        super.onResume();
+        initLists();
+    }
+
+    @Override
     public void showData(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
         refreshLayout.setRefreshing(false);
         lists.clear();
@@ -191,7 +198,7 @@ public class DynamicChildChildFragment extends Fragment implements IDynaicChildF
         mDynamicItemAdapter.notifyItemChanged(this.lists.size() - 1);
         if (status) {
             if (!newPosi.equals(oldPosi)) {
-                FancyToast.makeText(getContext(), "刷新成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+      //          FancyToast.makeText(getContext(), "刷新成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
                 //轮动到刷新的位置
 //                mRecyclerView.scrollToPosition(oldPosi - 1);
             }

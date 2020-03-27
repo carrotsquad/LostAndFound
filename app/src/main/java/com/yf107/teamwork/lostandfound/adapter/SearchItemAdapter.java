@@ -248,7 +248,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         //类型小标签
 
         //类型图片
-        holder.thingType.setText(" "+ SelectTypeUtils.getInstance().getImage(dynamicItemBean.getThelost().getLosttype())+" ");
+        holder.thingType.setText(" "+ SelectTypeUtils.getInstance().getImage(dynamicItemBean.getThelost().getTypeid())+" ");
 
 
 //        if(dynamicItemBean.getThelost().getPhoto().equals("")) {
@@ -325,11 +325,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         }else {
             holder.newMsg.setVisibility(View.INVISIBLE);
         }
-
-        holder.thingType.setText(" "+ SelectTypeUtils.getInstance().getImage(dynamicItemBean.getThelost().getLosttype())+" ");
-        Log.d("wocaonima", String.valueOf(dynamicItemBean.getThelost().getTypeid()));
-
-
     }
 
     @Override

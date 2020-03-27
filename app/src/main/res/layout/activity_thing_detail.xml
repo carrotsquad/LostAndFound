@@ -250,7 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="留言区"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:layout_gravity="center"
             android:padding="10dp"
             android:textColor="#7879ff"/>
@@ -285,8 +285,8 @@
             <TextView
                 android:id="@+id/comment"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
+                android:layout_height="35dp"
+                android:layout_gravity="center|bottom"
                 android:background="@drawable/commit"/>
         </LinearLayout>
         <LinearLayout
@@ -297,8 +297,8 @@
             <TextView
                 android:id="@+id/tv_return"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
+                android:layout_height="35dp"
+                android:layout_gravity="center|bottom"
                 android:background="@drawable/tv_return"/>
         </LinearLayout>
     </LinearLayout>

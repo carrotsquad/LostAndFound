@@ -72,11 +72,13 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
 
     public static int time = 0;
     private Object MainActivity = com.yf107.teamwork.lostandfound.view.activity.MainActivity.class;
+    private int i =1;
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         MessageFragment messageFragment = new MessageFragment();
         return messageFragment;
     }
+
     Handler handler;
     Handler handler1;
 
@@ -84,47 +86,47 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_message, container,false);
+        view = inflater.inflate(R.layout.fragment_message, container, false);
         mContext = getContext();
         messagePresenter = new MessagePresenter(this);
-        sharedPreferences = mContext.getSharedPreferences("users",Context.MODE_PRIVATE);
+        sharedPreferences = mContext.getSharedPreferences("users", Context.MODE_PRIVATE);
         ActivityManager.getActivityManager().addF(this);
         initView();
         initList();
         EventBus.getDefault().register(this);
         activity = getActivity();
-                    handler = new Handler() {
-                        @Override
-                        public void handleMessage(Message msg) {
-                            super.handleMessage(msg);
-                            switch (msg.what) {
-                                case 0: {
-                                    Log.d("进入了吗", "进入了");
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case 0: {
+                        Log.d("进入了吗", "进入了");
 
-                                    if (badge != null) {
-                                        badge.hide(false);
-                                    }
-                                    badge = new QBadgeView(activity)
-                                            .bindTarget(itemView)
-                                            .setShowShadow(true)
-                                            .setBadgeGravity(Gravity.END | Gravity.TOP)
-                                            .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
-                                                @Override
-                                                public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-
-                                                }
-                                            }).setBadgeText("");
-                                    break;
-                                }
-                                case 1: {
-                                    Log.d("进入了吗1", "进入了");
-                                    if (badge != null) {
-                                        badge.hide(false);
-                                    }
-                                }
-                            }
+                        if (badge != null) {
+                            badge.hide(false);
                         }
-                    };
+                        badge = new QBadgeView(activity)
+                                .bindTarget(itemView)
+                                .setShowShadow(true)
+                                .setBadgeGravity(Gravity.END | Gravity.TOP)
+                                .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                                    @Override
+                                    public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+
+                                    }
+                                }).setBadgeText("");
+                        break;
+                    }
+                    case 1: {
+                        Log.d("进入了吗1", "进入了");
+                        if (badge != null) {
+                            badge.hide(false);
+                        }
+                    }
+                }
+            }
+        };
 
         return view;
     }
@@ -149,29 +151,30 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
         super.onDestroyView();
     }
 
-    private void initView(){
+    private void initView() {
         refreshLayout = view.findViewById(R.id.message_swiperefresh);
         recyclerView = view.findViewById(R.id.message_recyclerview);
         refreshLayout.setOnRefreshListener(this);
-        gridLayoutManager = new GridLayoutManager(mContext,1);
-       // searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),true);
-        myMessageAdapter = new MyMessageAdapter((ArrayList<UpDateMessageBean.DynamicsBeanX>) list,changelist,getActivity(),true);
+        gridLayoutManager = new GridLayoutManager(mContext, 1);
+        // searchItemAdapter = new SearchItemAdapter((ArrayList<DynamicItemBean>) list,changelist,getActivity(),true);
+        myMessageAdapter = new MyMessageAdapter((ArrayList<UpDateMessageBean.DynamicsBeanX>) list, changelist, getActivity(), true);
         myMessageAdapter.attachPresenter(messagePresenter);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(myMessageAdapter);
     }
 
-    private void initList(){
-        String username = sharedPreferences.getString(EMAIL,"null");
-        String userphoto = sharedPreferences.getString(USERPHOTO,"null");
-        String usernickname = sharedPreferences.getString(STU,"null");
-        String jsessionid = sharedPreferences.getString(SESSION,"null");
+    private void initList() {
+        String username = sharedPreferences.getString(EMAIL, "null");
+        String userphoto = sharedPreferences.getString(USERPHOTO, "null");
+        String usernickname = sharedPreferences.getString(STU, "null");
+        String jsessionid = sharedPreferences.getString(SESSION, "null");
         messagePresenter.getMessageData(usernickname, userphoto, username, jsessionid, 0, 500);
     }
 
 
     /**
      * 处理更新消息事件,TODO:待完善
+     *
      * @param messageEvent
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -184,24 +187,24 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     @Override
     public void onDataBack(Boolean status, List<UpDateMessageBean.DynamicsBeanX> dynamicItemBeanList) {
         refreshLayout.setRefreshing(false);
-        if(!status){
-            FancyToast.makeText(mContext,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
-        }else {
-            if(isFresh){
+        if (!status) {
+            FancyToast.makeText(mContext, "出现了问题", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+        } else {
+            if (isFresh) {
                 isFresh = false;
-                FancyToast.makeText(mContext,"刷新成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+          //     FancyToast.makeText(mContext, "刷新成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
             }
             list.clear();
             list.addAll(dynamicItemBeanList);
 
 
-            for (int i =0 ; i<list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 changelist.add(0);
 
             }
             myMessageAdapter.notifyDataSetChanged();
             message = new Message();
-            if(dynamicItemBeanList.size() != 0) {
+            if (dynamicItemBeanList.size() != 0) {
                 for (int i = 0; i < dynamicItemBeanList.size(); i++) {
                     if (dynamicItemBeanList.get(i).getRead() == 0) {
                         aBoolean = true;
@@ -210,13 +213,13 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
                         aBoolean = false;
                     }
                 }
-            }else {
+            } else {
                 aBoolean = false;
             }
 
-            if(aBoolean){
+            if (aBoolean) {
                 message.what = 0;
-            }else {
+            } else {
                 message.what = 1;
 
             }
@@ -230,7 +233,7 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
                 }
             };
 
-            new Thread(){
+            new Thread() {
                 @Override
                 public void run() {
                     Looper.prepare();
@@ -245,8 +248,8 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
     @Override
     public void isRead(boolean status) {
 
-        if(status){
-           // Toast.makeText(getContext(),"修改状态成功",Toast.LENGTH_SHORT).show();
+        if (status) {
+            // Toast.makeText(getContext(),"修改状态成功",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -258,8 +261,19 @@ public class MessageFragment extends Fragment implements IMessageFragment, Swipe
 
     @Override
     public void onRefresh() {
-        isFresh = true;
-        initList();
+        Log.e("fragment","i = "+i);
+        if (i==0){//避免因为第一次登陆造成的线程问题
+            isFresh = true;
+            initList();
+            Log.e("fragment2","执行");
+        }
+       i=0;
+    }
 
+    @Override
+    public void onResume() { // 页面恢复
+        super.onResume();
+        Log.d("fragment2", "onResume");
+        onRefresh();
     }
 }

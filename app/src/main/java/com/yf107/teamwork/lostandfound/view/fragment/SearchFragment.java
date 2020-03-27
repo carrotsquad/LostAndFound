@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -27,7 +28,9 @@ import android.widget.TextView;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
+import com.yf107.teamwork.lostandfound.adapter.MyMessageAdapter;
 import com.yf107.teamwork.lostandfound.adapter.SearchItemAdapter;
+import com.yf107.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.view.interfaces.ISearchFragment;
@@ -53,7 +56,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSI
  * Description: 搜索界面
 
  */
-public class SearchFragment extends Fragment implements ISearchFragment {
+public class SearchFragment extends Fragment implements ISearchFragment, SwipeRefreshLayout.OnRefreshListener {
 
     private ImageView searchInput;
     private Button sure;
@@ -74,6 +77,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
     private Integer thingsPosition = 0;
 
+    private SwipeRefreshLayout refreshLayout;
+    private RecyclerView mrecyclerView;
+
     private GirdDropDownAdapter diushitypeAdapter;
     private ListDropDownAdapter placesAdapter;
     private ConstellationAdapter thingsAdapter;
@@ -90,6 +96,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     private ArrayList<DynamicItemBean> searchItemBeanArrayList = new ArrayList<>();
 
     private SearchPresenter iSearchPresenter;
+    private String keyword;
 
     private SharedPreferences sharedPreferences;
     private Unbinder unbinder;
@@ -173,19 +180,41 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         popupViews= Arrays.asList(diushitypesView, placesView, thingsView);
 
         //初始化recyclerView
+//        List<Integer> list = new ArrayList<>();
+//        SwipeRefreshLayout swipeRefreshLayout = new SwipeRefreshLayout(context);
+//        swipeRefreshLayout .setOnRefreshListener(this);
+//        searchItemAdapter = new SearchItemAdapter(searchItemBeanArrayList,list,getActivity(),false);
+//        recyclerView = new RecyclerView(context);
+//        recyclerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+//        gridLayoutManager = new GridLayoutManager(context,1);
+//        recyclerView.setLayoutManager(gridLayoutManager);
+//        recyclerView.setAdapter(searchItemAdapter);
+//
+//
+//
+//        Log.e("SearchFragment","headers大小:"+Integer.toString(headers.length) + "popupViews大小:"+Integer.toString(popupViews.size()));
+//
+//        //设置dropDownMenu
+//        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, recyclerView);
+
+        //初始化recyclerView
         List<Integer> list = new ArrayList<>();
+        refreshLayout = view.findViewById(R.id.message_swiperefresh);
+        recyclerView = view.findViewById(R.id.message_recyclerview);
+        mrecyclerView = new RecyclerView(context);
+        mrecyclerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+        mrecyclerView.setLayoutManager(gridLayoutManager);
+        mrecyclerView.setAdapter(searchItemAdapter);
+        refreshLayout.setOnRefreshListener(this);
+        gridLayoutManager = new GridLayoutManager(context, 1);
         searchItemAdapter = new SearchItemAdapter(searchItemBeanArrayList,list,getActivity(),false);
-        recyclerView = new RecyclerView(context);
-        recyclerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
-        gridLayoutManager = new GridLayoutManager(context,1);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(searchItemAdapter);
-//        SwipeRefreshLayout swipeRefreshLayout = new SwipeRefreshLayout(context);
 
         Log.e("SearchFragment","headers大小:"+Integer.toString(headers.length) + "popupViews大小:"+Integer.toString(popupViews.size()));
 
         //设置dropDownMenu
-        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, recyclerView);
+        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, mrecyclerView);
     }
 
     /**
@@ -256,10 +285,14 @@ public class SearchFragment extends Fragment implements ISearchFragment {
 
     @Override
     public void showSearchResult(Boolean status, List<DynamicItemBean> arrayList) {
+        refreshLayout.setRefreshing(false);
         if(status){
             searchItemBeanArrayList.clear();
             searchItemBeanArrayList.addAll(arrayList);
             searchItemAdapter.notifyDataSetChanged();
+            if (arrayList.isEmpty()==true){//如果没有找到
+                FancyToast.makeText(context,"抱歉啊亲，没有搜索到相关信息",FancyToast.LENGTH_LONG,FancyToast.DEFAULT,false).show();
+            }
 //            searchItemAdapter.notifyItemChanged(this.searchItemBeanArrayList.size()-1);
 //            recyclerView.scrollToPosition(msgList.size() - 1);
         }else {
@@ -268,7 +301,7 @@ public class SearchFragment extends Fragment implements ISearchFragment {
     }
 
     private void search(String str){
-        String keyword = str;
+        keyword = str;
         if(keyword.length()==0){
             keyword = "";
         }
@@ -283,7 +316,21 @@ public class SearchFragment extends Fragment implements ISearchFragment {
             thingsPosition=-1;
         }
         iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
-
     }
 
+
+    @Override
+    public void onRefresh() {
+        if (keyword.length()==0){
+            search("");
+        }else {
+            search(keyword);
+        }
+    }
+
+    @Override
+    public void onResume() { // 页面恢复
+        super.onResume();
+        onRefresh();
+    }
 }

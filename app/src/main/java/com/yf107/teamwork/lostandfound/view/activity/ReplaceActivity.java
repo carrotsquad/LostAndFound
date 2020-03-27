@@ -246,7 +246,14 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
         titleEdit.setText(strtitle);
         descEdit.setText(strdescri);
         Log.e("Replace","strphoto = "+strphoto);
-        img.setImageBitmap(BitmapFactory.decodeFile(strphoto));
+        if(strphoto.equals("")||strphoto.equals("default.jpg") || strphoto == null){
+            img.setImageResource(R.mipmap.user);
+        }else {
+            Glide.with(this)
+                    .load(strphoto)
+                    .asBitmap()
+                    .into(img);
+        }
 
 
         //地点选择

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +52,7 @@ public class UploadActivity extends AppCompatActivity {
 
     private UploadFragmentAdapter uploadFragmentAdapter;
     private View statusBarView;
+    private Integer qishileixing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,8 @@ public class UploadActivity extends AppCompatActivity {
 
     public void initView() {
         Intent intent = getIntent();
-        Integer qishileixing = intent.getIntExtra(QISHILEIXING, 0);
+        qishileixing = intent.getIntExtra(QISHILEIXING, 0);
+        Log.e("qishileixing","qishileixing1 = "+qishileixing);
         ButterKnife.bind(this);
         //实现渐变式状态栏
         StatusBarUtil.setGradientStatusBarColor(this, statusBarView);
@@ -122,7 +125,9 @@ public class UploadActivity extends AppCompatActivity {
                 if (item.isChecked()) {
                     Toast.makeText(UploadActivity.this, "已经是失物启事页面了", Toast.LENGTH_SHORT).show();
                 }
+                qishileixing = 0;
                 item.setChecked(true);
+
                 break;
             }
             case R.id.upload_find: {
@@ -133,6 +138,7 @@ public class UploadActivity extends AppCompatActivity {
                     Toast.makeText(UploadActivity.this, "已经是招领启事页面了", Toast.LENGTH_SHORT).show();
                 }
                 item.setChecked(true);
+                qishileixing = 1;
                 break;
             }
             default: {

@@ -390,6 +390,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                     strphoto = strphoto+",";
                 }
                 fileList.add(new File(resultList.get(i).getPhotoPath()));
+                Log.e("UploadFromActicity","fileList = "+fileList);
                 strphoto = strphoto + resultList.get(i).getPhotoPath();
                 Log.e("ImgTest",resultList.get(i).getPhotoPath());
             }
