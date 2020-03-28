@@ -151,9 +151,9 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         //设置主题
         //ThemeConfig.CYAN
         ThemeConfig theme = new ThemeConfig.Builder()
-                .setTitleBarBgColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setFabNornalColor(Color.rgb(0xF4, 0x7C, 0x00))
-                .setFabPressedColor(Color.rgb(0xF4, 0x7C, 0x00))
+                .setTitleBarBgColor(Color.rgb(0x78, 0x79, 0xFF))
+                .setFabNornalColor(Color.rgb(0x78, 0x79, 0xFF))
+                .setFabPressedColor(Color.rgb(0x78, 0x79, 0xFF))
                 .setCropControlColor(Color.rgb(0xFF, 0xFF, 0xFF))
                 .build();
         //配置功能
