@@ -147,6 +147,10 @@ public class  DynamicFragment extends Fragment {
         imageView.setImageResource(R.mipmap.tab_find);
 
         TextView textView = view.findViewById(R.id.tvv);
+
+        ImageView imageView1 = view.findViewById(R.id.imaggg);
+
+        imageView1.setImageResource(R.drawable.tablinefind);
         textView.setText("招领");
 
         return view;

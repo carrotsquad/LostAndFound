@@ -81,12 +81,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/myupload_thingtype"
-            android:layout_alignParentEnd="true"
             android:layout_marginTop="-1dp"
-            android:layout_marginEnd="135dp"
             android:text="二教"
                 android:textSize="17sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+             android:layout_toLeftOf="@+id/myupload_time"
+                android:layout_marginRight="20dp"/>
 
             <TextView
             android:id="@+id/myupload_time2"
@@ -94,15 +94,13 @@
             android:layout_height="16dp"
             android:layout_alignTop="@id/myupload_thingtype"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="90dp"
-            android:text="16:00"
                 android:textSize="12sp"
             android:textColor="@color/black" />
 
             <TextView
             android:id="@+id/myupload_time"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@id/myupload_thingtype"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="30dp"

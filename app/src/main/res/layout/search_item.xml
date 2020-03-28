@@ -97,10 +97,10 @@
                 android:id="@+id/search_item_placeanddate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="8dp"
                 android:layout_alignTop="@+id/search_item_thingstype"
-                android:layout_toRightOf="@+id/search_item_isNeedBounty"
-                android:text="四教   今天10:10"
+                android:layout_toRightOf="@+id/search_item_qishileixing"
+                android:text="四教"
                 android:textColor="@color/black" />
 
             <TextView

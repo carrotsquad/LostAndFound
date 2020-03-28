@@ -20,15 +20,16 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="15dp"
         android:layout_weight="0.6"
-        app:cardCornerRadius="12dp">
+        app:cardElevation="0dp">
 
         <TextView
             android:id="@+id/comment_ok"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/barbackgroud"
             android:gravity="center"
             android:text="发送"
+            style="@style/Widget.AppCompat.Button"
             android:textColor="@color/black"
             android:textSize="15dp" />
 

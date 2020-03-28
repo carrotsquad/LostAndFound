@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -64,6 +66,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
     private List<View> popupViews = new ArrayList<>();
     private View view;
     private Context context;
+    ImageView imageView;
 
     ArrayAdapter<String> adapter;
 
@@ -101,6 +104,19 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
     private SharedPreferences sharedPreferences;
     private Unbinder unbinder;
 
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:{
+                    imageView.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    };
+
     public static Fragment newInstance(){
         SearchFragment fragment = new SearchFragment();
         return fragment;
@@ -124,6 +140,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
     //    Editable etext = searchInput.getText();
       //  Selection.setSelection(etext, etext.length());
 
+        imageView.setVisibility(View.INVISIBLE);
         return view;
     }
 
@@ -156,6 +173,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
         sure = view.findViewById(R.id.search_sure);
         dropDownMenu = view.findViewById(R.id.search_dropDownMenu);
         searchFragment = com.wyt.searchbox.SearchFragment.newInstance();
+       imageView = view.findViewById(R.id.nomessage);
 
         //初始化启事类型过滤
         diushitypesView = new ListView(context);
@@ -291,8 +309,13 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
             searchItemBeanArrayList.addAll(arrayList);
             searchItemAdapter.notifyDataSetChanged();
             if (arrayList.isEmpty()==true){//如果没有找到
+                Message message = new Message();
+                message.arg1 = 0;
+                handler.sendMessage(message);
                 FancyToast.makeText(context,"抱歉啊亲，没有搜索到相关信息",FancyToast.LENGTH_LONG,FancyToast.DEFAULT,false).show();
             }
+
+            imageView.setVisibility(View.INVISIBLE);
 //            searchItemAdapter.notifyItemChanged(this.searchItemBeanArrayList.size()-1);
 //            recyclerView.scrollToPosition(msgList.size() - 1);
         }else {

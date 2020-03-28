@@ -43,9 +43,9 @@ public class StatusBarUtil {
             int identifier = activity.getResources().getIdentifier("statusBarBackground", "id", "android");
             statusBarView = activity.getWindow().findViewById(identifier);
         }
-        if (statusBarView != null) {
-            statusBarView.setBackgroundResource(R.drawable.barbackgroud);
-        }
+//        if (statusBarView != null) {
+//            statusBarView.setBackgroundResource(R.drawable.barbackgroud);
+//        }
     }
 
     public static boolean isStatusBar() {

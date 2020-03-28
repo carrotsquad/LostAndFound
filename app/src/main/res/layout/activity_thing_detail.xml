@@ -286,7 +286,7 @@
                 android:id="@+id/comment"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
-                android:layout_gravity="center|bottom"
+                android:layout_gravity="center"
                 android:background="@drawable/commit"/>
         </LinearLayout>
         <LinearLayout
@@ -298,7 +298,7 @@
                 android:id="@+id/tv_return"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
-                android:layout_gravity="center|bottom"
+                android:layout_gravity="center"
                 android:background="@drawable/tv_return"/>
         </LinearLayout>
     </LinearLayout>

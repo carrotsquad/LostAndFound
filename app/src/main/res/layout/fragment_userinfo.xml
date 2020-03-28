@@ -53,7 +53,7 @@
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="50dp"
-                android:background="@drawable/myupload" />
+                android:background="@drawable/myload1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="50dp"
-                android:background="@drawable/myhistory" />
+                android:background="@drawable/myhistory1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -125,7 +125,7 @@
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="50dp"
-                android:background="@drawable/feedback" />
+                android:background="@drawable/feedback1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -161,7 +161,7 @@
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="50dp"
-                android:background="@drawable/aboutus" />
+                android:background="@drawable/aboutus1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -198,7 +198,7 @@
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="50dp"
-                android:background="@drawable/setting" />
+                android:background="@drawable/setting1" />
 
             <TextView
                 android:layout_width="match_parent"
