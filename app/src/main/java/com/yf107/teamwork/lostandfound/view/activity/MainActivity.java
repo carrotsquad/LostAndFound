@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -35,6 +36,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.services.UpdateMessageService;
@@ -99,10 +101,8 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
     /* 这个里面包含了图标和文字 */
     @BindView(R.id.navigation)
-    BottomNavigationView mBottomNav;
+    BottomNavigationViewEx mBottomNav;
 
-   // @BindView(R.id.fabu11)
-   // Button fabu11;
 
     public static BottomNavigationItemView itemView;
 
@@ -110,9 +110,11 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
   public static String name111;
   public static Message message111;
-    private String[] titles = new String[]{"动态", "搜索", "消息", "我的"};
     private String session = "";
     private View statusBarView;
+
+    String[] tabtitles = new String[]{"动态","搜索"," ","消息","我的"};
+    int[] tabImagesSelect = new int[]{R.drawable.select1,R.drawable.select2,R.drawable.kongbai,R.drawable.select3,R.drawable.select4};
 
     //服务
     private UpdateMessageService.MsgBinder msgBinder;
@@ -148,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
         //实现渐变式状态栏
         StatusBarUtil.setGradientStatusBarColor(this, statusBarView);
         ActivityManager.getActivityManager().add(this);
+
        ButterKnife.bind(this);
         try {
             initView();
@@ -166,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements BaseView {
   //              showPopUpWindow();
   //          }
   //      });
-
     }
 
     /**
@@ -204,6 +206,10 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
 
 
+
+        mBottomNav.enableAnimation(false);
+        mBottomNav.enableShiftingMode(false);
+        mBottomNav.enableItemShiftingMode(false);
         MainViewAdapter mainViewAdapter = new MainViewAdapter(getSupportFragmentManager());
 
         mainViewAdapter.setFragments(fragments);
@@ -228,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
             public void onPageSelected(int position) {
                 if (position <= 1) {
                     mBottomNav.getMenu().getItem(position).setChecked(false);
+
                 } else if (position >= 2 && position <= 3) {
                     mBottomNav.getMenu().getItem(position + 1).setChecked(false);
                 }
@@ -475,5 +482,14 @@ public class MainActivity extends AppCompatActivity implements BaseView {
             Log.e("BNVHelper", "Unable to change value of shift mode", e);
         }
     }
+
+    public View getTab(int position){
+        View view =  LayoutInflater.from(this).inflate(R.layout.tab_icon,null);
+        ImageView imageView = view.findViewById(R.id.tab_image);
+        TextView textView = view.findViewById(R.id.tab_text);
+        imageView.setImageResource(tabImagesSelect[position]);
+        textView.setText(tabtitles[position]);
+        return view;
+    }     //自定义view设计tab
 
 }

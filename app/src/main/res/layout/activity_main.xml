@@ -58,21 +58,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f4f4f4"
+    android:id="@+id/relatelayout111"
     xmlns:materialdesign="http://schemas.android.com/tools">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/navigation"/>
 
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/main_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/navigation"/>
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -88,13 +78,37 @@
 <!--        materialdesign:iconDrawable="@drawable/ic_action_new"-->
 <!--        android:src="@drawable/fabu"/>-->
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/fabu11"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/fabu"
+
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"/>
+        app:menu="@menu/navigation"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/navigation" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabu11"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_centerInParent="true"
+        android:layout_alignBottom="@+id/navigation"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        android:scaleType="center"
+        app:elevation="9dp"
+        android:src="@mipmap/fabu"
+        android:layout_marginBottom="16dp" />
+
+
+
+
 </RelativeLayout>
 
 

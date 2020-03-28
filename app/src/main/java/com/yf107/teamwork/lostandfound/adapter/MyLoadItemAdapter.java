@@ -210,10 +210,10 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
         Log.e("MyloadAdapter","lists.get(position).getLosttype()"+ lists.get(position).getLosttype());
 
         if (lists.get(position).getLosttype()==0){
-            holder.eventtype.setBackgroundColor(R.drawable.shape_thingstype_lost);
+            holder.eventtype.setBackgroundResource(R.drawable.shape_thingstype_lost);
             holder.eventtype.setText(" "+"丢"+" ");
         }else if (lists.get(position).getLosttype()==1){
-            holder.eventtype.setBackgroundColor(R.drawable.shape_thingstype_find);
+            holder.eventtype.setBackgroundResource(R.drawable.shape_thingstype_find);
             holder.eventtype.setText(" "+"拾"+" ");
         }
         String lostPlace = AllURI.allPlaceBeanList.get(lists.get(position).getPlaceid()-1);

@@ -141,5 +141,7 @@ dependencies {
     implementation project(':openCVLibrary330')
     //集成Tesseract
     implementation 'com.rmtheis:tess-two:9.1.0'
+
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
 }
 

@@ -1,6 +1,7 @@
 package com.yf107.teamwork.lostandfound.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

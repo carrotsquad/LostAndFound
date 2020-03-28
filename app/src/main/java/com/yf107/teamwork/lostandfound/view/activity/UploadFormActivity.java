@@ -296,6 +296,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 .isDialog(true)
                 //切换时是否还原，设置默认选中第一项。
                 .isRestoreItem(false)
+                .setTextColorCenter(Color.parseColor("#feb31a"))
                 .build();
         pvOptionsPlace.setPicker(AllURI.allPlaceBeanList);
 
@@ -334,6 +335,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 .setSubmitText("确定")
                 //是否显示为对话框样式
                 .isDialog(true)
+                .setTextColorCenter(Color.parseColor("#feb31a"))
                 .build();
     }
 
