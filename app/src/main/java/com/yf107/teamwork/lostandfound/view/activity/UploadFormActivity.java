@@ -108,7 +108,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     @BindView(R.id.upload_lostorfind_sure)
     Button btnSure;
 
-
     private static final int REQUEST_CODE_GALLERY = 1;
     //时间选择器
     private TimePickerView pvTime;
@@ -224,7 +223,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,"default.jpg",0);
                         Log.e("THELOSTBEAN",bean.toString());
                         if (typeid == 13&&qishileixing!=0){
-                            Log.e("UploadFormActivity", "" + stu + jsession + bean);
+                            Log.e("UploadFromActivity", "" + stu + jsession + bean);
                             if (stu.substring(0,3).equals("201")) {
                                 uploadPresenter.cardUpload(stu, jsession, bean);
                              //   uploadPresenter.postUpload(jsession,bean);
@@ -239,15 +238,19 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
                         if (typeid == 13&&qishileixing!=0) {
                             if (stu.substring(0,3).equals("201")) {
-                                Log.e("UploadFormActivity","stu = "+stu+"jsession = "+jsession+"bean = "+bean+"fileList = "+fileList);
+                                Log.e("UploadFromActivity","stu = "+stu+"jsession = "+jsession+"bean = "+bean+"fileList = "+fileList);
                                 uploadPresenter.cardUpload(stu, jsession, bean, fileList);
+                                btnSure.setVisibility(View.GONE);
+                                FancyToast.makeText(UploadFormActivity.this, "图片上传中，请耐心等侯", FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false).show();
                            //     uploadPresenter.postUpload(jsession, bean, fileList);
                             }else{
                                 FancyToast.makeText(UploadFormActivity.this, "学号填写错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                             }
                         }else{
-                            Log.e("UploadFormActivity","jsession = "+jsession+"bean = "+bean+"fileList = "+fileList);
+                            Log.e("UploadFromActivity","jsession = "+jsession+"bean = "+bean+"fileList = "+fileList);
                             uploadPresenter.postUpload(jsession, bean, fileList);
+                            btnSure.setVisibility(View.GONE);
+                            FancyToast.makeText(UploadFormActivity.this, "图片上传中，请耐心等侯", FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false).show();
                         }
                     }
 
@@ -386,6 +389,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             }
 
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+
+            Log.e("UploadFromActivity","photoPath = "+photoPath+"BitmapFactory.decodeFile(photoPath) = "+BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UploadFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传
             for(int i =0 ; i<resultList.size();i++){
@@ -393,9 +398,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                     strphoto = strphoto+",";
                 }
                 fileList.add(new File(resultList.get(i).getPhotoPath()));
-                Log.e("UploadFromActicity","fileList = "+fileList);
                 strphoto = strphoto + resultList.get(i).getPhotoPath();
-                Log.e("ImgTest",resultList.get(i).getPhotoPath());
             }
         }
 

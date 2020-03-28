@@ -103,7 +103,6 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
     @BindView(R.id.upload_lostorfind_sure)
     Button btnSure;
 
-
     private static final int REQUEST_CODE_GALLERY = 1;
     //时间选择器
     private TimePickerView pvTime;
@@ -220,6 +219,8 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
                         Log.e("THELOSTBEAN",bean.toString());
                         Log.e("ReplaceActivity",""+id);
                         replacePresenter.postReplace(jsession, bean, fileList,id);
+                        btnSure.setVisibility(View.GONE);
+                        FancyToast.makeText(ReplaceActivity.this, "图片上传中，请耐心等侯", FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false).show();
                     }
 
                 }

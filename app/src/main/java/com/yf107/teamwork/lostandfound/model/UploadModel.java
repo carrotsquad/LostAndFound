@@ -66,12 +66,13 @@ public class UploadModel extends BaseModel implements IUploadModel {
 
     @Override
     public void cardUpload(String stu, String session, TheLostBean bean, List<File> fileList, Observer<AddCommitBean> observer) {
+        Integer s = Integer.valueOf(stu);//后端要求转成Interger类型
         Gson gson = new Gson();
         //传图片时
         if(fileList.size()!=0){
             Log.e("UploadFormActivity","stu = "+stu+"createRequestbody(session) = "+createRequestbody(session)+"RequestBody.create(MediaType.parse(\"application/json; charset=utf-8\"),gson.toJson(bean) = "+
                     RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean))+"createMultipartBody(fileList.get(0)) = "+createMultipartBody(fileList.get(0)));
-            api.cardUpload(stu,createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)))
+            api.cardUpload(s,createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),createMultipartBody(fileList.get(0)))
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -81,7 +82,7 @@ public class UploadModel extends BaseModel implements IUploadModel {
             RequestBody body = RequestBody.create(MediaType.parse("image/"+" "),"");
             //image为name参数的值，file.getname为filename参数的名字，body为请求体
             MultipartBody.Part part = MultipartBody.Part.createFormData("card","",body);
-            api.cardUpload(stu,createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),part)
+            api.cardUpload(s,createRequestbody(session),RequestBody.create(MediaType.parse("application/json; charset=utf-8"),gson.toJson(bean)),part)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -92,7 +93,8 @@ public class UploadModel extends BaseModel implements IUploadModel {
 
     @Override
     public void cardUpload(String stu, String session, TheLostBean bean, Observer<AddCommitBean> observer) {
-        api.cardUpload(stu,session,new Gson().toJson(bean))
+        Integer s = Integer.valueOf(stu);//后端要求转成Interger类型
+        api.cardUpload(s,session,new Gson().toJson(bean))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
