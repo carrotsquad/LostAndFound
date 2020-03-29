@@ -298,6 +298,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
         //popupWindow出场动画
 //        mPopWindow.setAnimationStyle(R.style.xinjian_popUp_style);
         ImageView newShiWu = contentView.findViewById(R.id.newShiWu);
+        Log.e("MainActivity","图片");
         ImageView newZhaoLing = contentView.findViewById(R.id.newZhaoLing);
         ImageView cancel = contentView.findViewById(R.id.cancel);
         TextView textView=contentView.findViewById(R.id.textView);
@@ -326,6 +327,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
         //新建失物
         newShiWu.setOnClickListener(view -> {
+            Log.e("MainActivity","新建失物");
             Intent intent = new Intent(view.getContext(), UploadActivity.class);
             intent.putExtra(QISHILEIXING, 0);
             startActivity(intent);
@@ -333,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
 
         //ic_newzhaolin
         newZhaoLing.setOnClickListener(view -> {
+            Log.e("MainActivity","新建招领");
             Intent intent = new Intent(view.getContext(), UploadActivity.class);
             intent.putExtra(QISHILEIXING, 1);
             startActivity(intent);
@@ -346,7 +349,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 Log.d("到底据顶部多少嘛", String.valueOf(motionEvent.getY()));
-                if (motionEvent.getRawY() < 1500) {
+                if (motionEvent.getRawY() < 1200) {
                     closeTranslationAnimation(newShiWu, 300, bottom);
                     closeTranslationAnimation(newZhaoLing, 300, bottom);
                     closeTranslationAnimation(textView, 300, bottom);

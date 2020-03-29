@@ -124,7 +124,7 @@
 
     <LinearLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="385dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/dp_120"
         android:layout_marginEnd="@dimen/dp_8"
         android:layout_marginStart="@dimen/dp_8"

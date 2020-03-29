@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<dimen name="card_common_margin_left">@dimen/dp_15</dimen>
+	<dimen name="dp__1">-3.5556dp</dimen>
 	<dimen name="dp_0">0.0000dp</dimen>
 	<dimen name="dp_0_1">0.3556dp</dimen>
 	<dimen name="dp_0_5">1.7778dp</dimen>
@@ -374,6 +375,7 @@
 	<dimen name="dp_360">1280.0000dp</dimen>
 	<dimen name="dp_365">1297.7778dp</dimen>
 	<dimen name="dp_370">1315.5556dp</dimen>
+	<dimen name="dp_385">1368.889dp</dimen>
 	<dimen name="dp_400">1422.2222dp</dimen>
 	<dimen name="dp_410">1457.7778dp</dimen>
 	<dimen name="dp_422">1500.4444dp</dimen>

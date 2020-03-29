@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/myupload_thingtype"
-            android:layout_marginTop="-1dp"
+            android:layout_marginTop="@dimen/dp__1"
             android:text="二教"
                 android:textSize="@dimen/sp_17"
             android:textColor="@color/black"
