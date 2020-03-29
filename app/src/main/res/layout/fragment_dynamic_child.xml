@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="@dimen/dp_10">
         <android.support.design.widget.TabLayout
             android:id="@+id/dynamic_child_fragment_tablayout"
             android:background="@drawable/tabshape"
@@ -30,11 +30,11 @@
             android:id="@+id/dynamic_child_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
             android:layout_below="@+id/dynamic_child_fragment_tablayout"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="@dimen/dp_7"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
     </LinearLayout>

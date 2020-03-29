@@ -19,15 +19,15 @@
 
 <!--    <ImageView-->
 <!--        android:id="@+id/setting_back"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="30dp"-->
+<!--        android:layout_width="@dimen/dp_30"-->
+<!--        android:layout_height="@dimen/dp_30"-->
 <!--        android:layout_centerVertical="true"-->
 <!--        android:src="@drawable/back" />-->
     <TextView
         android:gravity="center"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="@dimen/dp_20"
         android:text="设置"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
@@ -37,7 +37,7 @@
 
   <RelativeLayout
       android:layout_below="@id/setting_bar"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="@dimen/dp_10"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
@@ -45,53 +45,53 @@
         android:background="@drawable/click_style"
         android:id="@+id/setting_headlayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="@dimen/dp_80">
 
       <TextView
-          android:layout_width="80dp"
+          android:layout_width="@dimen/dp_80"
           android:layout_height="match_parent"
           android:layout_alignParentTop="true"
-          android:layout_marginStart="10dp"
+          android:layout_marginStart="@dimen/dp_10"
           android:gravity="center"
           android:text="头像"
           android:textColor="@color/black"
-          android:textSize="15sp" />
+          android:textSize="@dimen/sp_15" />
 
       <de.hdodenhof.circleimageview.CircleImageView
           android:src="@drawable/gril6"
           android:id="@+id/setting_headlayout_img"
-          android:layout_width="60dp"
-          android:layout_height="60dp"
+          android:layout_width="@dimen/dp_60"
+          android:layout_height="@dimen/dp_60"
           android:layout_alignParentRight="true"
           android:layout_centerVertical="true"
-          android:layout_marginRight="30dp"/>
+          android:layout_marginRight="@dimen/dp_30"/>
 
     </RelativeLayout>
     <View
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="@dimen/dp_1"
         android:layout_below="@id/setting_headlayout"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
         android:background="@color/grey_200"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="@dimen/dp_1"/>
 
     <RelativeLayout
         android:background="@drawable/click_style"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_below="@id/setting_headlayout"
         android:id="@+id/setting_nicklayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="@dimen/dp_60">
 
       <TextView
           android:id="@+id/setting_nicklayout_nick"
-          android:layout_marginStart="10dp"
+          android:layout_marginStart="@dimen/dp_10"
           android:gravity="center"
           android:textColor="@color/black"
-          android:textSize="15sp"
+          android:textSize="@dimen/sp_15"
           android:text="昵称"
-          android:layout_width="80dp"
+          android:layout_width="@dimen/dp_80"
           android:layout_height="match_parent" />
 
       <TextView
@@ -103,42 +103,42 @@
           android:gravity="center_vertical"
           android:text="我是一个家用户"
           android:textColor="@color/black"
-          android:textSize="15sp" />
+          android:textSize="@dimen/sp_15" />
       <ImageView
           android:id="@+id/rightpoint1"
           android:src="@drawable/rightpoint"
           android:layout_centerVertical="true"
-          android:layout_marginEnd="10dp"
+          android:layout_marginEnd="@dimen/dp_10"
           android:layout_alignParentRight="true"
-          android:layout_width="20dp"
-          android:layout_height="30dp" />
+          android:layout_width="@dimen/dp_20"
+          android:layout_height="@dimen/dp_30" />
     </RelativeLayout>
     <View
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="@dimen/dp_1"
         android:layout_below="@id/setting_nicklayout"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
         android:background="@color/grey_200"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="@dimen/dp_1"/>
 
 
     <RelativeLayout
         android:background="@drawable/click_style"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/dp_2"
         android:layout_below="@id/setting_nicklayout"
         android:id="@+id/setting_emaillayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="@dimen/dp_60">
 
       <TextView
           android:id="@+id/setting_emaillayout_nick"
-          android:layout_marginStart="10dp"
+          android:layout_marginStart="@dimen/dp_10"
           android:gravity="center"
           android:textColor="@color/black"
-          android:textSize="15sp"
+          android:textSize="@dimen/sp_15"
           android:text="邮箱"
-          android:layout_width="80dp"
+          android:layout_width="@dimen/dp_80"
           android:layout_height="match_parent" />
 
       <TextView
@@ -151,44 +151,44 @@
           android:gravity="center_vertical"
           android:text="我是一个家用户"
           android:textColor="@color/black"
-          android:textSize="15sp" />
+          android:textSize="@dimen/sp_15" />
 
       <ImageView
           android:id="@+id/rightpoint2"
           android:src="@drawable/rightpoint"
           android:layout_centerVertical="true"
-          android:layout_marginEnd="10dp"
+          android:layout_marginEnd="@dimen/dp_10"
           android:layout_alignParentRight="true"
-          android:layout_width="20dp"
-          android:layout_height="30dp" />
+          android:layout_width="@dimen/dp_20"
+          android:layout_height="@dimen/dp_30" />
 
     </RelativeLayout>
 
     <View
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="@dimen/dp_1"
         android:layout_below="@id/setting_emaillayout"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
         android:background="@color/grey_200"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="@dimen/dp_1"/>
 
     <RelativeLayout
       android:background="@drawable/click_style"
-      android:layout_marginTop="2dp"
+      android:layout_marginTop="@dimen/dp_2"
       android:layout_below="@id/setting_emaillayout"
       android:id="@+id/setting_phonelayout"
       android:layout_width="match_parent"
-      android:layout_height="60dp">
+      android:layout_height="@dimen/dp_60">
 
     <TextView
         android:id="@+id/setting_phonelayout_nick"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/dp_10"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="@dimen/sp_15"
         android:text="电话"
-        android:layout_width="80dp"
+        android:layout_width="@dimen/dp_80"
         android:layout_height="match_parent" />
 
     <TextView
@@ -201,44 +201,44 @@
         android:gravity="center_vertical"
         android:text="我是一个家用户"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="@dimen/sp_15" />
       <ImageView
           android:id="@+id/rightpoint3"
           android:src="@drawable/rightpoint"
           android:layout_centerVertical="true"
-          android:layout_marginEnd="10dp"
+          android:layout_marginEnd="@dimen/dp_10"
           android:layout_alignParentRight="true"
-          android:layout_width="20dp"
-          android:layout_height="30dp" />
+          android:layout_width="@dimen/dp_20"
+          android:layout_height="@dimen/dp_30" />
   </RelativeLayout>
 
     <View
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="@dimen/dp_1"
         android:layout_below="@id/setting_phonelayout"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
         android:background="@color/grey_200"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="@dimen/dp_1"/>
 
     <RelativeLayout
         android:background="@drawable/click_style"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/dp_2"
         android:layout_below="@id/setting_phonelayout"
         android:id="@+id/setting_passwordlayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="@dimen/dp_60">
 
       <TextView
           android:id="@+id/setting_passwordlayout_nick"
-          android:layout_width="80dp"
+          android:layout_width="@dimen/dp_80"
           android:layout_height="match_parent"
           android:layout_marginTop="0dp"
-          android:layout_marginLeft="25dp"
+          android:layout_marginLeft="@dimen/dp_25"
           android:gravity="center"
           android:text="修改密码"
           android:textColor="@color/black"
-          android:textSize="15sp" />
+          android:textSize="@dimen/sp_15" />
 
       <TextView
           android:layout_width="wrap_content"
@@ -248,39 +248,39 @@
           android:layout_toLeftOf="@+id/rightpoint4"          android:gravity="center_vertical"
           android:text="******"
           android:textColor="@color/black"
-          android:textSize="15sp" />
+          android:textSize="@dimen/sp_15" />
 
       <ImageView
           android:id="@+id/rightpoint4"
           android:src="@drawable/rightpoint"
           android:layout_centerVertical="true"
-          android:layout_marginEnd="10dp"
+          android:layout_marginEnd="@dimen/dp_10"
           android:layout_alignParentRight="true"
-          android:layout_width="20dp"
-          android:layout_height="30dp" />
+          android:layout_width="@dimen/dp_20"
+          android:layout_height="@dimen/dp_30" />
 
     </RelativeLayout>
 
     <View
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="@dimen/dp_1"
         android:layout_below="@id/setting_passwordlayout"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
         android:background="@color/grey_200"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="@dimen/dp_1"/>
 
 <!--    <RelativeLayout-->
 <!--        android:background="@drawable/click_style"-->
-<!--        android:layout_marginTop="2dp"-->
+<!--        android:layout_marginTop="@dimen/dp_2"-->
 <!--        android:layout_below="@id/setting_passwordlayout"-->
 <!--        android:id="@+id/setting_clearCache"-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="60dp">-->
+<!--        android:layout_height="@dimen/dp_60">-->
 
 <!--      <TextView-->
 <!--          android:id="@+id/setting_clearCache_text"-->
-<!--          android:layout_width="80dp"-->
+<!--          android:layout_width="@dimen/dp_80"-->
 <!--          android:layout_height="match_parent"-->
 <!--          android:layout_alignParentStart="true"-->
 <!--          android:layout_alignParentTop="true"-->
@@ -300,20 +300,20 @@
 <!--          android:layout_height="match_parent" />-->
 
 <!--      <View-->
-<!--          android:layout_marginRight="10dp"-->
-<!--          android:layout_marginLeft="10dp"-->
+<!--          android:layout_marginRight="@dimen/dp_10"-->
+<!--          android:layout_marginLeft="@dimen/dp_10"-->
 <!--          android:background="@color/grey_200"-->
 <!--          android:layout_alignParentBottom="true"-->
 <!--          android:layout_width="match_parent"-->
-<!--          android:layout_height="2dp"/>-->
+<!--          android:layout_height="@dimen/dp_2"/>-->
 <!--    </RelativeLayout>-->
 
   </RelativeLayout>
 
   <android.support.v7.widget.CardView
       android:clickable="true"
-      app:cardCornerRadius="4dp"
-      android:layout_marginBottom="20dp"
+      app:cardCornerRadius="@dimen/dp_4"
+      android:layout_marginBottom="@dimen/dp_20"
      android:layout_centerHorizontal="true"
       android:layout_alignParentBottom="true"
       android:layout_width="wrap_content"
@@ -323,7 +323,7 @@
         android:id="@+id/exit_account"
         android:background="@drawable/button_shape"
         android:text="退出登录"
-        android:layout_width="200dp"
+        android:layout_width="@dimen/dp_200"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
         style="@style/Widget.AppCompat.Button.Borderless"/>

@@ -9,16 +9,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/dp_50"
         android:background="@drawable/barbackgroud">
 
         <ImageView
             android:id="@+id/publishsuccess_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
             android:layout_centerVertical="true"
             android:src="@drawable/zuojiantou"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="@dimen/dp_20"/>
 
         <TextView
             android:id="@+id/publishsuccess_result"
@@ -26,36 +26,36 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="@dimen/dp_4"
             android:layout_marginTop="0dp"
             android:gravity="center"
             android:text="发布结果"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="@dimen/sp_25" />
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/publishsuccess_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="@dimen/dp_128"
         android:src="@drawable/gouhao"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="244dp" />
+        tools:layout_editor_absoluteX="@dimen/dp_149"
+        tools:layout_editor_absoluteY="@dimen/dp_244" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="@dimen/dp_248"
         android:text="发布成功"
         android:textColor="@color/black"
-        android:textSize="30sp"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="334dp" />
+        android:textSize="@dimen/sp_30"
+        tools:layout_editor_absoluteX="@dimen/dp_128"
+        tools:layout_editor_absoluteY="@dimen/dp_334" />
 
     <LinearLayout
         android:id="@+id/publishsuccess_continue"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="98dp"
+        android:layout_marginBottom="@dimen/dp_98"
         android:background="@color/white"
         android:orientation="vertical">
 
@@ -71,57 +71,57 @@
             android:id="@+id/publishsuccess_continue_newlost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="继续发布失物启事"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="10dp"
+            android:textSize="@dimen/sp_20"
+            android:padding="@dimen/dp_10"
             android:drawableRight="@drawable/zijiantou1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginHorizontal="30dp"
+            android:layout_height="@dimen/dp_2"
+            android:layout_marginHorizontal="@dimen/dp_30"
             android:background="@color/grey_200" />
 
         <TextView
             android:id="@+id/publishsuccess_continue_newfind"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="继续发布招领启事"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="10dp"
+            android:textSize="@dimen/sp_20"
+            android:padding="@dimen/dp_10"
             android:drawableEnd="@drawable/zijiantou1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginHorizontal="30dp"
+            android:layout_height="@dimen/dp_2"
+            android:layout_marginHorizontal="@dimen/dp_30"
             android:background="@color/grey_200" />
 
         <TextView
             android:id="@+id/publishsuccess_continue_returnmainactivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="返回主页"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="10dp"
+            android:textSize="@dimen/sp_20"
+            android:padding="@dimen/dp_10"
             android:drawableEnd="@drawable/zijiantou1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginHorizontal="30dp"
+            android:layout_height="@dimen/dp_2"
+            android:layout_marginHorizontal="@dimen/dp_30"
             android:background="@color/grey_200" />
 
     </LinearLayout>

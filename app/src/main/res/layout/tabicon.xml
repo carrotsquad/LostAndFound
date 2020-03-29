@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"/>
 
 </RelativeLayout>

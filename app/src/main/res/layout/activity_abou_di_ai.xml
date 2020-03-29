@@ -16,14 +16,14 @@
 
         <ImageView
             android:id="@+id/aboutdiail_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
             android:layout_centerVertical="true"
             android:src="@drawable/back" />
 
         <TextView
             android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="@dimen/sp_22"
             android:gravity="center"
             android:text="关于递爱"
             android:layout_gravity="center"
@@ -38,16 +38,16 @@
         android:layout_below="@id/setting_bar"
         android:id="@+id/aboutus_headlayout"
         android:layout_width="match_parent"
-        android:layout_height="160dp" >
+        android:layout_height="@dimen/dp_160" >
         <ImageView
             android:src="@mipmap/diai2"
             android:layout_centerInParent="true"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100" />
     </RelativeLayout>
 
     <TextView
-        android:paddingStart="5dp"
+        android:paddingStart="@dimen/dp_5"
         android:layout_below="@id/aboutus_headlayout"
         android:textColor="@color/black"
         android:id="@+id/aboutdiai"

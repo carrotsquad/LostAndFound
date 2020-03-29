@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="登陆"
-        android:textSize="40sp"
+        android:textSize="@dimen/sp_40"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +23,10 @@
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:layout_marginBottom="8dp"-->
+<!--        android:layout_marginStart="@dimen/dp_8"-->
+<!--        android:layout_marginTop="@dimen/dp_8"-->
+<!--        android:layout_marginEnd="@dimen/dp_8"-->
+<!--        android:layout_marginBottom="@dimen/dp_8"-->
 <!--        android:text="登 录"-->
 <!--        android:textStyle="bold"-->
 <!--        android:textColor="#FFF1833B"-->
@@ -43,10 +43,10 @@
     <!--<ImageView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginBottom="@dimen/dp_8"-->
+        <!--android:layout_marginEnd="@dimen/dp_8"-->
+        <!--android:layout_marginStart="@dimen/dp_8"-->
+        <!--android:layout_marginTop="@dimen/dp_8"-->
         <!--android:src="@drawable/ic_logo"-->
         <!--app:layout_constraintBottom_toTopOf="@+id/cardView"-->
         <!--app:layout_constraintEnd_toEndOf="parent"-->
@@ -57,11 +57,11 @@
 
     <RelativeLayout
         android:id="@+id/cardView"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/dp_300"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginLeft="@dimen/dp_27"
+        android:layout_marginRight="@dimen/dp_27"
+        android:layout_marginBottom="@dimen/dp_28"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,11 +72,11 @@
         <EditText
             android:id="@+id/signin_username"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="18dp"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_50"
             android:layout_marginTop="23dp"
-            android:layout_marginRight="18dp"
-            android:drawablePadding="10dp"
+            android:layout_marginRight="@dimen/dp_50"
+            android:drawablePadding="@dimen/dp_10"
             android:hint="学号"
             android:textColorHint="#d3d3d3"
             android:inputType="number"
@@ -91,11 +91,11 @@
         <EditText
             android:id="@+id/signin_pwd"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="18dp"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_50"
             android:layout_marginTop="110dp"
-            android:layout_marginRight="18dp"
-            android:drawablePadding="10dp"
+            android:layout_marginRight="@dimen/dp_50"
+            android:drawablePadding="@dimen/dp_10"
             android:hint="输入密码"
             android:textCursorDrawable="@null"
             android:textColorHint="#d3d3d3"
@@ -131,7 +131,7 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/dp_50"
         android:background="@drawable/signin_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -142,11 +142,11 @@
     <TextView
         android:id="@+id/signin_tologin"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="232dp"
+        android:layout_height="@dimen/dp_18"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_200"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_232"
         android:text="点击注册"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -158,11 +158,11 @@
     <TextView
         android:id="@+id/reset_password"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="232dp"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_200"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_232"
         android:text="重置密码"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

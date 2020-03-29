@@ -18,37 +18,37 @@
         android:layout_height="wrap_content"
         android:text="修改电话"
         android:layout_below="@id/phone_toolbar"
-        android:textSize="40sp"
+        android:textSize="@dimen/sp_40"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="@dimen/dp_50"/>
 
 
   <EditText
       android:id="@+id/phone_edit"
-      android:layout_width="300dp"
+      android:layout_width="@dimen/dp_300"
       android:layout_height="wrap_content"
       android:hint="输入电话"
       android:layout_centerHorizontal="true"
       android:layout_below="@id/phonenumber"
-      android:layout_marginTop="150dp"/>
+      android:layout_marginTop="@dimen/dp_150"/>
 
     <Button
         android:id="@+id/phone_clear"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16"
         android:layout_toRightOf="@+id/phone_edit"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/phonenumber"
         android:background="@drawable/all_clear"
-        android:layout_marginTop="150dp"/>
+        android:layout_marginTop="@dimen/dp_150"/>
 
     <Button
         android:id="@+id/phone_sure"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
         android:layout_below="@id/phone_clear"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="@dimen/dp_150"
         android:layout_centerHorizontal="true"
         android:background="@drawable/login_icon"
         style="@style/Widget.AppCompat.Button.Borderless"/>

@@ -4,25 +4,25 @@
     android:orientation="horizontal"
     android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="@dimen/dp_70">
     <EditText
         android:layout_gravity="center_vertical"
-        android:layout_marginVertical="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginVertical="@dimen/dp_5"
+        android:layout_marginLeft="@dimen/dp_10"
         android:singleLine="true"
         android:hint="请输入"
         android:id="@+id/change_edt"
-        android:layout_width="240dp"
-        android:layout_height="50dp" />
+        android:layout_width="@dimen/dp_240"
+        android:layout_height="@dimen/dp_50" />
 
     <Button
         android:layout_gravity="center_vertical"
         android:id="@+id/change_btn"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_10"
         android:textColor="@android:color/white"
         android:text="修改"
         android:background="@drawable/barbackgroud"
-        android:layout_width="80dp"
-        android:layout_height="40dp" />
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_40" />
 </LinearLayout>

@@ -14,14 +14,14 @@
 
         <ImageView
             android:id="@+id/aboutus_detail_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
             android:layout_centerVertical="true"
             android:src="@drawable/back" />
 
         <TextView
             android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="@dimen/sp_22"
             android:gravity="center"
             android:text="官网"
             android:layout_gravity="center"

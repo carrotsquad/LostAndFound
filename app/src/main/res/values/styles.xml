@@ -30,38 +30,38 @@
 
 
     <style name="MyButtonText">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="MyCaption">
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">@dimen/sp_13</item>
     </style>
 
     <style name="MyBody1">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/sp_15</item>
     </style>
 
     <style name="MyBody2">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="MySubhead">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">@dimen/sp_17</item>
     </style>
 
     <style name="MyTitle">
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">@dimen/sp_21</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="MyHeadLine">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/sp_24</item>
     </style>
 
     <style name="MyDisplay1">
-        <item name="android:textSize">34sp</item>
+        <item name="android:textSize">@dimen/sp_34</item>
     </style>
 
     <style name="MyDisplay2">

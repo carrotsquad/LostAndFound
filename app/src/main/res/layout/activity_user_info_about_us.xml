@@ -17,7 +17,7 @@
         <TextView
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="@dimen/dp_20"
             android:textColor="@color/white"
             android:text="关于我们"
             android:layout_width="wrap_content"
@@ -28,12 +28,12 @@
         android:layout_below="@id/userinfo_aboutus_toolbar"
         android:id="@+id/aboutus_headlayout"
         android:layout_width="match_parent"
-        android:layout_height="180dp" >
+        android:layout_height="@dimen/dp_180" >
         <ImageView
             android:src="@mipmap/diai2"
             android:layout_centerInParent="true"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -45,20 +45,20 @@
             android:background="@drawable/click_style"
             android:id="@+id/aboutus_updatelayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/dp_50">
             <TextView
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="@dimen/dp_15"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="@dimen/dp_18"
                 android:text="检查更新"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/dp_10"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:textSize="15dp"
+                android:textSize="@dimen/dp_15"
                 android:text="已是最新版本"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -67,65 +67,65 @@
         <View
             android:layout_below="@id/aboutus_updatelayout"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="@dimen/dp_1" />
 
         <RelativeLayout
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="@dimen/dp_1"
             android:background="@drawable/click_style"
             android:layout_below="@id/aboutus_updatelayout"
             android:id="@+id/aboutus_applayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/dp_50">
             <TextView
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="@dimen/dp_15"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="@dimen/sp_18"
                 android:text="关于递爱"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
            <ImageView
                android:src="@drawable/rightpoint"
                android:layout_centerVertical="true"
-               android:layout_marginEnd="10dp"
+               android:layout_marginEnd="@dimen/dp_10"
                android:layout_alignParentRight="true"
-               android:layout_width="20dp"
-               android:layout_height="30dp" />
+               android:layout_width="@dimen/dp_20"
+               android:layout_height="@dimen/dp_30" />
         </RelativeLayout>
 
         <View
             android:layout_below="@id/aboutus_applayout"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="@dimen/dp_1" />
 
         <RelativeLayout
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="@dimen/dp_1"
             android:background="@drawable/click_style"
             android:layout_below="@id/aboutus_applayout"
             android:id="@+id/aboutus_feedback"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/dp_50">
             <TextView
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="@dimen/dp_15"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="@dimen/dp_18"
                 android:text="我要反馈"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:src="@drawable/rightpoint"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/dp_10"
                 android:layout_alignParentRight="true"
-                android:layout_width="20dp"
-                android:layout_height="30dp" />
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_30" />
         </RelativeLayout>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/dp_15"
         android:layout_below="@id/aboutus_largelayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -134,56 +134,56 @@
             android:background="@drawable/click_style"
             android:id="@+id/aboutus_mainze"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/dp_50">
             <TextView
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="@dimen/dp_15"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="@dimen/dp_18"
                 android:text="免责声明"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:src="@drawable/rightpoint"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/dp_10"
                 android:layout_alignParentRight="true"
-                android:layout_width="20dp"
-                android:layout_height="30dp" />
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_30" />
 
         </RelativeLayout>
         <View
             android:layout_below="@id/aboutus_mainze"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="@dimen/dp_1" />
 
         <RelativeLayout
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="@dimen/dp_1"
             android:background="@drawable/click_style"
             android:layout_below="@id/aboutus_mainze"
             android:id="@+id/aboutus_web"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/dp_50">
             <TextView
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="@dimen/dp_15"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="@dimen/dp_18"
                 android:text="官网"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:src="@drawable/rightpoint"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="@dimen/dp_10"
                 android:layout_alignParentRight="true"
-                android:layout_width="20dp"
-                android:layout_height="30dp" />
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_30" />
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/dp_1"
             android:background="@color/grey_200"
             android:layout_below="@+id/aboutus_web"/>
     </RelativeLayout>

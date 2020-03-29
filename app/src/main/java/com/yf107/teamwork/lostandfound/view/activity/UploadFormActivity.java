@@ -373,7 +373,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
 
-        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,8 ,mOnHandlerResultCallback);
+        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY,1 ,mOnHandlerResultCallback);
 
     }
 
@@ -390,7 +390,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             }
 
             img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
-
+           Log.e("UploadFromActivity","fileList = "+fileList);
+           fileList.clear();//用户重新添加图片时
             Log.e("UploadFromActivity","photoPath = "+photoPath+"BitmapFactory.decodeFile(photoPath) = "+BitmapFactory.decodeFile(photoPath));
             FancyToast.makeText(UploadFormActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
             //上传
@@ -398,6 +399,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 if(i>0){
                     strphoto = strphoto+",";
                 }
+                Log.e("UploadFromActivity","resultList.get(i).getPhotoPath() = "+resultList.get(i).getPhotoPath());
                 fileList.add(new File(resultList.get(i).getPhotoPath()));
                 strphoto = strphoto + resultList.get(i).getPhotoPath();
             }
