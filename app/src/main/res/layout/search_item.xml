@@ -46,12 +46,13 @@
             <TextView
                 android:id="@+id/search_item_thingstype"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_23"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_18"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_toRightOf="@id/search_item_thingsphoto"
                 android:padding="@dimen/dp_3"
                 android:text=" 电脑 "
+                android:textSize="@dimen/sp_13"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
                 android:background="@drawable/shape_type"/>
@@ -72,13 +73,14 @@
             <TextView
                 android:id="@+id/search_item_qishileixing"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_23"
+                android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/search_item_thingstype"
                 android:layout_marginStart="@dimen/dp_6"
                 android:layout_marginLeft="@dimen/dp_7"
                 android:scaleType="fitXY"
                 android:layout_toEndOf="@+id/search_item_userphoto"
                 android:text=" 丢 "
+                android:textSize="@dimen/sp_13"
                 android:padding="@dimen/dp_3"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
@@ -101,6 +103,7 @@
                 android:layout_alignTop="@+id/search_item_thingstype"
                 android:layout_toRightOf="@+id/search_item_qishileixing"
                 android:text="四教"
+                android:textSize="@dimen/sp_12"
                 android:textColor="@color/black" />
 
             <TextView

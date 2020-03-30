@@ -84,7 +84,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textCursorDrawable="@null"
-            android:textSize="17sp" />
+            android:textSize="18sp" />
 <!--            android:drawableStart="@drawable/ic_people"/>-->
 
 
@@ -102,7 +102,7 @@
             android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="18sp" />
 
 
         <TextView
@@ -116,11 +116,11 @@
 
         <Button
             android:id="@+id/all_clear"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
             android:layout_alignTop="@+id/signin_pwd"
             android:layout_alignEnd="@+id/signin_pwd"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="@dimen/dp_13"
             android:layout_marginEnd="-16dp"
             android:background="@drawable/all_clear" />
 
@@ -148,6 +148,7 @@
         android:layout_marginEnd="@dimen/dp_8"
         android:layout_marginBottom="@dimen/dp_232"
         android:text="点击注册"
+        android:textSize="@dimen/sp_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.702"
@@ -164,6 +165,7 @@
         android:layout_marginEnd="@dimen/dp_8"
         android:layout_marginBottom="@dimen/dp_232"
         android:text="重置密码"
+        android:textSize="@dimen/sp_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.298"

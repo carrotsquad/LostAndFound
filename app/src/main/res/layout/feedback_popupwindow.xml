@@ -23,6 +23,7 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:id="@+id/feedback_edt"
         android:hint="请写入您对我们的意见"
+        android:textSize="@dimen/sp_16"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_150" />
     <Button
@@ -32,6 +33,7 @@
         android:gravity="center"
         android:textColor="@android:color/white"
         android:text="发送"
+        android:textSize="@dimen/sp_16"
         android:id="@+id/feedback_btn"
         android:background="@drawable/barbackgroud"
         android:layout_width="match_parent"

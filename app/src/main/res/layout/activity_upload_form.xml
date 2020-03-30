@@ -70,7 +70,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
-                android:hint="请输入标题" />
+                android:hint="请输入标题"
+                android:textSize="@dimen/sp_16"/>
 
             <EditText
                 android:id="@+id/upload_lostorfind_description_text"
@@ -80,6 +81,7 @@
                 android:gravity="top"
                 android:theme="@style/MyEditText1"
                 android:hint="请输入对此事件的描述，可以在此留下你的联系方式。"
+                android:textSize="@dimen/sp_16"
                 android:minLines="4" />
 
             <ImageView
@@ -165,6 +167,7 @@
             <EditText
                 android:id="@+id/upload_lostorfind_time"
                 android:hint="（必填）"
+                android:textSize="@dimen/sp_16"
                 android:padding="@dimen/dp_10"
                 android:focusableInTouchMode="false"
                 android:focusable="false"
@@ -201,6 +204,7 @@
             <EditText
                 android:id="@+id/upload_lostorfind_place"
                 android:hint="（必填）"
+                android:textSize="@dimen/sp_16"
                 android:padding="@dimen/dp_10"
                 android:focusableInTouchMode="false"
                 android:focusable="false"

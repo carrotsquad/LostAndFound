@@ -23,6 +23,7 @@
         android:layout_marginStart="@dimen/dp_68"
         android:layout_marginTop="@dimen/dp_10"
         android:text="我不是桔猫我是橘猫"
+        android:textSize="@dimen/sp_12"
         />
 
     <LinearLayout
@@ -36,6 +37,7 @@
         <TextView
             android:layout_marginRight="@dimen/dp_10"
             android:text="测试评论"
+            android:textSize="@dimen/sp_12"
             android:maxLines="8"
             android:id="@+id/comment_item_content"
             android:layout_width="match_parent"
@@ -43,7 +45,7 @@
     </LinearLayout>
 
     <TextView
-        android:textSize="@dimen/dp_11"
+        android:textSize="@dimen/sp_11"
         android:layout_marginTop="@dimen/dp_2"
         android:id="@+id/comment_item_date"
         android:layout_width="wrap_content"

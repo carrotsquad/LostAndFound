@@ -96,12 +96,13 @@
                             android:layout_marginTop="@dimen/dp_11"
                             android:layout_marginRight="@dimen/dp_20"
                             android:text="2018年11月19日"
+                            android:textSize="@dimen/sp_10"
                             android:textColor="#000000"/>
 
                             <TextView
                                 android:background="@drawable/shape_place"
                                 android:layout_width="wrap_content"
-                                android:layout_height="@dimen/dp_28"
+                                android:layout_height="wrap_content"
                                 android:id="@+id/thing_detail_thingsdetail_place"
                                 android:text="二教"
                                 android:padding="@dimen/dp_3"
@@ -126,9 +127,10 @@
                             android:scaleType="fitXY"
                             android:id="@+id/thing_detail_thingsdetail_thingstype"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dp_28"
+                            android:layout_height="wrap_content"
                             android:padding="@dimen/dp_3"
                             android:text="电脑"
+                            android:textSize="@dimen/sp_14"
                             android:textStyle="bold"
                             android:textColor="#ffffff"
                             android:layout_alignTop="@+id/thing_detail_thingsdetail_diushidate"
@@ -148,13 +150,14 @@
                         <TextView
                             android:id="@+id/thing_detail_thingsdetail_losttype"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dp_28"
+                            android:layout_height="wrap_content"
                             android:padding="@dimen/dp_3"
                             android:layout_alignTop="@+id/thing_detail_thingsdetail_diushidate"
                             android:layout_marginStart="@dimen/dp_16"
                             android:layout_toRightOf="@+id/thing_detail_thingsdetail_thingstype"
                             android:scaleType="fitXY"
                             android:text=" 丢 "
+                            android:textSize="@dimen/sp_14"
                             android:textStyle="bold"
                             android:textColor="#ffffff"
                             android:background="@drawable/shape_thingstype_find"/>
@@ -242,7 +245,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/thing_detail_thingsdetail_nickname"
                     android:layout_below="@+id/thing_detail_thingsdetail_nickname"
-                    android:text="发布于2018年11月20日" />
+                    android:text="发布于2018年11月20日"
+                    android:textSize="@dimen/sp_14"/>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 

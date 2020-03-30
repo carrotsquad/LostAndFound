@@ -29,6 +29,7 @@
       android:layout_width="@dimen/dp_300"
       android:layout_height="wrap_content"
       android:hint="输入电话"
+      android:textSize="@dimen/sp_16"
       android:layout_centerHorizontal="true"
       android:layout_below="@id/phonenumber"
       android:layout_marginTop="@dimen/dp_150"/>

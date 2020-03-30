@@ -27,7 +27,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/dp_20"
+        android:textSize="@dimen/sp_20"
         android:text="设置"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />

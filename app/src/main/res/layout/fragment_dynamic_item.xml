@@ -43,6 +43,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:padding="@dimen/dp_3"
                 android:text="电脑"
+                android:textSize="@dimen/sp_13"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
                 android:background="@drawable/shape_type"/>
@@ -65,6 +66,7 @@
                 android:layout_toRightOf="@id/dynamic_card_thingtype"
                 android:scaleType="fitXY"
                 android:text="丢"
+                android:textSize="@dimen/sp_13"
                 android:padding="@dimen/dp_3"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
