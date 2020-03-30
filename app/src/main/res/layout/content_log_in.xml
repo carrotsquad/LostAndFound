@@ -34,6 +34,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="注册"
@@ -43,15 +44,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.075" />
 
     <ImageView
         android:id="@+id/imageview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
+        android:layout_height="@dimen/dp_110"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -59,9 +60,9 @@
     <EditText
         android:id="@+id/login_student"
         android:layout_width="@dimen/dp_300"
-        android:layout_height="@dimen/dp_44"
+        android:layout_height="@dimen/dp_42"
         android:layout_marginStart="@dimen/dp_8"
-        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_12"
         android:layout_marginEnd="@dimen/dp_8"
         android:ems="10"
         android:hint="学号"
@@ -96,7 +97,7 @@
     <EditText
         android:id="@+id/login_password"
         android:layout_width="@dimen/dp_300"
-        android:layout_height="@dimen/dp_44"
+        android:layout_height="@dimen/dp_42"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_8"
@@ -111,7 +112,7 @@
     <EditText
         android:id="@+id/login_repassword"
         android:layout_width="@dimen/dp_300"
-        android:layout_height="@dimen/dp_44"
+        android:layout_height="@dimen/dp_42"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_8"
@@ -139,7 +140,7 @@
     <EditText
         android:id="@+id/login_email"
         android:layout_width="@dimen/dp_300"
-        android:layout_height="@dimen/dp_44"
+        android:layout_height="@dimen/dp_42"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_8"
@@ -155,7 +156,7 @@
     <EditText
         android:id="@+id/login_phonenumber"
         android:layout_width="@dimen/dp_300"
-        android:layout_height="@dimen/dp_44"
+        android:layout_height="@dimen/dp_42"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_8"
@@ -169,13 +170,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
+<!--    <ImageView-->
+<!--        android:layout_width="@dimen/dp_200"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/arm"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/login_sure" />-->
+
     <Button
         android:id="@+id/login_sure"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_100"
         android:layout_marginStart="@dimen/dp_8"
-        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_28"
         android:layout_marginEnd="@dimen/dp_8"
         android:background="@drawable/login_icon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -199,17 +207,17 @@
         android:layout_height="@dimen/dp_50"
         android:background="@null"
         android:text="免责声明"
-        android:textSize="@dimen/sp_15"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_usdetail"
         app:layout_constraintLeft_toRightOf="@+id/tv_usdetail"
-        app:layout_constraintStart_toEndOf="@+id/tv_usdetail"
+        app:layout_constraintRight_toLeftOf="@+id/tv_usdetail2"
         app:layout_constraintBottom_toBottomOf="@+id/tv_usdetail" />
 
     <TextView
         android:id="@+id/tv_usdetail2"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_35"
-        android:text=" -------------------------"
+        android:text=" -----------------"
         android:textSize="@dimen/sp_13"
         app:layout_constraintBaseline_toBaselineOf="@id/btn_usdetail"
         app:layout_constraintBottom_toBottomOf="@+id/btn_usdetail"

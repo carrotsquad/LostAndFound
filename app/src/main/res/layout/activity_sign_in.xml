@@ -9,6 +9,7 @@
 
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="登陆"
@@ -18,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15"/>
+        app:layout_constraintVertical_bias="0.15" />
 
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
@@ -126,6 +127,14 @@
 
     </RelativeLayout>
 
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/hand"-->
+<!--        android:layout_marginTop="@dimen/dp_100"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/signin_signin"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/cardView" />-->
+
     <Button
         android:id="@+id/signin_signin"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -142,7 +151,7 @@
     <TextView
         android:id="@+id/signin_tologin"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_18"
+        android:layout_height="@dimen/dp_22"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_200"
         android:layout_marginEnd="@dimen/dp_8"
@@ -159,7 +168,7 @@
     <TextView
         android:id="@+id/reset_password"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_22"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_200"
         android:layout_marginEnd="@dimen/dp_8"

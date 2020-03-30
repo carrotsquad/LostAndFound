@@ -58,7 +58,7 @@ public class AboutUsDetailActivity extends AppCompatActivity {
                 "\n  7.任何由于黑客攻击、计算机病毒侵入或发作、因政府管制而造成的暂时性关闭等影响网络正常经营的不可抗力而造成的个人资料泄露、丢失、被盗用或被窜改等，“递爱”均得免责。\n" +
                 "\n  8.“递爱”使用者因为违反本声明的规定而触犯中华人民共和国法律的，一切后果自己负责，“递爱”不承担任何责任。\n" +
                 " \n9.本声明未涉及的问题参见国家有关法律法规,当本声明");
-
+       info.setTextSize(18);
        back.setOnClickListener(v->finish());
 
         //实现渐变式状态栏
