@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        android:background="@drawable/barbackgroud">
+        android:background="#7879ff">
 
         <ImageView
             android:id="@+id/publishsuccess_back"

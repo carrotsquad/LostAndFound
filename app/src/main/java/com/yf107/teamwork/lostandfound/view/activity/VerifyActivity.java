@@ -2,9 +2,11 @@ package com.yf107.teamwork.lostandfound.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -75,6 +77,15 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
         stu = intent.getStringExtra(SignInActivity.STU);
         session = intent.getStringExtra(SignInActivity.SESSION);
         email.setText("验证码已发送到关联邮箱 " + eemail);
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //设置返回键
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("");
+        }
     }
 
     @OnClick({R.id.verify_sure, R.id.verify_back})
@@ -125,4 +136,12 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

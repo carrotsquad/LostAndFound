@@ -9,7 +9,7 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/setting_bar"
-        android:background="@drawable/barbackgroud"
+        android:background="#7879ff"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 

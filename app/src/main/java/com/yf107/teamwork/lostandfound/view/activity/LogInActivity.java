@@ -105,7 +105,7 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.login_sure, R.id.btn_usdetail, R.id.all_clear, R.id.all_clear2,R.id.cl_hide})
+    @OnClick({R.id.login_sure, R.id.btn_usdetail, R.id.all_clear, R.id.all_clear2,R.id.cl_hide,R.id.login_back})
     void onClicked(View view) {
         switch (view.getId()) {
             case R.id.login_sure: {

@@ -11,7 +11,7 @@
         android:id="@+id/phone_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background" />
+        android:background="#7879ff" />
     <TextView
         android:id="@+id/phonenumber"
         android:layout_width="wrap_content"

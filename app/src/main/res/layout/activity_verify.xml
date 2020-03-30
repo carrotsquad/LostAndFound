@@ -9,7 +9,7 @@
         android:id="@+id/verify_loginbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/barbackgroud"
+        android:background="#7879ff"
         android:fitsSystemWindows="true">
 
         <TextView

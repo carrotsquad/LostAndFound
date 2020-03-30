@@ -9,7 +9,7 @@
     tools:context="com.yf107.teamwork.lostandfound.view.activity.UserInfoAboutUsActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/userinfo_aboutus_toolbar"
-        android:background="@drawable/barbackgroud"
+        android:background="#7879ff"
         android:layout_width="match_parent"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_height="?attr/actionBarSize">

@@ -74,8 +74,8 @@
 
     <Button
         android:id="@+id/all_clear"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16"
         android:background="@drawable/all_clear"
         app:layout_constraintBottom_toBottomOf="@+id/login_password"
         app:layout_constraintEnd_toEndOf="@+id/login_password"
@@ -83,8 +83,8 @@
 
     <Button
         android:id="@+id/all_clear2"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16"
         android:layout_alignTop="@+id/signin_pwd"
         android:layout_alignEnd="@+id/signin_pwd"
         android:background="@drawable/all_clear"
