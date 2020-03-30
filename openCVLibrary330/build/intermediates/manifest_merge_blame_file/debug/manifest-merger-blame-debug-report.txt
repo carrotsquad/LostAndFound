@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="19"
-8-->D:\diai\LostAndFound\openCVLibrary330\src\main\AndroidManifest.xml
+8-->D:\laf\openCVLibrary330\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="27" />
-9-->D:\diai\LostAndFound\openCVLibrary330\src\main\AndroidManifest.xml
+9-->D:\laf\openCVLibrary330\src\main\AndroidManifest.xml
 10
 11</manifest>

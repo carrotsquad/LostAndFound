@@ -64,6 +64,9 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     @BindView(R.id.reset_password_back)
     Button back;
 
+    @BindView(R.id.reset_new_password_long)
+    TextView reset_new_password_long;
+
 
     private ForgetPasswordPrensenter forgetPasswordPrensenter;
 
@@ -86,6 +89,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
         new_password_wrong.setVisibility(View.INVISIBLE);
         statu_wrong.setVisibility(View.INVISIBLE);
         mailbox_wrong.setVisibility(View.INVISIBLE);
+        reset_new_password_long.setVisibility(View.INVISIBLE);
         forgetPasswordPrensenter = new ForgetPasswordPrensenter(this);
 
 //        if(new_password.getText().toString().equals(new_password_confirm.getText().toString())){
@@ -128,9 +132,9 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
             case R.id.reset_getmailbox: {
 
-                if (new_password != new_password_confirm) {
-                    new_password_wrong.setVisibility(View.VISIBLE);
-                }
+//                if (new_password != new_password_confirm) {
+//                    new_password_wrong.setVisibility(View.VISIBLE);
+//                }
                 if (!isEmail(email)) {
                     mailbox_wrong.setVisibility(View.VISIBLE);
                 }
@@ -228,6 +232,12 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
         @Override
         public void afterTextChanged(Editable editable) {
+
+            if(new_password.getText().length() <8||new_password.getText().length()>16){
+                reset_new_password_long.setVisibility(View.VISIBLE);
+            }else {
+                reset_new_password_long.setVisibility(View.INVISIBLE);
+            }
 
             //检查两次密码是否一致
             if (!new_password.getText().toString().equals("") && !new_password_confirm.getText().toString().equals("")){
