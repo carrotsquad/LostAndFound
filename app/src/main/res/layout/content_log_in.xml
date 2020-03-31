@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@null"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.yf107.teamwork.lostandfound.view.activity.LogInActivity"
@@ -44,12 +46,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <ImageView
         android:id="@+id/imageview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_110"
+        android:layout_height="@dimen/dp_140"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -170,12 +172,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
-<!--    <ImageView-->
-<!--        android:layout_width="@dimen/dp_200"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:src="@drawable/arm"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/login_sure" />-->
+    <ImageView
+        android:layout_width="@dimen/dp_220"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:src="@drawable/arm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_sure" />
 
     <Button
         android:id="@+id/login_sure"
@@ -194,9 +197,9 @@
 
     <TextView
         android:id="@+id/tv_usdetail"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp_220"
         android:layout_height="@dimen/dp_35"
-        android:text="---------------------注册即代表阅读并同意"
+        android:text="--------------注册即代表阅读并同意"
         android:textSize="@dimen/sp_13"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>

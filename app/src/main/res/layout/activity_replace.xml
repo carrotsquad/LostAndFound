@@ -59,7 +59,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:background="@drawable/shape_item"
-                android:layout_height="@dimen/dp_301">
+                android:layout_height="wrap_content">
 
                 <EditText
 
@@ -71,6 +71,7 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:hint="请输入标题"
+                    android:maxLength="17"
                     android:textSize="@dimen/sp_16"/>
 
                 <EditText

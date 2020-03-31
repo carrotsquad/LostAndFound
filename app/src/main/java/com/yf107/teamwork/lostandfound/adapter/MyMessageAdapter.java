@@ -251,7 +251,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vie
         //类型小标签
 
         //类型图片
-        holder.thingType.setText(" "+ SelectTypeUtils.getInstance().getImage(dynamicItemBean.getDynamics().getThelost().getLosttype())+" ");
+        holder.thingType.setText(" "+ SelectTypeUtils.getInstance().getImage(dynamicItemBean.getDynamics().getThelost().getTypeid())+" ");
 
 
         if(dynamicItemBean.getDynamics().getThelost().getPhoto() == null||dynamicItemBean.getDynamics().getThelost().getPhoto().equals("")||dynamicItemBean.getDynamics().getThelost().getPhoto().equals("default.jpg")) {

@@ -224,9 +224,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         Log.e("THELOSTBEAN",bean.toString());
                         if (typeid == 13&&qishileixing!=0){
                             Log.e("UploadFromActivity", "" + stu + jsession + bean);
-                            if (stu.substring(0,3).equals("201")) {
+                            if (!stu.equals("")&&stu.substring(0,3).equals("201")&&stu.length()==10) {
                                 uploadPresenter.cardUpload(stu, jsession, bean);
-                             //   uploadPresenter.postUpload(jsession,bean);
                             }else {
                                 FancyToast.makeText(UploadFormActivity.this, "学号填写错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                             }
@@ -237,7 +236,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                         bean = new TheLostBean(typeid+1,qishileixing,strtitle,strdescri,placeid+1,"00000000",strLostDate,strphoto,0);
                         Log.e("THELOSTBEAN","strphoto"+strphoto);
                         if (typeid == 13&&qishileixing!=0) {
-                            if (stu.substring(0,3).equals("201")) {
+                            if (!stu.equals("")&&stu.substring(0,3).equals("201")&&stu.length()==10) {
                                 Log.e("UploadFromActivity","stu = "+stu+"jsession = "+jsession+"bean = "+bean+"fileList = "+fileList);
                                 uploadPresenter.cardUpload(stu, jsession, bean, fileList);
                                 btnSure.setVisibility(View.GONE);
@@ -425,6 +424,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             FancyToast.makeText(UploadFormActivity.this,"发布成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
         }else {
             FancyToast.makeText(UploadFormActivity.this,"出现了错误",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+            btnSure.setVisibility(View.VISIBLE);
         }
     }
 

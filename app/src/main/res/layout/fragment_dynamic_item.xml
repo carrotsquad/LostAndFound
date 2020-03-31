@@ -72,16 +72,21 @@
                 android:textColor="#ffffff"
                 android:background="@drawable/shape_thingstype_find"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/dynamic_card_dateandplace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_10"
                 android:text="四教"
+                android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp_14"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMaxTextSize="14sp"
+                app:autoSizeMinTextSize="9sp"
+                app:autoSizeStepGranularity="1sp"/>
 
         </RelativeLayout>
 
@@ -149,9 +154,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dynamic_card_neckname"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_6"
             android:text="2018年10月5日发布"
-            android:textSize="@dimen/sp_10" />
+            android:textSize="@dimen/sp_8" />
 
     </RelativeLayout>
 

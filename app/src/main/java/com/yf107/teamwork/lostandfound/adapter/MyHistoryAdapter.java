@@ -41,8 +41,8 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
         @BindView(R.id.myhistory_time)
         TextView  time  ;                     //月 日
 
-        @BindView(R.id.myhistory_time2)
-        TextView  time2;                     //19:00
+//        @BindView(R.id.myhistory_time2)
+//        TextView  time2;                     //19:00
 
         @BindView(R.id.myhistory_where)
         TextView  where;
@@ -117,7 +117,7 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
             String time1 = year + "." + mouth + "." + "" + day;
             String time2 = hours + "点";
             holder.time.setText(time1);
-            holder.time2.setText("");
+//            holder.time2.setText("");
         }
     }
 

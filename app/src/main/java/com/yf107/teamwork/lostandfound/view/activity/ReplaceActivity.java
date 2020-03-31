@@ -392,6 +392,7 @@ public class ReplaceActivity extends AppCompatActivity implements IReplceActivit
             FancyToast.makeText(ReplaceActivity.this, "发布成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
         } else {
             FancyToast.makeText(ReplaceActivity.this, "出现了错误", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            btnSure.setVisibility(View.VISIBLE);
         }
     }
     @Override
