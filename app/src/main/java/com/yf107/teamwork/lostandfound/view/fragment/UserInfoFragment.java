@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
@@ -61,6 +62,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.NICKN
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.USERPHOTO;
 import static com.yf107.teamwork.lostandfound.view.activity.UserInfoSettingActivity.changename1111;
+import static com.yf107.teamwork.lostandfound.view.activity.UserInfoSettingActivity.headString;
 
 /**
  * Description
@@ -71,7 +73,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     private static final int REQUEST_CODE_GALLERY = 1;
 
     @BindView(R.id.userinfo_head_img)
-    CircleImageView headImg;
+    CircleImageView headImg1;
 
     @BindView(R.id.userinfo_head_nick)
     TextView headTxt;
@@ -103,6 +105,9 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     private UserInfoPresenter mPresenter;
     private Unbinder unbinder;
     TimeThread timeThread = new TimeThread();
+    private boolean isGetData = false;
+    String head111;
+
 
 
     @Nullable
@@ -210,12 +215,12 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
 
         if(preferences.getString(USERPHOTO,null) == null){
-            headImg.setImageResource(R.mipmap.user);
+            headImg1.setImageResource(R.mipmap.user);
         }else {
             Glide.with(mContext)
-                    .load(preferences.getString(USERPHOTO, null))
+                    .load(head111)
                     .asBitmap()
-                    .into(headImg);
+                    .into(headImg1);
         }
 
     }
@@ -262,6 +267,20 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 //                .into(headImg);
         Log.d("15486622", "" + AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)));
         headTxt.setText(mContext.getSharedPreferences("users", MODE_PRIVATE).getString(NICKNAME, null));
+
+
+        Log.d("Tag",sharedPreferences.getString(USERPHOTO,null));
+        head111=sharedPreferences.getString(USERPHOTO,null);
+
+
+        if(preferences.getString(USERPHOTO,null) == null){
+            headImg1.setImageResource(R.mipmap.user);
+        }else {
+            Glide.with(mContext)
+                    .load(preferences.getString(USERPHOTO, null))
+                    .asBitmap()
+                    .into(headImg1);
+        }
         super.onResume();
     }
 
@@ -275,7 +294,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    headImg.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+                    headImg1.setImageBitmap(BitmapFactory.decodeFile(userphoto));
 //                    Glide.with(getContext())
 //                    .load(userphoto)
 //                    .asBitmap()
@@ -360,6 +379,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
+
                     if (changename1111 == " ") break;
                     else {
                         headTxt.setText(changename1111);
@@ -376,7 +396,8 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
                 try {
                     Thread.sleep(1000);
                     Message message = new Message();
-                    message.what = 0;
+                    message.arg1 = 0;
+                    message.arg2 = 1;
                     handler.sendMessage(message);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -392,4 +413,36 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         super.onDestroyOptionsMenu();
         timeThread.interrupt();
     }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if(enter&&!isGetData){
+            isGetData=true;
+
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("users", MODE_PRIVATE);
+            Log.d("Tag",sharedPreferences.getString(USERPHOTO,null));
+           head111=sharedPreferences.getString(USERPHOTO,null);
+
+
+            if(preferences.getString(USERPHOTO,null) == null){
+                headImg1.setImageResource(R.mipmap.user);
+            }else {
+                Glide.with(mContext)
+                        .load(preferences.getString(USERPHOTO, null))
+                        .asBitmap()
+                        .into(headImg1);
+            }
+
+        }else{
+            isGetData = false;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isGetData = false;
+    }
+
 }

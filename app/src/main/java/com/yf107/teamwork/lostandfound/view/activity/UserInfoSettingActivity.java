@@ -117,6 +117,8 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
     private String change_nick = null;
     private String change_phone = null;
     public static String changename1111 = " ";
+    public static String headString;
+
 
 
     @Override
@@ -267,6 +269,7 @@ public class UserInfoSettingActivity extends AppCompatActivity implements IUserI
                     .load(sharedPreferences.getString(USERPHOTO, null))
                     .asBitmap()
                     .into(headImg);
+
         }
 
         setSupportActionBar(mToolbar);

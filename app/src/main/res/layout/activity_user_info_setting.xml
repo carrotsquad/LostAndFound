@@ -310,14 +310,14 @@
 
   </RelativeLayout>
 
-  <android.support.v7.widget.CardView
-      android:clickable="true"
-      app:cardCornerRadius="@dimen/dp_4"
-      android:layout_marginBottom="@dimen/dp_20"
-     android:layout_centerHorizontal="true"
-      android:layout_alignParentBottom="true"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
+<!--  <android.support.v7.widget.CardView-->
+<!--      android:clickable="true"-->
+<!--      app:cardElevation="0dp"-->
+<!--      android:layout_marginBottom="@dimen/dp_20"-->
+<!--     android:layout_centerHorizontal="true"-->
+<!--      android:layout_alignParentBottom="true"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content">-->
 
     <Button
         android:id="@+id/exit_account"
@@ -326,7 +326,9 @@
         android:layout_width="@dimen/dp_200"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 
-  </android.support.v7.widget.CardView>
+<!--  </android.support.v7.widget.CardView>-->
 </RelativeLayout>
