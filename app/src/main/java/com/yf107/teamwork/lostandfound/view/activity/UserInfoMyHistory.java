@@ -1,10 +1,13 @@
 package com.yf107.teamwork.lostandfound.view.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -62,6 +65,16 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
             }
         });
 
+        Toolbar toolbar = findViewById(R.id.setting_bar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //设置返回键
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("");
+        }
+
     }
 
     @Override
@@ -89,6 +102,15 @@ public class UserInfoMyHistory extends AppCompatActivity implements IMyHistoryAc
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

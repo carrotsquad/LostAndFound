@@ -43,6 +43,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -149,6 +150,9 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     private TextView textViewtest;
     public static String changname = " ";
+
+    String[] titles = {"丢了不要怕，递爱找回家","捡到给递爱，丢了找递爱",
+            "递的不是失物，是关爱","丢了找不到？在递爱呢！","递一份情，传一份爱"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -416,7 +420,9 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     public void showStatus(Boolean status,int lostid) {
         if(status){
 
-            uploadPresenter.sendDataToWeb(sharedPreferences.getString("SESSION",null),null,lostid,null,"");
+            Random random = new Random();
+            int number = random.nextInt(4);
+            uploadPresenter.sendDataToWeb(sharedPreferences.getString("SESSION",null),null,lostid,null,titles[number]);
             Intent intent = new Intent(UploadFormActivity.this,UploadSuccessActivity.class);
             intent.putExtra("SESSION",sharedPreferences.getString(SESSION, "null"));
             startActivity(intent);

@@ -2,10 +2,13 @@ package com.yf107.teamwork.lostandfound.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +74,9 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     @BindView(R.id.login_back)
     Button back;
 
+    @BindView(R.id.login_bar)
+    Toolbar toolbar;
+
     private String stu;
     private String pwd;
     private String repwd;
@@ -98,6 +104,14 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         loginRepassword.addTextChangedListener(new CheckOutTextWatcher(loginPassword, loginRepassword));
         EditUtil.EditAllClear(all_clear,loginPassword);
         EditUtil.EditAllClear(all_clear2,loginRepassword);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //设置返回键
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("");
+        }
     }
     @Override
     protected void onDestroy() {
@@ -269,5 +283,14 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

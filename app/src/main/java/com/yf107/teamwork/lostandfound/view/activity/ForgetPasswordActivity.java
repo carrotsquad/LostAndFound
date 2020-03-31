@@ -3,11 +3,15 @@ package com.yf107.teamwork.lostandfound.view.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.design.widget.TabLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,7 +71,6 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     @BindView(R.id.reset_new_password_long)
     TextView reset_new_password_long;
 
-
     private ForgetPasswordPrensenter forgetPasswordPrensenter;
 
     String mailbox111;
@@ -85,6 +88,15 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
         EditUtil.EditAllClear(all_clear, new_password_confirm);
+        Toolbar toolbar = findViewById(R.id.forgetpassword_tablayout);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //设置返回键
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("");
+        }
         timeCount = new TimeCount(60000, 1000);
         new_password_wrong.setVisibility(View.INVISIBLE);
         statu_wrong.setVisibility(View.INVISIBLE);
@@ -254,5 +266,14 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
