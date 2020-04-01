@@ -29,11 +29,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.yf107.teamwork.lostandfound.adapter.MyMessageAdapter;
 import com.yf107.teamwork.lostandfound.adapter.SearchItemAdapter;
 import com.yf107.teamwork.lostandfound.bean.UpDateMessageBean;
 import com.yf107.teamwork.lostandfound.network.AllURI;
+import com.yf107.teamwork.lostandfound.searchview.custom.IOnSearchClickListener;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.view.interfaces.ISearchFragment;
 import com.yyydjk.library.DropDownMenu;
@@ -94,6 +94,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
     private TextView ok;
     private GridLayoutManager gridLayoutManager;
     private com.wyt.searchbox.SearchFragment searchFragment;
+    com.yf107.teamwork.lostandfound.searchview.SearchFragment searchFragment1;
 
     private SearchItemAdapter searchItemAdapter;
     private ArrayList<DynamicItemBean> searchItemBeanArrayList = new ArrayList<>();
@@ -173,6 +174,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
         sure = view.findViewById(R.id.search_sure);
         dropDownMenu = view.findViewById(R.id.search_dropDownMenu);
         searchFragment = com.wyt.searchbox.SearchFragment.newInstance();
+        searchFragment1 = com.yf107.teamwork.lostandfound.searchview.SearchFragment.newInstance();
        imageView = view.findViewById(R.id.nomessage);
 
         //初始化启事类型过滤
@@ -278,16 +280,22 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
             @Override
             public void onClick(View view) {
 
-                Log.d("Tag","ajhksdfhlks");
-                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+//                Log.d("Tag","ajhksdfhlks");
+//                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+//                    @Override
+//                    public void OnSearchClick(String keyword) {
+//                       // String keyword = searchInput.getText().toString();
+//                        search(keyword);
+//                    }
+//                });
+
+                searchFragment1.setOnSearchClickListener(new IOnSearchClickListener() {
                     @Override
                     public void OnSearchClick(String keyword) {
-                       // String keyword = searchInput.getText().toString();
                         search(keyword);
                     }
                 });
-
-                searchFragment.showFragment(getFragmentManager(), com.wyt.searchbox.SearchFragment.TAG);
+                searchFragment1.showFragment(getFragmentManager(), com.wyt.searchbox.SearchFragment.TAG);
             }
         });
 
