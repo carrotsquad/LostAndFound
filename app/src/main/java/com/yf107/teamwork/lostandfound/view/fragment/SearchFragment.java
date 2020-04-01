@@ -320,7 +320,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
                 Message message = new Message();
                 message.arg1 = 0;
                 handler.sendMessage(message);
-                FancyToast.makeText(context,"抱歉啊亲，没有搜索到相关信息",FancyToast.LENGTH_LONG,FancyToast.DEFAULT,false).show();
+            //    FancyToast.makeText(context,"抱歉啊亲，没有搜索到相关信息",FancyToast.LENGTH_LONG,FancyToast.DEFAULT,false).show();
             }
 
             imageView.setVisibility(View.INVISIBLE);
