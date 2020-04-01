@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.yf107.teamwork.lostandfound.adapter.MyLoadItemAdapter;
 import com.yf107.teamwork.lostandfound.model.MyLoadModel;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
+import com.yf107.teamwork.lostandfound.services.UpdateMessageService;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
 import com.yf107.teamwork.lostandfound.view.interfaces.IMyLoadActivity;
 import com.yf107.teamwork.lostandfound.R;
@@ -125,5 +126,9 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
         }
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    protected void onDestroy() {
+        presenter.dettachActivity();
+        super.onDestroy();
+    }
 }

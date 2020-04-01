@@ -453,7 +453,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         String datapath = Environment.getExternalStorageDirectory() + "/tesseract/";
         File dir = new File(datapath + "tessdata/");
         Log.e("Tess",""+dir);
-        if (!dir.exists()) {
+        if (dir.exists()) {
             dir.mkdirs();
             Log.e("Tess","加载成功");
             InputStream input = getResources().openRawResource(R.raw.stu);
@@ -498,11 +498,11 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         int r = recognizeCardId(cardImage);
         if (r==0){
             //顺时针旋转90°
-            Bitmap resizedBitmap = rotateBitmap(90, BitmapFactory.decodeFile(photoPath,options));
+            Bitmap resizedBitmap = rotateBitmap(-90, BitmapFactory.decodeFile(photoPath,options));
             int x = recognizeCardId(resizedBitmap);
             if (x == 0){
                 //逆时针旋转90°
-                Bitmap resizedBitmap2 = rotateBitmap(-90, BitmapFactory.decodeFile(photoPath,options));
+                Bitmap resizedBitmap2 = rotateBitmap(90, BitmapFactory.decodeFile(photoPath,options));
                 int y = recognizeCardId(resizedBitmap2);
                 if (y == 0){
                     FancyToast.makeText(UploadFormActivity.this,"识别失败",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
