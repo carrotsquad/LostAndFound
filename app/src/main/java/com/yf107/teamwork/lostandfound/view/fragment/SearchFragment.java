@@ -93,7 +93,6 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
     private RecyclerView recyclerView;
     private TextView ok;
     private GridLayoutManager gridLayoutManager;
-    private com.wyt.searchbox.SearchFragment searchFragment;
     com.yf107.teamwork.lostandfound.searchview.SearchFragment searchFragment1;
 
     private SearchItemAdapter searchItemAdapter;
@@ -173,7 +172,6 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
        // searchInput.findViewById(android.support.v7.appcompat.R.id.submit_area).setBackground(null);
         sure = view.findViewById(R.id.search_sure);
         dropDownMenu = view.findViewById(R.id.search_dropDownMenu);
-        searchFragment = com.wyt.searchbox.SearchFragment.newInstance();
         searchFragment1 = com.yf107.teamwork.lostandfound.searchview.SearchFragment.newInstance();
        imageView = view.findViewById(R.id.nomessage);
 

@@ -422,7 +422,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
             Random random = new Random();
             int number = random.nextInt(4);
-            uploadPresenter.sendDataToWeb(sharedPreferences.getString("SESSION",null),null,lostid,null,titles[number]);
+          //  uploadPresenter.sendDataToWeb(sharedPreferences.getString("SESSION",null),null,lostid,null,titles[number]);
             Intent intent = new Intent(UploadFormActivity.this,UploadSuccessActivity.class);
             intent.putExtra("SESSION",sharedPreferences.getString(SESSION, "null"));
             startActivity(intent);
