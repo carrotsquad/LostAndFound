@@ -1,5 +1,6 @@
 package com.yf107.teamwork.lostandfound.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -127,6 +128,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 
     @Override
     public void onDestroyView() {
+        ActivityManager.getActivityManager().removeFAll();
         mPresenter.dettachActivity();
         unbinder.unbind();
         super.onDestroyView();
@@ -172,7 +174,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
                 .build();
         //配置imageloader
         GlideImageLoader imageloader = new GlideImageLoader();
-        CoreConfig coreConfig = new CoreConfig.Builder(mContext, imageloader, theme)
+        CoreConfig coreConfig = new CoreConfig.Builder(mContext.getApplicationContext(), imageloader, theme)
                 .setDebug(BuildConfig.DEBUG)
                 .setFunctionConfig(functionConfig).build();
         GalleryFinal.init(coreConfig);
@@ -188,7 +190,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             //置换
             photoPath = resultList.get(0).getPhotoPath();
             Log.e("ImgTest", photoPath);
-            FancyToast.makeText(mContext, "取得照片", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+            FancyToast.makeText(mContext.getApplicationContext(), "取得照片", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
             jsession = getActivity().getSharedPreferences("users", Context.MODE_PRIVATE).getString(SESSION, "null");
             mPresenter.uploadHeadImg(jsession, new File(photoPath));
         }
@@ -196,7 +198,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         @Override
         public void onHanlderFailure(int requestCode, String errorMsg) {
             Log.e("editinfo", errorMsg);
-            FancyToast.makeText(mContext, errorMsg, FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            FancyToast.makeText(mContext.getApplicationContext(), errorMsg, FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     };
 
@@ -217,7 +219,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         if(preferences.getString(USERPHOTO,null) == null){
             headImg1.setImageResource(R.mipmap.user);
         }else {
-            Glide.with(mContext)
+            Glide.with(mContext.getApplicationContext())
                     .load(head111)
                     .asBitmap()
                     .into(headImg1);
@@ -236,19 +238,19 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
                 initGallery();
                 break;
             case R.id.userinfo_myupload_layout:
-                startActivity(new Intent(mContext, UserInfoMyUpload.class));
+                startActivity(new Intent(mContext.getApplicationContext(), UserInfoMyUpload.class));
                 break;
             case R.id.userinfo_myhistory_layout:
-                startActivity(new Intent(mContext, UserInfoMyHistory.class));
+                startActivity(new Intent(mContext.getApplicationContext(), UserInfoMyHistory.class));
                 break;
             case R.id.userinfo_feedback_layout:
                 feedBack();
                 break;
             case R.id.userinfo_aboutus_layout:
-                startActivity(new Intent(mContext, UserInfoAboutUsActivity.class));
+                startActivity(new Intent(mContext.getApplicationContext(), UserInfoAboutUsActivity.class));
                 break;
             case R.id.userinfo_setting_layout:
-                startActivity(new Intent(mContext, UserInfoSettingActivity.class));
+                startActivity(new Intent(mContext.getApplicationContext(), UserInfoSettingActivity.class));
                 break;
             default:
                 break;
@@ -266,7 +268,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 //                .asBitmap()
 //                .into(headImg);
         Log.d("15486622", "" + AllURI.getUserPhoto(sharedPreferences.getString(SESSION, null), sharedPreferences.getString(USERPHOTO, null)));
-        headTxt.setText(mContext.getSharedPreferences("users", MODE_PRIVATE).getString(NICKNAME, null));
+        headTxt.setText(mContext.getApplicationContext().getSharedPreferences("users", MODE_PRIVATE).getString(NICKNAME, null));
 
 
         Log.d("Tag",sharedPreferences.getString(USERPHOTO,null));
@@ -276,7 +278,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         if(preferences.getString(USERPHOTO,null) == null){
             headImg1.setImageResource(R.mipmap.user);
         }else {
-            Glide.with(mContext)
+            Glide.with(mContext.getApplicationContext())
                     .load(preferences.getString(USERPHOTO, null))
                     .asBitmap()
                     .into(headImg1);
@@ -307,9 +309,9 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
 //                    .asBitmap()
 //                    .into(headImg);
 
-            Toast.makeText(mContext, "头像上传成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext.getApplicationContext(), "头像上传成功", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(mContext, "头像上传失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext.getApplicationContext(), "头像上传失败", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -427,7 +429,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             if(preferences.getString(USERPHOTO,null) == null){
                 headImg1.setImageResource(R.mipmap.user);
             }else {
-                Glide.with(mContext)
+                Glide.with(mContext.getApplicationContext())
                         .load(preferences.getString(USERPHOTO, null))
                         .asBitmap()
                         .into(headImg1);

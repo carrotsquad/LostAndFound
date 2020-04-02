@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.yf107.teamwork.lostandfound.adapter.UploadFragmentAdapter;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
@@ -89,7 +90,7 @@ public class UploadActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        UploadFragmentAdapter uploadFragmentAdapter = new UploadFragmentAdapter(lists, qishileixing);
+        uploadFragmentAdapter = new UploadFragmentAdapter(lists, qishileixing);
         mRecyclerView.setAdapter(uploadFragmentAdapter);
     }
 
@@ -104,41 +105,17 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.upload, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.upload, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
                 finish();
-                break;
-            }
-            case R.id.upload_lost: {
-                /*
-                切换为失物界面
-                如果以及是失物界面
-                */
-                if (item.isChecked()) {
-                    Toast.makeText(UploadActivity.this, "已经是失物启事页面了", Toast.LENGTH_SHORT).show();
-                }
-                qishileixing = 0;
-                item.setChecked(true);
-
-                break;
-            }
-            case R.id.upload_find: {
-                /*
-                 同上
-                 */
-                if (item.isChecked()) {
-                    Toast.makeText(UploadActivity.this, "已经是招领启事页面了", Toast.LENGTH_SHORT).show();
-                }
-                item.setChecked(true);
-                qishileixing = 1;
                 break;
             }
             default: {

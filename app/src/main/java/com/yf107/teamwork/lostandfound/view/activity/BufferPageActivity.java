@@ -42,7 +42,6 @@ import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.USERP
  */
 public class BufferPageActivity extends AppCompatActivity implements ISignInActivity, IAllTypesAndPlaces {
 
-
     private SignPresenter signPresenter;
     private AllTypesAndPlacesPresenter allTypesAndPlacesPresenter;
 
@@ -149,6 +148,10 @@ public class BufferPageActivity extends AppCompatActivity implements ISignInActi
             allTypesAndPlacesPresenter.getAllTypesAndPlaces(signInBean.getJSESSIONID());
         } else {
             FancyToast.makeText(BufferPageActivity.this, "登录失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            Intent intent = new Intent(BufferPageActivity.this,SignInActivity.class);
+            intent.putExtra("isExit1",true);
+            startActivity(intent);
+            finish();
         }
     }
 }

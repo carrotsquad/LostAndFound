@@ -130,7 +130,6 @@ public class DynamicChildFragment extends Fragment {
                 TabLayoutViewPagerAdapterNew adapterNew = new TabLayoutViewPagerAdapterNew(man,mFragments);
                 mViewPager.setAdapter(adapterNew);
                 tab.setupWithViewPager(mViewPager);
-                tab.setupWithViewPager(mViewPager);
                 tab.getTabAt(0).setCustomView(getTabView());
                 tab.getTabAt(1).setCustomView(getTabView1());
                 tab.getTabAt(2).setCustomView(getTabView2());
