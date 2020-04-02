@@ -19,18 +19,18 @@ public class BaseApp extends Application {
     //实现数据共享,共享Handler
     private Handler handler=null;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Logger.addLogAdapter(new AndroidLogAdapter());
-        // TODO: 2018/11/22 用来检测内存泄漏,发布时删了
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
-    }
+//    @Override
+//    public void onCreate() {
+//        super.onCreate();
+//        Logger.addLogAdapter(new AndroidLogAdapter());
+//        // TODO: 2018/11/22 用来检测内存泄漏,发布时删了
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
+//    }
 
     public void setHandler(Handler handler){
         this.handler = handler;

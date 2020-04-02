@@ -138,7 +138,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
     private String strphoto = "";
     private TessBaseAPI baseApi;
     private BitmapFactory.Options options;
-
+    private static final String DEFAULT_LANGUAGE = "stu2";
 
     private String strLostDate = "";
     private Integer qishileixing;
@@ -418,6 +418,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
 
     @Override
     public void showStatus(Boolean status,int lostid) {
+        Log.e("UploadActivity","status ="+status);
         if(status){
 
             Random random = new Random();
@@ -456,8 +457,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         if (dir.exists()) {
             dir.mkdirs();
             Log.e("Tess","加载成功");
-            InputStream input = getResources().openRawResource(R.raw.stu);
-            File file = new File(dir, "stu.traineddata");
+            InputStream input = getResources().openRawResource(R.raw.stu2);
+            File file = new File(dir, "stu2.traineddata");
             Log.e("Tess",""+file);
             FileOutputStream output = new FileOutputStream(file);
             byte[] buff = new byte[1024];
@@ -468,7 +469,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             input.close();
             output.close();
         }
-        boolean success = baseApi.init(datapath, "stu");
+        boolean success = baseApi.init(datapath, DEFAULT_LANGUAGE);
         if(success){
             Log.i("UploadFromActivity", "load Tesseract OCR Engine successfully...");
         } else {
@@ -524,15 +525,18 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //对识别的目标进行优化
             String num = myNumber.replaceAll("\n","");
             String nber = num.replaceAll(" ","");
-            if (nber.indexOf("20") == -1){
+            Log.e("Tess","nber = "+nber);
+            if (!nber.contains("201")){
                 return 0;
             }else{
-                String number = nber + "3";
-                String s[] = number.split("20");
+                String number = "6"+nber+"6";
+                Log.e("Tess","number = "+number);
+                String s[] = number.split("201");
+                    Log.e("Tess","s[0] = "+s[0]+",s[1] = "+s[1]);
                 if (s[1].length()<7){
                     return 0;
                 }else {
-                    String stunumber = "20" + s[1].substring(0,8);
+                    String stunumber = "201" + s[1].substring(0,7);
                     FancyToast.makeText(UploadFormActivity.this,"识别成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                     stuEdit.setText(stunumber);
                 }

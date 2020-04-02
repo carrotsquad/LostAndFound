@@ -189,10 +189,10 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
                 public void onNext(AddCommitBean addCommitBean) {
 
                     Log.e("UploadPresenter3","statusBean.getStatus()"+addCommitBean.getStatus());
-                    if (addCommitBean == null || addCommitBean.getStatus()!= 200) {
-                        getV().showStatus(false,addCommitBean.getLostid());
-                    } else {
+                    if (addCommitBean.getStatus() == 200 || addCommitBean.getStatus()== 400) {
                         getV().showStatus(true,addCommitBean.getLostid());
+                    } else {
+                        getV().showStatus(false,addCommitBean.getLostid());
                     }
                 }
 
@@ -250,10 +250,11 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
                 @Override
                 public void onNext(AddCommitBean addCommitBean) {
                     Log.e("UploadPresenter4","statusBean.getStatus()"+addCommitBean.getStatus());
-                    if (addCommitBean == null || addCommitBean.getStatus() != 200) {
-                        getV().showStatus(false,addCommitBean.getLostid());
-                    } else {
+                    Log.e("UploadPresenter","addCommitBean.getStatus() = "+addCommitBean.getStatus());
+                    if (addCommitBean.getStatus() == 200 || addCommitBean.getStatus()== 400) {
                         getV().showStatus(true,addCommitBean.getLostid());
+                    } else {
+                        getV().showStatus(false,addCommitBean.getLostid());
                     }
                 }
 
