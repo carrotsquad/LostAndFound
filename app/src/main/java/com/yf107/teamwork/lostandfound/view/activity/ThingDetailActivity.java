@@ -53,6 +53,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 
 
@@ -257,7 +258,10 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
          intent.putExtra(OTHERSTHINGSTYPES, searchItemBean.getTypes());
          intent.putExtra(OTHERSID, searchItemBean.getID());
          */
-        strusernickname = intent.getStringExtra(OTHERSNICKNAME);
+
+        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+
+        strusernickname = sharedPreferences.getString(NICKNAME,null);
         String struserphoto = intent.getStringExtra(OTHERSPHOTO);
         String strfabiaodate = intent.getStringExtra(OTHERSFABIAODATE);
         String strplace = intent.getStringExtra(OTHERSPLACE);

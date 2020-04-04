@@ -53,11 +53,11 @@ public class GivebackActivity extends AppCompatActivity implements IGiveBackView
 
         if(type.equals("0")){
             sure.setBackgroundResource(R.drawable.sure_back);
-            tishi.setText("    为确保您确实是失物的主人，递爱要对您做信息的录入，且方便失物者联系你");
+            tishi.setText("    为了方便失主联系您，递爱要对您做信息的录入.");
             guihuan_zhanling.setText("我要归还");
         }else{
             sure.setBackgroundResource(R.drawable.sure_get);
-            tishi.setText("    为了方便失主联系您，递爱要对您做信息的录入");
+            tishi.setText("    为确保您确实是失物的主人，递爱要对您做信息的录入，且方便失物者联系你.");
             guihuan_zhanling.setText("我要招领");
         }
 

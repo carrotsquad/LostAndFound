@@ -393,7 +393,8 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                 displaySelectedImage(photoPath);
             }
 
-            img.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+            img.setImageBitmap(ResolveOOM.getCompressBitmap(photoPath,100,100,1000));
+
            Log.e("UploadFromActivity","fileList = "+fileList);
            fileList.clear();//用户重新添加图片时
             Log.e("UploadFromActivity","photoPath = "+photoPath+"BitmapFactory.decodeFile(photoPath) = "+BitmapFactory.decodeFile(photoPath));
