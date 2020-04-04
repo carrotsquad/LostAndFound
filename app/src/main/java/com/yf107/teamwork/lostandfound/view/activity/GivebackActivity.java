@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,6 +41,9 @@ public class GivebackActivity extends AppCompatActivity implements IGiveBackView
         returnPresenter.attachActivity(this);
         warning.setVisibility(View.INVISIBLE);
 
+       phone.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+       qq.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+
 
         Intent intent = getIntent();
         String type = intent.getStringExtra("TYPE");
@@ -60,7 +64,7 @@ public class GivebackActivity extends AppCompatActivity implements IGiveBackView
         sure.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        if (!qq.getText().toString().equals("") && !phone.getText().equals("")) {
+                                        if ((qq.getText().toString().equals("") && !phone.getText().toString().equals("")) || (!qq.getText().toString().equals("") && phone.getText().toString().equals("")) || (!qq.getText().toString().equals("") && !phone.getText().toString().equals(""))) {
                                             Log.d("进入归还了吗", "进入了");
                                             returnPresenter.sendMessage(session, id, qq.getText().toString(), phone.getText().toString());
                                         } else {

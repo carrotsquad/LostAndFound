@@ -1,9 +1,11 @@
 package com.yf107.teamwork.lostandfound.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,6 +45,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPHOTO;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSPLACE;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTHINGSTYPE;
+import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSTITLE;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERUSERNAME;
 
 
@@ -64,6 +67,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
     private MyLoadPresenter myLoadPresenter;
     private SharedPreferences sharedPreferences;
     private String jsession;
+    private Context context;
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
         ImageView thingtype;
@@ -97,7 +101,8 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
 
     }
 
-    public MyLoadItemAdapter (List<TheLostBean> list, String userphoto, String username, String nickname , Boolean isMessage){
+    public MyLoadItemAdapter (Context context,List<TheLostBean> list, String userphoto, String username, String nickname , Boolean isMessage){
+        this.context = context;
         this.lists=list;
         this.username = username;
         this.userphoto = userphoto;
@@ -168,15 +173,17 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
                 int thingstype = dynamicItemBean.getThelost().getTypeid();
 
                 String place = AllURI.allPlaceBeanList.get(lostplace);
-                String thingsType = AllURI.allTypeBeanList.get(thingstype);
+          //      String thingsType = AllURI.allTypeBeanList.get(thingstype);
 
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
                 intent.putExtra(OTHERSNICKNAME, dynamicItemBean.getNickname());
+                Log.d("NICKNAME11",dynamicItemBean.getNickname());
                 intent.putExtra(OTHERSPHOTO, dynamicItemBean.getUserphoto());
                 intent.putExtra(OTHERSFABIAODATE, fabaiodate);
                 intent.putExtra(OTHERSDIUSHILEIXING, losttype);
                 intent.putExtra(OTHERSDIUSHIDATE, lostdate);
                 intent.putExtra(OTHERSPLACE, place);
+                intent.putExtra(OTHERSTITLE,dynamicItemBean.getThelost().getTitle());
                 intent.putExtra(OTHERSIMGS, dynamicItemBean.getThelost().getPhoto());
                 intent.putExtra(OTHERSTHINGSTYPE, dynamicItemBean.getThelost().getTypeid());
                 intent.putExtra(OTHERSID, dynamicItemBean.getThelost().getId());
@@ -238,27 +245,73 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
       if (isMessage) {
             //侧滑删除
             holder.btnDlt.setOnClickListener(v -> {
-                jsession = sharedPreferences.getString(SESSION, "null");
-                id = lists.get(position).getId();
-                myLoadPresenter.postDelete(jsession,id);
-                Log.d("Tag","delete"+id);
-                holder.swipeMenuLayout.quickClose();
-                lists.remove(position);
-                FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
-                notifyItemRemoved(position);
-                notifyDataSetChanged();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("");
+                    builder.setMessage("你确定要删除吗？");
+
+                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                            jsession = sharedPreferences.getString(SESSION, "null");
+                            id = lists.get(position).getId();
+                            myLoadPresenter.postDelete(jsession,id);
+                            Log.d("Tag","delete"+id);
+                            holder.swipeMenuLayout.quickClose();
+                            lists.remove(position);
+                            FancyToast.makeText(mContext, "成功删除", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+                            notifyItemRemoved(position);
+                            notifyDataSetChanged();
+                    }
+                });
+                    builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+
+                    });
+
+                    builder.show();
+
+
             });
 
             holder.btnFinish.setOnClickListener(view -> {
-                jsession = sharedPreferences.getString(SESSION, "null");
-                id = lists.get(position).getId();
-                myLoadPresenter.postSuccess(jsession,id);
-                Log.d("Tag","success"+id);
-                holder.swipeMenuLayout.quickClose();
-                lists.remove(position);
-                FancyToast.makeText(mContext, "递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
-                notifyItemRemoved(position);
-                notifyDataSetChanged();
+
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("");
+                builder.setMessage("您确定递爱成功吗？");
+
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        jsession = sharedPreferences.getString(SESSION, "null");
+                        id = lists.get(position).getId();
+                        myLoadPresenter.postSuccess(jsession,id);
+                        Log.d("Tag","success"+id);
+                        holder.swipeMenuLayout.quickClose();
+                        lists.remove(position);
+                        FancyToast.makeText(mContext, "递爱成功", FancyToast.CONFUSING, Toast.LENGTH_SHORT, false).show();
+                        notifyItemRemoved(position);
+                        notifyDataSetChanged();
+                    }
+                });
+                builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+
+                });
+
+                builder.show();
+
+
             });
 
             holder.btnEdit.setOnClickListener(view -> {

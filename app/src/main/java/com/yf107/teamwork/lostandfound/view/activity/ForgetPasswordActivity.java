@@ -1,6 +1,8 @@
 package com.yf107.teamwork.lostandfound.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.design.widget.TabLayout;
@@ -33,7 +35,6 @@ import butterknife.OnClick;
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.PWD;
 
 public class ForgetPasswordActivity extends AppCompatActivity implements IForgetPasswordActivity {
-    String email = new String();
 
     @BindView(R.id.reset_new_password)
     EditText new_password;
@@ -73,6 +74,8 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
     private ForgetPasswordPrensenter forgetPasswordPrensenter;
 
+    private SharedPreferences sharedPreferences;
+
     String mailbox111;
 
     String session;
@@ -80,6 +83,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
     String s;
     TimeCount timeCount;
+    String email;
 
 
     @Override
@@ -97,11 +101,14 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
             actionBar.setHomeButtonEnabled(true);
             actionBar.setTitle("");
         }
+        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
+        email = sharedPreferences.getString("EMAIL",null);
         timeCount = new TimeCount(60000, 1000);
         new_password_wrong.setVisibility(View.INVISIBLE);
         statu_wrong.setVisibility(View.INVISIBLE);
         mailbox_wrong.setVisibility(View.INVISIBLE);
         reset_new_password_long.setVisibility(View.INVISIBLE);
+        confirm.setVisibility(View.INVISIBLE);
         forgetPasswordPrensenter = new ForgetPasswordPrensenter(this);
 
 //        if(new_password.getText().toString().equals(new_password_confirm.getText().toString())){
@@ -121,14 +128,14 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
             case R.id.reset_submit: {
 
                 if (isright) {
-                    forgetPasswordPrensenter.IsRight(session, confirm.getText().toString(), new_password.getText().toString(), email);
+                    forgetPasswordPrensenter.IsRight(session, mailbox.getText().toString(), new_password.getText().toString(), email);
                     Intent intent = new Intent(ForgetPasswordActivity.this, SignInActivity.class);
                     intent.putExtra(PWD, new_password.getText().toString());
                     intent.putExtra("ForgetorLogin", "Foeget");
                     startActivity(intent);
                     finish();
                 } else {
-                    statu_wrong.setVisibility(View.VISIBLE);
+                    mailbox_wrong.setVisibility(View.VISIBLE);
                 }
 
 
@@ -147,11 +154,10 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 //                if (new_password != new_password_confirm) {
 //                    new_password_wrong.setVisibility(View.VISIBLE);
 //                }
-                if (!isEmail(email)) {
-                    mailbox_wrong.setVisibility(View.VISIBLE);
-                }
+//                if (!isEmail(email)) {
+//                    mailbox_wrong.setVisibility(View.VISIBLE);
+//                }
 
-                email = mailbox.getText().toString();
                 forgetPasswordPrensenter.getCode(email);
                 Log.d("wofole", "nmsl");
                 timeCount.start();

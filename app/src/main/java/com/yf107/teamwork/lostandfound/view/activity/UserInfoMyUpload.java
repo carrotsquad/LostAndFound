@@ -68,7 +68,7 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
         ButterKnife.bind(this);
         Log.d("123456", "success");
         list.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new MyLoadItemAdapter(lists, sharedPreferences.getString(USERPHOTO, "null"), sharedPreferences.getString(EMAIL, "null")
+        mAdapter = new MyLoadItemAdapter(this,lists, sharedPreferences.getString(USERPHOTO, "null"), sharedPreferences.getString(EMAIL, "null")
                 , sharedPreferences.getString(STU, "null"), true);
         mAdapter.attachPresenter(presenter);
         list.setAdapter(mAdapter);
