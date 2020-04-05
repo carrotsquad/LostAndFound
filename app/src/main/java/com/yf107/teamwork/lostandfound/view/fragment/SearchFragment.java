@@ -344,8 +344,11 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
         if(thingsPosition==0){
             thingsPosition=-1;
         }
+
         Log.e("SearchFragment","diushiTypePosition-1 =  "+(diushiTypePosition-1));
-        iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
+
+            iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
+
     }
 
 

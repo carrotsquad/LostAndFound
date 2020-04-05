@@ -228,4 +228,5 @@ public interface Api {
     @FormUrlEncoded
     @POST("/passlove/sendmail")
     Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("lostid") int id,@Field("QQ") String QQ,@Field("phone") String phone);
+
 }

@@ -26,8 +26,8 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.googlecode.tesseract.android.TessBaseAPI;
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.yf107.teamwork.lostandfound.image.BitmapUtil;
 import com.yf107.teamwork.lostandfound.image.GlideImageLoader;
-import com.yf107.teamwork.lostandfound.image.ResolveOOM;
 import com.yf107.teamwork.lostandfound.network.AllURI;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
 import com.yf107.teamwork.lostandfound.utils.StatusBarUtil;
@@ -388,12 +388,14 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //进行图片上传与置换
             //置换
             String photoPath = resultList.get(0).getPhotoPath();
+
+            String photopath = BitmapUtil.compressImage(photoPath);
              //学号识别
             if (typeid == 13&&qishileixing!=0){
                 displaySelectedImage(photoPath);
             }
 
-            img.setImageBitmap(ResolveOOM.getCompressBitmap(photoPath,100,100,1000));
+            img.setImageBitmap(BitmapFactory.decodeFile(photopath));
 
            Log.e("UploadFromActivity","fileList = "+fileList);
            fileList.clear();//用户重新添加图片时

@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/diai2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.RevisePhoneNumber"></activity>
+        <activity android:name=".view.activity.ChangePassword"></activity>
+        <activity android:name="com.yf107.teamwork.intelligenttcmpharmacy.ChangePassword" />
+        <activity android:name=".view.activity.RevisePhoneNumber" />
         <activity android:name="com.yf107.teamwork.intelligenttcmpharmacy.RevisePhoneNumber" />
         <activity
             android:name=".ui.login.RevisePhoneNumber"
@@ -68,8 +70,7 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity android:name=".view.activity.UploadSuccessActivity" />
-        <activity android:name=".view.activity.ChangeNickNameActivity" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
+        <activity android:name=".view.activity.ChangeNickNameActivity" /> <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
         <activity android:name=".view.activity.AboutUsDetailActivity" />
         <activity android:name=".view.activity.AboutDiAi" />
         <activity android:name=".view.activity.OurWebActivity" />
