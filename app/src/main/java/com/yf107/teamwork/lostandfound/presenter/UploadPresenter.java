@@ -189,10 +189,10 @@ public class UploadPresenter extends BasePresenter<IUploadFormActivity> implemen
                 public void onNext(AddCommitBean addCommitBean) {
 
                     Log.e("UploadPresenter3","statusBean.getStatus()"+addCommitBean.getStatus());
-                    if (addCommitBean.getStatus() == 200 || addCommitBean.getStatus()== 400) {
-                        getV().showStatus(true,addCommitBean.getLostid());
-                    } else {
+                    if (addCommitBean==null || addCommitBean.getStatus()!= 200) {
                         getV().showStatus(false,addCommitBean.getLostid());
+                    } else {
+                        getV().showStatus(true,addCommitBean.getLostid());
                     }
                 }
 

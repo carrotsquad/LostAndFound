@@ -32,7 +32,7 @@
 
         <activity
             android:name=".view.activity.MainActivity"
-            android:launchMode="standard" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".view.activity.LogInActivity"
             android:label="@string/title_activity_log_in"
@@ -64,11 +64,7 @@
         <activity
             android:name=".view.activity.UserInfoMyUpload"
             android:label="我的发布" /> <!-- <activity android:name=".view.activity.UserSettingEditInfoActivity" /> -->
-        <activity android:name=".view.activity.InitActivity">
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
-        </activity>
+        <activity android:name=".view.activity.InitActivity"/>
         <activity android:name=".view.activity.UploadSuccessActivity" />
         <activity android:name=".view.activity.ChangeNickNameActivity" /> <!-- <activity android:name=".view.activity.ChangePasswordsActivity"></activity> -->
         <activity android:name=".view.activity.AboutUsDetailActivity" />
