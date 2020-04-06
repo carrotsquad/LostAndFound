@@ -542,6 +542,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                     FancyToast.makeText(UploadFormActivity.this,"识别成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                     stuEdit.setText(stunumber);
                 }
+
             }
 
         }return 1;//识别成功
