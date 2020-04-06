@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
         ActivityManager.getActivityManager().add(this);
 
        ButterKnife.bind(this);
+
         try {
             initView();
         } catch (NoSuchFieldException e) {

@@ -2,6 +2,8 @@ package com.yf107.teamwork.lostandfound.image;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -22,6 +24,7 @@ public class GlideImageLoader implements ImageLoader {
         Glide.with(activity)
                 .load("file://" + path)
                 .override(width, height)
+
                 //不缓存到SD卡
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)

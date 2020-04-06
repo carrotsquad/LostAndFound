@@ -388,7 +388,6 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
             //进行图片上传与置换
             //置换
             String photoPath = resultList.get(0).getPhotoPath();
-
             String photopath = BitmapUtil.compressImage(photoPath);
              //学号识别
             if (typeid == 13&&qishileixing!=0){
@@ -457,28 +456,27 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
         baseApi = new TessBaseAPI();
         String datapath = Environment.getExternalStorageDirectory() + "/tesseract/";
         File dir = new File(datapath + "tessdata/");
-        Log.e("Tess",""+dir);
-        if (dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdirs();
-            Log.e("Tess","加载成功");
+            FancyToast.makeText(UploadFormActivity.this, "加载成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
             InputStream input = getResources().openRawResource(R.raw.stu2);
             File file = new File(dir, "stu2.traineddata");
-            Log.e("Tess",""+file);
             FileOutputStream output = new FileOutputStream(file);
             byte[] buff = new byte[1024];
             int len = 0;
-            while((len = input.read(buff)) != -1) {
+            while ((len = input.read(buff)) != -1) {
                 output.write(buff, 0, len);
             }
             input.close();
             output.close();
         }
-        boolean success = baseApi.init(datapath, DEFAULT_LANGUAGE);
-        if(success){
-            Log.i("UploadFromActivity", "load Tesseract OCR Engine successfully...");
-        } else {
-            Log.i("UploadFromActivity", "WARNING:could not initialize Tesseract data...");
-        }
+        baseApi.init(datapath, DEFAULT_LANGUAGE);
+//        boolean success =
+//        if(success){
+//            Log.i("UploadFromActivity", "load Tesseract OCR Engine successfully...");
+//        } else {
+//            Log.i("UploadFromActivity", "WARNING:could not initialize Tesseract data...");
+//        }
     }
     //降采样
     private void displaySelectedImage(String photoPath) {
@@ -544,6 +542,7 @@ public class UploadFormActivity extends AppCompatActivity implements IUploadForm
                     FancyToast.makeText(UploadFormActivity.this,"识别成功",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                     stuEdit.setText(stunumber);
                 }
+
             }
 
         }return 1;//识别成功

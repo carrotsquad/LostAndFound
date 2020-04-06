@@ -39,8 +39,6 @@ import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSI
  */
 public class UploadActivity extends AppCompatActivity {
 
-    public static final String ACTION_SHORTCUT_2 = "SHORTCUT_2";//shortcuts跳转需要
-
     private List<UploadItemBean> lists = new ArrayList<>();
 
     @BindView(R.id.upload_list)

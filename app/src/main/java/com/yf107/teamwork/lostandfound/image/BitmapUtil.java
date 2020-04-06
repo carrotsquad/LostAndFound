@@ -32,7 +32,7 @@ public class BitmapUtil {
                     outputFile.getParentFile().mkdirs();
                     //outputFile.createNewFile();
                 } else {
-                    outputFile.delete();
+//                    outputFile.delete();
                 }
                 FileOutputStream out1 = new FileOutputStream(outputFile);
 

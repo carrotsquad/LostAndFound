@@ -1,6 +1,8 @@
 package com.yf107.teamwork.lostandfound.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -87,7 +89,6 @@ public class MyHistoryAdapter  extends RecyclerView.Adapter<MyHistoryAdapter.Vie
                     .asBitmap()
                     .into(holder.thingtype);
         }
-
         Log.d("zhaopian",lists.get(position).getPhoto());
 
         //类型图片
