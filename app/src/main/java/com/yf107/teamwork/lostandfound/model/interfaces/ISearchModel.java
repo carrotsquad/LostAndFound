@@ -6,4 +6,5 @@ import io.reactivex.Observer;
 
 public interface ISearchModel {
     void getSearch(String keyword, int diushileixing, int place, int thingstypes, String session, Observer<SearchBean> searchBeanObserver);
+    void getSearch1(String keyword, int place, int thingstypes, String session, Observer<SearchBean> searchBeanObserver);
 }

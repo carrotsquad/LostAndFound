@@ -329,6 +329,28 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
         }
     }
 
+    @Override
+    public void showSearchResult1(Boolean status, List<DynamicItemBean> searchItemBeanArrayList) {
+        refreshLayout.setRefreshing(false);
+        if(status){
+            searchItemBeanArrayList.clear();
+            searchItemBeanArrayList.addAll(searchItemBeanArrayList);
+            searchItemAdapter.notifyDataSetChanged();
+            if (searchItemBeanArrayList.isEmpty()==true){//如果没有找到
+                Message message = new Message();
+                message.arg1 = 0;
+                handler.sendMessage(message);
+                //    FancyToast.makeText(context,"抱歉啊亲，没有搜索到相关信息",FancyToast.LENGTH_LONG,FancyToast.DEFAULT,false).show();
+            }
+
+            imageView.setVisibility(View.INVISIBLE);
+//            searchItemAdapter.notifyItemChanged(this.searchItemBeanArrayList.size()-1);
+//            recyclerView.scrollToPosition(msgList.size() - 1);
+        }else {
+            FancyToast.makeText(context,"出现了问题",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+        }
+    }
+
     private void search(String str){
         keyword = str;
         if(keyword.length()==0){
@@ -347,8 +369,14 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
 
         Log.e("SearchFragment","diushiTypePosition-1 =  "+(diushiTypePosition-1));
 
-            iSearchPresenter.getSearchResult(keyword, diushiTypePosition-1, placePosition, thingsPosition, session);
+        if(diushiTypePosition == 0){
+            iSearchPresenter.getSearchResult1(keyword,placePosition,thingsPosition,session);
+        }
 
+        else {
+            iSearchPresenter.getSearchResult(keyword, diushiTypePosition - 1, placePosition, thingsPosition, session);
+
+        }
     }
 
 

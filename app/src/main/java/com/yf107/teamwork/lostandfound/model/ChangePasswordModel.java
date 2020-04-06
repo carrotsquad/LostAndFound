@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ChangePasswordModel extends BaseModel implements IChangePasswordModel {
     @Override
     public void uploadPassword(String password, String session, String email, Observer<CheckCodeBean> observer) {
-        api.updatepassword(password,session,email)
+        api.updatepasswordUncheck(password,session,email)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

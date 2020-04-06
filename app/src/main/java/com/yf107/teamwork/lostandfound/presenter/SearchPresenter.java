@@ -54,4 +54,35 @@ public class SearchPresenter extends AbstractBasePresenter<ISearchFragment> impl
             }
         });
     }
+
+    @Override
+    public void getSearchResult1(String keyword, @Nullable Integer place, @Nullable Integer thingstypes, String session) {
+        iSearchModel = new SearchModel();
+        iSearchModel.getSearch1(keyword, place, thingstypes, session, new Observer<SearchBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(SearchBean searchBean) {
+
+                if(searchBean!=null&& !searchBean.getStatus().equals(MainActivity.BAD_INTERNET_STATUS)) {
+                    v.showSearchResult1(true,searchBean.getDynamics());
+                }else {
+                    v.showSearchResult1(false,searchBean.getDynamics());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
 }

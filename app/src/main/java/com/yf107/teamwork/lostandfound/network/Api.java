@@ -54,10 +54,15 @@ public interface Api {
     @POST("/passlove/loginIn2")
     Observable<SignInBean> getSignIn(@Field("requestData") String info);
 
-    //搜索
+    //搜索1
     @FormUrlEncoded
     @POST("/passlove/dynamics/search")
     Observable<SearchBean> getSearchItem(@Field("requestData") String info, @Field("JSESSIONID") String session);
+
+    //搜索2
+    @FormUrlEncoded
+    @POST("/passlove/dynamics/search")
+    Observable<SearchBean> getSearchItem1(@Field("requestData") String info, @Field("JSESSIONID") String session);
 
     //启事详情
     @FormUrlEncoded
@@ -228,5 +233,9 @@ public interface Api {
     @FormUrlEncoded
     @POST("/passlove/sendmail")
     Observable<StatusBean> sendMessage(@Field("JSESSIONID") String session, @Field("lostid") int id,@Field("QQ") String QQ,@Field("phone") String phone);
+
+    @FormUrlEncoded
+    @POST("/passlove/updatepassword/uncheck")
+    Observable<CheckCodeBean> updatepasswordUncheck(@Field("password") String password,@Field("JSESSIONID") String session,@Field("username") String email);
 
 }

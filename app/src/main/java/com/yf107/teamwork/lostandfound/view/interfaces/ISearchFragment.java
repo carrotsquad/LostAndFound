@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ISearchFragment extends BaseView{
     void showSearchResult(Boolean status, List<DynamicItemBean> searchItemBeanArrayList);
+    void showSearchResult1(Boolean status, List<DynamicItemBean> searchItemBeanArrayList);
 }
