@@ -86,6 +86,7 @@ public class UploadActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+
         }
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         uploadFragmentAdapter = new UploadFragmentAdapter(lists, qishileixing);
