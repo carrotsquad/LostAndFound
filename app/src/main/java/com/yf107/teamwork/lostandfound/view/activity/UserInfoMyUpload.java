@@ -48,8 +48,6 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
     @BindView(R.id.myload_list)
     RecyclerView list;
 
-    @BindView(R.id.myupload_back)
-    ImageView back;
     private View statusBarView;
 
     @Override
@@ -72,12 +70,6 @@ public class UserInfoMyUpload extends AppCompatActivity implements IMyLoadActivi
                 , sharedPreferences.getString(STU, "null"), true);
         mAdapter.attachPresenter(presenter);
         list.setAdapter(mAdapter);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         Toolbar toolbar = findViewById(R.id.setting_bar);
         setSupportActionBar(toolbar);

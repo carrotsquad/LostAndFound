@@ -94,7 +94,7 @@ public class SignInActivity extends AppCompatActivity implements ISignInActivity
         setContentView(R.layout.activity_sign_in);
         boolean success = OpenCVLoader.initDebug();
         ButterKnife.bind(this);
-        Eyeofcloud.enableEditor(); //注意：正式发布的App中⼀定 不要 调⽤此⽅法！
+//        Eyeofcloud.enableEditor(); //注意：正式发布的App中⼀定 不要 调⽤此⽅法！
         Eyeofcloud.startEyeofcloudWithAPIToken("67e81f06e40a2fa3cc2c478344c637b3~10058",getApplication());
         sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
         signPresenter = new SignPresenter(this);
