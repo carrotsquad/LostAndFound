@@ -3,6 +3,7 @@ package com.yf107.teamwork.lostandfound.view.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -43,6 +44,7 @@ public class GivebackActivity extends AppCompatActivity implements IGiveBackView
 
        phone.setInputType(EditorInfo.TYPE_CLASS_PHONE);
        qq.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+       phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)});
 
 
         Intent intent = getIntent();

@@ -6,9 +6,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -54,6 +56,9 @@ public class RevisePhoneNumber extends AppCompatActivity implements IRevisePhone
         }
         editPhoneNumberPresenter = new EditPhoneNumberPresenter(new EditPhoneNumberModel());
         editPhoneNumberPresenter.attachActivity(this);
+
+        phone_number.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+        phone_number.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)});
 
         clear.setOnClickListener(new View.OnClickListener() {
             @Override

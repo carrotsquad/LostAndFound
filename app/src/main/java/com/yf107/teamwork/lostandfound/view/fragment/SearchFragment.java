@@ -354,7 +354,7 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
     private void search(String str){
         keyword = str;
         if(keyword.length()==0){
-            keyword = "";
+            keyword = "no";
         }
         String session = sharedPreferences.getString(SESSION,"null");
         if(placePosition==0){
@@ -367,16 +367,13 @@ public class SearchFragment extends Fragment implements ISearchFragment, SwipeRe
             thingsPosition=-1;
         }
 
+
         Log.e("SearchFragment","diushiTypePosition-1 =  "+(diushiTypePosition-1));
 
-        if(diushiTypePosition == 0){
-            iSearchPresenter.getSearchResult1(keyword,placePosition,thingsPosition,session);
-        }
 
-        else {
             iSearchPresenter.getSearchResult(keyword, diushiTypePosition - 1, placePosition, thingsPosition, session);
 
-        }
+
     }
 
 
