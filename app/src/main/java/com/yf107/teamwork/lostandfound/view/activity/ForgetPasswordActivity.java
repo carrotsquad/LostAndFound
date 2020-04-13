@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +13,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.NumberKeyListener;
+import android.text.method.TextKeyListener;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -108,8 +112,9 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
         statu_wrong.setVisibility(View.INVISIBLE);
         mailbox_wrong.setVisibility(View.INVISIBLE);
         reset_new_password_long.setVisibility(View.INVISIBLE);
-        confirm.setVisibility(View.INVISIBLE);
         forgetPasswordPrensenter = new ForgetPasswordPrensenter(this);
+
+    //   mailbox.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
 //        if(new_password.getText().toString().equals(new_password_confirm.getText().toString())){
 //            new_password_wrong.setVisibility(View.INVISIBLE);
@@ -119,6 +124,20 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 //
         new_password.addTextChangedListener(new CheckOutText());
         new_password_confirm.addTextChangedListener(new CheckOutText());
+
+        mailbox.setKeyListener(new NumberKeyListener() {
+            @NonNull
+            @Override
+            protected char[] getAcceptedChars() {
+                char[] c = {'@','a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0'};
+                return c;
+            }
+
+            @Override
+            public int getInputType() {
+                return 3;
+            }
+        });
     }
 
 
@@ -128,17 +147,15 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
             case R.id.reset_submit: {
 
                 if (isright) {
-                    forgetPasswordPrensenter.IsRight(session, mailbox.getText().toString(), new_password.getText().toString(), email);
+                    forgetPasswordPrensenter.IsRight(session, confirm.getText().toString(), new_password.getText().toString(), email);
                     Intent intent = new Intent(ForgetPasswordActivity.this, SignInActivity.class);
                     intent.putExtra(PWD, new_password.getText().toString());
                     intent.putExtra("ForgetorLogin", "Foeget");
                     startActivity(intent);
                     finish();
                 } else {
-                    mailbox_wrong.setVisibility(View.VISIBLE);
+                    statu_wrong.setVisibility(View.VISIBLE);
                 }
-
-
                 break;
             }
 
@@ -154,15 +171,17 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 //                if (new_password != new_password_confirm) {
 //                    new_password_wrong.setVisibility(View.VISIBLE);
 //                }
-//                if (!isEmail(email)) {
-//                    mailbox_wrong.setVisibility(View.VISIBLE);
-//                }
+                if (!isEmail(email)) {
+                    mailbox_wrong.setVisibility(View.VISIBLE);
+                }
 
-                forgetPasswordPrensenter.getCode(email);
-                Log.d("wofole", "nmsl");
-                timeCount.start();
-
-                break;
+                if(new_password.getText().toString().equals(new_password_confirm.getText().toString())) {
+                    email = mailbox.getText().toString();
+                    forgetPasswordPrensenter.getCode(email);
+                    Log.d("wofole", "nmsl");
+                    timeCount.start();
+                    break;
+                }
             }
 
             case R.id.reset_password_back: {
@@ -193,7 +212,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
         Toast.makeText(this, "修改密码成功", Toast.LENGTH_SHORT).show();
         if (!status) {
-            //  statu_wrong.setText("验证码错误！");
+              statu_wrong.setVisibility(View.VISIBLE);
         }
 
     }
@@ -205,6 +224,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
         Matcher m = p.matcher(strEmail);
         return m.matches();
     }
+
 
 
     //计时内部类

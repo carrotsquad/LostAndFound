@@ -2,14 +2,18 @@ package com.yf107.teamwork.lostandfound.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.KeyListener;
+import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -77,6 +81,9 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
     @BindView(R.id.login_bar)
     Toolbar toolbar;
 
+    @BindView(R.id.password_long)
+    TextView password_long;
+
     private String stu;
     private String pwd;
     private String repwd;
@@ -101,9 +108,11 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         // 给手机编辑框添加文本变化监听器
         loginPhone.addTextChangedListener(new CheckOutTextWatcher(loginPhone));
         // 给密码编辑框添加文本变化监听器
-        loginRepassword.addTextChangedListener(new CheckOutTextWatcher(loginPassword, loginRepassword));
-        EditUtil.EditAllClear(all_clear,loginPassword);
-        EditUtil.EditAllClear(all_clear2,loginRepassword);
+        loginRepassword.addTextChangedListener(new CheckOutTextWatcher(loginPassword,loginRepassword));
+
+        loginPassword.addTextChangedListener(new Check());
+//        EditUtil.EditAllClear(all_clear,loginPassword);
+//        EditUtil.EditAllClear(all_clear2,loginRepassword);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -112,6 +121,21 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setTitle("");
         }
+        loginEmail.setKeyListener(new NumberKeyListener() {
+            @NonNull
+            @Override
+            protected char[] getAcceptedChars() {
+                char[] c = {'@','a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0'};
+
+                return c;
+            }
+
+            @Override
+            public int getInputType() {
+                return 3;
+            }
+        });
+
     }
     @Override
     protected void onDestroy() {
@@ -237,6 +261,14 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
+//            password_long.setVisibility(View.INVISIBLE);
+//
+//            if(loginPassword.getText().length() <8||loginPassword.getText().length()>16){
+//                password_long.setVisibility(View.VISIBLE);
+//            }else {
+//                password_long.setVisibility(View.INVISIBLE);
+//            }
+
             //检查两次密码是否一致
             if (loginPassword != null && loginRepassword != null) {
                 checkOut.setVisibility(View.VISIBLE);
@@ -260,6 +292,31 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
                 et.setSelection(et.getText().length());
             }
 
+        }
+    }
+
+    private class Check implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+            password_long.setVisibility(View.INVISIBLE);
+
+            if(loginPassword.getText().length() <8||loginPassword.getText().length()>16){
+                password_long.setVisibility(View.VISIBLE);
+            }else {
+                password_long.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
@@ -293,4 +350,5 @@ public class LogInActivity extends AppCompatActivity implements ILogInActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

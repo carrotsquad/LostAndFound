@@ -34,7 +34,10 @@ import com.yf107.teamwork.lostandfound.image.GetImageFromWeb;
 import com.yf107.teamwork.lostandfound.image.GlideImageLoader;
 import com.yf107.teamwork.lostandfound.model.UserInfoModel;
 import com.yf107.teamwork.lostandfound.network.AllURI;
+import com.yf107.teamwork.lostandfound.presenter.UserAdvicePresenter;
+import com.yf107.teamwork.lostandfound.presenter.interfaces.IUserAdvicePresenter;
 import com.yf107.teamwork.lostandfound.services.ActivityManager;
+import com.yf107.teamwork.lostandfound.view.interfaces.IUserAdviceView;
 import com.yf107.teamwork.lostandfound.view.interfaces.IUserInfoFragment;
 import com.yf107.teamwork.lostandfound.R;
 import com.yf107.teamwork.lostandfound.presenter.UserInfoPresenter;
@@ -69,7 +72,7 @@ import static com.yf107.teamwork.lostandfound.view.activity.UserInfoSettingActiv
  * Description
  * 用户资料界面
  */
-public class UserInfoFragment extends Fragment implements IUserInfoFragment {
+public class UserInfoFragment extends Fragment implements IUserInfoFragment, IUserAdviceView {
 
     private static final int REQUEST_CODE_GALLERY = 1;
 
@@ -108,6 +111,7 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
     TimeThread timeThread = new TimeThread();
     private boolean isGetData = false;
     String head111;
+    UserAdvicePresenter userAdvicePresenter;
 
 
 
@@ -118,6 +122,8 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
         unbinder = ButterKnife.bind(this, view);
         headTxt = view.findViewById(R.id.userinfo_head_nick);
         mContext = getContext();
+        userAdvicePresenter = new UserAdvicePresenter();
+        userAdvicePresenter.attachActivity(this);
         ActivityManager.getActivityManager().addF(this);
         getSharePrefrence();
         initView();
@@ -349,9 +355,10 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
                             FancyToast.makeText(getContext(), "填写为空",
                                     Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                         } else {
-                            FancyToast.makeText(getContext(),
-                                    "感谢您衷心的意见，我们会尽快更改", Toast.LENGTH_SHORT, FancyToast.SUCCESS
-                                    , false).show();
+                            userAdvicePresenter.senAdvice(jsession,msg);
+//                            FancyToast.makeText(getContext(),
+//                                    "感谢您衷心的意见，我们会尽快更改", Toast.LENGTH_SHORT, FancyToast.SUCCESS
+//                                    , false).show();
                         }
                         mFeedBack.dismiss();
                         break;
@@ -389,6 +396,19 @@ public class UserInfoFragment extends Fragment implements IUserInfoFragment {
             }
         }
     };
+
+    @Override
+    public void isSuccess(int code) {
+        if(code == 200) {
+            FancyToast.makeText(getContext(),
+                    "感谢您衷心的意见，我们会尽快更改", Toast.LENGTH_SHORT, FancyToast.SUCCESS
+                    , false).show();
+        }else {
+        FancyToast.makeText(getContext(),"反馈失败！",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false);
+
+        }
+
+    }
 
     public class TimeThread extends Thread {
         @Override

@@ -238,4 +238,8 @@ public interface Api {
     @POST("/passlove/updatepassword/uncheck")
     Observable<CheckCodeBean> updatepasswordUncheck(@Field("password") String password,@Field("JSESSIONID") String session,@Field("username") String email);
 
+
+    @FormUrlEncoded
+    @POST("/passlove/user/advice")
+    Observable<CheckCodeBean> userAdvice(@Field("JSESSIONID") String session,@Field("advice") String advice);
 }
