@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.NumberKeyListener;
 import android.text.method.TextKeyListener;
@@ -88,6 +89,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
     String s;
     TimeCount timeCount;
     String email;
+    static  String strPattern = null;
 
 
     @Override
@@ -124,6 +126,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 //
         new_password.addTextChangedListener(new CheckOutText());
         new_password_confirm.addTextChangedListener(new CheckOutText());
+        confirm.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
 
         mailbox.setKeyListener(new NumberKeyListener() {
             @NonNull
@@ -154,7 +157,12 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
                     startActivity(intent);
                     finish();
                 } else {
-                    statu_wrong.setVisibility(View.VISIBLE);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            statu_wrong.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
                 break;
             }
@@ -171,17 +179,29 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 //                if (new_password != new_password_confirm) {
 //                    new_password_wrong.setVisibility(View.VISIBLE);
 //                }
-                if (!isEmail(email)) {
-                    mailbox_wrong.setVisibility(View.VISIBLE);
-                }
 
-                if(new_password.getText().toString().equals(new_password_confirm.getText().toString())) {
-                    email = mailbox.getText().toString();
-                    forgetPasswordPrensenter.getCode(email);
-                    Log.d("wofole", "nmsl");
-                    timeCount.start();
-                    break;
-                }
+                email = mailbox.getText().toString();
+                     if(isEmail(email)) {
+                         Log.d("email is right", "email is right");
+                         if (new_password.getText().toString().equals(new_password_confirm.getText().toString())) {
+                             email = mailbox.getText().toString();
+                             forgetPasswordPrensenter.getCode(email);
+                             Log.d("wofole", "nmsl");
+                             timeCount.start();
+                         }
+                    }else{
+                        Log.d("email is not right","email is not right");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mailbox_wrong.setVisibility(View.VISIBLE);
+                                Log.d("?","红字显示没");
+                            }
+                        });
+
+                    }
+
+                break;
             }
 
             case R.id.reset_password_back: {
@@ -219,11 +239,13 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IForget
 
     //验证邮箱格式
     public static boolean isEmail(String strEmail) {
-        String strPattern = "^[a-zA-Z]*[\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9]*[\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+
+        strPattern = "^[a-zA-Z]*[\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9]*[\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
         Pattern p = Pattern.compile(strPattern);
         Matcher m = p.matcher(strEmail);
         return m.matches();
     }
+
 
 
 
