@@ -144,7 +144,8 @@ dependencies {
 
     //搜索框
     implementation 'com.wenwenwen888:searchbox:1.0.1'
-    implementation files('libs\\eyeofcloud.jar')
-    implementation files('libs\\okhttp-2.3.0.jar')
+  //  implementation files('libs\\eyeofcloud.jar')
+ //   implementation files('libs\\okhttp-2.3.0.jar')
+    compileOnly fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
 
 }

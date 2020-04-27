@@ -258,10 +258,7 @@ public class ThingDetailActivity extends AppCompatActivity implements IThingDeta
          intent.putExtra(OTHERSTHINGSTYPES, searchItemBean.getTypes());
          intent.putExtra(OTHERSID, searchItemBean.getID());
          */
-
-        sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
-
-        strusernickname = sharedPreferences.getString(NICKNAME,null);
+        strusernickname = intent.getStringExtra(OTHERSNICKNAME);
         String struserphoto = intent.getStringExtra(OTHERSPHOTO);
         String strfabiaodate = intent.getStringExtra(OTHERSFABIAODATE);
         String strplace = intent.getStringExtra(OTHERSPLACE);

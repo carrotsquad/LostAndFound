@@ -34,6 +34,7 @@ import com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity;
 import java.util.List;
 
 import static com.yf107.teamwork.lostandfound.popupwindow.ArrowPopWindows.SHOW_TOP;
+import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.NICKNAME;
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDESC;
 import static com.yf107.teamwork.lostandfound.view.activity.ThingDetailActivity.OTHERSDIUSHIDATE;
@@ -176,7 +177,7 @@ public class MyLoadItemAdapter  extends RecyclerView.Adapter<MyLoadItemAdapter.V
           //      String thingsType = AllURI.allTypeBeanList.get(thingstype);
 
                 Intent intent = new Intent(mContext, ThingDetailActivity.class);
-                intent.putExtra(OTHERSNICKNAME, dynamicItemBean.getNickname());
+                intent.putExtra(OTHERSNICKNAME, sharedPreferences.getString(NICKNAME,null));
                 Log.d("NICKNAME11",dynamicItemBean.getNickname());
                 intent.putExtra(OTHERSPHOTO, dynamicItemBean.getUserphoto());
                 intent.putExtra(OTHERSFABIAODATE, fabaiodate);

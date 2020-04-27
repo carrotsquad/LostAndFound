@@ -50,9 +50,9 @@ public class VerifyPresenter extends AbstractBasePresenter<IVerifyActivity> impl
                         @Override
                         public void onNext(RegisterBean registerBean) {
                             if(registerBean==null||registerBean.getStatus()==400){
-                                v.getregister(false);
+                                v.getregister(registerBean.getStatus(),registerBean.getMsg());
                             }else {
-                                v.getregister(true);
+                                v.getregister(registerBean.getStatus(),registerBean.getMsg());
                                 Log.d("verifyPresenter","成功而");
                             }
                         }

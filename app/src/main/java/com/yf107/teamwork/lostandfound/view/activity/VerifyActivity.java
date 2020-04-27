@@ -109,8 +109,8 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
     }
 
     @Override
-    public void getregister(Boolean status) {
-        if (status) {
+    public void getregister(int status,String msg) {
+        if (status == 200) {
             FancyToast.makeText(VerifyActivity.this, "注册成功", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
             Intent intent = new Intent(VerifyActivity.this, SignInActivity.class);
             intent.putExtra(SignInActivity.PWD, pwd);
@@ -122,7 +122,7 @@ public class VerifyActivity extends AppCompatActivity implements IVerifyActivity
             startActivity(intent);
             onPause();
         } else {
-            FancyToast.makeText(VerifyActivity.this, "注册失败", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+            FancyToast.makeText(VerifyActivity.this, msg, FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
     }
 

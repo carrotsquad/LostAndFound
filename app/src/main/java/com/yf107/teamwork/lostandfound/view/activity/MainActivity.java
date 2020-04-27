@@ -60,7 +60,7 @@ import butterknife.ButterKnife;
 import cn.finalteam.toolsfinal.Logger;
 
 import static com.yf107.teamwork.lostandfound.view.activity.SignInActivity.SESSION;
-
+import com.eyeofcloud.Eyeofcloud;
 
 /**
  * Description: 主页面
@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements BaseView {
         StatusBarUtil.setGradientStatusBarColor(this, statusBarView);
         ActivityManager.getActivityManager().add(this);
 
+        Eyeofcloud.startEyeofcloudWithAPIToken("67e81f06e40a2fa3cc2c478344c637b3~10058",getApplication());
        ButterKnife.bind(this);
 
         try {
